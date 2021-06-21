@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{29241DA0-3886-47F9-A333-BA6D81B6F901}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{29241DA0-3886-47F9-A333-BA6D81B6F901}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchApp.Business", "TouchApp.Business\TouchApp.Business.csproj", "{07AEE4B6-3311-4DBA-87A9-9B5516ED7502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TouchApp.Business", "TouchApp.Business\TouchApp.Business.csproj", "{07AEE4B6-3311-4DBA-87A9-9B5516ED7502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchApp.DataAccess", "TouchApp.DataAccess\TouchApp.DataAccess.csproj", "{1DC43437-8829-466F-96AD-42DA120B929E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchApp.WebMVC", "TouchApp.WebMVC\TouchApp.WebMVC.csproj", "{A391D908-AA1B-4281-B150-EC8D4480C9D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchApp.WebAPI", "TouchApp.WebAPI\TouchApp.WebAPI.csproj", "{2A2C6477-EB3F-401C-AAE3-A2056D842D4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{07AEE4B6-3311-4DBA-87A9-9B5516ED7502}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07AEE4B6-3311-4DBA-87A9-9B5516ED7502}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07AEE4B6-3311-4DBA-87A9-9B5516ED7502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DC43437-8829-466F-96AD-42DA120B929E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DC43437-8829-466F-96AD-42DA120B929E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DC43437-8829-466F-96AD-42DA120B929E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DC43437-8829-466F-96AD-42DA120B929E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A391D908-AA1B-4281-B150-EC8D4480C9D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A391D908-AA1B-4281-B150-EC8D4480C9D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A391D908-AA1B-4281-B150-EC8D4480C9D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A391D908-AA1B-4281-B150-EC8D4480C9D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A2C6477-EB3F-401C-AAE3-A2056D842D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A2C6477-EB3F-401C-AAE3-A2056D842D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A2C6477-EB3F-401C-AAE3-A2056D842D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A2C6477-EB3F-401C-AAE3-A2056D842D4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
