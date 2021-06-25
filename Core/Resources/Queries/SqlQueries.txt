@@ -1,0 +1,68 @@
+﻿
+
+
+-----------------------------------------------------------------------  Dont touch this file !!!!!! ------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE or alter VIEW SearchCelebritiesView
+AS
+
+select
+       U.Id,
+       U.FirstName,
+       U.LastName,
+       U.FirstName + ' ' + U.LastName as "FullName",
+       U.Email,
+       u.UnitPrice,
+       u.ProfilePhotoPath as "ProfilePhotoId",
+       u.WallpaperPath as "WallpaperId",
+       u.PreviewMoviePath as "PreviewMovieId",
+       L.LanguageName as "Language",
+       CL.Name as "Category"
+from Users U
+join Categories C on U.CategoryId = C.Id
+join CategoryLanguages CL on C.Id = CL.CategoryId
+join Languages L on CL.LanguageId = L.Id
+where U.IsActive = 1
+go
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE or alter VIEW GetSubCategoriesView
+AS
+WITH RCTE
+         AS
+         (SELECT *, Id AS TopLevelParentId
+          FROM dbo.Categories c
+
+          UNION ALL
+          SELECT c.*, r.TopLevelParentId
+          FROM dbo.Categories c
+                   INNER JOIN RCTE r ON c.ParentCategoryId = r.Id
+         )
+SELECT *
+FROM RCTE r
+where r.IsActive = 1 and r.ShowInHomePage = 1
+group by r.Id
+        , r.ParentCategoryId,
+         r.ShowInHomePage,
+         r.Created_by, r.Created_at,
+         r.Modified_by, r.Modified_at,
+         r.IsActive,
+         r.TopLevelParentId,
+         r.Banner
+go
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
