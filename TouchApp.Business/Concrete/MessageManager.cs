@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
-using DataAccess.Abstract;
+using TouchApp.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -15,12 +15,10 @@ namespace Business.Concrete
     {
         private readonly IMessageDal _messageDal;
         private readonly IMapper _mapper;
-        private readonly IMessageLanguageService _messageLanguageService;
-        public MessageManager(IMessageDal messageDal, IMapper mapper, IMessageLanguageService messageLanguageService)
+        public MessageManager(IMessageDal messageDal, IMapper mapper)
         {
             _messageDal = messageDal;
             _mapper = mapper;
-            _messageLanguageService = messageLanguageService;
         }
 
         public IDataResult<int> Add(Message message)
@@ -275,19 +273,13 @@ namespace Business.Concrete
         {
             foreach (var message in messages)
             {
-                if (message.MessageLanguages != null)
-                {
-                    _messageLanguageService.DeleteByStatusList(message.MessageLanguages);
-                }
+                
             }
         }
 
         private void DeleteByStatusForAllRelation(Message message)
         {
-            if (message.MessageLanguages != null)
-            {
-                _messageLanguageService.DeleteByStatusList(message.MessageLanguages);
-            }
+            
         }
     }
 }

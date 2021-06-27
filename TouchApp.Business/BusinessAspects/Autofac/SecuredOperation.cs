@@ -9,7 +9,7 @@ using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Business.BusinessAspects.Autofac
+namespace TouchApp.Business.BusinessAspects.Autofac
 {
     public class SecuredOperation:MethodInterception
     {

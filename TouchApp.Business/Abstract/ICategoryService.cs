@@ -5,9 +5,8 @@ using System.Linq.Expressions;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos.Category;
 using Core.Utilities.Results;
-using DataAccess.Concrete.EntityFramework.Contexts;
 
-namespace Business.Abstract
+namespace TouchApp.Business.Abstract
 {
     public interface ICategoryService
     {

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Core.Entities.Abstract;
+using System;
 
 namespace Core.Entities.Concrete.Base
 {
-    public class BaseEntity
+    public class BaseEntity : IBaseEntity
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

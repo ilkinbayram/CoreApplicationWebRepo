@@ -5,7 +5,7 @@ using Core.Entities.Concrete;
 using Core.Entities.Dtos.User;
 using Core.Utilities.Results;
 
-namespace Business.Abstract
+namespace TouchApp.Business.Abstract
 {
     public interface IUserService
     {

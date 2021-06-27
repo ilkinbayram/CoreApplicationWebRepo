@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Business.Constants;
 using Business.Libs;
 using Business.ValidationRules.FluentValidation.Home;
@@ -9,7 +9,7 @@ using Core.Entities.Dtos.Home;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using Core.Utilities.Services.Rest;
-using DataAccess.Abstract;
+using TouchApp.DataAccess.Abstract;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -24,20 +24,16 @@ namespace Business.Concrete
         private readonly IHomeMetaTagDal _homeMetaTagDal;
         private readonly IMapper _mapper;
 
-        private readonly IHomeMetaTagLanguageService _homeMetaTagLanguageService;
         private readonly IHomeMetaTagGalleryService _homeMetaTagGalleryService;
-        private readonly IHomeMetaTagSectionService _homeMetaTagSectionService;
         private readonly IHttpContextAccessor _httpContext;
         private readonly IFileManager _fileManager;
         private readonly ICloudinaryService _cloudinaryService;
 
-        public HomeMetaTagManager(IHomeMetaTagDal homeMetaTagDal, IMapper mapper, IHomeMetaTagLanguageService homeMetaTagLanguageService, IHomeMetaTagGalleryService homeMetaTagGalleryService, IHomeMetaTagSectionService homeMetaTagSectionService, IHttpContextAccessor httpContextAccessor, ICloudinaryService cloudinaryService, IFileManager fileManager)
+        public HomeMetaTagManager(IHomeMetaTagDal homeMetaTagDal, IMapper mapper, IHomeMetaTagGalleryService homeMetaTagGalleryService, IHttpContextAccessor httpContextAccessor, ICloudinaryService cloudinaryService, IFileManager fileManager)
         {
             _homeMetaTagDal = homeMetaTagDal;
             _mapper = mapper;
-            _homeMetaTagLanguageService = homeMetaTagLanguageService;
             _homeMetaTagGalleryService = homeMetaTagGalleryService;
-            _homeMetaTagSectionService = homeMetaTagSectionService;
             _httpContext = httpContextAccessor;
             _cloudinaryService = cloudinaryService;
             _fileManager = fileManager;
@@ -194,7 +190,6 @@ namespace Business.Concrete
                     {
                         var existGalleryOne = dbHomeMetaTag.HomeMetaTagGalleries.FirstOrDefault(x => x.Id == currentOne.Id);
                         existGalleryOne.IsActive = currentOne.IsActive;
-                        existGalleryOne.Order = currentOne.Order;
                         if ((currentOne.Url.Split("/").Reverse().ToList()[0] != "string" || currentOne.Url.Split("/").Reverse().ToList()[0] != string.Empty) && existGalleryOne.Url != currentOne.Url)
                         {
                             deletableFiles.Add(existGalleryOne.Url);
@@ -202,20 +197,6 @@ namespace Business.Concrete
                     }
                 }
 
-                if (dbHomeMetaTag.HomeMetaTagLanguages != null)
-                {
-                    foreach (var currentOne in editHomeMetaTagDto.HomeMetaTagLanguages)
-                    {
-                        var existLangOne = dbHomeMetaTag.HomeMetaTagLanguages.FirstOrDefault(x => x.Id == currentOne.Id);
-                        existLangOne.IsActive = currentOne.IsActive;
-                        existLangOne.Keywords = currentOne.Keywords;
-                        existLangOne.LanguageId = currentOne.LanguageId ?? default;
-                        existLangOne.MetaDescription = currentOne.MetaDescription;
-                        existLangOne.MetaTitle = currentOne.MetaTitle;
-                        existLangOne.SearchKeyword = currentOne.SearchKeyword;
-                        existLangOne.Tag = currentOne.Tag;
-                    }
-                }
 
                 int affectedRows = _homeMetaTagDal.Commit();
                 IDataResult<int> dataResult;
@@ -370,16 +351,6 @@ namespace Business.Concrete
                 {
                     _homeMetaTagGalleryService.DeleteByStatusList(homeMetaTag.HomeMetaTagGalleries);
                 }
-
-                if (homeMetaTag.HomeMetaTagSections != null)
-                {
-                    _homeMetaTagSectionService.DeleteByStatusList(homeMetaTag.HomeMetaTagSections);
-                }
-
-                if (homeMetaTag.HomeMetaTagLanguages != null)
-                {
-                    _homeMetaTagLanguageService.DeleteByStatusList(homeMetaTag.HomeMetaTagLanguages);
-                }
             }
         }
 
@@ -390,15 +361,6 @@ namespace Business.Concrete
                 _homeMetaTagGalleryService.DeleteByStatusList(homeMetaTag.HomeMetaTagGalleries);
             }
 
-            if (homeMetaTag.HomeMetaTagSections != null)
-            {
-                _homeMetaTagSectionService.DeleteByStatusList(homeMetaTag.HomeMetaTagSections);
-            }
-
-            if (homeMetaTag.HomeMetaTagLanguages != null)
-            {
-                _homeMetaTagLanguageService.DeleteByStatusList(homeMetaTag.HomeMetaTagLanguages);
-            }
         }
 
         public IDataResult<GetHomeMetaTagDto> GetItemWithInclude(Expression<Func<HomeMetaTag, bool>> filter)
@@ -448,30 +410,8 @@ namespace Business.Concrete
 
         public IDataResult<IEnumerable<GetHomeMetaTagDto>> GetAllItemsWithIncludeByLang(long langID, Expression<Func<HomeMetaTag, bool>> filter = null)
         {
-            try
-            {
-                List<GetHomeMetaTagDto> result = new List<GetHomeMetaTagDto>();
-                var response = _homeMetaTagDal.GetAllItemsWithInclude(filter);
-
-                foreach (var item in response)
-                {
-                    List<GetHomeMetaTagLangDto> checkLang = (List<GetHomeMetaTagLangDto>)item.HomeMetaTagLanguages.Where(x => x.LanguageId == langID);
-                    var resultGetHomeDto = new GetHomeMetaTagDto
-                    {
-                        Id = item.Id,
-                        Created_at = item.Created_at,
-                        Created_by = item.Created_by,
-                        HomeMetaTagGalleries = (IEnumerable<GetHomeMetaTagGalleryDto>)item.HomeMetaTagGalleries,
-                        HomeMetaTagLanguages = checkLang
-                    };
-                    result.Add(resultGetHomeDto);
-                }
-                return new SuccessDataResult<IEnumerable<GetHomeMetaTagDto>>(result);
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<IEnumerable<GetHomeMetaTagDto>>(null, $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}");
-            }
+            return null;
+            
         }
 
         public IDataResult<bool> CheckIsExist(long id)

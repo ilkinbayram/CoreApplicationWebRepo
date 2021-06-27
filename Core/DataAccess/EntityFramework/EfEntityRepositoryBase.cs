@@ -39,29 +39,29 @@ namespace Core.DataAccess.EntityFramework
         /// </summary>
         /// <param name="entity">The entity which will be deleted</param>
         /// <returns></returns>
-        public int DeleteByStatus(TEntity entity)
+        public virtual int DeleteByStatus(TEntity entity)
         {
             var deletedEntity = Context.Entry(entity);
             deletedEntity.State = EntityState.Modified;
             return Context.SaveChanges();
         }
 
-        public void DeleteByStatusBeforeCommit(TEntity entity)
+        public virtual void DeleteByStatusBeforeCommit(TEntity entity)
         {
             Context.Set<TEntity>().Update(entity);
         }
 
-        public void AddBeforeCommit(TEntity entity)
+        public virtual void AddBeforeCommit(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
         }
 
-        public void UpdateBeforeCommit(TEntity entity)
+        public virtual void UpdateBeforeCommit(TEntity entity)
         {
             Context.Set<TEntity>().Update(entity);
         }
 
-        public int DeletePermanently(TEntity entity)
+        public virtual int DeletePermanently(TEntity entity)
         {
             var deletedEntity = Context.Entry(entity);
             deletedEntity.State = EntityState.Deleted;
@@ -102,31 +102,31 @@ namespace Core.DataAccess.EntityFramework
             return Context.SaveChanges();
         }
 
-        public int DeletePermanently(IEnumerable<TEntity> entities)
+        public virtual int DeletePermanently(IEnumerable<TEntity> entities)
         {
             var deletedEntities = Context.Entry(entities);
             deletedEntities.State = EntityState.Deleted;
             return Context.SaveChanges();
         }
 
-        public int DeleteByStatus(IEnumerable<TEntity> entities)
+        public virtual int DeleteByStatus(IEnumerable<TEntity> entities)
         {
             var deletedEntities = Context.Entry(entities);
             deletedEntities.State = EntityState.Modified;
             return Context.SaveChanges();
         }
-        public void RemoveRange(IEnumerable<TEntity> entities)
+        public virtual void RemoveRange(IEnumerable<TEntity> entities)
         {
             Context.Set<TEntity>().RemoveRange(entities);
         }
-        public TEntity GetById(long id)
+        public virtual TEntity GetById(long id)
         {
 
             var result = Context.Set<TEntity>().Find(id);
             return result;
         }
 
-        public IList<TEntity> GetAll()
+        public virtual IList<TEntity> GetAll()
         {
             Context.ChangeTracker.LazyLoadingEnabled = true;
           return  Context.Set<TEntity>().ToList();

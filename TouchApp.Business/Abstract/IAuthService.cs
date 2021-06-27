@@ -7,7 +7,7 @@ using Core.Entities.Dtos;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Jwt;
 
-namespace Business.Abstract
+namespace TouchApp.Business.Abstract
 {
     public interface IAuthService
     {

@@ -1,12 +1,12 @@
 ﻿using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
-using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TouchApp.DataAccess.Abstract;
 
-namespace DataAccess.Concrete.EntityFramework
+namespace TouchApp.DataAccess.Concrete.EntityFramework
 {
     public class EfUserOperationClaimDal : EfEntityRepositoryBase<UserOperationClaim, ApplicationDbContext>, IUserOperationClaimDal
     {

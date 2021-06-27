@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -45,7 +45,6 @@ namespace Business.Concrete
                     Birthday = userForRegisterDto.Birthday,
                     SecurityToken = securityToken,
                     IsActive = true,
-                    AccountType = AccountType.Client,
                     Created_at = DateTime.Now,
                     Created_by = "Client"
                 };
@@ -77,8 +76,6 @@ namespace Business.Concrete
                 dbModel.FirstName = userForRegisterDto.FirstName;
                 dbModel.LastName = userForRegisterDto.LastName;
                 dbModel.Birthday = userForRegisterDto.Birthday;
-
-                dbModel.AccountType = AccountType.Client;
                 dbModel.Created_at = DateTime.Now;
                 dbModel.Created_by = "Client";
                 dbModel.PasswordHash = passwordHash;

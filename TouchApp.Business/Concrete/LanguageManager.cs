@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
-using DataAccess.Abstract;
+using TouchApp.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -16,32 +16,10 @@ namespace Business.Concrete
         private readonly ILanguageDal _languageDal;
         private readonly IMapper _mapper;
 
-        private readonly IUserLanguageService _userLanguageService;
-        private readonly ICategoryLanguageService _categoryLanguageService;
-        private readonly IMessageLanguageService _messageLanguageService;
-        private readonly IHomeMetaTagLanguageService _homeMetaTagLanguageService;
-        private readonly ISectionLanguageService _sectionLanguageService;
-        private readonly IFeatureValueLanguageService _featureValueLanguageService;
-        private readonly IFeatureLanguageService _featureLanguageService;
-
-        public LanguageManager(ILanguageDal languageDal, IMapper mapper,
-                               IUserLanguageService userLanguageService,
-                               ICategoryLanguageService categoryLanguageService,
-                               IMessageLanguageService messageLanguageService,
-                               IHomeMetaTagLanguageService homeMetaTagLanguageService,
-                               ISectionLanguageService sectionLanguageService,
-                               IFeatureValueLanguageService featureValueLanguageService,
-                               IFeatureLanguageService featureLanguageService)
+        public LanguageManager(ILanguageDal languageDal, IMapper mapper)
         {
             _languageDal = languageDal;
             _mapper = mapper;
-            _userLanguageService = userLanguageService;
-            _categoryLanguageService = categoryLanguageService;
-            _messageLanguageService = messageLanguageService;
-            _homeMetaTagLanguageService = homeMetaTagLanguageService;
-            _sectionLanguageService = sectionLanguageService;
-            _featureValueLanguageService = featureValueLanguageService;
-            _featureLanguageService = featureLanguageService;
         }
 
         public IDataResult<int> Add(Language language)
@@ -292,75 +270,11 @@ namespace Business.Concrete
         {
             foreach (var language in languages)
             {
-                if (language.CategoryLanguages != null)
-                {
-                    _categoryLanguageService.DeleteByStatusList(language.CategoryLanguages);
-                }
-
-                if (language.FameousPersonLanguages != null)
-                {
-                    _userLanguageService.DeleteByStatusList(language.FameousPersonLanguages);
-                }
-                if (language.FeatureLanguages != null)
-                {
-                    _featureLanguageService.DeleteByStatusList(language.FeatureLanguages);
-                }
-
-                if (language.FeatureValueLanguages != null)
-                {
-                    _featureValueLanguageService.DeleteByStatusList(language.FeatureValueLanguages);
-                }
-                if (language.HomeMetaTagLanguages != null)
-                {
-                    _homeMetaTagLanguageService.DeleteByStatusList(language.HomeMetaTagLanguages);
-                }
-
-                if (language.MessageLanguages != null)
-                {
-                    _messageLanguageService.DeleteByStatusList(language.MessageLanguages);
-                }
-
-                if (language.SectionLanguages != null)
-                {
-                    _sectionLanguageService.DeleteByStatusList(language.SectionLanguages);
-                }
             }
         }
 
         private void DeleteByStatusForAllRelation(Language language)
         {
-            if (language.CategoryLanguages != null)
-            {
-                _categoryLanguageService.DeleteByStatusList(language.CategoryLanguages);
-            }
-
-            if (language.FameousPersonLanguages != null)
-            {
-                _userLanguageService.DeleteByStatusList(language.FameousPersonLanguages);
-            }
-            if (language.FeatureLanguages != null)
-            {
-                _featureLanguageService.DeleteByStatusList(language.FeatureLanguages);
-            }
-
-            if (language.FeatureValueLanguages != null)
-            {
-                _featureValueLanguageService.DeleteByStatusList(language.FeatureValueLanguages);
-            }
-            if (language.HomeMetaTagLanguages != null)
-            {
-                _homeMetaTagLanguageService.DeleteByStatusList(language.HomeMetaTagLanguages);
-            }
-
-            if (language.MessageLanguages != null)
-            {
-                _messageLanguageService.DeleteByStatusList(language.MessageLanguages);
-            }
-
-            if (language.SectionLanguages != null)
-            {
-                _sectionLanguageService.DeleteByStatusList(language.SectionLanguages);
-            }
         }
     }
 }

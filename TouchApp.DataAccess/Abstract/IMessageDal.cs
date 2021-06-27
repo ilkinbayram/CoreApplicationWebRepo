@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.Abstract
+namespace TouchApp.DataAccess.Abstract
 {
     public interface IMessageDal : IEntityRepository<Message>
     {

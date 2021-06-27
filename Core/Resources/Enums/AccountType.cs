@@ -2,8 +2,9 @@
 {
     public enum AccountType
     {
-        Client = 1,
-        Admin = 2,
-        Celebrity = 3,
+        Admin = 1,
+        Teacher = 2,
+        Mentor = 3,
+        Student = 4
     }
 }

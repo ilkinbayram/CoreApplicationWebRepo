@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Core.DataAccess;
 using Core.Entities.Concrete;
 
-namespace DataAccess.Abstract
+namespace TouchApp.DataAccess.Abstract
 {
     public interface IUserDal : IEntityRepository<User>
     {
@@ -12,6 +12,5 @@ namespace DataAccess.Abstract
         User GetUserWithRelations(Expression<Func<User, bool>> filter);
         User GetUserForOrderWithRelations(Expression<Func<User, bool>> filter);
         User UserGetById(long id);
-        UserLanguage GetUserBySlug(string userSlug, string lang);
     }
 }

@@ -2,7 +2,7 @@
 using Core.Entities.Dtos.User;
 using Core.Utilities.Results;
 
-namespace Business.Abstract
+namespace TouchApp.Business.Abstract
 {
     public interface IAdminService
     {

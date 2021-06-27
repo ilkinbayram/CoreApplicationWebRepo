@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
-using DataAccess.Abstract;
+using TouchApp.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

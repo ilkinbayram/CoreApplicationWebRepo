@@ -18,26 +18,15 @@ namespace Core.Entities.Concrete
         public string PhoneNumber { get; set; }
         public DateTime? Birthday { get; set; }
         public Gender Gender { get; set; }
-        public AccountType AccountType { get; set; }
         public decimal? Rate { get; set; }
         public int? RateCount { get; set; }
-        public string Biography { get; set; }
-        public decimal? UnitPrice { get; set; }
-        public string PreviewMoviePath { get; set; }
-
-        public long? CategoryId { get; set; }
-        public bool ShowInHomePage { get; set; }
+        public string BiographyKey { get; set; }
+        public AccountType AccountType { get; set; }
         public string SecurityToken { get; set; }
 
-        public virtual Category Category { get; set; }
-        public virtual IEnumerable<UserOperationClaim> UserOperationClaims { get; set; }
-        public virtual IEnumerable<Order> UserOrders { get; set; }
-        public virtual IEnumerable<Order> FamousOrders { get; set; }
-
-        public virtual IEnumerable<Rate> UserRates { get; set; }
-        public virtual IEnumerable<Rate> FamousRates { get; set; }
-
-        public virtual IEnumerable<UserLanguage> UserLanguages { get; set; }
-        public virtual IEnumerable<UserFeatureValue> UserFeatureValues { get; set; }
+        public virtual List<UserOperationClaim> UserOperationClaims { get; set; }
+        public virtual TeacherInfo TeacherInfo { get; set; }
+        public virtual List<UserSocialMedia> UserSocialMedias { get; set; }
+        public virtual List<Post> Posts { get; set; }
     }
 }

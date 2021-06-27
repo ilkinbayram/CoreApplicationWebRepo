@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
-using DataAccess.Abstract;
+using TouchApp.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -11,24 +11,22 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class UserFeatureValueManager : IUserFeatureValueService
+    public class SharingTypeManager : ISharingTypeService
     {
-        private readonly IUserFeatureValueDal _userFeatureValueDal;
+        private readonly ISharingTypeDal _sharingTypeDal;
         private readonly IMapper _mapper;
 
-        public UserFeatureValueManager(IUserFeatureValueDal userFeatureValueDal, IMapper mapper)
+        public SharingTypeManager(ISharingTypeDal sharingTypeDal, IMapper mapper)
         {
-            _userFeatureValueDal = userFeatureValueDal;
+            _sharingTypeDal = sharingTypeDal;
             _mapper = mapper;
         }
 
-        public IDataResult<int> Add(UserFeatureValue userFeatureValue)
+        public IDataResult<int> Add(SharingType sharingType)
         {
             try
             {
-                userFeatureValue.IsActive = true;
-
-                int affectedRows = _userFeatureValueDal.Add(userFeatureValue);
+                int affectedRows = _sharingTypeDal.Add(sharingType);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
@@ -53,7 +51,7 @@ namespace Business.Concrete
             {
                 IDataResult<int> dataResult;
 
-                var deletableEntity = _userFeatureValueDal.Get(x => x.Id == Id);
+                var deletableEntity = _sharingTypeDal.Get(x => x.Id == Id);
 
                 if (deletableEntity == null)
                 {
@@ -61,8 +59,10 @@ namespace Business.Concrete
                     return dataResult;
                 }
 
+                DeleteByStatusForAllRelation(deletableEntity);
+
                 deletableEntity.IsActive = false;
-                int affectedRows = _userFeatureValueDal.DeleteByStatus(deletableEntity);
+                int affectedRows = _sharingTypeDal.DeleteByStatus(deletableEntity);
 
                 if (affectedRows > 0)
                 {
@@ -87,7 +87,7 @@ namespace Business.Concrete
             {
                 IDataResult<int> dataResult;
 
-                var deletableEntity = _userFeatureValueDal.Get(x => x.Id == Id);
+                var deletableEntity = _sharingTypeDal.Get(x => x.Id == Id);
 
                 if (deletableEntity == null)
                 {
@@ -95,8 +95,7 @@ namespace Business.Concrete
                     return dataResult;
                 }
 
-                int affectedRows = _userFeatureValueDal.DeletePermanently(deletableEntity);
-
+                int affectedRows = _sharingTypeDal.DeletePermanently(deletableEntity);
                 if (affectedRows > 0)
                 {
                     dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
@@ -114,39 +113,39 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<UserFeatureValue> Get(Expression<Func<UserFeatureValue, bool>> filter)
+        public IDataResult<SharingType> Get(Expression<Func<SharingType, bool>> filter)
         {
             try
             {
-                var response = _userFeatureValueDal.Get(filter);
-                var mappingResult = _mapper.Map<UserFeatureValue>(response);
-                return new SuccessDataResult<UserFeatureValue>(mappingResult);
+                var response = _sharingTypeDal.Get(filter);
+                var mappingResult = _mapper.Map<SharingType>(response);
+                return new SuccessDataResult<SharingType>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<UserFeatureValue>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<SharingType>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
-        public IDataResult<IEnumerable<UserFeatureValue>> GetList(Expression<Func<UserFeatureValue, bool>> filter = null)
+        public IDataResult<IEnumerable<SharingType>> GetList(Expression<Func<SharingType, bool>> filter = null)
         {
             try
             {
-                var response = _userFeatureValueDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<UserFeatureValue>>(response);
-                return new SuccessDataResult<IEnumerable<UserFeatureValue>>(mappingResult);
+                var response = _sharingTypeDal.GetList(filter);
+                var mappingResult = _mapper.Map<IEnumerable<SharingType>>(response);
+                return new SuccessDataResult<IEnumerable<SharingType>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<UserFeatureValue>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<IEnumerable<SharingType>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
-        public IDataResult<int> Update(UserFeatureValue userFeatureValue)
+        public IDataResult<int> Update(SharingType sharingType)
         {
             try
             {
-                int affectedRows = _userFeatureValueDal.Update(userFeatureValue);
+                int affectedRows = _sharingTypeDal.Update(sharingType);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
@@ -167,40 +166,11 @@ namespace Business.Concrete
 
 
 
-
-
-        public IDataResult<int> UpdateList(IEnumerable<UserFeatureValue> userFeatureValues)
+        public IDataResult<int> AddList(IEnumerable<SharingType> sharingTypes)
         {
             try
             {
-                int affectedRows = _userFeatureValueDal.Update(userFeatureValues);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
-                {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataUpdated);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
-                }
-
-                return dataResult;
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-            }
-        }
-        public IDataResult<int> AddList(IEnumerable<UserFeatureValue> userFeatureValues)
-        {
-            try
-            {
-                foreach (var userFeatureValue in userFeatureValues)
-                {
-                    userFeatureValue.IsActive = true;
-                }
-
-                int affectedRows = _userFeatureValueDal.Add(userFeatureValues);
+                int affectedRows = _sharingTypeDal.Add(sharingTypes);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
@@ -218,25 +188,20 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-        public IDataResult<int> DeleteByStatusList(IEnumerable<UserFeatureValue> userFeatureValues)
+
+        public IDataResult<int> UpdateList(IEnumerable<SharingType> sharingTypes)
         {
             try
             {
-                foreach (var userFeatureValue in userFeatureValues)
-                {
-                    userFeatureValue.IsActive = false;
-                }
-
-                int affectedRows = _userFeatureValueDal.DeleteByStatus(userFeatureValues);
-
+                int affectedRows = _sharingTypeDal.Update(sharingTypes);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
@@ -246,19 +211,20 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<UserFeatureValue> userFeatureValues)
+
+        public IDataResult<int> DeletePermanentlyList(IEnumerable<SharingType> sharingTypes)
         {
             try
             {
-                int affectedRows = _userFeatureValueDal.DeletePermanently(userFeatureValues);
+                int affectedRows = _sharingTypeDal.DeletePermanently(sharingTypes);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
@@ -267,7 +233,48 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
+        }
 
+        public IDataResult<int> DeleteByStatusList(IEnumerable<SharingType> sharingTypes)
+        {
+            try
+            {
+                foreach (var sharingType in sharingTypes)
+                {
+                    sharingType.IsActive = false;
+                }
+
+                DeleteAllEntitiesByStatusForAllRelationList(sharingTypes);
+
+                int affectedRows = _sharingTypeDal.DeleteByStatus(sharingTypes);
+
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<SharingType> sharingTypes)
+        {
+            foreach (var sharingType in sharingTypes)
+            {
+            }
+        }
+
+        private void DeleteByStatusForAllRelation(SharingType sharingType)
+        {
         }
     }
 }

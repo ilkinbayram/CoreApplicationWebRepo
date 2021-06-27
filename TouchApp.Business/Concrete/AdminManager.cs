@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Core.Entities.Dtos.User;
 using Core.Resources.Enums;
 using Core.Utilities.Results;
-using DataAccess.Abstract;
+using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
 {

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
-using DataAccess.Abstract;
+using TouchApp.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -11,21 +11,22 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class UserLanguageManager : IUserLanguageService
+    public class TeacherInfoManager : ITeacherInfoService
     {
-        private readonly IUserLanguageDal _userLanguageDal;
+        private readonly ITeacherInfoDal _teacherInfoDal;
         private readonly IMapper _mapper;
-        public UserLanguageManager(IUserLanguageDal userLanguageDal, IMapper mapper)
+
+        public TeacherInfoManager(ITeacherInfoDal teacherInfoDal, IMapper mapper)
         {
-            _userLanguageDal = userLanguageDal;
+            _teacherInfoDal = teacherInfoDal;
             _mapper = mapper;
         }
 
-        public IDataResult<int> Add(UserLanguage userLanguage)
+        public IDataResult<int> Add(TeacherInfo teacherInfo)
         {
             try
             {
-                int affectedRows = _userLanguageDal.Add(userLanguage);
+                int affectedRows = _teacherInfoDal.Add(teacherInfo);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
@@ -40,7 +41,7 @@ namespace Business.Concrete
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -50,7 +51,7 @@ namespace Business.Concrete
             {
                 IDataResult<int> dataResult;
 
-                var deletableEntity = _userLanguageDal.Get(x => x.Id == Id);
+                var deletableEntity = _teacherInfoDal.Get(x => x.Id == Id);
 
                 if (deletableEntity == null)
                 {
@@ -58,8 +59,10 @@ namespace Business.Concrete
                     return dataResult;
                 }
 
+                DeleteByStatusForAllRelation(deletableEntity);
+
                 deletableEntity.IsActive = false;
-                int affectedRows = _userLanguageDal.DeleteByStatus(deletableEntity);
+                int affectedRows = _teacherInfoDal.DeleteByStatus(deletableEntity);
 
                 if (affectedRows > 0)
                 {
@@ -74,7 +77,7 @@ namespace Business.Concrete
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -84,7 +87,7 @@ namespace Business.Concrete
             {
                 IDataResult<int> dataResult;
 
-                var deletableEntity = _userLanguageDal.Get(x => x.Id == Id);
+                var deletableEntity = _teacherInfoDal.Get(x => x.Id == Id);
 
                 if (deletableEntity == null)
                 {
@@ -92,8 +95,7 @@ namespace Business.Concrete
                     return dataResult;
                 }
 
-                int affectedRows = _userLanguageDal.DeletePermanently(deletableEntity);
-
+                int affectedRows = _teacherInfoDal.DeletePermanently(deletableEntity);
                 if (affectedRows > 0)
                 {
                     dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
@@ -107,69 +109,43 @@ namespace Business.Concrete
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
-        public IDataResult<UserLanguage> Get(Expression<Func<UserLanguage, bool>> filter)
+        public IDataResult<TeacherInfo> Get(Expression<Func<TeacherInfo, bool>> filter)
         {
             try
             {
-                var response = _userLanguageDal.Get(filter);
-                var mappingResult = _mapper.Map<UserLanguage>(response);
-                return new SuccessDataResult<UserLanguage>(mappingResult);
+                var response = _teacherInfoDal.Get(filter);
+                var mappingResult = _mapper.Map<TeacherInfo>(response);
+                return new SuccessDataResult<TeacherInfo>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<UserLanguage>(null, $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<TeacherInfo>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
-        public IDataResult<IEnumerable<UserLanguage>> GetList(Expression<Func<UserLanguage, bool>> filter = null)
+        public IDataResult<IEnumerable<TeacherInfo>> GetList(Expression<Func<TeacherInfo, bool>> filter = null)
         {
             try
             {
-                var response = _userLanguageDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<UserLanguage>>(response);
-                return new SuccessDataResult<IEnumerable<UserLanguage>>(mappingResult);
+                var response = _teacherInfoDal.GetList(filter);
+                var mappingResult = _mapper.Map<IEnumerable<TeacherInfo>>(response);
+                return new SuccessDataResult<IEnumerable<TeacherInfo>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<UserLanguage>>(null, $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<IEnumerable<TeacherInfo>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
-        public IDataResult<int> Update(UserLanguage userLanguage)
+        public IDataResult<int> Update(TeacherInfo teacherInfo)
         {
             try
             {
-                int affectedRows = _userLanguageDal.Update(userLanguage);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
-                {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataUpdated);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
-                }
-
-                return dataResult;
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<int>(-1, $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}");
-            }
-        }
-
-
-
-
-        public IDataResult<int> UpdateList(IEnumerable<UserLanguage> userLanguages)
-        {
-            try
-            {
-                int affectedRows = _userLanguageDal.Update(userLanguages);
+                int affectedRows = _teacherInfoDal.Update(teacherInfo);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
@@ -187,16 +163,14 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-        public IDataResult<int> AddList(IEnumerable<UserLanguage> userLanguages)
+
+
+
+        public IDataResult<int> AddList(IEnumerable<TeacherInfo> teacherInfos)
         {
             try
             {
-                foreach (var userLanguage in userLanguages)
-                {
-                    userLanguage.IsActive = true;
-                }
-
-                int affectedRows = _userLanguageDal.Add(userLanguages);
+                int affectedRows = _teacherInfoDal.Add(teacherInfos);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
@@ -214,25 +188,20 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-        public IDataResult<int> DeleteByStatusList(IEnumerable<UserLanguage> userLanguages)
+
+        public IDataResult<int> UpdateList(IEnumerable<TeacherInfo> teacherInfos)
         {
             try
             {
-                foreach (var userLanguage in userLanguages)
-                {
-                    userLanguage.IsActive = false;
-                }
-
-                int affectedRows = _userLanguageDal.DeleteByStatus(userLanguages);
-
+                int affectedRows = _teacherInfoDal.Update(teacherInfos);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
@@ -242,19 +211,20 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<UserLanguage> userLanguages)
+
+        public IDataResult<int> DeletePermanentlyList(IEnumerable<TeacherInfo> teacherInfos)
         {
             try
             {
-                int affectedRows = _userLanguageDal.DeletePermanently(userLanguages);
+                int affectedRows = _teacherInfoDal.DeletePermanently(teacherInfos);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
@@ -263,7 +233,48 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
+        }
 
+        public IDataResult<int> DeleteByStatusList(IEnumerable<TeacherInfo> teacherInfos)
+        {
+            try
+            {
+                foreach (var teacherInfo in teacherInfos)
+                {
+                    teacherInfo.IsActive = false;
+                }
+
+                DeleteAllEntitiesByStatusForAllRelationList(teacherInfos);
+
+                int affectedRows = _teacherInfoDal.DeleteByStatus(teacherInfos);
+
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<TeacherInfo> teacherInfos)
+        {
+            foreach (var teacherInfo in teacherInfos)
+            {
+            }
+        }
+
+        private void DeleteByStatusForAllRelation(TeacherInfo teacherInfo)
+        {
         }
     }
 }

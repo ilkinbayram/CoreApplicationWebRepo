@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DataAccess.Abstract
+namespace TouchApp.DataAccess.Abstract
 {
     public interface IHomeMetaTagDal : IEntityRepository<HomeMetaTag>
     {

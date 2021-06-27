@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.Concrete.EntityFramework.Configurations
+namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
 {
     public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationClaim>
     {

@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Core.CrossCuttingConcerns.Caching;
+using Core.DependencyResolvers;
+using Core.Entities.Concrete;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Extensions
 {
@@ -33,6 +37,15 @@ namespace Core.Extensions
             }
 
             return resultList.ToArray();
+        }
+
+        public static string Translate(this string key, byte lang_oid)
+        {
+            var _cacheManager = CoreInstanceFactory.GetInstance<ICacheManager>();
+
+            var result = _cacheManager.Get<List<Localization>>(key);
+
+            return result.FirstOrDefault(x => x.Lang_oid == lang_oid).Translate;
         }
     }
 }

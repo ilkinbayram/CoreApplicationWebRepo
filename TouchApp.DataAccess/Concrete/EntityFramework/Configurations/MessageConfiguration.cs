@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.Concrete.EntityFramework.Configurations
+namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
 {
     public class MessageConfiguration : IEntityTypeConfiguration<Message>
     {
@@ -13,8 +13,6 @@ namespace DataAccess.Concrete.EntityFramework.Configurations
 
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(p => p.MessageCode).IsRequired();
-
-            builder.HasMany(m => m.MessageLanguages).WithOne(o => o.Message);
         }
     }
 }

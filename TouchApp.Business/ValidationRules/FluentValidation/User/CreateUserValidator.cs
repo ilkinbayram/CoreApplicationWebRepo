@@ -19,8 +19,6 @@ namespace Business.ValidationRules.FluentValidation.User
             RuleFor(p => p.WallpaperPath).NotEmpty().WithMessage("Wallpaper  sekli bos ola bilmez");
             RuleFor(p => p.PreviewMoviePath).NotEmpty().WithMessage("Video bos ola bilmez");
             RuleFor(p => p.CategoryId).NotNull().WithMessage("Categoria bos qoyula bilmez").NotEmpty().WithMessage("Categoria bos qoyula bilmez");
-            RuleForEach(x => x.UserLanguages).SetValidator(new CreateUserLanguageValidator());
-            RuleForEach(x => x.UserFeatureValues).SetValidator(new CreateUserFeatureValueValidator());
         }
     }
 }

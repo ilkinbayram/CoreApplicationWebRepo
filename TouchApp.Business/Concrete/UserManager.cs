@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using AutoMapper;
-using Business.Abstract;
+using TouchApp.Business.Abstract;
 using Business.Constants;
 using Business.ExternalServices.Mail;
 using Business.ExternalServices.Mail.Services.Abstract;
@@ -21,7 +21,7 @@ using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Services.Rest;
-using DataAccess.Abstract;
+using TouchApp.DataAccess.Abstract;
 using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete
@@ -31,48 +31,32 @@ namespace Business.Concrete
         private readonly IUserDal _userDal;
         private readonly IMapper _mapper;
         private readonly IUserOperationClaimService _userOperationClaimService; //
-        private readonly IOrderService _orderService;
         private readonly ICategoryService _categoryService;
-        private readonly IRateService _rateService; //
-        private readonly IUserLanguageService _userLanguageService;
-        private readonly IUserFeatureValueService _userFeatureValueService;
         private readonly ILanguageService _languageService;
         private readonly ICloudinaryService _cloudinaryService;
         private readonly IFileManager _fileManager;
         private readonly IMailService _mailService;
         private readonly IHttpContextAccessor _httpContext;
-        private readonly IUserFeatureValueDal _userFeatureValueDal;
-
 
         public UserManager(IUserDal userDal,
                            IMapper mapper,
                            IUserOperationClaimService userOperationClaimService,
                            ICategoryService categoryService,
-                           IRateService rateService,
-                           IOrderService orderService,
-                           IUserLanguageService userLanguageService,
-                           IUserFeatureValueService userFeatureValueService,
                            ICloudinaryService cloudinaryService,
                            IMailService mailService,
                            IFileManager fileManager,
                            ILanguageService languageService,
-                           IHttpContextAccessor httpContextAccessor,
-                           IUserFeatureValueDal userFeatureValueDal)
+                           IHttpContextAccessor httpContextAccessor)
         {
             _userDal = userDal;
             _mapper = mapper;
             _userOperationClaimService = userOperationClaimService;
             _categoryService = categoryService;
-            _orderService = orderService;
-            _rateService = rateService;
-            _userLanguageService = userLanguageService;
-            _userFeatureValueService = userFeatureValueService;
             _cloudinaryService = cloudinaryService;
             _fileManager = fileManager;
             _mailService = mailService;
             _languageService = languageService;
             _httpContext = httpContextAccessor;
-            _userFeatureValueDal = userFeatureValueDal;
         }
 
         public IDataResult<int> Add(User user)
@@ -123,13 +107,10 @@ namespace Business.Concrete
                 userModel.PasswordHash = passwordHash;
                 userModel.PasswordSalt = passwordSalt;
                 userModel.SecurityToken = securityToken;
-                userModel.AccountType = AccountType.Celebrity;
                 userModel.Rate = 0;
                 userModel.ProfilePhotoPath = createUserDto.ProfilePhotoPath;
                 userModel.IsActive = true;
                 userModel.WallpaperPath = createUserDto.WallpaperPath;
-
-                userModel.PreviewMoviePath = createUserDto.PreviewMoviePath;
 
                 int affectedRows = _userDal.Add(userModel);
 
@@ -348,16 +329,6 @@ namespace Business.Concrete
             }
         }
 
-        [TransactionScopeAspect()]
-        private bool TransactionalUserRelationsAdd(UserLanguage userLanguage, UserFeatureValue userFeatureValue)
-        {
-            bool result = false;
-
-            result = _userLanguageService.Add(userLanguage).Data > 0 && _userFeatureValueService.Add(userFeatureValue).Data > 0;
-
-            return result;
-        }
-
         public IDataResult<int> AddList(IEnumerable<User> users)
         {
             try
@@ -462,245 +433,30 @@ namespace Business.Concrete
         {
             foreach (var user in users)
             {
-                if (user.UserRates != null)
-                {
-                    _rateService.DeleteByStatusList(user.UserRates);
-                }
-
-                if (user.FamousRates != null)
-                {
-                    _rateService.DeleteByStatusList(user.FamousRates);
-                }
-
-                if (user.UserOrders != null)
-                {
-                    _orderService.DeleteByStatusList(user.UserOrders);
-                }
-
-                if (user.FamousOrders != null)
-                {
-                    _orderService.DeleteByStatusList(user.FamousOrders);
-                }
-
-                if (user.UserOperationClaims != null)
-                {
-                    _userOperationClaimService.DeleteByStatusList(user.UserOperationClaims);
-                }
-
-                if (user.UserLanguages != null)
-                {
-                    _userLanguageService.DeleteByStatusList(user.UserLanguages);
-                }
-
-                if (user.UserFeatureValues != null)
-                {
-                    _userFeatureValueService.DeleteByStatusList(user.UserFeatureValues);
-                }
+                
             }
         }
 
         private void DeleteByStatusForAllRelation(User user)
         {
-            if (user.UserRates != null)
-            {
-                _rateService.DeleteByStatusList(user.UserRates);
-            }
-
-            if (user.FamousRates != null)
-            {
-                _rateService.DeleteByStatusList(user.FamousRates);
-            }
-
-            if (user.UserOrders != null)
-            {
-                _orderService.DeleteByStatusList(user.UserOrders);
-            }
-
-            if (user.FamousOrders != null)
-            {
-                _orderService.DeleteByStatusList(user.FamousOrders);
-            }
-
-            if (user.UserOperationClaims != null)
-            {
-                _userOperationClaimService.DeleteByStatusList(user.UserOperationClaims);
-            }
-
-            if (user.UserLanguages != null)
-            {
-                _userLanguageService.DeleteByStatusList(user.UserLanguages);
-            }
-
-            if (user.UserFeatureValues != null)
-            {
-                _userFeatureValueService.DeleteByStatusList(user.UserFeatureValues);
-            }
+            
         }
 
         [ValidationAspect(typeof(UpdateUserDtoValidator), Priority = 1)]
         public IDataResult<int> UpdateUserByAdmin(UpdateUserDto updateUserDto)
         {
-            try
-            {
-                var activeUserName = _httpContext.HttpContext.User.GetFullName();
-                User user = _userDal.UserGetById(updateUserDto.Id);
-                user.Modified_at = DateTime.Now;
-                user.Modified_by = activeUserName;
-                user.Gender = updateUserDto.Gender;
-                user.FirstName = updateUserDto.FirstName;
-                user.LastName = updateUserDto.LastName;
-                user.UnitPrice = updateUserDto.UnitPrice;
-                user.Biography = user.Biography;
-                user.Birthday = updateUserDto.Birthday;
-                user.PhoneNumber = updateUserDto.PhoneNumber;
-                user.PhoneNumberPrefix = updateUserDto.PhoneNumberPrefix;
-                user.ShowInHomePage = updateUserDto.ShowInHomePage;
-                user.CategoryId = updateUserDto.CategoryId;
-                
-                if (updateUserDto.ProfilePhotoPath != null && user.ProfilePhotoPath == null)
-                {
-                    user.ProfilePhotoPath = updateUserDto.ProfilePhotoPath;
-                }
-                else if (updateUserDto.ProfilePhotoPath != null && user.ProfilePhotoPath != null)
-                {
-                    _cloudinaryService.Delete(user.ProfilePhotoPath);
-                    user.ProfilePhotoPath = updateUserDto.ProfilePhotoPath;
-                }
-                if (updateUserDto.WallpaperPath != null && user.WallpaperPath == null)
-                {
-                        
-                        user.WallpaperPath = updateUserDto.WallpaperPath;
-                }
-                else if (updateUserDto.WallpaperPath != null && user.WallpaperPath != null)
-                 {
-                        _cloudinaryService.Delete(user.WallpaperPath);
-                    
-                        user.WallpaperPath = updateUserDto.WallpaperPath;
-                 }
-                if (updateUserDto.PreviewMoviePath != null && user.PreviewMoviePath == null)
-                {
-                        
-                        user.ProfilePhotoPath = updateUserDto.PreviewMoviePath;
-                }
-                else if (updateUserDto.PreviewMoviePath != null && user.PreviewMoviePath != null)
-                {
-                        _cloudinaryService.Delete(user.PreviewMoviePath);
-                       
-                        user.PreviewMoviePath = updateUserDto.PreviewMoviePath;
-                }
-
-                foreach (var userLang in updateUserDto.UserLanguages)
-                {
-
-                    var userlang = user.UserLanguages.FirstOrDefault(x => x.Id == userLang.Id && x.LanguageId == userLang.LanguageId);
-                    if (userlang != null)
-                    {
-                        userlang.Description = userLang.Description;
-                        userlang.LanguageId = userLang.LanguageId;
-                        userlang.Slug = userLang.Slug;
-
-                    }
-                }
-                var dbuserfeturevalue = user.UserFeatureValues.ToList();
-
-                foreach (var userfeaturevalue in updateUserDto.UserFeatureValues)
-                {
-                    if (dbuserfeturevalue.Any(x=>x.Id == userfeaturevalue.Id))
-                    {
-                        var featureValue = user.UserFeatureValues.FirstOrDefault(x => x.Id == userfeaturevalue.Id);
-                        featureValue.FeatureValueId = userfeaturevalue.FeatureValueId ;
-                        featureValue.CategoryFeatureId = userfeaturevalue.CategoryFeatureId;
-                        dbuserfeturevalue.Remove(user.UserFeatureValues.FirstOrDefault(x => x.Id == userfeaturevalue.Id));
-                    }
-                    else
-                    {
-
-                        var userfeturemappermapper = new UserFeatureValue
-                        {
-                            IsActive = true,
-                            FeatureValueId = userfeaturevalue.FeatureValueId,
-                            CategoryFeatureId = userfeaturevalue.CategoryFeatureId,
-                            UserId = user.Id
-                        };
-                        _userFeatureValueDal.AddUserFeature(userfeturemappermapper);
-                    }
-                }
-
-                _userFeatureValueDal.RemoveRange(dbuserfeturevalue);
-
-                int affectedRows = _userDal.Commit();
-                    IDataResult<int> dataResult;
-                    if (affectedRows > 0)
-                    {
-                        dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataUpdated);
-                    }
-                    else
-                    {
-                        dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
-                    }
-
-                    return dataResult;
-                }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-            }
+            return null;
         }
 
         public IDataResult<UserGetByIdDto> GetUserById(long userId)
         {
-            try
-            {
-                var response = _userDal.UserGetById(userId);
-                var mappingresult = _mapper.Map<UserGetByIdDto>(response);
-                mappingresult.ProfilePhotoPathCloudinaryUrl = _cloudinaryService.BuildUrl(response.ProfilePhotoPath);
-                mappingresult.WallpaperPathCloudinaryUrl = _cloudinaryService.BuildUrl(response.WallpaperPath);
-                mappingresult.PreviewMoviePathCloudinaryUrl = _cloudinaryService.BuildUrlVideo(response.PreviewMoviePath);
-
-                return new SuccessDataResult<UserGetByIdDto>(mappingresult);
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<UserGetByIdDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-            }
+            return null;
         }
 
         public IDataResult<IEnumerable<GetFamousOfferFeatureDto>> GetUserOfferFeatures(long famousPersonId, string acceptedLang)
 
         {
-            IDataResult<IEnumerable<GetFamousOfferFeatureDto>> dataResult;
-            var langID = _languageService.Get(x => x.LanguageName == acceptedLang).Data.Id;
-            try
-            {
-                var user = _userDal.GetUserForOrderWithRelations(x=>x.Id==famousPersonId & x.IsActive == true);
-                var features = user.UserFeatureValues.Select(x=>x.FeatureValue.Feature).GroupBy(g => g.Id).Select(s => s.First()).ToList();
-
-                //foreach (var feature in features)
-                //{
-                //    feature.FeatureLanguages = feature.FeatureLanguages.Where(f => f.LanguageId == langID).ToList();
-                //    foreach (var featureValue in feature.FeatureValues)
-                //        featureValue.FeatureValueLanguages = featureValue.FeatureValueLanguages.Where(f => f.LanguageId == langID).ToList();
-                //}
-                var c = features.Where(z=>z.OfferFeature).Select(x => new GetFamousOfferFeatureDto
-                {
-                    FeatureName = x.FeatureLanguages.FirstOrDefault(z => z.LanguageId == langID).FeatureName,
-                    FeatureValues = x.FeatureValues.Select(b => new GetFamousOfferFeatureValueDto
-                    {
-                        Id=b.Id,
-                        FeatureValueName = b.FeatureValueLanguages.FirstOrDefault(n => n.LanguageId == langID).FeatureValueName
-                    })
-                });
-
-                //var result = _mapper.Map<IEnumerable<GetFamousOfferFeatureDto>>(features);
-                return new SuccessDataResult<IEnumerable<GetFamousOfferFeatureDto>>(c);
-
-            }
-            catch (Exception exception)
-            {
-                dataResult = new ErrorDataResult<IEnumerable<GetFamousOfferFeatureDto>>($"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-
-                return dataResult;
-            }
+            return null;
         }
 
         public IDataResult<UserLangDto> GetUserBySlug(string userSlug, string lang)
@@ -708,13 +464,7 @@ namespace Business.Concrete
            
                 try
                 {
-                    var response = _userDal.GetUserBySlug(userSlug,lang);
-                    var mappingresult = _mapper.Map<UserLangDto>(response);
-                    mappingresult.User.ProfilePhotoPathCloudinaryUrl = _cloudinaryService.BuildUrl(response.User.ProfilePhotoPath);
-                    mappingresult.User.WallpaperPathCloudinaryUrl = _cloudinaryService.BuildUrl(response.User.WallpaperPath);
-                    mappingresult.User.PreviewMoviePathCloudinaryUrl = _cloudinaryService.BuildUrlVideo(response.User.PreviewMoviePath);
-
-                    return new SuccessDataResult<UserLangDto>(mappingresult);
+                    return new SuccessDataResult<UserLangDto>();
                 }
                 catch (Exception exception)
                 {

@@ -4,7 +4,6 @@
     {
         public long Id { get; set; }
         public string Url { get; set; }
-        public long Order { get; set; }
         public string Alt { get; set; }
         public bool IsActive { get; set; }
         public long HomeMetaTagId { get; set; }
