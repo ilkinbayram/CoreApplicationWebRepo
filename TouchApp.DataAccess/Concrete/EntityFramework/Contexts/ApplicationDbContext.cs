@@ -33,6 +33,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new SocialMediaConfiguration());
             modelBuilder.ApplyConfiguration(new TeacherInfoConfiguration());
             modelBuilder.ApplyConfiguration(new UserSocialMediaConfiguration());
+            modelBuilder.ApplyConfiguration(new RoutingConfiguration());
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -55,5 +56,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<TeacherInfo> TeacherInfos { get; set; }
         public DbSet<UserSocialMedia> UserSocialMedias { get; set; }
+        public DbSet<Routing> Routings { get; set; }
     }
 }
