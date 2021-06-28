@@ -30,6 +30,30 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Gallery()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult StudyPackage()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult TeachersInfo()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult BlogDetails()
+        {
+            return View();
+        }
         #endregion
     }
 }
