@@ -1,6 +1,10 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
 using Core.DependencyResolvers;
 using Core.Entities.Concrete;
+using Core.Utilities.Helpers;
+using Core.Utilities.Helpers.Abstracts;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,13 +43,37 @@ namespace Core.Extensions
             return resultList.ToArray();
         }
 
-        public static string Translate(this string key, byte lang_oid)
+        private static byte lang_oid
+        {
+            get
+            {
+                var _configHelper = CoreInstanceFactory.GetInstance<IConfigHelper>();
+                
+                HttpContextAccessor context = new HttpContextAccessor();
+                var response = context.HttpContext.Request.Cookies[_configHelper.GetSettingsData<string>("cookie_lang_oid", "CookieFixedKeywords")];
+
+                if (string.IsNullOrEmpty(response))
+                {
+                    response = context.HttpContext.Request.Cookies[_configHelper.GetSettingsData<string>("default_lang_oid", "CookieFixedKeywords")];
+                    return Convert.ToByte(response);
+                }
+
+                return Convert.ToByte(response);
+            }
+        }
+
+        public static string Translate(this string key)
         {
             var _cacheManager = CoreInstanceFactory.GetInstance<ICacheManager>();
 
-            var result = _cacheManager.Get<List<Localization>>(key);
+            var unfilteredResponse = _cacheManager.Get<List<Localization>>(key);
 
-            return result.FirstOrDefault(x => x.Lang_oid == lang_oid).Translate;
+            if (unfilteredResponse != null)
+            {
+                return unfilteredResponse.FirstOrDefault(x => x.Lang_oid == lang_oid).Translate;
+            }
+
+            return key;
         }
     }
 }

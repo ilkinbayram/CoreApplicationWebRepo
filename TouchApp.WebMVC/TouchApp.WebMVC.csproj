@@ -25,7 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\TouchApp.Business\TouchApp.Business.csproj" />
+    <ProjectReference Include="..\TouchApp.WebAPI\TouchApp.WebAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,12 @@
 using Core.DependencyResolvers;
 using Core.Extensions;
 using Core.Utilities.IoC;
+using DataAccess.Concrete.EntityFramework.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,17 +29,25 @@ namespace TouchApp.WebMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<RazorViewEngineOptions>(options =>
-            //{
-            //    options.AreaViewLocationFormats.Clear();
-            //    options.AreaViewLocationFormats.Add("/Global/{2}/Views/{1}/{0}.cshtml");
-            //    options.AreaViewLocationFormats.Add("/Global/{2}/Views/Shared/{0}.cshtml");
-            //    options.AreaViewLocationFormats.Add("/Admin/{2}/Views/{1}/{0}.cshtml");
-            //    options.AreaViewLocationFormats.Add("/Admin/{2}/Views/Shared/{0}.cshtml");
-            //    options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
-            //});
-
             services.AddControllersWithViews();
+
+            var local = Configuration.GetConnectionString("LocalDB");
+            var testServer = Configuration.GetConnectionString("TestServerDB");
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(testServer);
+            });
+
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            services.AddCors(o => o.AddPolicy("AllowOrigin", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             //services.AddRazorPages();
 

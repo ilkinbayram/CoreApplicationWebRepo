@@ -2,6 +2,8 @@
 using Autofac.Core;
 using Core.CrossCuttingConcerns.Caching;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
+using Core.Utilities.Helpers;
+using Core.Utilities.Helpers.Abstracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace Core.DependencyResolvers
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ICacheManager>().As<MemoryCacheManager>();
+            builder.RegisterType<IConfigHelper>().As<ConfigHelper>();
         }
     }
 }

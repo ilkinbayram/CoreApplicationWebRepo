@@ -29,6 +29,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new ProfessionConfiguration());
             modelBuilder.ApplyConfiguration(new SectionConfiguration());
             modelBuilder.ApplyConfiguration(new SharingTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TagPostsConfiguration());
             modelBuilder.ApplyConfiguration(new SharingTypePostConfiguration());
             modelBuilder.ApplyConfiguration(new SocialMediaConfiguration());
             modelBuilder.ApplyConfiguration(new TeacherInfoConfiguration());
@@ -53,6 +54,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Section> Sections { get; set; }
         public DbSet<SharingType> SharingTypes { get; set; }
         public DbSet<SharingTypePost> SharingTypePosts { get; set; }
+        public DbSet<TagPosts> TagPosts { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<TeacherInfo> TeacherInfos { get; set; }
         public DbSet<UserSocialMedia> UserSocialMedias { get; set; }

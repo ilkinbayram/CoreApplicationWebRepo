@@ -22,6 +22,8 @@ namespace Core.Entities.Concrete
         public virtual List<Media> Medias { get; set; }
         public virtual Section Section { get; set; }
         public virtual List<SharingTypePost> SharingTypePosts { get; set; }
+        public virtual List<TagPosts> TagPosts { get; set; }
+
         public virtual User User { get; set; }
     }
 }
