@@ -9,7 +9,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,10 +24,12 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 
             modelBuilder.ApplyConfiguration(new LocalizationConfiguration());
             modelBuilder.ApplyConfiguration(new MediaConfiguration());
+            modelBuilder.ApplyConfiguration(new PhraseConfiguration());
             modelBuilder.ApplyConfiguration(new PostConfiguration());
             modelBuilder.ApplyConfiguration(new ProfessionConfiguration());
             modelBuilder.ApplyConfiguration(new SectionConfiguration());
             modelBuilder.ApplyConfiguration(new SharingTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TagConfiguration());
             modelBuilder.ApplyConfiguration(new TagPostsConfiguration());
             modelBuilder.ApplyConfiguration(new SharingTypePostConfiguration());
             modelBuilder.ApplyConfiguration(new SocialMediaConfiguration());
@@ -49,11 +50,12 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Localization> Localizations { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<Post> Posts { get; set; }
-        // public DbSet<Phrase> Phrases { get; set; }
+        public DbSet<Phrase> Phrases { get; set; }
         public DbSet<Profession> Professions { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<SharingType> SharingTypes { get; set; }
         public DbSet<SharingTypePost> SharingTypePosts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<TagPosts> TagPosts { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<TeacherInfo> TeacherInfos { get; set; }

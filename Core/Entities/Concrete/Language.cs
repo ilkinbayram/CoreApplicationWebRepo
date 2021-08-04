@@ -6,6 +6,8 @@ namespace Core.Entities.Concrete
     {
         public long Id { get; set; }
         public string NameKey { get; set; }
+        public string NameAbr { get; set; }
+        public string FullName { get; set; }
         public bool IsActive { get; set; }
     }
 }

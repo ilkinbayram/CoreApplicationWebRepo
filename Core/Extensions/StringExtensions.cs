@@ -50,7 +50,7 @@ namespace Core.Extensions
                 var _configHelper = CoreInstanceFactory.GetInstance<IConfigHelper>();
                 
                 HttpContextAccessor context = new HttpContextAccessor();
-                var response = context.HttpContext.Request.Cookies[_configHelper.GetSettingsData<string>("cookie_lang_oid", "CookieFixedKeywords")];
+                var response = context.HttpContext.Request.Cookies[_configHelper.GetSettingsData<string>("cookie_lang_oid_keyword", "CookieFixedKeywords")];
 
                 if (string.IsNullOrEmpty(response))
                 {

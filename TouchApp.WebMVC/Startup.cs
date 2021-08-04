@@ -38,6 +38,8 @@ namespace TouchApp.WebMVC
                 options.UseSqlServer(testServer);
             });
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -53,7 +55,7 @@ namespace TouchApp.WebMVC
 
             services.AddDependencyResolvers(new ICoreModule[]
             {
-                new CoreModule(),
+                new CoreModule()
             });
         }
 

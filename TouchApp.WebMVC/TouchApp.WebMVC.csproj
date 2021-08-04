@@ -36,7 +36,6 @@
     <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Global\Data\" />
     <Folder Include="Areas\Global\Models\" />
-    <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="Pages\" />
     <Folder Include="wwwroot\css\" />

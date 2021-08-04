@@ -13,21 +13,29 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
     [Area("Global")]
     public class HomeController : Controller
     {
-        public ICacheManager _cacheManager { get; set; }
-        public ILocalizationService _localizationService { get; set; }
-        public IConfigHelper _configHelper { get; set; }
+        private ICacheManager _cacheManager;
+        private ISessionStorageHelper _sessionStorageHelper;
+        private ILocalizationService _localizationService;
+        private ILanguageService _languageService;
+        private IConfigHelper _configHelper;
         public HomeController(ICacheManager cacheManager, 
                               ILocalizationService localizationService, 
-                              IConfigHelper configHelper)
+                              IConfigHelper configHelper,
+                              ISessionStorageHelper sessionStorageHelper,
+                              ILanguageService languageService)
         {
             _cacheManager = cacheManager;
             _localizationService = localizationService;
             _configHelper = configHelper;
+            _sessionStorageHelper = sessionStorageHelper;
+            _languageService = languageService;
         }
 
         [HttpGet]
         public IActionResult TouchIndex()
         {
+            _sessionStorageHelper.SetSessionLangIfNotExist();
+
             if (_cacheManager.Get(_configHelper.GetSettingsData<string>("staticLanguageCache", "ServerCache")) ==null)
             {
                 var cachableLocalizationList = _localizationService.GetList();
