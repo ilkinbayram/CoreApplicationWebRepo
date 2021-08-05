@@ -9,6 +9,7 @@ namespace Core.Entities.Concrete
 {
     public class Section : BaseEntity, IEntity
     {
+        public string PrioritySeparatorKey { get; set; }
         public string TitleKey { get; set; }
         public string SubtitleKey { get; set; }
         public string DescKey { get; set; }

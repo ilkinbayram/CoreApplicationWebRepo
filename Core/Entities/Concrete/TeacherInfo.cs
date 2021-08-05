@@ -15,6 +15,7 @@ namespace Core.Entities.Concrete
         public string IconSource { get; set; }
 
         public virtual Profession Profession { get; set; }
-        public virtual List<User> Users { get; set; }
+        public virtual List<Course> Courses { get; set; }
+        public virtual List<UserCourse> UserCourses { get; set; }
     }
 }

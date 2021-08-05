@@ -28,5 +28,6 @@ namespace Core.Entities.Concrete
         public virtual TeacherInfo TeacherInfo { get; set; }
         public virtual List<UserSocialMedia> UserSocialMedias { get; set; }
         public virtual List<Post> Posts { get; set; }
+        public virtual List<UserCourse> UserCourses { get; set; }
     }
 }

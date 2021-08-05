@@ -17,6 +17,5 @@ namespace Core.Entities.Concrete
         public virtual HashSet<Category> Children { get; set; } //ozunden ozune relation ucun ve childlari
         public virtual Category ParentCategory { get; set; }
         public virtual List<User> Users { get; set; }
-
     }
 }

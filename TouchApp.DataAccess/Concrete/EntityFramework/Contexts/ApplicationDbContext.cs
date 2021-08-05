@@ -21,6 +21,9 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new OperationClaimConfiguration());
             modelBuilder.ApplyConfiguration(new UserOperationClaimConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new UserCourseConfiguration());
+            modelBuilder.ApplyConfiguration(new CourseConfiguration());
+            modelBuilder.ApplyConfiguration(new ProfessionCourseCategoryConfiguration());
 
             modelBuilder.ApplyConfiguration(new LocalizationConfiguration());
             modelBuilder.ApplyConfiguration(new MediaConfiguration());
@@ -46,6 +49,9 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<HomeMetaTag> HomeMetaTags { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<ProfessionCourseCategory> ProfessionCourseCategories { get; set; }
+        public DbSet<UserCourse> UserCourses { get; set; }
 
         public DbSet<Localization> Localizations { get; set; }
         public DbSet<Media> Medias { get; set; }
