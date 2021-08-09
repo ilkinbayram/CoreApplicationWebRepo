@@ -107,7 +107,6 @@ namespace Business.Concrete
                 userModel.PasswordHash = passwordHash;
                 userModel.PasswordSalt = passwordSalt;
                 userModel.SecurityToken = securityToken;
-                userModel.Rate = 0;
                 userModel.ProfilePhotoPath = createUserDto.ProfilePhotoPath;
                 userModel.IsActive = true;
                 userModel.WallpaperPath = createUserDto.WallpaperPath;

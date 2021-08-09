@@ -9,7 +9,8 @@ namespace Core.Entities.Concrete
 {
     public class Phrase : BaseEntity, IEntity
     {
-        public string Owner { get; set; }
+        public string OwnerName { get; set; }
+        public string OwnerSurname { get; set; }
         public string CaptionSource { get; set; }
         public string ProfessionKey { get; set; }
         public string ContentKey { get; set; }

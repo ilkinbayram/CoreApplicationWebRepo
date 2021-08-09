@@ -26,6 +26,21 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CategoryManager>().As<ICategoryService>();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>();
 
+            builder.RegisterType<CourseManager>().As<ICourseService>();
+            builder.RegisterType<EfCourseDal>().As<ICourseDal>();
+
+            builder.RegisterType<CourseCommentManager>().As<ICourseCommentService>();
+            builder.RegisterType<EfCourseCommentDal>().As<ICourseCommentDal>();
+
+            builder.RegisterType<CourseServiceManager>().As<ICourseServiceService>();
+            builder.RegisterType<EfCourseServiceDal>().As<ICourseServiceDal>();
+
+            builder.RegisterType<BlogCategoryManager>().As<IBlogCategoryService>();
+            builder.RegisterType<EfBlogCategoryDal>().As<IBlogCategoryDal>();
+
+            builder.RegisterType<ProfessionCourseCategoryManager>().As<IProfessionCourseCategoryService>();
+            builder.RegisterType<EfProfessionCourseCategoryDal>().As<IProfessionCourseCategoryDal>();
+
             builder.RegisterType<HomeMetaTagGalleryManager>().As<IHomeMetaTagGalleryService>();
             builder.RegisterType<EfHomeMetaTagGalleryDal>().As<IHomeMetaTagGalleryDal>();
 
@@ -47,20 +62,17 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<PhraseManager>().As<IPhraseService>();
             builder.RegisterType<EfPhraseDal>().As<IPhraseDal>();
 
-            builder.RegisterType<PostManager>().As<IPostService>();
-            builder.RegisterType<EfPostDal>().As<IPostDal>();
+            builder.RegisterType<BlogManager>().As<IBlogService>();
+            builder.RegisterType<EfBlogDal>().As<IBlogDal>();
 
             builder.RegisterType<ProfessionManager>().As<IProfessionService>();
             builder.RegisterType<EfProfessionDal>().As<IProfessionDal>();
 
-            builder.RegisterType<RoutingManager>().As<IRoutingService>();
-            builder.RegisterType<EfRoutingDal>().As<IRoutingDal>();
-
-            builder.RegisterType<SectionManager>().As<ISectionService>();
-            builder.RegisterType<EfSectionDal>().As<ISectionDal>();
-
             builder.RegisterType<SharingTypeManager>().As<ISharingTypeService>();
             builder.RegisterType<EfSharingTypeDal>().As<ISharingTypeDal>();
+
+            builder.RegisterType<SharingTypeMediaManager>().As<ISharingTypeMediaService>();
+            builder.RegisterType<EfSharingTypeMediaDal>().As<ISharingTypeMediaDal>();
 
             builder.RegisterType<SocialMediaManager>().As<ISocialMediaService>();
             builder.RegisterType<EfSocialMediaDal>().As<ISocialMediaDal>();
@@ -68,17 +80,26 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<TagManager>().As<ITagService>();
             builder.RegisterType<EfTagDal>().As<ITagDal>();
 
-            builder.RegisterType<TagPostsManager>().As<ITagPostsService>();
-            builder.RegisterType<EfTagPostsDal>().As<ITagPostsDal>();
+            builder.RegisterType<TagBlogManager>().As<ITagBlogService>();
+            builder.RegisterType<EfTagBlogDal>().As<ITagBlogDal>();
 
-            builder.RegisterType<TeacherInfoManager>().As<ITeacherInfoService>();
-            builder.RegisterType<EfTeacherInfoDal>().As<ITeacherInfoDal>();
+            builder.RegisterType<TeacherManager>().As<ITeacherService>();
+            builder.RegisterType<EfTeacherDal>().As<ITeacherDal>();
+
+            builder.RegisterType<TeacherCourseManager>().As<ITeacherCourseService>();
+            builder.RegisterType<EfTeacherCourseDal>().As<ITeacherCourseDal>();
+
+            builder.RegisterType<TeacherSocialMediaManager>().As<ITeacherSocialMediaService>();
+            builder.RegisterType<EfTeacherSocialMediaDal>().As<ITeacherSocialMediaDal>();
 
             builder.RegisterType<UserSocialMediaManager>().As<IUserSocialMediaService>();
             builder.RegisterType<EfUserSocialMediaDal>().As<IUserSocialMediaDal>();
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
+
+
+
 
 
             builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();

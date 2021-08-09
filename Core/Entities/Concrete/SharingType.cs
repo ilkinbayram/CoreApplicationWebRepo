@@ -10,6 +10,6 @@ namespace Core.Entities.Concrete
     public class SharingType : BaseEntity, IEntity
     {
         public string NameKey { get; set; }
-        public virtual List<SharingTypePost> SharingTypePosts { get; set; }
+        public virtual List<SharingTypeMedia> SharingTypeMedias { get; set; }
     }
 }

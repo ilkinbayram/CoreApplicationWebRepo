@@ -118,7 +118,7 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<long?>("ProfessionCourseCategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("TeacherInfoId")
+                    b.Property<long?>("TeacherId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("UniqueCourseName")
@@ -128,7 +128,7 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.HasIndex("ProfessionCourseCategoryId");
 
-                    b.HasIndex("TeacherInfoId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Courses");
                 });
@@ -723,7 +723,7 @@ namespace TouchApp.DataAccess.Migrations
                     b.ToTable("SharingTypes");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.SharingTypePost", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.SharingTypeMedia", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -765,7 +765,7 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.HasIndex("SharingTypeId");
 
-                    b.ToTable("SharingTypePosts");
+                    b.ToTable("SharingTypeMedias");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.SocialMedia", b =>
@@ -853,7 +853,7 @@ namespace TouchApp.DataAccess.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.TagPosts", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.TagBlog", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -895,10 +895,10 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("TagPosts");
+                    b.ToTable("TagBlog");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.TeacherInfo", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.Teacher", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -944,7 +944,7 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.HasIndex("ProfessionId");
 
-                    b.ToTable("TeacherInfos");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.User", b =>
@@ -1033,7 +1033,7 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<long?>("TeacherInfoId")
+                    b.Property<long?>("TeacherId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("WallpaperPath")
@@ -1043,7 +1043,7 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("TeacherInfoId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Users");
                 });
@@ -1084,7 +1084,7 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<DateTime>("RegisteredDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("TeacherInfoId")
+                    b.Property<long?>("TeacherId")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("UserId")
@@ -1094,7 +1094,7 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("TeacherInfoId");
+                    b.HasIndex("TeacherId");
 
                     b.HasIndex("UserId");
 
@@ -1191,13 +1191,13 @@ namespace TouchApp.DataAccess.Migrations
                         .WithMany("Courses")
                         .HasForeignKey("ProfessionCourseCategoryId");
 
-                    b.HasOne("Core.Entities.Concrete.TeacherInfo", "TeacherInfo")
+                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
                         .WithMany("Courses")
-                        .HasForeignKey("TeacherInfoId");
+                        .HasForeignKey("TeacherId");
 
                     b.Navigation("ProfessionCourseCategory");
 
-                    b.Navigation("TeacherInfo");
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.HomeMetaTagGallery", b =>
@@ -1251,14 +1251,14 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("ParentCategory");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.SharingTypePost", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.SharingTypeMedia", b =>
                 {
                     b.HasOne("Core.Entities.Concrete.Post", "Post")
-                        .WithMany("SharingTypePosts")
+                        .WithMany("SharingTypeMedias")
                         .HasForeignKey("PostId");
 
                     b.HasOne("Core.Entities.Concrete.SharingType", "SharingType")
-                        .WithMany("SharingTypePosts")
+                        .WithMany("SharingTypeMedias")
                         .HasForeignKey("SharingTypeId");
 
                     b.Navigation("Post");
@@ -1266,14 +1266,14 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("SharingType");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.TagPosts", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.TagBlog", b =>
                 {
                     b.HasOne("Core.Entities.Concrete.Post", "Post")
-                        .WithMany("TagPosts")
+                        .WithMany("TagBlog")
                         .HasForeignKey("PostId");
 
                     b.HasOne("Core.Entities.Concrete.Tag", "Tag")
-                        .WithMany("TagPosts")
+                        .WithMany("TagBlog")
                         .HasForeignKey("TagId");
 
                     b.Navigation("Post");
@@ -1281,10 +1281,10 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.TeacherInfo", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.Teacher", b =>
                 {
                     b.HasOne("Core.Entities.Concrete.Profession", "Profession")
-                        .WithMany("TeacherInfos")
+                        .WithMany("Teachers")
                         .HasForeignKey("ProfessionId");
 
                     b.Navigation("Profession");
@@ -1296,11 +1296,11 @@ namespace TouchApp.DataAccess.Migrations
                         .WithMany("Users")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("Core.Entities.Concrete.TeacherInfo", "TeacherInfo")
+                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
                         .WithMany()
-                        .HasForeignKey("TeacherInfoId");
+                        .HasForeignKey("TeacherId");
 
-                    b.Navigation("TeacherInfo");
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.UserCourse", b =>
@@ -1309,9 +1309,9 @@ namespace TouchApp.DataAccess.Migrations
                         .WithMany("UserCourses")
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("Core.Entities.Concrete.TeacherInfo", "TeacherInfo")
+                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
                         .WithMany("UserCourses")
-                        .HasForeignKey("TeacherInfoId");
+                        .HasForeignKey("TeacherId");
 
                     b.HasOne("Core.Entities.Concrete.User", "User")
                         .WithMany("UserCourses")
@@ -1319,7 +1319,7 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Navigation("Course");
 
-                    b.Navigation("TeacherInfo");
+                    b.Navigation("Teacher");
 
                     b.Navigation("User");
                 });
@@ -1382,16 +1382,16 @@ namespace TouchApp.DataAccess.Migrations
                 {
                     b.Navigation("Medias");
 
-                    b.Navigation("SharingTypePosts");
+                    b.Navigation("SharingTypeMedias");
 
-                    b.Navigation("TagPosts");
+                    b.Navigation("TagBlog");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Profession", b =>
                 {
                     b.Navigation("SubProfession");
 
-                    b.Navigation("TeacherInfos");
+                    b.Navigation("Teachers");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.ProfessionCourseCategory", b =>
@@ -1408,7 +1408,7 @@ namespace TouchApp.DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.SharingType", b =>
                 {
-                    b.Navigation("SharingTypePosts");
+                    b.Navigation("SharingTypeMedias");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.SocialMedia", b =>
@@ -1418,10 +1418,10 @@ namespace TouchApp.DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.Tag", b =>
                 {
-                    b.Navigation("TagPosts");
+                    b.Navigation("TagBlog");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.TeacherInfo", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.Teacher", b =>
                 {
                     b.Navigation("Courses");
 

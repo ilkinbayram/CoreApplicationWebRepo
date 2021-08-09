@@ -5,6 +5,6 @@ namespace Core.Entities.Concrete
 {
     public class HomeMetaTag : BaseEntity, IEntity
     {
-        public virtual IEnumerable<HomeMetaTagGallery> HomeMetaTagGalleries { get; set; }
+        public virtual List<HomeMetaTagGallery> HomeMetaTagGalleries { get; set; }
     }
 }

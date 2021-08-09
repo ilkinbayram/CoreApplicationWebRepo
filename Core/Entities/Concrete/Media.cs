@@ -12,8 +12,9 @@ namespace Core.Entities.Concrete
     {
         public string Source { get; set; }
         public string AltrKey { get; set; }
+        public string UniqueParentToken { get; set; }
         public MediaType MediaType { get; set; }
 
-        public virtual Post Post { get; set; }
+        public virtual List<SharingTypeMedia> SharingTypeMedias { get; set; }
     }
 }

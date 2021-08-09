@@ -270,7 +270,7 @@ namespace TouchApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeacherInfos",
+                name: "Teachers",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -287,9 +287,9 @@ namespace TouchApp.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeacherInfos", x => x.Id);
+                    table.PrimaryKey("PK_Teachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TeacherInfos_Professions_ProfessionId",
+                        name: "FK_Teachers_Professions_ProfessionId",
                         column: x => x.ProfessionId,
                         principalTable: "Professions",
                         principalColumn: "Id",
@@ -318,7 +318,7 @@ namespace TouchApp.DataAccess.Migrations
                     BiographyKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccountType = table.Column<int>(type: "int", nullable: false),
                     SecurityToken = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    TeacherInfoId = table.Column<long>(type: "bigint", nullable: true),
+                    TeacherId = table.Column<long>(type: "bigint", nullable: true),
                     CategoryId = table.Column<long>(type: "bigint", nullable: true),
                     Created_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Modified_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -336,9 +336,9 @@ namespace TouchApp.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Users_TeacherInfos_TeacherInfoId",
-                        column: x => x.TeacherInfoId,
-                        principalTable: "TeacherInfos",
+                        name: "FK_Users_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -469,7 +469,7 @@ namespace TouchApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SharingTypePosts",
+                name: "SharingTypeMedias",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -484,15 +484,15 @@ namespace TouchApp.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SharingTypePosts", x => x.Id);
+                    table.PrimaryKey("PK_SharingTypeMedias", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SharingTypePosts_Posts_PostId",
+                        name: "FK_SharingTypeMedias_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SharingTypePosts_SharingTypes_SharingTypeId",
+                        name: "FK_SharingTypeMedias_SharingTypes_SharingTypeId",
                         column: x => x.SharingTypeId,
                         principalTable: "SharingTypes",
                         principalColumn: "Id",
@@ -500,7 +500,7 @@ namespace TouchApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TagPosts",
+                name: "TagBlog",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -515,15 +515,15 @@ namespace TouchApp.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TagPosts", x => x.Id);
+                    table.PrimaryKey("PK_TagBlog", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TagPosts_Posts_PostId",
+                        name: "FK_TagBlog_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TagPosts_Tag_TagId",
+                        name: "FK_TagBlog_Tag_TagId",
                         column: x => x.TagId,
                         principalTable: "Tag",
                         principalColumn: "Id",
@@ -561,28 +561,28 @@ namespace TouchApp.DataAccess.Migrations
                 column: "ParentProfessionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SharingTypePosts_PostId",
-                table: "SharingTypePosts",
+                name: "IX_SharingTypeMedias_PostId",
+                table: "SharingTypeMedias",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SharingTypePosts_SharingTypeId",
-                table: "SharingTypePosts",
+                name: "IX_SharingTypeMedias_SharingTypeId",
+                table: "SharingTypeMedias",
                 column: "SharingTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TagPosts_PostId",
-                table: "TagPosts",
+                name: "IX_TagBlog_PostId",
+                table: "TagBlog",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TagPosts_TagId",
-                table: "TagPosts",
+                name: "IX_TagBlog_TagId",
+                table: "TagBlog",
                 column: "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherInfos_ProfessionId",
-                table: "TeacherInfos",
+                name: "IX_Teachers_ProfessionId",
+                table: "Teachers",
                 column: "ProfessionId");
 
             migrationBuilder.CreateIndex(
@@ -601,9 +601,9 @@ namespace TouchApp.DataAccess.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_TeacherInfoId",
+                name: "IX_Users_TeacherId",
                 table: "Users",
-                column: "TeacherInfoId");
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserSocialMedias_SocialMediaId",
@@ -637,10 +637,10 @@ namespace TouchApp.DataAccess.Migrations
                 name: "Routings");
 
             migrationBuilder.DropTable(
-                name: "SharingTypePosts");
+                name: "SharingTypeMedias");
 
             migrationBuilder.DropTable(
-                name: "TagPosts");
+                name: "TagBlog");
 
             migrationBuilder.DropTable(
                 name: "UserOperationClaims");
@@ -676,7 +676,7 @@ namespace TouchApp.DataAccess.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "TeacherInfos");
+                name: "Teachers");
 
             migrationBuilder.DropTable(
                 name: "Professions");

@@ -20,6 +20,6 @@ namespace Core.Entities.Concrete
 
         public virtual HashSet<Profession> SubProfession { get; set; }
         public virtual Profession ParentProfession { get; set; }
-        public virtual List<TeacherInfo> TeacherInfos { get; set; }
+        public virtual List<Teacher> Teachers { get; set; }
     }
 }

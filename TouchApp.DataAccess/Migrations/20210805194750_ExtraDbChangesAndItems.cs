@@ -8,8 +8,8 @@ namespace TouchApp.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_TagPosts_Tag_TagId",
-                table: "TagPosts");
+                name: "FK_TagBlog_Tag_TagId",
+                table: "TagBlog");
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_Tag",
@@ -136,7 +136,7 @@ namespace TouchApp.DataAccess.Migrations
                     PeriodAsMonth = table.Column<byte>(type: "tinyint", nullable: false),
                     PricePerMonth = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProfessionCourseCategoryId = table.Column<long>(type: "bigint", nullable: true),
-                    TeacherInfoId = table.Column<long>(type: "bigint", nullable: true),
+                    TeacherId = table.Column<long>(type: "bigint", nullable: true),
                     Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
@@ -153,9 +153,9 @@ namespace TouchApp.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Courses_TeacherInfos_TeacherInfoId",
-                        column: x => x.TeacherInfoId,
-                        principalTable: "TeacherInfos",
+                        name: "FK_Courses_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -167,7 +167,7 @@ namespace TouchApp.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RegisteredDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TeacherInfoId = table.Column<long>(type: "bigint", nullable: true),
+                    TeacherId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
                     CourseId = table.Column<long>(type: "bigint", nullable: true),
                     Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -186,9 +186,9 @@ namespace TouchApp.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UserCourses_TeacherInfos_TeacherInfoId",
-                        column: x => x.TeacherInfoId,
-                        principalTable: "TeacherInfos",
+                        name: "FK_UserCourses_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -205,9 +205,9 @@ namespace TouchApp.DataAccess.Migrations
                 column: "ProfessionCourseCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_TeacherInfoId",
+                name: "IX_Courses_TeacherId",
                 table: "Courses",
-                column: "TeacherInfoId");
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProfessionCourseCategories_ParentCategoryId",
@@ -220,9 +220,9 @@ namespace TouchApp.DataAccess.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCourses_TeacherInfoId",
+                name: "IX_UserCourses_TeacherId",
                 table: "UserCourses",
-                column: "TeacherInfoId");
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserCourses_UserId",
@@ -230,8 +230,8 @@ namespace TouchApp.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TagPosts_Tags_TagId",
-                table: "TagPosts",
+                name: "FK_TagBlog_Tags_TagId",
+                table: "TagBlog",
                 column: "TagId",
                 principalTable: "Tags",
                 principalColumn: "Id",
@@ -241,8 +241,8 @@ namespace TouchApp.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_TagPosts_Tags_TagId",
-                table: "TagPosts");
+                name: "FK_TagBlog_Tags_TagId",
+                table: "TagBlog");
 
             migrationBuilder.DropTable(
                 name: "Phrases");
@@ -317,8 +317,8 @@ namespace TouchApp.DataAccess.Migrations
                 column: "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TagPosts_Tag_TagId",
-                table: "TagPosts",
+                name: "FK_TagBlog_Tag_TagId",
+                table: "TagBlog",
                 column: "TagId",
                 principalTable: "Tag",
                 principalColumn: "Id",

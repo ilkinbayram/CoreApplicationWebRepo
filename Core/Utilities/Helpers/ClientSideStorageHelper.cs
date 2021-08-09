@@ -47,7 +47,7 @@ namespace Core.Utilities.Helpers
             if (settledLangOid == null || string.IsNullOrEmpty(settledLangOid))
             {
                 var defaultValue = _configHelper.GetSettingsData<string>("default_lang_oid", "CookieFixedKeywords");
-                Set(settledLangOid, defaultValue, 1440);
+                Set(settingKeyParameterLangOid, defaultValue, 1440);
             }
         }
     }

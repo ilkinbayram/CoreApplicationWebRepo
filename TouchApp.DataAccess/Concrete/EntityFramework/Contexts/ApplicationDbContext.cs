@@ -23,22 +23,25 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserCourseConfiguration());
             modelBuilder.ApplyConfiguration(new CourseConfiguration());
+            modelBuilder.ApplyConfiguration(new CourseCommentConfiguration());
+            modelBuilder.ApplyConfiguration(new CourseServiceConfiguration());
             modelBuilder.ApplyConfiguration(new ProfessionCourseCategoryConfiguration());
 
             modelBuilder.ApplyConfiguration(new LocalizationConfiguration());
             modelBuilder.ApplyConfiguration(new MediaConfiguration());
             modelBuilder.ApplyConfiguration(new PhraseConfiguration());
-            modelBuilder.ApplyConfiguration(new PostConfiguration());
+            modelBuilder.ApplyConfiguration(new BlogConfiguration());
+            modelBuilder.ApplyConfiguration(new BlogCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ProfessionConfiguration());
-            modelBuilder.ApplyConfiguration(new SectionConfiguration());
             modelBuilder.ApplyConfiguration(new SharingTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new SharingTypeMediaConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
-            modelBuilder.ApplyConfiguration(new TagPostsConfiguration());
-            modelBuilder.ApplyConfiguration(new SharingTypePostConfiguration());
+            modelBuilder.ApplyConfiguration(new TagBlogConfiguration());
             modelBuilder.ApplyConfiguration(new SocialMediaConfiguration());
-            modelBuilder.ApplyConfiguration(new TeacherInfoConfiguration());
+            modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            modelBuilder.ApplyConfiguration(new TeacherCourseConfiguration());
             modelBuilder.ApplyConfiguration(new UserSocialMediaConfiguration());
-            modelBuilder.ApplyConfiguration(new RoutingConfiguration());
+            modelBuilder.ApplyConfiguration(new TeacherSocialMediaConfiguration());
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -50,22 +53,25 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Message> Messages { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseService> CourseServices { get; set; }
+        public DbSet<CourseComment> CourseComments { get; set; }
         public DbSet<ProfessionCourseCategory> ProfessionCourseCategories { get; set; }
+        public DbSet<BlogCategory> BlogCategories { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
 
         public DbSet<Localization> Localizations { get; set; }
         public DbSet<Media> Medias { get; set; }
-        public DbSet<Post> Posts { get; set; }
         public DbSet<Phrase> Phrases { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
         public DbSet<Profession> Professions { get; set; }
-        public DbSet<Section> Sections { get; set; }
         public DbSet<SharingType> SharingTypes { get; set; }
-        public DbSet<SharingTypePost> SharingTypePosts { get; set; }
+        public DbSet<SharingTypeMedia> SharingTypeMedias { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<TagPosts> TagPosts { get; set; }
+        public DbSet<TagBlog> TagBlogs { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
-        public DbSet<TeacherInfo> TeacherInfos { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<TeacherCourse> TeacherCourses { get; set; }
         public DbSet<UserSocialMedia> UserSocialMedias { get; set; }
-        public DbSet<Routing> Routings { get; set; }
+        public DbSet<TeacherSocialMedia> TeacherSocialMedias { get; set; }
     }
 }

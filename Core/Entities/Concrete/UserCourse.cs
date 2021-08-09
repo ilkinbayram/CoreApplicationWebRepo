@@ -12,7 +12,7 @@ namespace Core.Entities.Concrete
         public DateTime RegisteredDate { get; set; }
 
 
-        public virtual TeacherInfo TeacherInfo { get; set; }
+        public virtual Teacher Teacher { get; set; }
         public virtual User User { get; set; }
         public virtual Course Course { get; set; }
     }
