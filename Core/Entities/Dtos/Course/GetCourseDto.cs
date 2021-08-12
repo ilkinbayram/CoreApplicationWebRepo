@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Entities.Abstract;
+using System;
 
 namespace Core.Entities.Dtos.Course
 {
-    public class GetCourseDto
+    public class GetCourseDto : IBaseDto
     {
+        public long Id { get; set; }
+        public string Created_by { get; set; }
+        public DateTime Created_at { get; set; }
     }
 }
