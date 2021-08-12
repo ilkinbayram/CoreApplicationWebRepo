@@ -42,6 +42,8 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
                 _cacheManager.Add(_configHelper.GetSettingsData<string>("staticLanguageCache", "ServerCache"), cachableLocalizationList.Data, 1440);
             }
 
+
+
             return View();
         }
     }

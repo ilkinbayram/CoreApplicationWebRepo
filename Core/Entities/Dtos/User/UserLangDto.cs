@@ -12,6 +12,5 @@ namespace Core.Entities.Dtos.User
         public long LanguageId { get; set; }
         public long UserId { get; set; }
         public string Slug { get; set; }
-        public virtual UserForLangDto User { get; set; }
     }
 }

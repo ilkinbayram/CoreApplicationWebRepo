@@ -32,7 +32,6 @@ namespace Core.Entities.Dtos.User
         public long? CategoryId { get; set; }
         public bool ShowInHomePage { get; set; }
 
-        public virtual IEnumerable<GetByIdUserLanguage> UserLanguages { get; set; }
         public virtual IEnumerable<GetByIdUserFeatureValue> UserFeatureValues { get; set; }
     }
 

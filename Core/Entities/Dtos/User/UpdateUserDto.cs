@@ -25,6 +25,5 @@ namespace Core.Entities.Dtos.User
         public long CategoryId { get; set; }
         public bool ShowInHomePage { get; set; }
         public IEnumerable<UpdateUserFeatureValue> UserFeatureValues { get; set; }
-        public IEnumerable<UpdateUserLanguageDto> UserLanguages { get; set; }
     }
 }

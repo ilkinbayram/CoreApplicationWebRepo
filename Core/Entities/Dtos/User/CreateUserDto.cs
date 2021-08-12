@@ -24,7 +24,6 @@ namespace Core.Entities.Dtos.User
         public bool ShowInHomePage { get; set; }
         public string Banner { get; set; }
         public IEnumerable<CreateUserFeatureValue> UserFeatureValues { get; set; }
-        public IEnumerable<CreateUserLanguageDto> UserLanguages { get; set; }
 
     }
 }
