@@ -8,9 +8,9 @@ namespace TouchApp.DataAccess.Abstract
 {
     public interface IProfessionCourseCategoryDal : IEntityRepository<ProfessionCourseCategory>
     {
-        IEnumerable<ProfessionCourseCategory> GetProfessionCourseCategoryList(int page, int count,string key);
-        IEnumerable<ProfessionCourseCategory> GetParentProfessionCourseCategory();
-        IEnumerable<ProfessionCourseCategory> GetSubCategories(int parentId);
+        List<ProfessionCourseCategory> GetProfessionCourseCategoryList(int page, int count,string key);
+        List<ProfessionCourseCategory> GetParentProfessionCourseCategory();
+        List<ProfessionCourseCategory> GetSubCategories(int parentId);
         ProfessionCourseCategory GetProfessionCourseCategoryById(long ProfessionCourseCategoryId);
     }
 }

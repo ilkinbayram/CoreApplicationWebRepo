@@ -29,9 +29,11 @@ namespace Core.Entities.Concrete
         public byte[] PasswordSalt { get; set; }
         public byte[] PasswordHash { get; set; }
 
-
+        public long ProfessionId { get; set; }
+        
         public virtual Profession Profession { get; set; }
         public virtual List<TeacherCourse> TeacherCourses { get; set; }
+        public virtual List<TeacherSocialMedia> TeacherSocialMedias { get; set; }
         public virtual List<UserCourse> UserCourses { get; set; }
     }
 }

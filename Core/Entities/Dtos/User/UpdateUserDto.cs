@@ -24,6 +24,6 @@ namespace Core.Entities.Dtos.User
         //public string PreviewMoviePathUpdate { get; set; }
         public long CategoryId { get; set; }
         public bool ShowInHomePage { get; set; }
-        public IEnumerable<UpdateUserFeatureValue> UserFeatureValues { get; set; }
+        public List<UpdateUserFeatureValue> UserFeatureValues { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
     public class AboutController : Controller
     {
         [HttpGet]
-        public IActionResult Touch()
+        public async Task<IActionResult> Touch()
         {
             return View();
         }

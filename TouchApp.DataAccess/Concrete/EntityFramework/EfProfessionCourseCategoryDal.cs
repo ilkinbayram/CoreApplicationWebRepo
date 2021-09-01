@@ -21,17 +21,17 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ProfessionCourseCategory> GetProfessionCourseCategoryList(int page, int count, string key)
+        public List<ProfessionCourseCategory> GetProfessionCourseCategoryList(int page, int count, string key)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ProfessionCourseCategory> GetParentProfessionCourseCategory()
+        public List<ProfessionCourseCategory> GetParentProfessionCourseCategory()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ProfessionCourseCategory> GetSubCategories(int parentId)
+        public List<ProfessionCourseCategory> GetSubCategories(int parentId)
         {
             throw new NotImplementedException();
         }

@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<CourseComment>> GetList(Expression<Func<CourseComment, bool>> filter = null)
+        public IDataResult<List<CourseComment>> GetList(Expression<Func<CourseComment, bool>> filter = null)
         {
             try
             {
                 var response = _courseCommentDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<CourseComment>>(response);
-                return new SuccessDataResult<IEnumerable<CourseComment>>(mappingResult);
+                var mappingResult = _mapper.Map<List<CourseComment>>(response);
+                return new SuccessDataResult<List<CourseComment>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<CourseComment>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<CourseComment>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<CourseComment> courseComments)
+        public IDataResult<int> AddList(List<CourseComment> courseComments)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<CourseComment> courseComments)
+        public IDataResult<int> UpdateList(List<CourseComment> courseComments)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<CourseComment> courseComments)
+        public IDataResult<int> DeletePermanentlyList(List<CourseComment> courseComments)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<CourseComment> courseComments)
+        public IDataResult<int> DeleteByStatusList(List<CourseComment> courseComments)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<CourseComment> courseComments)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<CourseComment> courseComments)
         {
             foreach (var courseComment in courseComments)
             {

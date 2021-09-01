@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Core.Entities.Dtos.Blog;
+using System.Linq;
 
 namespace Business.Concrete
 {
@@ -127,17 +129,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<Blog>> GetList(Expression<Func<Blog, bool>> filter = null)
+        public IDataResult<List<Blog>> GetList(Expression<Func<Blog, bool>> filter = null)
         {
             try
             {
                 var response = _blogDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<Blog>>(response);
-                return new SuccessDataResult<IEnumerable<Blog>>(mappingResult);
+                var mappingResult = _mapper.Map<List<Blog>>(response);
+                return new SuccessDataResult<List<Blog>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<Blog>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<Blog>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +168,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<Blog> blogs)
+        public IDataResult<int> AddList(List<Blog> blogs)
         {
             try
             {
@@ -189,7 +191,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<Blog> blogs)
+        public IDataResult<int> UpdateList(List<Blog> blogs)
         {
             try
             {
@@ -212,7 +214,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Blog> blogs)
+        public IDataResult<int> DeletePermanentlyList(List<Blog> blogs)
         {
             try
             {
@@ -235,7 +237,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Blog> blogs)
+        public IDataResult<int> DeleteByStatusList(List<Blog> blogs)
         {
             try
             {
@@ -266,7 +268,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<Blog> blogs)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<Blog> blogs)
         {
             foreach (var blog in blogs)
             {
@@ -275,6 +277,34 @@ namespace Business.Concrete
 
         private void DeleteByStatusForAllRelation(Blog blog)
         {
+        }
+
+        public IDataResult<GetBlogDto> GetDto(Func<GetBlogDto, bool> filter = null)
+        {
+            try
+            {
+                var response = _blogDal.GetAll();
+                var mappingResult = _mapper.Map<List<GetBlogDto>>(response);
+                return new SuccessDataResult<GetBlogDto>(mappingResult.FirstOrDefault(filter));
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetBlogDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetBlogDto>> GetDtoList(Func<GetBlogDto, bool> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var response = _blogDal.GetList();
+                var mappingResult = _mapper.Map<List<GetBlogDto>>(response).Where(filter).Take(takeCount).ToList();
+                return new SuccessDataResult<List<GetBlogDto>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetBlogDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
         }
     }
 }

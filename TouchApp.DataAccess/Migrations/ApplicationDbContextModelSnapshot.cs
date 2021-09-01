@@ -19,6 +19,124 @@ namespace TouchApp.DataAccess.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Core.Entities.Concrete.Blog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("BlogCategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CaptionSource")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentHtmlRawKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("Modified_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("OverviewHtmlRawKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerProfessionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("ScreenType")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("SubtitleKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniqueToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogCategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.BlogCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DescKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IconSource")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("Modified_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NameKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("ParentCategoryId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentCategoryId");
+
+                    b.ToTable("BlogCategories");
+                });
+
             modelBuilder.Entity("Core.Entities.Concrete.Category", b =>
                 {
                     b.Property<long>("Id")
@@ -83,6 +201,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ContentHtmlRawKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Created_at")
                         .HasColumnType("smalldatetime");
 
@@ -99,6 +220,12 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<byte>("MaxTotalMonths")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("MinTotalMonths")
+                        .HasColumnType("tinyint");
+
                     b.Property<DateTime>("Modified_at")
                         .HasColumnType("smalldatetime");
 
@@ -107,31 +234,38 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<byte>("PeriodAsMonth")
-                        .HasColumnType("tinyint");
+                    b.Property<string>("OverViewHtmlRawKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PricePerMonth")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long?>("ProfessionCourseCategoryId")
+                    b.Property<long>("ProfessionCourseCategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("TeacherId")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime>("PublishDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("UniqueCourseName")
+                    b.Property<string>("ScheduleHtmlRawKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short>("TotalHours")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("UniqueToken")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProfessionCourseCategoryId");
 
-                    b.HasIndex("TeacherId");
-
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.HomeMetaTag", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.CourseComment", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,6 +273,12 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CommentContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("CourseId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created_at")
                         .HasColumnType("smalldatetime");
@@ -161,12 +301,17 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("OwnerEmail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("HomeMetaTags");
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CourseComments");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.HomeMetaTagGallery", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.CourseService", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,28 +320,42 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Alt")
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long>("HomeMetaTagId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("DescriptionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IconSource")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Url")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<DateTime>("Modified_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("TitleKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniqueToken")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HomeMetaTagId");
-
-                    b.ToTable("HomeMetaTagGalleries");
+                    b.ToTable("CourseServices");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Language", b =>
@@ -207,6 +366,12 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CourseLanguageKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FlagIconSource")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
@@ -308,15 +473,13 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long?>("PostId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Source")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UniqueParentToken")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("PostId");
+                    b.HasKey("Id");
 
                     b.ToTable("Medias");
                 });
@@ -399,7 +562,10 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Owner")
+                    b.Property<string>("OwnerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerSurname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfessionKey")
@@ -411,75 +577,6 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Phrases");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.Post", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CaptionSource")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Created_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<bool>("IsHtmlContent")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("Modified_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Modified_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("OwnerProfessionKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostOwner")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("ScreenType")
-                        .HasColumnType("tinyint");
-
-                    b.Property<long?>("SectionId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SubtitleKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SectionId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Profession", b =>
@@ -563,6 +660,9 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("DescriptionKey")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IconSource")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -587,100 +687,6 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("ProfessionCourseCategories");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.Routing", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ActionNameKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaNameKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ControllerNameKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Created_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime>("Modified_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Modified_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Routings");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.Section", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Created_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("DescKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IconSource")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime>("Modified_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Modified_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PrioritySeparatorKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubtitleKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sections");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.SharingType", b =>
@@ -743,6 +749,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<long>("MediaId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("Modified_at")
                         .HasColumnType("smalldatetime");
 
@@ -751,19 +760,59 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long?>("PostId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("SharingTypeId")
+                    b.Property<long>("SharingTypeId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("MediaId");
 
                     b.HasIndex("SharingTypeId");
 
                     b.ToTable("SharingTypeMedias");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.Slider", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Created_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("Modified_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modified_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SliderMediaSource")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubTitleKey")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("TitleKey")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sliders");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.SocialMedia", b =>
@@ -799,7 +848,7 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("NameKey")
+                    b.Property<string>("NameSocial")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Uri")
@@ -840,7 +889,7 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("NameKey")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("TagType")
@@ -860,6 +909,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long>("BlogId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("Created_at")
                         .HasColumnType("smalldatetime");
 
@@ -881,22 +933,155 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long?>("PostId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("TagId")
+                    b.Property<long>("TagId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("BlogId");
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("TagBlog");
+                    b.ToTable("TagBlogs");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Teacher", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BiographyKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IconSource")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Modified_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumberPrefix")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreviewMoviePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("ProfessionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ProfilePhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Rate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("RateCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecurityToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WallpaperPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfessionId");
+
+                    b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.TeacherCourse", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CourseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("Modified_at")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("TeacherId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherCourses");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.TeacherSocialMedia", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -913,9 +1098,6 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("IconSource")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -929,20 +1111,22 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("PreviewMoviePath")
+                    b.Property<string>("RedirectUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("ProfessionId")
+                    b.Property<long>("SocialMediaId")
                         .HasColumnType("bigint");
 
-                    b.Property<decimal?>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<long>("TeacherId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfessionId");
+                    b.HasIndex("SocialMediaId");
 
-                    b.ToTable("Teachers");
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherSocialMedias");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.User", b =>
@@ -1020,19 +1204,10 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("ProfilePhotoPath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("RateCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityToken")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
-
-                    b.Property<long?>("TeacherId")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("WallpaperPath")
                         .HasColumnType("nvarchar(max)");
@@ -1040,8 +1215,6 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Users");
                 });
@@ -1055,7 +1228,7 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("CourseId")
+                    b.Property<long>("CourseId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created_at")
@@ -1082,10 +1255,10 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<DateTime>("RegisteredDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("TeacherId")
+                    b.Property<long>("TeacherId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -1159,10 +1332,10 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("RedirectUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("SocialMediaId")
+                    b.Property<long>("SocialMediaId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -1172,6 +1345,34 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserSocialMedias");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.Blog", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.BlogCategory", "BlogCategory")
+                        .WithMany("Blogs")
+                        .HasForeignKey("BlogCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.User", "User")
+                        .WithMany("Blogs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BlogCategory");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.BlogCategory", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.BlogCategory", "ParentCategory")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentCategoryId");
+
+                    b.Navigation("ParentCategory");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Category", b =>
@@ -1187,48 +1388,22 @@ namespace TouchApp.DataAccess.Migrations
                 {
                     b.HasOne("Core.Entities.Concrete.ProfessionCourseCategory", "ProfessionCourseCategory")
                         .WithMany("Courses")
-                        .HasForeignKey("ProfessionCourseCategoryId");
-
-                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
-                        .WithMany("Courses")
-                        .HasForeignKey("TeacherId");
+                        .HasForeignKey("ProfessionCourseCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProfessionCourseCategory");
-
-                    b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.HomeMetaTagGallery", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.CourseComment", b =>
                 {
-                    b.HasOne("Core.Entities.Concrete.HomeMetaTag", "HomeMetaTag")
-                        .WithMany("HomeMetaTagGalleries")
-                        .HasForeignKey("HomeMetaTagId");
+                    b.HasOne("Core.Entities.Concrete.Course", "Course")
+                        .WithMany("CourseComments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("HomeMetaTag");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.Media", b =>
-                {
-                    b.HasOne("Core.Entities.Concrete.Post", "Post")
-                        .WithMany("Medias")
-                        .HasForeignKey("PostId");
-
-                    b.Navigation("Post");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.Post", b =>
-                {
-                    b.HasOne("Core.Entities.Concrete.Section", "Section")
-                        .WithMany("Posts")
-                        .HasForeignKey("SectionId");
-
-                    b.HasOne("Core.Entities.Concrete.User", "User")
-                        .WithMany("Posts")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Section");
-
-                    b.Navigation("User");
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Profession", b =>
@@ -1251,30 +1426,38 @@ namespace TouchApp.DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.SharingTypeMedia", b =>
                 {
-                    b.HasOne("Core.Entities.Concrete.Post", "Post")
+                    b.HasOne("Core.Entities.Concrete.Media", "Media")
                         .WithMany("SharingTypeMedias")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("MediaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.Concrete.SharingType", "SharingType")
                         .WithMany("SharingTypeMedias")
-                        .HasForeignKey("SharingTypeId");
+                        .HasForeignKey("SharingTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Post");
+                    b.Navigation("Media");
 
                     b.Navigation("SharingType");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.TagBlog", b =>
                 {
-                    b.HasOne("Core.Entities.Concrete.Post", "Post")
-                        .WithMany("TagBlog")
-                        .HasForeignKey("PostId");
+                    b.HasOne("Core.Entities.Concrete.Blog", "Blog")
+                        .WithMany("TagBlogs")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.Concrete.Tag", "Tag")
-                        .WithMany("TagBlog")
-                        .HasForeignKey("TagId");
+                        .WithMany("TagBlogs")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Post");
+                    b.Navigation("Blog");
 
                     b.Navigation("Tag");
                 });
@@ -1283,9 +1466,49 @@ namespace TouchApp.DataAccess.Migrations
                 {
                     b.HasOne("Core.Entities.Concrete.Profession", "Profession")
                         .WithMany("Teachers")
-                        .HasForeignKey("ProfessionId");
+                        .HasForeignKey("ProfessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Profession");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.TeacherCourse", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.Course", "Course")
+                        .WithMany("TeacherCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
+                        .WithMany("TeacherCourses")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.TeacherSocialMedia", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.SocialMedia", "SocialMedia")
+                        .WithMany("TeacherSocialMedias")
+                        .HasForeignKey("SocialMediaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
+                        .WithMany("TeacherSocialMedias")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SocialMedia");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.User", b =>
@@ -1293,27 +1516,27 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.Category", null)
                         .WithMany("Users")
                         .HasForeignKey("CategoryId");
-
-                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId");
-
-                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.UserCourse", b =>
                 {
                     b.HasOne("Core.Entities.Concrete.Course", "Course")
                         .WithMany("UserCourses")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
                         .WithMany("UserCourses")
-                        .HasForeignKey("TeacherId");
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.Concrete.User", "User")
                         .WithMany("UserCourses")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Course");
 
@@ -1343,15 +1566,31 @@ namespace TouchApp.DataAccess.Migrations
                 {
                     b.HasOne("Core.Entities.Concrete.SocialMedia", "SocialMedia")
                         .WithMany("UserSocialMedias")
-                        .HasForeignKey("SocialMediaId");
+                        .HasForeignKey("SocialMediaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.Concrete.User", "User")
                         .WithMany("UserSocialMedias")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("SocialMedia");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.Blog", b =>
+                {
+                    b.Navigation("TagBlogs");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.BlogCategory", b =>
+                {
+                    b.Navigation("Blogs");
+
+                    b.Navigation("Children");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Category", b =>
@@ -1363,26 +1602,21 @@ namespace TouchApp.DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.Course", b =>
                 {
+                    b.Navigation("CourseComments");
+
+                    b.Navigation("TeacherCourses");
+
                     b.Navigation("UserCourses");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.HomeMetaTag", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.Media", b =>
                 {
-                    b.Navigation("HomeMetaTagGalleries");
+                    b.Navigation("SharingTypeMedias");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.OperationClaim", b =>
                 {
                     b.Navigation("UserOperationClaims");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.Post", b =>
-                {
-                    b.Navigation("Medias");
-
-                    b.Navigation("SharingTypeMedias");
-
-                    b.Navigation("TagBlog");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Profession", b =>
@@ -1399,11 +1633,6 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("Courses");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.Section", b =>
-                {
-                    b.Navigation("Posts");
-                });
-
             modelBuilder.Entity("Core.Entities.Concrete.SharingType", b =>
                 {
                     b.Navigation("SharingTypeMedias");
@@ -1411,24 +1640,28 @@ namespace TouchApp.DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.SocialMedia", b =>
                 {
+                    b.Navigation("TeacherSocialMedias");
+
                     b.Navigation("UserSocialMedias");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Tag", b =>
                 {
-                    b.Navigation("TagBlog");
+                    b.Navigation("TagBlogs");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Teacher", b =>
                 {
-                    b.Navigation("Courses");
+                    b.Navigation("TeacherCourses");
+
+                    b.Navigation("TeacherSocialMedias");
 
                     b.Navigation("UserCourses");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.User", b =>
                 {
-                    b.Navigation("Posts");
+                    b.Navigation("Blogs");
 
                     b.Navigation("UserCourses");
 

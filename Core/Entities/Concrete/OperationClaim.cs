@@ -8,6 +8,6 @@ namespace Core.Entities.Concrete
         public string Name { get; set; }
         public bool IsActive { get; set; }
 
-        public virtual IEnumerable<UserOperationClaim> UserOperationClaims { get; set; }
+        public virtual List<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }

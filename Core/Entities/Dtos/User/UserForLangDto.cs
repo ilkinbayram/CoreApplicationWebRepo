@@ -33,6 +33,6 @@ namespace Core.Entities.Dtos.User
         public long? CategoryId { get; set; }
         public bool ShowInHomePage { get; set; }
 
-        public virtual IEnumerable<GetByIdUserFeatureValue> UserFeatureValues { get; set; }
+        public virtual List<GetByIdUserFeatureValue> UserFeatureValues { get; set; }
     }
 }

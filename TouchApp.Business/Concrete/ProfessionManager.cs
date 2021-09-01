@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<Profession>> GetList(Expression<Func<Profession, bool>> filter = null)
+        public IDataResult<List<Profession>> GetList(Expression<Func<Profession, bool>> filter = null)
         {
             try
             {
                 var response = _professionDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<Profession>>(response);
-                return new SuccessDataResult<IEnumerable<Profession>>(mappingResult);
+                var mappingResult = _mapper.Map<List<Profession>>(response);
+                return new SuccessDataResult<List<Profession>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<Profession>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<Profession>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<Profession> professions)
+        public IDataResult<int> AddList(List<Profession> professions)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<Profession> professions)
+        public IDataResult<int> UpdateList(List<Profession> professions)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Profession> professions)
+        public IDataResult<int> DeletePermanentlyList(List<Profession> professions)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Profession> professions)
+        public IDataResult<int> DeleteByStatusList(List<Profession> professions)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<Profession> professions)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<Profession> professions)
         {
             foreach (var profession in professions)
             {

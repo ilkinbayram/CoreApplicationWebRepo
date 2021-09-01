@@ -17,6 +17,8 @@ namespace Core.Entities.Concrete
         public ProfessionDegree ProfessionDegree { get; set; }
         public string CurrentCompanyKey { get; set; }
         public string CurrentPositionAtCompanyKey { get; set; }
+        public long? ParentProfessionId { get; set; } 
+
 
         public virtual HashSet<Profession> SubProfession { get; set; }
         public virtual Profession ParentProfession { get; set; }

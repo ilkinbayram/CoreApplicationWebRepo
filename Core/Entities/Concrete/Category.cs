@@ -12,7 +12,6 @@ namespace Core.Entities.Concrete
         public bool ShowInHomePage { get; set; }
         public DirectCategoryType CategoryType { get; set; }
         public string IconSource { get; set; }
-        // public string Banner { get; set; }
 
         public virtual HashSet<Category> Children { get; set; } //ozunden ozune relation ucun ve childlari
         public virtual Category ParentCategory { get; set; }

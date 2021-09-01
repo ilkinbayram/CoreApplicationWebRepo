@@ -8,7 +8,7 @@ namespace TouchApp.DataAccess.Abstract
 {
     public interface IUserDal : IEntityRepository<User>
     {
-        IEnumerable<OperationClaim> GetClaims(User user);
+        List<OperationClaim> GetClaims(User user);
         User GetUserWithRelations(Expression<Func<User, bool>> filter);
         User GetUserForOrderWithRelations(Expression<Func<User, bool>> filter);
         User UserGetById(long id);

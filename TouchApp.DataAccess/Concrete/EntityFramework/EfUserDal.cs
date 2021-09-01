@@ -17,7 +17,7 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework
         {
         }
 
-        public IEnumerable<OperationClaim> GetClaims(User user)
+        public List<OperationClaim> GetClaims(User user)
         {
             throw new NotImplementedException();
         }

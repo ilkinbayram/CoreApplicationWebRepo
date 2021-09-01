@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<BlogCategory>> GetList(Expression<Func<BlogCategory, bool>> filter = null)
+        public IDataResult<List<BlogCategory>> GetList(Expression<Func<BlogCategory, bool>> filter = null)
         {
             try
             {
                 var response = _blogCategoryDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<BlogCategory>>(response);
-                return new SuccessDataResult<IEnumerable<BlogCategory>>(mappingResult);
+                var mappingResult = _mapper.Map<List<BlogCategory>>(response);
+                return new SuccessDataResult<List<BlogCategory>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<BlogCategory>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<BlogCategory>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<BlogCategory> blogCategorys)
+        public IDataResult<int> AddList(List<BlogCategory> blogCategorys)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<BlogCategory> blogCategorys)
+        public IDataResult<int> UpdateList(List<BlogCategory> blogCategorys)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<BlogCategory> blogCategorys)
+        public IDataResult<int> DeletePermanentlyList(List<BlogCategory> blogCategorys)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<BlogCategory> blogCategorys)
+        public IDataResult<int> DeleteByStatusList(List<BlogCategory> blogCategorys)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<BlogCategory> blogCategorys)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<BlogCategory> blogCategorys)
         {
             foreach (var blogCategory in blogCategorys)
             {

@@ -1,4 +1,11 @@
-﻿@*
+﻿@using Core.Entities.Dtos.OurService;
+@using Core.Extensions;
+
+
+
+@model List<GetCourseServiceDto>;
+
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -9,6 +16,7 @@
             <div class="col-md-12">
                 <div class="section-title-wrapper">
                     <div class="section-title">
+                        @* TODO : Localization *@
                         <h3>Our Services</h3>
                         <p>Our best services for your Kids</p>
                     </div>
@@ -17,64 +25,49 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-4">
-                <div class="single-small-service">
-                    <div class="small-service-icon">
-                        <i class="fa fa-cutlery"></i>
+                @for (int i = 0; i < Model.Count && Model.Count%3==0; i++)
+                {
+
+                    <div class="single-small-service">
+                        <div class="small-service-icon">
+                            <i class="@(Model[i].IconSource)"></i>
+                        </div>
+                        <div class="small-services-text">
+                            <h4>@(Model[i].TitleKey.Translate())</h4>
+                            <p>@(Model[i].DescriptionKey.Translate())</p>
+                        </div>
                     </div>
-                    <div class="small-services-text">
-                        <h4>Meals Provided</h4>
-                        <p>It has survived not only five but also the lorem ipsum is leap of into electronic typesetting, remaining essentially unchanged.</p>
-                    </div>
-                </div>
-                <div class="single-small-service">
-                    <div class="small-service-icon">
-                        <i class="fa fa-calendar-check-o"></i>
-                    </div>
-                    <div class="small-services-text">
-                        <h4>Full Day Session</h4>
-                        <p>And more recently with desktop ispsing with the publishing software like Aldus PageMaker including of Lorem Ipsum.</p>
-                    </div>
-                </div>
+                }
             </div>
             <div class="col-lg-4 col-md-4">
-                <div class="single-small-service">
-                    <div class="small-service-icon">
-                        <i class="fa fa-language"></i>
+                @for (int i = 0; i < Model.Count - 1 && Model.Count % 3 == 1; i++)
+                {
+
+                    <div class="single-small-service">
+                        <div class="small-service-icon">
+                            <i class="@(Model[i].IconSource)"></i>
+                        </div>
+                        <div class="small-services-text">
+                            <h4>@(Model[i].TitleKey.Translate())</h4>
+                            <p>@(Model[i].DescriptionKey.Translate())</p>
+                        </div>
                     </div>
-                    <div class="small-services-text">
-                        <h4>Language Lessons</h4>
-                        <p>Lorem ipsum dolor sit amet al cotetur adipisicing elit, sed do mod tempor incididunt ut labore etdolore versions ipsum!</p>
-                    </div>
-                </div>
-                <div class="single-small-service">
-                    <div class="small-service-icon">
-                        <i class="fa fa-bookmark"></i>
-                    </div>
-                    <div class="small-services-text">
-                        <h4>Special Education</h4>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page looking at its layout.</p>
-                    </div>
-                </div>
+                }
             </div>
             <div class="col-lg-4 col-md-4">
-                <div class="single-small-service">
-                    <div class="small-service-icon">
-                        <i class="fa fa-bus"></i>
+                @for (int i = 0; i < Model.Count - 1 && Model.Count % 3 == 2; i++)
+                {
+
+                    <div class="single-small-service">
+                        <div class="small-service-icon">
+                            <i class="@(Model[i].IconSource)"></i>
+                        </div>
+                        <div class="small-services-text">
+                            <h4>@(Model[i].TitleKey.Translate())</h4>
+                            <p>@(Model[i].DescriptionKey.Translate())</p>
+                        </div>
                     </div>
-                    <div class="small-services-text">
-                        <h4>Transportation</h4>
-                        <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages when is looking.</p>
-                    </div>
-                </div>
-                <div class="single-small-service">
-                    <div class="small-service-icon">
-                        <i class="fa fa-graduation-cap"></i>
-                    </div>
-                    <div class="small-services-text">
-                        <h4>Qualified Teachers</h4>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected.</p>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

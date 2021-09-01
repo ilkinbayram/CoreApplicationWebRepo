@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<Tag>> GetList(Expression<Func<Tag, bool>> filter = null)
+        public IDataResult<List<Tag>> GetList(Expression<Func<Tag, bool>> filter = null)
         {
             try
             {
                 var response = _tagDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<Tag>>(response);
-                return new SuccessDataResult<IEnumerable<Tag>>(mappingResult);
+                var mappingResult = _mapper.Map<List<Tag>>(response);
+                return new SuccessDataResult<List<Tag>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<Tag>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<Tag>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<Tag> tags)
+        public IDataResult<int> AddList(List<Tag> tags)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<Tag> tags)
+        public IDataResult<int> UpdateList(List<Tag> tags)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Tag> tags)
+        public IDataResult<int> DeletePermanentlyList(List<Tag> tags)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Tag> tags)
+        public IDataResult<int> DeleteByStatusList(List<Tag> tags)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<Tag> tags)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<Tag> tags)
         {
             foreach (var tag in tags)
             {

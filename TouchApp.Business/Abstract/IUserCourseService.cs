@@ -9,15 +9,15 @@ namespace TouchApp.Business.Abstract
 {
     public interface IUserCourseService
     {
-        IDataResult<IEnumerable<UserCourse>> GetList(Expression<Func<UserCourse, bool>> filter = null);
+        IDataResult<List<UserCourse>> GetList(Expression<Func<UserCourse, bool>> filter = null);
         IDataResult<UserCourse> Get(Expression<Func<UserCourse, bool>> filter);
         IDataResult<int> Add(UserCourse userCourse);
         IDataResult<int> Update(UserCourse userCourse);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);
-        IDataResult<int> AddList(IEnumerable<UserCourse> userCourses);
-        IDataResult<int> UpdateList(IEnumerable<UserCourse> userCourses);
-        IDataResult<int> DeletePermanentlyList(IEnumerable<UserCourse> userCourses);
-        IDataResult<int> DeleteByStatusList(IEnumerable<UserCourse> userCourses);
+        IDataResult<int> AddList(List<UserCourse> userCourses);
+        IDataResult<int> UpdateList(List<UserCourse> userCourses);
+        IDataResult<int> DeletePermanentlyList(List<UserCourse> userCourses);
+        IDataResult<int> DeleteByStatusList(List<UserCourse> userCourses);
     }
 }

@@ -14,8 +14,11 @@ using Business.ExternalServices.Cloudinarys;
 using Business.Libs;
 using TouchApp.DataAccess.Abstract;
 using TouchApp.DataAccess.Concrete.EntityFramework;
+using Core.CrossCuttingConcerns.Caching;
+using Core.CrossCuttingConcerns.Caching.Microsoft;
+using Microsoft.AspNetCore.Http;
 
-namespace Business.DependencyResolvers.Autofac
+namespace TouchApp.Business.DependencyResolvers.Autofac
 {
     public class AutofacBusinessModule : Module
     {
@@ -41,11 +44,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ProfessionCourseCategoryManager>().As<IProfessionCourseCategoryService>();
             builder.RegisterType<EfProfessionCourseCategoryDal>().As<IProfessionCourseCategoryDal>();
 
-            builder.RegisterType<HomeMetaTagGalleryManager>().As<IHomeMetaTagGalleryService>();
-            builder.RegisterType<EfHomeMetaTagGalleryDal>().As<IHomeMetaTagGalleryDal>();
-
-            builder.RegisterType<HomeMetaTagManager>().As<IHomeMetaTagService>();
-            builder.RegisterType<EfHomeMetaTagDal>().As<IHomeMetaTagDal>();
+            builder.RegisterType<SliderManager>().As<ISliderService>();
+            builder.RegisterType<EfSliderDal>().As<ISliderDal>();
 
             builder.RegisterType<LanguageManager>().As<ILanguageService>();
             builder.RegisterType<EfLanguageDal>().As<ILanguageDal>();
@@ -115,6 +115,11 @@ namespace Business.DependencyResolvers.Autofac
 
 
             builder.RegisterType<AdminManager>().As<IAdminService>();
+
+
+            builder.RegisterType<MemoryCacheManager>().As<ICacheManager>();
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
+            builder.RegisterType<ClientSideStorageHelper>().As<ISessionStorageHelper>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

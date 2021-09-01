@@ -9,15 +9,15 @@ namespace TouchApp.Business.Abstract
 {
     public interface ILocalizationService
     {
-        IDataResult<IEnumerable<Localization>> GetList(Expression<Func<Localization, bool>> filter = null);
+        IDataResult<List<Localization>> GetList(Expression<Func<Localization, bool>> filter = null);
         IDataResult<Localization> Get(Expression<Func<Localization, bool>> filter);
         IDataResult<int> Add(Localization localization);
         IDataResult<int> Update(Localization localization);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);
-        IDataResult<int> AddList(IEnumerable<Localization> localizations);
-        IDataResult<int> UpdateList(IEnumerable<Localization> localizations);
-        IDataResult<int> DeletePermanentlyList(IEnumerable<Localization> localizations);
-        IDataResult<int> DeleteByStatusList(IEnumerable<Localization> localizations);
+        IDataResult<int> AddList(List<Localization> localizations);
+        IDataResult<int> UpdateList(List<Localization> localizations);
+        IDataResult<int> DeletePermanentlyList(List<Localization> localizations);
+        IDataResult<int> DeleteByStatusList(List<Localization> localizations);
     }
 }

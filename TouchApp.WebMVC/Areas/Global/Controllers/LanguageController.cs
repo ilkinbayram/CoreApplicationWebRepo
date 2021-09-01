@@ -31,7 +31,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
 
         // POST: LanguageController/Edit/id
         [HttpPost]
-        public ActionResult SetLanguage(int id, string controllerName, string actionName)
+        public async Task<IActionResult> SetLanguage(int id, string controllerName, string actionName)
         {
             try
             {

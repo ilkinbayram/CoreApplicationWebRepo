@@ -7,6 +7,6 @@ namespace Core.Entities.Dtos.User
     public class GetFamousOfferFeatureDto
     {
         public string FeatureName { get; set; }
-        public IEnumerable<GetFamousOfferFeatureValueDto> FeatureValues { get; set; }
+        public List<GetFamousOfferFeatureValueDto> FeatureValues { get; set; }
     }
 }

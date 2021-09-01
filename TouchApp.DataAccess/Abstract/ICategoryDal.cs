@@ -8,9 +8,9 @@ namespace TouchApp.DataAccess.Abstract
 {
     public interface ICategoryDal : IEntityRepository<Category>
     {
-        IEnumerable<Category> GetCategoryList(int page, int count,string key);
-        IEnumerable<Category> GetParentCategory();
-        IEnumerable<Category> GetSubCategories(int parentId);
+        List<Category> GetCategoryList(int page, int count,string key);
+        List<Category> GetParentCategory();
+        List<Category> GetSubCategories(int parentId);
         Category GetCategoryById(long categoryId);
     }
 }

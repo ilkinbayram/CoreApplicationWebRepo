@@ -276,31 +276,31 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<OperationClaim>> GetClaims(User user)
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
             try
             {
                 var response = _userDal.GetClaims(user);
-                var mappingResult = _mapper.Map<IEnumerable<OperationClaim>>(response);
-                return new SuccessDataResult<IEnumerable<OperationClaim>>(mappingResult);
+                var mappingResult = _mapper.Map<List<OperationClaim>>(response);
+                return new SuccessDataResult<List<OperationClaim>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<OperationClaim>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<OperationClaim>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
-        public IDataResult<IEnumerable<User>> GetList(Expression<Func<User, bool>> filter = null)
+        public IDataResult<List<User>> GetList(Expression<Func<User, bool>> filter = null)
         {
             try
             {
                 var response = _userDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<User>>(response);
-                return new SuccessDataResult<IEnumerable<User>>(mappingResult);
+                var mappingResult = _mapper.Map<List<User>>(response);
+                return new SuccessDataResult<List<User>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<User>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<User>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -328,7 +328,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> AddList(IEnumerable<User> users)
+        public IDataResult<int> AddList(List<User> users)
         {
             try
             {
@@ -351,7 +351,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<User> users)
+        public IDataResult<int> UpdateList(List<User> users)
         {
             try
             {
@@ -374,7 +374,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<User> users)
+        public IDataResult<int> DeletePermanentlyList(List<User> users)
         {
             try
             {
@@ -397,7 +397,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<User> users)
+        public IDataResult<int> DeleteByStatusList(List<User> users)
         {
             try
             {
@@ -428,7 +428,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<User> users)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<User> users)
         {
             foreach (var user in users)
             {
@@ -452,7 +452,7 @@ namespace Business.Concrete
             return null;
         }
 
-        public IDataResult<IEnumerable<GetFamousOfferFeatureDto>> GetUserOfferFeatures(long famousPersonId, string acceptedLang)
+        public IDataResult<List<GetFamousOfferFeatureDto>> GetUserOfferFeatures(long famousPersonId, string acceptedLang)
 
         {
             return null;

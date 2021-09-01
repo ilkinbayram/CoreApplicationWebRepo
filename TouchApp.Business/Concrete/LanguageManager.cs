@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<Language>> GetList(Expression<Func<Language, bool>> filter = null)
+        public IDataResult<List<Language>> GetList(Expression<Func<Language, bool>> filter = null)
         {
             try
             {
                 var response = _languageDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<Language>>(response);
-                return new SuccessDataResult<IEnumerable<Language>>(mappingResult);
+                var mappingResult = _mapper.Map<List<Language>>(response);
+                return new SuccessDataResult<List<Language>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<Language>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<Language>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<Language> languages)
+        public IDataResult<int> AddList(List<Language> languages)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<Language> languages)
+        public IDataResult<int> UpdateList(List<Language> languages)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Language> languages)
+        public IDataResult<int> DeletePermanentlyList(List<Language> languages)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Language> languages)
+        public IDataResult<int> DeleteByStatusList(List<Language> languages)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<Language> languages)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<Language> languages)
         {
             foreach (var language in languages)
             {

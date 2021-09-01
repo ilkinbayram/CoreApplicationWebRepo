@@ -20,10 +20,10 @@ namespace Core.Entities.Dtos.Category
         /// <summary>
         /// Kateqoriyanın dil model listi
         /// </summary>
-        public IEnumerable<CategoryLangDto> CategoryLanguages { get; set; }
+        public List<CategoryLangDto> CategoryLanguages { get; set; }
         /// <summary>
         /// Xüsusiyyətlərin model listi
         /// </summary>
-        public IEnumerable<CategoryFeatureDto> CategoryFeatures { get; set; }
+        public List<CategoryFeatureDto> CategoryFeatures { get; set; }
     }
 }

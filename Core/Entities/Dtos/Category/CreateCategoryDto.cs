@@ -18,11 +18,11 @@ namespace Core.Entities.Dtos.Category
         /// Kateqoriya dilə görə əlavə et model listi
         /// </summary>
         public string Banner { get; set; }
-        public IEnumerable<CreateCategoryLangDto> CategoryLanguages { get; set; }
+        public List<CreateCategoryLangDto> CategoryLanguages { get; set; }
         /// <summary>
         /// Kateqoriyanin field listi
         /// </summary>
-        public IEnumerable<CreateCategoryFeatureDto> CategoryFeatures { get; set; }
+        public List<CreateCategoryFeatureDto> CategoryFeatures { get; set; }
 
     }
 }

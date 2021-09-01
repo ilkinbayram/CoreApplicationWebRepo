@@ -9,6 +9,9 @@ namespace Core.Entities.Concrete
 {
     public class TeacherCourse : BaseEntity, IEntity
     {
+        public long TeacherId { get; set; }
+        public long CourseId { get; set; }
+
         public virtual Teacher Teacher { get; set; }
         public virtual Course Course { get; set; }
     }

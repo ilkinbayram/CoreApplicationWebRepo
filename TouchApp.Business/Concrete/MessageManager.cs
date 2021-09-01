@@ -126,17 +126,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<Message>> GetList(Expression<Func<Message, bool>> filter = null)
+        public IDataResult<List<Message>> GetList(Expression<Func<Message, bool>> filter = null)
         {
             try
             {
                 var response = _messageDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<Message>>(response);
-                return new SuccessDataResult<IEnumerable<Message>>(mappingResult);
+                var mappingResult = _mapper.Map<List<Message>>(response);
+                return new SuccessDataResult<List<Message>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<Message>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<Message>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> UpdateList(IEnumerable<Message> messages)
+        public IDataResult<int> UpdateList(List<Message> messages)
         {
             try
             {
@@ -188,7 +188,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-        public IDataResult<int> AddList(IEnumerable<Message> messages)
+        public IDataResult<int> AddList(List<Message> messages)
         {
             try
             {
@@ -215,7 +215,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Message> messages)
+        public IDataResult<int> DeleteByStatusList(List<Message> messages)
         {
             try
             {
@@ -245,7 +245,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Message> messages)
+        public IDataResult<int> DeletePermanentlyList(List<Message> messages)
         {
             try
             {
@@ -269,7 +269,7 @@ namespace Business.Concrete
 
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<Message> messages)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<Message> messages)
         {
             foreach (var message in messages)
             {

@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Core.Entities.Dtos.Media;
+using System.Linq;
+using Core.Aspects.Autofac.Caching;
 
 namespace Business.Concrete
 {
@@ -127,17 +130,18 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<Media>> GetList(Expression<Func<Media, bool>> filter = null)
+        [CacheAspect(1440)]
+        public IDataResult<List<Media>> GetList(Expression<Func<Media, bool>> filter = null)
         {
             try
             {
                 var response = _mediaDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<Media>>(response);
-                return new SuccessDataResult<IEnumerable<Media>>(mappingResult);
+                var mappingResult = _mapper.Map<List<Media>>(response);
+                return new SuccessDataResult<List<Media>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<Media>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<Media>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +170,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<Media> medias)
+        public IDataResult<int> AddList(List<Media> medias)
         {
             try
             {
@@ -189,7 +193,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<Media> medias)
+        public IDataResult<int> UpdateList(List<Media> medias)
         {
             try
             {
@@ -212,7 +216,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Media> medias)
+        public IDataResult<int> DeletePermanentlyList(List<Media> medias)
         {
             try
             {
@@ -235,7 +239,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Media> medias)
+        public IDataResult<int> DeleteByStatusList(List<Media> medias)
         {
             try
             {
@@ -266,7 +270,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<Media> medias)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<Media> medias)
         {
             foreach (var media in medias)
             {
@@ -275,6 +279,35 @@ namespace Business.Concrete
 
         private void DeleteByStatusForAllRelation(Media media)
         {
+        }
+
+        public IDataResult<GetMediaDto> GetDto(Func<GetMediaDto, bool> filter = null)
+        {
+            try
+            {
+                var response = _mediaDal.GetAll();
+                var mappingResult = _mapper.Map<List<GetMediaDto>>(response);
+                return new SuccessDataResult<GetMediaDto>(mappingResult.FirstOrDefault(filter));
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetMediaDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        [CacheAspect(1440)]
+        public IDataResult<List<GetMediaDto>> GetDtoList(Func<GetMediaDto, bool> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var response = _mediaDal.GetList();
+                var mappingResult = _mapper.Map<List<GetMediaDto>>(response).Where(filter).Take(takeCount).ToList();
+                return new SuccessDataResult<List<GetMediaDto>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetMediaDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
         }
     }
 }

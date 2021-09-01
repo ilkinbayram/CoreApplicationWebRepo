@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Core.Entities.Dtos.OurService;
+using System.Linq;
 
 namespace Business.Concrete
 {
@@ -127,17 +129,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<CourseService>> GetList(Expression<Func<CourseService, bool>> filter = null)
+        public IDataResult<List<CourseService>> GetList(Expression<Func<CourseService, bool>> filter = null)
         {
             try
             {
                 var response = _courseServiceDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<CourseService>>(response);
-                return new SuccessDataResult<IEnumerable<CourseService>>(mappingResult);
+                var mappingResult = _mapper.Map<List<CourseService>>(response);
+                return new SuccessDataResult<List<CourseService>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<CourseService>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<CourseService>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +168,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<CourseService> courseServices)
+        public IDataResult<int> AddList(List<CourseService> courseServices)
         {
             try
             {
@@ -189,7 +191,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<CourseService> courseServices)
+        public IDataResult<int> UpdateList(List<CourseService> courseServices)
         {
             try
             {
@@ -212,7 +214,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<CourseService> courseServices)
+        public IDataResult<int> DeletePermanentlyList(List<CourseService> courseServices)
         {
             try
             {
@@ -235,7 +237,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<CourseService> courseServices)
+        public IDataResult<int> DeleteByStatusList(List<CourseService> courseServices)
         {
             try
             {
@@ -266,7 +268,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<CourseService> courseServices)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<CourseService> courseServices)
         {
             foreach (var courseService in courseServices)
             {
@@ -275,6 +277,34 @@ namespace Business.Concrete
 
         private void DeleteByStatusForAllRelation(CourseService courseService)
         {
+        }
+
+        public IDataResult<GetCourseServiceDto> GetDto(Func<GetCourseServiceDto, bool> filter = null)
+        {
+            try
+            {
+                var response = _courseServiceDal.GetAll();
+                var mappingResult = _mapper.Map<List<GetCourseServiceDto>>(response);
+                return new SuccessDataResult<GetCourseServiceDto>(mappingResult.FirstOrDefault(filter));
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetCourseServiceDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetCourseServiceDto>> GetDtoList(Func<GetCourseServiceDto, bool> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var response = _courseServiceDal.GetList();
+                var mappingResult = _mapper.Map<List<GetCourseServiceDto>>(response).Where(filter).Take(takeCount).ToList();
+                return new SuccessDataResult<List<GetCourseServiceDto>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetCourseServiceDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
         }
     }
 }

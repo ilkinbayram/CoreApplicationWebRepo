@@ -13,16 +13,16 @@ namespace Core.DataAccess
         IList<T> GetAll();
 
         T Get(Expression<Func<T, bool>> filter);
-        IEnumerable<T> GetList(Expression<Func<T, bool>> filter=null);
+        List<T> GetList(Expression<Func<T, bool>> filter=null);
         int Add(T entity);
         int Update(T entity);
-        int Add(IEnumerable<T> entities);
-        int Update(IEnumerable<T> entities);
+        int Add(List<T> entities);
+        int Update(List<T> entities);
         int DeletePermanently(T entity);
         int DeleteByStatus(T entity);
-        int DeletePermanently(IEnumerable<T> entities);
-        int DeleteByStatus(IEnumerable<T> entities);
-        void RemoveRange(IEnumerable<T> entities);
+        int DeletePermanently(List<T> entities);
+        int DeleteByStatus(List<T> entities);
+        void RemoveRange(List<T> entities);
 
         void DeleteByStatusBeforeCommit(T entity);
         void AddBeforeCommit(T entity);

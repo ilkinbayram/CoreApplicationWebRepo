@@ -8,9 +8,9 @@ namespace TouchApp.DataAccess.Abstract
 {
     public interface IBlogCategoryDal : IEntityRepository<BlogCategory>
     {
-        IEnumerable<BlogCategory> GetBlogCategoryList(int page, int count,string key);
-        IEnumerable<BlogCategory> GetParentBlogCategory();
-        IEnumerable<BlogCategory> GetSubCategories(int parentId);
+        List<BlogCategory> GetBlogCategoryList(int page, int count,string key);
+        List<BlogCategory> GetParentBlogCategory();
+        List<BlogCategory> GetSubCategories(int parentId);
         BlogCategory GetBlogCategoryById(long blogCategoryId);
     }
 }

@@ -1,4 +1,23 @@
-﻿@*
+﻿@using Core.Entities.Dtos.Media;
+@using Core.Entities.Dtos.SharingTypeMedia;
+@using Core.Extensions;
+
+@{
+    List<string> tagList = new List<string>();
+    Model.ForEach(x =>
+    {
+        foreach (var item in x.SharingTypeMedias)
+        {
+            var currentOne = item.SharingType.NameKey;
+            if (!tagList.Contains(currentOne))
+                tagList.Add(currentOne);
+        }
+    });
+}
+
+
+@model List<GetMediaDto>;
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -10,6 +29,7 @@
             <div class="col-md-12">
                 <div class="section-title-wrapper">
                     <div class="section-title">
+                        @* TODO : Localization *@
                         <h3>Our Gallery</h3>
                         <p>Discove Our Kindergarten Photo Gallery</p>
                     </div>
@@ -20,7 +40,12 @@
             <div class="col-md-12">
                 <div class="filter-menu">
                     <ul>
+                        @* TODO : Localization *@
                         <li class="filter" data-filter="all">All</li>
+                        @foreach (var item in tagList)
+                        {
+                            <li class="filter" data-filter=".@(item.Replace(".","-").Replace(" ","-"))">@(item.Translate())</li>
+                        }
                         <li class="filter" data-filter=".drawing">Drawing</li>
                         <li class="filter" data-filter=".excursions">Excursions</li>
                         <li class="filter" data-filter=".courses">Courses</li>
@@ -31,83 +56,39 @@
         </div>
         <div class="gallery-row">
             <div class="row filter-items">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items drawing overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/1.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/1.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Drawings</span>
+                @foreach (var mediaOne in Model)
+                {
+                    string shareTypeClass = " ";
+                    string shareTypeTranslation = "";
+
+                    @for (int i = 0; i < mediaOne.SharingTypeMedias.Count; i++)
+                    {
+                        shareTypeClass += mediaOne.SharingTypeMedias[i].SharingType.NameKey.Replace(".", "-").Replace(" ", "-");
+                        shareTypeClass += " ";
+
+                        shareTypeTranslation += mediaOne.SharingTypeMedias[i].SharingType.NameKey.Translate();
+                        if (i+1 < mediaOne.SharingTypeMedias.Count)
+                        {
+                            shareTypeTranslation += ", ";
+                        }
+                    }
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items @shareTypeClass overlay-hover">
+                        <div class="overlay-effect">
+                            <a href="#"><img src="@(mediaOne.Source)" alt="@(mediaOne.AltrKey.Translate())"></a>
+                            <div class="gallery-hover-effect">
+                                <a class="gallery-icon venobox" href="@(mediaOne.Source)"><i class="fa fa-image"></i></a>
+                                <span class="gallery-text">@shareTypeTranslation</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items play courses  overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/2.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/2.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Activities, Photos</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items play overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/3.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/3.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Play Time</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items play excursions overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/4.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/4.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Excursions, Play</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items courses excursions overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/5.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/5.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Courses, Exursions</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items drawing overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/12.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/12.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Drawing</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items courses excursions overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/6.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/6.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Excursions, Courses</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items drawing excursions overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/10.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/10.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Drawing, Exursions</span>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="view-gallery text-center">
+                    @* TODO : Localization *@
                     <h4>See Our Kindergarten <span>Photo Gallery!</span></h4>
                     <a href="#" class="button-default button-yellow">View Now</a>
                 </div>

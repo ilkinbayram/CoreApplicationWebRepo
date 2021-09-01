@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<TagBlog>> GetList(Expression<Func<TagBlog, bool>> filter = null)
+        public IDataResult<List<TagBlog>> GetList(Expression<Func<TagBlog, bool>> filter = null)
         {
             try
             {
                 var response = _TagBlogDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<TagBlog>>(response);
-                return new SuccessDataResult<IEnumerable<TagBlog>>(mappingResult);
+                var mappingResult = _mapper.Map<List<TagBlog>>(response);
+                return new SuccessDataResult<List<TagBlog>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<TagBlog>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<TagBlog>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<TagBlog> TagBlogs)
+        public IDataResult<int> AddList(List<TagBlog> TagBlogs)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<TagBlog> TagBlogs)
+        public IDataResult<int> UpdateList(List<TagBlog> TagBlogs)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<TagBlog> TagBlogs)
+        public IDataResult<int> DeletePermanentlyList(List<TagBlog> TagBlogs)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<TagBlog> TagBlogs)
+        public IDataResult<int> DeleteByStatusList(List<TagBlog> TagBlogs)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<TagBlog> TagBlogs)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<TagBlog> TagBlogs)
         {
             foreach (var TagBlog in TagBlogs)
             {

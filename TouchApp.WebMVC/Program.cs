@@ -1,7 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Business.DependencyResolvers.Autofac;
+using Core.CrossCuttingConcerns.Caching;
 using Core.DependencyResolvers;
+using Core.Utilities.Helpers.Abstracts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
+using TouchApp.Business.DependencyResolvers.Autofac;
 
 namespace TouchApp.WebMVC
 {
@@ -22,12 +25,15 @@ namespace TouchApp.WebMVC
 
         // EF Core uses this method at design time to access the DbContext
         public static IHostBuilder CreateHostBuilder(string[] args)
-            => Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                .ConfigureContainer<ContainerBuilder>(builder =>
-                {
-                    builder.RegisterModule(new AutofacBusinessModule());
-                })
-                .ConfigureWebHostDefaults(webBuilder =>  webBuilder.UseStartup<Startup>());
+        {
+            return Host.CreateDefaultBuilder(args)
+            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.RegisterModule(new AutofacBusinessModule());
+            })
+            .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+        }
+
     }
 }

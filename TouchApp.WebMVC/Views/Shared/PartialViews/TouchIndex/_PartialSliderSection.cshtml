@@ -1,4 +1,10 @@
-﻿@*
+﻿@using Core.Entities.Dtos.Slider;
+@using Core.Extensions;
+
+
+
+@model List<GetSliderDto>;
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -6,43 +12,33 @@
 <div class="slider-area slider-five-area">
     <div class="preview-2">
         <div id="nivoslider" class="slides">
-            <img src="~/img/slider/9.jpg" alt="" title="#slider-1-caption1" />
-            <img src="~/img/slider/10.jpg" alt="" title="#slider-1-caption2" />
+            @foreach (var sliderOne in Model)
+            {
+                @* TODO : Localization *@
+                <img src="@(sliderOne.SliderMediaSource)" alt="Image was Not Found" title="@(sliderOne.SubTitleKey.Translate())" />
+            }
         </div>
-        <div id="slider-1-caption1" class="nivo-html-caption nivo-caption">
-            <div class="banner-content slider-1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="text-content hidden-xs">
-                                <p class="sub-title">Your Child can be a genius</p>
-                                <h1 class="title1">Fun &amp; Learning</h1>
-                                <div class="banner-readmore">
-                                    <a title="Read more" href="#">Enroll your child</a>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div id="slider-1-caption1" class="nivo-html-caption nivo-caption">
+                <div class="banner-content slider-@(i%2==0?"1":"2")">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-content hidden-xs">
+                                    <p class="sub-title">@(Model[i].SubTitleKey.Translate())</p>
+                                    <h1 class="title1">@(Model[i].TitleKey.Translate())</h1>
+                                    <div class="banner-readmore">
+                                        @* TODO : Localization *@
+                                        <a title="Read more" href="#">Enroll your child</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="slider-1-caption2" class="nivo-html-caption nivo-caption">
-            <div class="banner-content slider-1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="text-content slide-2 hidden-xs">
-                                <p class="sub-title">Your Child can be a genius</p>
-                                <h1 class="title1">Fun &amp; Learning</h1>
-                                <div class="banner-readmore">
-                                    <a title="Read more" href="#">Enroll your child</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
 <!--End of Slider Area-->

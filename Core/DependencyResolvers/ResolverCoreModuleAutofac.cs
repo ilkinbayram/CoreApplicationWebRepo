@@ -17,10 +17,10 @@ namespace Core.DependencyResolvers
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ICacheManager>().As<MemoryCacheManager>();
-            //builder.RegisterType<IHttpContextAccessor>().As<HttpContextAccessor>();
-            //builder.RegisterType<ISessionStorageHelper>().As<ClientSideStorageHelper>();
-            builder.RegisterType<IConfigHelper>().As<ConfigHelper>();
+            builder.RegisterType<MemoryCacheManager>().As<ICacheManager>();
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
+            builder.RegisterType<ClientSideStorageHelper>().As<ISessionStorageHelper>();
+            builder.RegisterType<ConfigHelper>().As<IConfigHelper>();
         }
     }
 }

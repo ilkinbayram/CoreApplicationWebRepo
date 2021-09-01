@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<Localization>> GetList(Expression<Func<Localization, bool>> filter = null)
+        public IDataResult<List<Localization>> GetList(Expression<Func<Localization, bool>> filter = null)
         {
             try
             {
                 var response = _localizationDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<Localization>>(response);
-                return new SuccessDataResult<IEnumerable<Localization>>(mappingResult);
+                var mappingResult = _mapper.Map<List<Localization>>(response);
+                return new SuccessDataResult<List<Localization>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<Localization>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<Localization>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<Localization> localizations)
+        public IDataResult<int> AddList(List<Localization> localizations)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<Localization> localizations)
+        public IDataResult<int> UpdateList(List<Localization> localizations)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Localization> localizations)
+        public IDataResult<int> DeletePermanentlyList(List<Localization> localizations)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Localization> localizations)
+        public IDataResult<int> DeleteByStatusList(List<Localization> localizations)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<Localization> localizations)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<Localization> localizations)
         {
             foreach (var localization in localizations)
             {

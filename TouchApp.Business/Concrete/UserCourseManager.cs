@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<UserCourse>> GetList(Expression<Func<UserCourse, bool>> filter = null)
+        public IDataResult<List<UserCourse>> GetList(Expression<Func<UserCourse, bool>> filter = null)
         {
             try
             {
                 var response = _userCourseDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<UserCourse>>(response);
-                return new SuccessDataResult<IEnumerable<UserCourse>>(mappingResult);
+                var mappingResult = _mapper.Map<List<UserCourse>>(response);
+                return new SuccessDataResult<List<UserCourse>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<UserCourse>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<UserCourse>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<UserCourse> userCourses)
+        public IDataResult<int> AddList(List<UserCourse> userCourses)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<UserCourse> userCourses)
+        public IDataResult<int> UpdateList(List<UserCourse> userCourses)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<UserCourse> userCourses)
+        public IDataResult<int> DeletePermanentlyList(List<UserCourse> userCourses)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<UserCourse> userCourses)
+        public IDataResult<int> DeleteByStatusList(List<UserCourse> userCourses)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<UserCourse> userCourses)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<UserCourse> userCourses)
         {
             foreach (var userCourse in userCourses)
             {

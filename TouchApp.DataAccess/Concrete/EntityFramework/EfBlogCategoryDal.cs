@@ -21,17 +21,17 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BlogCategory> GetBlogCategoryList(int page, int count, string key)
+        public List<BlogCategory> GetBlogCategoryList(int page, int count, string key)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BlogCategory> GetParentBlogCategory()
+        public List<BlogCategory> GetParentBlogCategory()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BlogCategory> GetSubCategories(int parentId)
+        public List<BlogCategory> GetSubCategories(int parentId)
         {
             throw new NotImplementedException();
         }

@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<SharingType>> GetList(Expression<Func<SharingType, bool>> filter = null)
+        public IDataResult<List<SharingType>> GetList(Expression<Func<SharingType, bool>> filter = null)
         {
             try
             {
                 var response = _sharingTypeDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<SharingType>>(response);
-                return new SuccessDataResult<IEnumerable<SharingType>>(mappingResult);
+                var mappingResult = _mapper.Map<List<SharingType>>(response);
+                return new SuccessDataResult<List<SharingType>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<SharingType>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<SharingType>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<SharingType> sharingTypes)
+        public IDataResult<int> AddList(List<SharingType> sharingTypes)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<SharingType> sharingTypes)
+        public IDataResult<int> UpdateList(List<SharingType> sharingTypes)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<SharingType> sharingTypes)
+        public IDataResult<int> DeletePermanentlyList(List<SharingType> sharingTypes)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<SharingType> sharingTypes)
+        public IDataResult<int> DeleteByStatusList(List<SharingType> sharingTypes)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<SharingType> sharingTypes)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<SharingType> sharingTypes)
         {
             foreach (var sharingType in sharingTypes)
             {

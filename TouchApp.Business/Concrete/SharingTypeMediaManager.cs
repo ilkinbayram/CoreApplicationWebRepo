@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<SharingTypeMedia>> GetList(Expression<Func<SharingTypeMedia, bool>> filter = null)
+        public IDataResult<List<SharingTypeMedia>> GetList(Expression<Func<SharingTypeMedia, bool>> filter = null)
         {
             try
             {
                 var response = _SharingTypeMediaDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<SharingTypeMedia>>(response);
-                return new SuccessDataResult<IEnumerable<SharingTypeMedia>>(mappingResult);
+                var mappingResult = _mapper.Map<List<SharingTypeMedia>>(response);
+                return new SuccessDataResult<List<SharingTypeMedia>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<SharingTypeMedia>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<SharingTypeMedia>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<SharingTypeMedia> SharingTypeMedias)
+        public IDataResult<int> AddList(List<SharingTypeMedia> SharingTypeMedias)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<SharingTypeMedia> SharingTypeMedias)
+        public IDataResult<int> UpdateList(List<SharingTypeMedia> SharingTypeMedias)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<SharingTypeMedia> SharingTypeMedias)
+        public IDataResult<int> DeletePermanentlyList(List<SharingTypeMedia> SharingTypeMedias)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<SharingTypeMedia> SharingTypeMedias)
+        public IDataResult<int> DeleteByStatusList(List<SharingTypeMedia> SharingTypeMedias)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<SharingTypeMedia> SharingTypeMedias)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<SharingTypeMedia> SharingTypeMedias)
         {
             foreach (var SharingTypeMedia in SharingTypeMedias)
             {

@@ -1,17 +1,19 @@
-﻿
+﻿@using TouchApp.WebMVC.Areas.Global.Models.ViewModel; 
+@model HomeViewModel;
+
 @{
     ViewData["Title"] = "TouchIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-@Html.Partial("PartialViews/TouchIndex/_PartialSliderSection");
-@Html.Partial("PartialViews/TouchIndex/_PartialServiceArea");
-@Html.Partial("PartialViews/TouchIndex/_PartialSkillInformationSection");
-@Html.Partial("PartialViews/TouchIndex/_PartialStudyBagSection");
-@Html.Partial("PartialViews/TouchIndex/_PartialRegisterAreaSection");
-@Html.Partial("PartialViews/TouchIndex/_PartialTeachersAreaSection");
-@Html.Partial("PartialViews/TouchIndex/_PartialGallerySection");
-@Html.Partial("PartialViews/TouchIndex/_PartialPhrasesCarouselSection");
-@Html.Partial("PartialViews/TouchIndex/_PartialBlogsSection");
-@Html.Partial("PartialViews/TouchIndex/_PartialMessageLetterSection");
+@Html.Partial("PartialViews/TouchIndex/_PartialSliderSection", Model.Sliders)
+@Html.Partial("PartialViews/TouchIndex/_PartialServiceArea", Model.CourseServices)
+@Html.Partial("PartialViews/TouchIndex/_PartialSkillInformationSection")
+@Html.Partial("PartialViews/TouchIndex/_PartialStudyBagSection", Model.Courses)
+@Html.Partial("PartialViews/TouchIndex/_PartialRegisterAreaSection")
+@Html.Partial("PartialViews/TouchIndex/_PartialTeachersAreaSection", Model.Teachers)
+@Html.Partial("PartialViews/TouchIndex/_PartialGallerySection", Model.Medias)
+@Html.Partial("PartialViews/TouchIndex/_PartialPhrasesCarouselSection", Model.Phrases)
+@Html.Partial("PartialViews/TouchIndex/_PartialBlogsSection", Model.Blogs)
+@Html.Partial("PartialViews/TouchIndex/_PartialMessageLetterSection")

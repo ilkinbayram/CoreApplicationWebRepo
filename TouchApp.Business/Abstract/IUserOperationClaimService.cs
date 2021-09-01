@@ -9,15 +9,15 @@ namespace TouchApp.Business.Abstract
 {
     public interface IUserOperationClaimService
     {
-        IDataResult<IEnumerable<UserOperationClaim>> GetList(Expression<Func<UserOperationClaim, bool>> filter = null);
+        IDataResult<List<UserOperationClaim>> GetList(Expression<Func<UserOperationClaim, bool>> filter = null);
         IDataResult<UserOperationClaim> Get(Expression<Func<UserOperationClaim, bool>> filter);
         IDataResult<int> Add(UserOperationClaim userOperationClaim);
         IDataResult<int> Update(UserOperationClaim userOperationClaim);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);
-        IDataResult<int> AddList(IEnumerable<UserOperationClaim> userOperationClaims);
-        IDataResult<int> UpdateList(IEnumerable<UserOperationClaim> userOperationClaims);
-        IDataResult<int> DeletePermanentlyList(IEnumerable<UserOperationClaim> userOperationClaims);
-        IDataResult<int> DeleteByStatusList(IEnumerable<UserOperationClaim> userOperationClaims);
+        IDataResult<int> AddList(List<UserOperationClaim> userOperationClaims);
+        IDataResult<int> UpdateList(List<UserOperationClaim> userOperationClaims);
+        IDataResult<int> DeletePermanentlyList(List<UserOperationClaim> userOperationClaims);
+        IDataResult<int> DeleteByStatusList(List<UserOperationClaim> userOperationClaims);
     }
 }

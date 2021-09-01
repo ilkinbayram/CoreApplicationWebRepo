@@ -127,17 +127,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<TeacherSocialMedia>> GetList(Expression<Func<TeacherSocialMedia, bool>> filter = null)
+        public IDataResult<List<TeacherSocialMedia>> GetList(Expression<Func<TeacherSocialMedia, bool>> filter = null)
         {
             try
             {
                 var response = _teacherSocialMediaDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<TeacherSocialMedia>>(response);
-                return new SuccessDataResult<IEnumerable<TeacherSocialMedia>>(mappingResult);
+                var mappingResult = _mapper.Map<List<TeacherSocialMedia>>(response);
+                return new SuccessDataResult<List<TeacherSocialMedia>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<TeacherSocialMedia>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<TeacherSocialMedia>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<TeacherSocialMedia> teacherSocialMedias)
+        public IDataResult<int> AddList(List<TeacherSocialMedia> teacherSocialMedias)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<TeacherSocialMedia> teacherSocialMedias)
+        public IDataResult<int> UpdateList(List<TeacherSocialMedia> teacherSocialMedias)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<TeacherSocialMedia> teacherSocialMedias)
+        public IDataResult<int> DeletePermanentlyList(List<TeacherSocialMedia> teacherSocialMedias)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<TeacherSocialMedia> teacherSocialMedias)
+        public IDataResult<int> DeleteByStatusList(List<TeacherSocialMedia> teacherSocialMedias)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<TeacherSocialMedia> teacherSocialMedias)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<TeacherSocialMedia> teacherSocialMedias)
         {
             foreach (var teacherSocialMedia in teacherSocialMedias)
             {

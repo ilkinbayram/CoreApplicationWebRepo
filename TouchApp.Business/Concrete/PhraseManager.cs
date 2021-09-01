@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Core.Entities.Dtos.Phrase;
+using System.Linq;
 
 namespace Business.Concrete
 {
@@ -127,17 +129,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<IEnumerable<Phrase>> GetList(Expression<Func<Phrase, bool>> filter = null)
+        public IDataResult<List<Phrase>> GetList(Expression<Func<Phrase, bool>> filter = null)
         {
             try
             {
                 var response = _phraseDal.GetList(filter);
-                var mappingResult = _mapper.Map<IEnumerable<Phrase>>(response);
-                return new SuccessDataResult<IEnumerable<Phrase>>(mappingResult);
+                var mappingResult = _mapper.Map<List<Phrase>>(response);
+                return new SuccessDataResult<List<Phrase>>(mappingResult);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<IEnumerable<Phrase>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<List<Phrase>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -166,7 +168,7 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<int> AddList(IEnumerable<Phrase> phrases)
+        public IDataResult<int> AddList(List<Phrase> phrases)
         {
             try
             {
@@ -189,7 +191,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<Phrase> phrases)
+        public IDataResult<int> UpdateList(List<Phrase> phrases)
         {
             try
             {
@@ -212,7 +214,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Phrase> phrases)
+        public IDataResult<int> DeletePermanentlyList(List<Phrase> phrases)
         {
             try
             {
@@ -235,7 +237,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Phrase> phrases)
+        public IDataResult<int> DeleteByStatusList(List<Phrase> phrases)
         {
             try
             {
@@ -266,7 +268,7 @@ namespace Business.Concrete
             }
         }
 
-        private void DeleteAllEntitiesByStatusForAllRelationList(IEnumerable<Phrase> phrases)
+        private void DeleteAllEntitiesByStatusForAllRelationList(List<Phrase> phrases)
         {
             foreach (var phrase in phrases)
             {
@@ -275,6 +277,34 @@ namespace Business.Concrete
 
         private void DeleteByStatusForAllRelation(Phrase phrase)
         {
+        }
+
+        public IDataResult<GetPhraseDto> GetDto(Func<GetPhraseDto, bool> filter = null)
+        {
+            try
+            {
+                var response = _phraseDal.GetAll();
+                var mappingResult = _mapper.Map<List<GetPhraseDto>>(response);
+                return new SuccessDataResult<GetPhraseDto>(mappingResult.FirstOrDefault(filter));
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetPhraseDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetPhraseDto>> GetDtoList(Func<GetPhraseDto, bool> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var response = _phraseDal.GetList();
+                var mappingResult = _mapper.Map<List<GetPhraseDto>>(response).Where(filter).Take(takeCount).ToList();
+                return new SuccessDataResult<List<GetPhraseDto>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetPhraseDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
         }
     }
 }

@@ -9,6 +9,9 @@ namespace Core.Entities.Concrete
 {
     public class SharingTypeMedia : BaseEntity, IEntity
     {
+        public long MediaId { get; set; }
+        public long SharingTypeId { get; set; }
+
         public virtual Media Media { get; set; }
         public virtual SharingType SharingType { get; set; }
     }

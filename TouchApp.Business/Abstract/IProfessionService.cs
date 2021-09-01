@@ -9,15 +9,15 @@ namespace TouchApp.Business.Abstract
 {
     public interface IProfessionService
     {
-        IDataResult<IEnumerable<Profession>> GetList(Expression<Func<Profession, bool>> filter = null);
+        IDataResult<List<Profession>> GetList(Expression<Func<Profession, bool>> filter = null);
         IDataResult<Profession> Get(Expression<Func<Profession, bool>> filter);
         IDataResult<int> Add(Profession profession);
         IDataResult<int> Update(Profession profession);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);
-        IDataResult<int> AddList(IEnumerable<Profession> professions);
-        IDataResult<int> UpdateList(IEnumerable<Profession> professions);
-        IDataResult<int> DeletePermanentlyList(IEnumerable<Profession> professions);
-        IDataResult<int> DeleteByStatusList(IEnumerable<Profession> professions);
+        IDataResult<int> AddList(List<Profession> professions);
+        IDataResult<int> UpdateList(List<Profession> professions);
+        IDataResult<int> DeletePermanentlyList(List<Profession> professions);
+        IDataResult<int> DeleteByStatusList(List<Profession> professions);
     }
 }

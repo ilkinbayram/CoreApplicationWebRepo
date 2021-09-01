@@ -21,6 +21,8 @@ namespace Core.Entities.Concrete
         public string OverViewHtmlRawKey { get; set; }
         public DateTime PublishDate { get; set; }
 
+        public long ProfessionCourseCategoryId { get; set; }
+
 
         public virtual List<TeacherCourse> TeacherCourses { get; set; }
         public virtual List<UserCourse> UserCourses { get; set; }

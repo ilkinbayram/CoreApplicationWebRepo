@@ -14,8 +14,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new HomeMetaTagConfiguration());
-            modelBuilder.ApplyConfiguration(new HomeMetaTagGalleryConfiguration());
+            modelBuilder.ApplyConfiguration(new SliderConfiguration());
             modelBuilder.ApplyConfiguration(new LanguageConfiguration());
             modelBuilder.ApplyConfiguration(new MessageConfiguration());
             modelBuilder.ApplyConfiguration(new OperationClaimConfiguration());
@@ -48,8 +47,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<Language> Languages { get; set; }
-        public DbSet<HomeMetaTagGallery> HomeMetaTagGalleries { get; set; }
-        public DbSet<HomeMetaTag> HomeMetaTags { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }

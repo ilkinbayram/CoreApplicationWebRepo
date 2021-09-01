@@ -24,7 +24,7 @@ namespace Core.Utilities.Security.Jwt
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
             
         }
-        public AccessToken CreateToken(User user, IEnumerable<OperationClaim> operationClaims,bool rememberMe)
+        public AccessToken CreateToken(User user, List<OperationClaim> operationClaims,bool rememberMe)
         {
             if (rememberMe)
             {
@@ -50,7 +50,7 @@ namespace Core.Utilities.Security.Jwt
         }
 
         public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, 
-            SigningCredentials signingCredentials, IEnumerable<OperationClaim> operationClaims)
+            SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
         {
             var jwt = new JwtSecurityToken(
                 issuer:tokenOptions.Issuer,
@@ -63,7 +63,7 @@ namespace Core.Utilities.Security.Jwt
             return jwt;
         }
 
-        private IEnumerable<Claim> SetClaims(User user, IEnumerable<OperationClaim> operationClaims)
+        private List<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
         {
             var claims = new List<Claim>();
             claims.AddUserId(user.Id);

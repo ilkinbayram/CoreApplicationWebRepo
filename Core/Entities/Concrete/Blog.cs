@@ -19,6 +19,9 @@ namespace Core.Entities.Concrete
         public string OverviewHtmlRawKey { get; set; }
         public PostScreenType ScreenType { get; set; }
 
+        public long BlogCategoryId { get; set; }
+        public long UserId { get; set; }
+
         public virtual BlogCategory BlogCategory { get; set; }
         public virtual List<TagBlog> TagBlogs { get; set; }
         public virtual User User { get; set; }

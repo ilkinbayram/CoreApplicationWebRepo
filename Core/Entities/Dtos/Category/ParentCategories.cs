@@ -16,8 +16,8 @@ namespace Core.Entities.Dtos.Category
        /// <summary>
         /// Kateqoriyanın dil model listi
         /// </summary>
-        public IEnumerable<CategoryLangDto> CategoryLanguages { get; set; }
-        public IEnumerable<CategoryFeatureListDto> CategoryFeatures { get; set; }
+        public List<CategoryLangDto> CategoryLanguages { get; set; }
+        public List<CategoryFeatureListDto> CategoryFeatures { get; set; }
 
     }
 }

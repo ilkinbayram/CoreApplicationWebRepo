@@ -41,7 +41,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<int> AddList(IEnumerable<Category> categories)
+        public IDataResult<int> AddList(List<Category> categories)
         {
             throw new NotImplementedException();
         }
@@ -51,7 +51,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<int> DeleteByStatusList(IEnumerable<Category> categories)
+        public IDataResult<int> DeleteByStatusList(List<Category> categories)
         {
             throw new NotImplementedException();
         }
@@ -61,7 +61,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<int> DeletePermanentlyList(IEnumerable<Category> categories)
+        public IDataResult<int> DeletePermanentlyList(List<Category> categories)
         {
             throw new NotImplementedException();
         }
@@ -81,32 +81,32 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<IEnumerable<CategoryListDto>> GetCategoryList(int page, int count, string key)
+        public IDataResult<List<CategoryListDto>> GetCategoryList(int page, int count, string key)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<IEnumerable<CategoryLangClientDto>> GetHomeChildCategoryList(int categoryId, string acceptedLanguage)
+        public IDataResult<List<CategoryLangClientDto>> GetHomeChildCategoryList(int categoryId, string acceptedLanguage)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<IEnumerable<CategoryLangClientDto>> GetHomeParentCategoryList(string acceptedLanguage)
+        public IDataResult<List<CategoryLangClientDto>> GetHomeParentCategoryList(string acceptedLanguage)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<IEnumerable<Category>> GetList(Expression<Func<Category, bool>> filter = null)
+        public IDataResult<List<Category>> GetList(Expression<Func<Category, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<IEnumerable<ParentCategories>> GetParentCategory()
+        public IDataResult<List<ParentCategories>> GetParentCategory()
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<IEnumerable<ParentCategories>> GetSubCategories(int parentId)
+        public IDataResult<List<ParentCategories>> GetSubCategories(int parentId)
         {
             throw new NotImplementedException();
         }
@@ -116,7 +116,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<int> UpdateList(IEnumerable<Category> categories)
+        public IDataResult<int> UpdateList(List<Category> categories)
         {
             throw new NotImplementedException();
         }

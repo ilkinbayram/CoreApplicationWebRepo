@@ -9,15 +9,15 @@ namespace TouchApp.Business.Abstract
 {
     public interface IMessageService
     {
-        IDataResult<IEnumerable<Message>> GetList(Expression<Func<Message, bool>> filter = null);
+        IDataResult<List<Message>> GetList(Expression<Func<Message, bool>> filter = null);
         IDataResult<Message> Get(Expression<Func<Message, bool>> filter);
         IDataResult<int> Add(Message message);
         IDataResult<int> Update(Message message);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);
-        IDataResult<int> AddList(IEnumerable<Message> messages);
-        IDataResult<int> UpdateList(IEnumerable<Message> messages);
-        IDataResult<int> DeletePermanentlyList(IEnumerable<Message> messages);
-        IDataResult<int> DeleteByStatusList(IEnumerable<Message> messages);
+        IDataResult<int> AddList(List<Message> messages);
+        IDataResult<int> UpdateList(List<Message> messages);
+        IDataResult<int> DeletePermanentlyList(List<Message> messages);
+        IDataResult<int> DeleteByStatusList(List<Message> messages);
     }
 }

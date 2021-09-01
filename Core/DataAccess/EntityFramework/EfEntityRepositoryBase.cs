@@ -73,7 +73,7 @@ namespace Core.DataAccess.EntityFramework
             return Context.Set<TEntity>().SingleOrDefault(filter);
         }
 
-        public virtual IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             return filter == null
                 ? Context.Set<TEntity>().ToList()
@@ -88,34 +88,34 @@ namespace Core.DataAccess.EntityFramework
             return Context.SaveChanges();
         }
 
-        public virtual int Add(IEnumerable<TEntity> entities)
+        public virtual int Add(List<TEntity> entities)
         {
-            Context.Set<IEnumerable<TEntity>>().Add(entities);
+            Context.Set<List<TEntity>>().Add(entities);
             return Context.SaveChanges();
         }
 
 
-        public virtual int Update(IEnumerable<TEntity> entities)
+        public virtual int Update(List<TEntity> entities)
         {
             var updatedEntities = Context.Entry(entities);
             updatedEntities.State = EntityState.Modified;
             return Context.SaveChanges();
         }
 
-        public virtual int DeletePermanently(IEnumerable<TEntity> entities)
+        public virtual int DeletePermanently(List<TEntity> entities)
         {
             var deletedEntities = Context.Entry(entities);
             deletedEntities.State = EntityState.Deleted;
             return Context.SaveChanges();
         }
 
-        public virtual int DeleteByStatus(IEnumerable<TEntity> entities)
+        public virtual int DeleteByStatus(List<TEntity> entities)
         {
             var deletedEntities = Context.Entry(entities);
             deletedEntities.State = EntityState.Modified;
             return Context.SaveChanges();
         }
-        public virtual void RemoveRange(IEnumerable<TEntity> entities)
+        public virtual void RemoveRange(List<TEntity> entities)
         {
             Context.Set<TEntity>().RemoveRange(entities);
         }
