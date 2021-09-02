@@ -25,7 +25,6 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         private IConfigHelper _configHelper;
 
         private HomeViewModel _viewModel;
-
         public HomeController(ICacheManager cacheManager, 
                               ILocalizationService localizationService, 
                               IConfigHelper configHelper,
