@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos.Category;
 using Core.Utilities.Results;
@@ -27,5 +28,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<List<CategoryLangClientDto>> GetHomeParentCategoryList(string acceptedLanguage);
         IDataResult<List<CategoryLangClientDto>> GetHomeChildCategoryList(int categoryId, string acceptedLanguage);
         IDataResult<CategoryGetLangDto> GetCategoryById(long categoryId, string acceptedLanguage);
+
+        //Task<IDataResult<List<GetCategoryDto>>> GetDtoListAsync(Expression<Func<Category, bool>> filter = null, int takeCount = 2000);
+        //Task<IDataResult<GetCategoryDto>> GetDtoAsync(Expression<Func<Category, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<Category> categories);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<Category> categories);
+        Task<IDataResult<List<Category>>> GetListAsync(Expression<Func<Category, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<Category> categories);
+        Task<IDataResult<int>> UpdateAsync(Category category);
+        Task<IDataResult<Category>> GetAsync(Expression<Func<Category, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(Category category);
     }
 }

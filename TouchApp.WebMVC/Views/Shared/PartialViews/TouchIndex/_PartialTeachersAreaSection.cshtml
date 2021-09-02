@@ -34,49 +34,55 @@
             <div class="col-lg-6">
                 <div class="testimonial-image-text-wrapper">
                     <div class="testimonial-text-slider">
-                        @foreach (var teacherOne in Model)
+                        @if (Model != null)
                         {
-                            <div class="sin-testiText">
-                                <h2>@(teacherOne.FirstName)&nbsp;@(teacherOne.LastName)</h2>
-                                <span class="language">@(teacherOne.Profession.NameKey.Translate())</span>
-                                <div class="teacher-info-container">
-                                    <p><i class="fa fa-graduation-cap"></i>Degree: @(string.Format("{0}.ProfessionDegree",teacherOne.Profession.ProfessionDegree.ToString()).Translate())</p>
-                                    @* TODO : Localization *@
-                                    <p><i class="fa fa-star"></i>Experience: 2 Years in Preschool Education (From)</p>
-                                    <p>
-                                        <i class="fa fa-edit"></i>My Courses:
-                                        @for (int i = 0; i < teacherOne.TeacherCourses.Count; i++)
-                                        {
-                                            <b>@(teacherOne.TeacherCourses[i].Course.TitleKey.Translate())</b>
-                                            if (i + 1 < teacherOne.TeacherCourses.Count)
+                            foreach (var teacherOne in Model)
+                            {
+                                <div class="sin-testiText">
+                                    <h2>@(teacherOne.FirstName)&nbsp;@(teacherOne.LastName)</h2>
+                                    <span class="language">@(teacherOne.Profession.NameKey.Translate())</span>
+                                    <div class="teacher-info-container">
+                                        <p><i class="fa fa-graduation-cap"></i>Degree: @(string.Format("{0}.ProfessionDegree",teacherOne.Profession.ProfessionDegree.ToString()).Translate())</p>
+                                        @* TODO : Localization *@
+                                        <p><i class="fa fa-star"></i>Experience: 2 Years in Preschool Education (From)</p>
+                                        <p>
+                                            <i class="fa fa-edit"></i>My Courses:
+                                            @for (int i = 0; i < teacherOne.TeacherCourses.Count; i++)
                                             {
-                                                <span>&sbquo;</span>
+                                                <b>@(teacherOne.TeacherCourses[i].Course.TitleKey.Translate())</b>
+                                                if (i + 1 < teacherOne.TeacherCourses.Count)
+                                                {
+                                                    <span>&sbquo;</span>
+                                                }
                                             }
-                                        }
-                                    </p>
-                                </div>
-                                <p>@(teacherOne.BiographyKey.Translate())</p>
-                                <div class="teacher-links">
-                                    @foreach (var socialMediaOne in teacherOne.TeacherSocialMedias)
-                                    {
-                                        <a href="@(socialMediaOne.RedirectUrl)"><i class="@(socialMediaOne.SocialMedia.IconSource)"></i></a>
+                                        </p>
+                                    </div>
+                                    <p>@(teacherOne.BiographyKey.Translate())</p>
+                                    <div class="teacher-links">
+                                        @foreach (var socialMediaOne in teacherOne.TeacherSocialMedias)
+                                        {
+                                            <a href="@(socialMediaOne.RedirectUrl)"><i class="@(socialMediaOne.SocialMedia.IconSource)"></i></a>
 
-                                    }
+                                        }
+                                    </div>
+                                    @* TODO : Localization *@
+                                    <a href="#" class="button-default button-yellow">View Profile</a>
                                 </div>
-                                @* TODO : Localization *@
-                                <a href="#" class="button-default button-yellow">View Profile</a>
-                            </div>
+                            }
                         }
                     </div>
                     <div class="testimonial-image-slider text-center">
-                        @foreach (var teacherOne in Model)
+                        @if (Model != null)
                         {
-                            <div class="sin-testiImage">
-                                <div class="teacher-image-carousel">
-                                    @* TODO : Localization *@
-                                    <img src="@(teacherOne.IconSource)" alt="The Image Was Not Found" />
+                            foreach (var teacherOne in Model)
+                            {
+                                <div class="sin-testiImage">
+                                    <div class="teacher-image-carousel">
+                                        @* TODO : Localization *@
+                                        <img src="@(teacherOne.IconSource)" alt="The Image Was Not Found" />
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         }
                     </div>
                 </div>

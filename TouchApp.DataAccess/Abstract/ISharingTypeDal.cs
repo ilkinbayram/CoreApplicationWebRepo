@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface ISharingTypeDal : IEntityRepository<SharingType>
+    public interface ISharingTypeDal : IEntityRepository<SharingType>, IEntityQueryableRepository<SharingType>
     {
     }
 }

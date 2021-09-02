@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos.User;
 using Core.Utilities.Results;
@@ -31,5 +32,18 @@ namespace TouchApp.Business.Abstract
         IDataResult<List<GetFamousOfferFeatureDto>> GetUserOfferFeatures(long famousPersonId, string acceptedLang);
 
         IDataResult<UserLangDto> GetUserBySlug(string userSlug , string lang);
+
+
+        Task<IDataResult<List<GetUserDto>>> GetDtoListAsync(Expression<Func<User, bool>> filter = null, int takeCount = 2000);
+        Task<IDataResult<GetUserDto>> GetDtoAsync(Expression<Func<User, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<User> users);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<User> users);
+        Task<IDataResult<List<User>>> GetListAsync(Expression<Func<User, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<User> users);
+        Task<IDataResult<int>> UpdateAsync(User user);
+        Task<IDataResult<User>> GetAsync(Expression<Func<User, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(User user);
     }
 }

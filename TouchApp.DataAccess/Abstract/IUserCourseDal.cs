@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IUserCourseDal : IEntityRepository<UserCourse>
+    public interface IUserCourseDal : IEntityRepository<UserCourse>, IEntityQueryableRepository<UserCourse>
     {
     }
 }

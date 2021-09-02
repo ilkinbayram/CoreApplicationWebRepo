@@ -1,9 +1,11 @@
 ﻿using Core.Entities.Concrete;
+using Core.Entities.Dtos.SharingTypeMedia;
 using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TouchApp.Business.Abstract
 {
@@ -19,5 +21,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<int> UpdateList(List<SharingTypeMedia> sharingTypeMedias);
         IDataResult<int> DeletePermanentlyList(List<SharingTypeMedia> sharingTypeMedias);
         IDataResult<int> DeleteByStatusList(List<SharingTypeMedia> sharingTypeMedias);
+
+        Task<IDataResult<List<GetSharingTypeMediaDto>>> GetDtoListAsync(Expression<Func<SharingTypeMedia, bool>> filter = null, int takeCount = 2000);
+        Task<IDataResult<GetSharingTypeMediaDto>> GetDtoAsync(Expression<Func<SharingTypeMedia, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<SharingTypeMedia> sharingTypeMedias);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<SharingTypeMedia> sharingTypeMedias);
+        Task<IDataResult<List<SharingTypeMedia>>> GetListAsync(Expression<Func<SharingTypeMedia, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<SharingTypeMedia> sharingTypeMedias);
+        Task<IDataResult<int>> UpdateAsync(SharingTypeMedia sharingTypeMedia);
+        Task<IDataResult<SharingTypeMedia>> GetAsync(Expression<Func<SharingTypeMedia, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(SharingTypeMedia sharingTypeMedia);
     }
 }

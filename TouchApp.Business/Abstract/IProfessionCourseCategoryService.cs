@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.ProfessionCourseCategory;
 using Core.Utilities.Results;
 
 namespace TouchApp.Business.Abstract
@@ -19,5 +21,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<int> UpdateList(List<ProfessionCourseCategory> professionProfessionCourseCategoryCategorys);
         IDataResult<int> DeletePermanentlyList(List<ProfessionCourseCategory> professionProfessionCourseCategoryCategorys);
         IDataResult<int> DeleteByStatusList(List<ProfessionCourseCategory> professionProfessionCourseCategoryCategorys);
+
+        Task<IDataResult<List<GetProfessionCourseCategoryDto>>> GetDtoListAsync(Expression<Func<ProfessionCourseCategory, bool>> filter = null, int takeCount = 2000);
+        Task<IDataResult<GetProfessionCourseCategoryDto>> GetDtoAsync(Expression<Func<ProfessionCourseCategory, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<ProfessionCourseCategory> professionCourseCategories);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<ProfessionCourseCategory> professionCourseCategories);
+        Task<IDataResult<List<ProfessionCourseCategory>>> GetListAsync(Expression<Func<ProfessionCourseCategory, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<ProfessionCourseCategory> professionCourseCategories);
+        Task<IDataResult<int>> UpdateAsync(ProfessionCourseCategory professionCourseCategory);
+        Task<IDataResult<ProfessionCourseCategory>> GetAsync(Expression<Func<ProfessionCourseCategory, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(ProfessionCourseCategory professionCourseCategory);
     }
 }

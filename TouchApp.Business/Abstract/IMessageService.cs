@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TouchApp.Business.Abstract
 {
@@ -19,5 +20,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<int> UpdateList(List<Message> messages);
         IDataResult<int> DeletePermanentlyList(List<Message> messages);
         IDataResult<int> DeleteByStatusList(List<Message> messages);
+
+        //Task<IDataResult<List<GetMessageDto>>> GetDtoListAsync(Expression<Func<Message, bool>> filter = null, int takeCount = 2000);
+        //Task<IDataResult<GetMessageDto>> GetDtoAsync(Expression<Func<Message, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<Message> messages);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<Message> messages);
+        Task<IDataResult<List<Message>>> GetListAsync(Expression<Func<Message, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<Message> messages);
+        Task<IDataResult<int>> UpdateAsync(Message message);
+        Task<IDataResult<Message>> GetAsync(Expression<Func<Message, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(Message message);
     }
 }

@@ -3,16 +3,22 @@
 @using Core.Extensions;
 
 @{
-    List<string> tagList = new List<string>();
-    Model.ForEach(x =>
+    List<string> tagList = null;
+
+    if (Model != null)
     {
-        foreach (var item in x.SharingTypeMedias)
+        tagList = new List<string>();
+
+        Model.ForEach(x =>
         {
-            var currentOne = item.SharingType.NameKey;
-            if (!tagList.Contains(currentOne))
-                tagList.Add(currentOne);
-        }
-    });
+            foreach (var item in x.SharingTypeMedias)
+            {
+                var currentOne = item.SharingType.NameKey;
+                if (!tagList.Contains(currentOne))
+                    tagList.Add(currentOne);
+            }
+        });
+    };
 }
 
 
@@ -42,46 +48,48 @@
                     <ul>
                         @* TODO : Localization *@
                         <li class="filter" data-filter="all">All</li>
-                        @foreach (var item in tagList)
+                        @if (tagList != null)
                         {
-                            <li class="filter" data-filter=".@(item.Replace(".","-").Replace(" ","-"))">@(item.Translate())</li>
+                            foreach (var item in tagList)
+                            {
+                                <li class="filter" data-filter=".@(item.Replace(".","-").Replace(" ","-"))">@(item.Translate())</li>
+                            }
                         }
-                        <li class="filter" data-filter=".drawing">Drawing</li>
-                        <li class="filter" data-filter=".excursions">Excursions</li>
-                        <li class="filter" data-filter=".courses">Courses</li>
-                        <li class="filter" data-filter=".play">Play time</li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="gallery-row">
             <div class="row filter-items">
-                @foreach (var mediaOne in Model)
+                @if (Model != null)
                 {
-                    string shareTypeClass = " ";
-                    string shareTypeTranslation = "";
-
-                    @for (int i = 0; i < mediaOne.SharingTypeMedias.Count; i++)
+                    foreach (var mediaOne in Model)
                     {
-                        shareTypeClass += mediaOne.SharingTypeMedias[i].SharingType.NameKey.Replace(".", "-").Replace(" ", "-");
-                        shareTypeClass += " ";
+                        string shareTypeClass = " ";
+                        string shareTypeTranslation = "";
 
-                        shareTypeTranslation += mediaOne.SharingTypeMedias[i].SharingType.NameKey.Translate();
-                        if (i+1 < mediaOne.SharingTypeMedias.Count)
+                        for (int i = 0; i < mediaOne.SharingTypeMedias.Count; i++)
                         {
-                            shareTypeTranslation += ", ";
-                        }
-                    }
+                            shareTypeClass += mediaOne.SharingTypeMedias[i].SharingType.NameKey.Replace(".", "-").Replace(" ", "-");
+                            shareTypeClass += " ";
 
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items @shareTypeClass overlay-hover">
-                        <div class="overlay-effect">
-                            <a href="#"><img src="@(mediaOne.Source)" alt="@(mediaOne.AltrKey.Translate())"></a>
-                            <div class="gallery-hover-effect">
-                                <a class="gallery-icon venobox" href="@(mediaOne.Source)"><i class="fa fa-image"></i></a>
-                                <span class="gallery-text">@shareTypeTranslation</span>
+                            shareTypeTranslation += mediaOne.SharingTypeMedias[i].SharingType.NameKey.Translate();
+                            if (i + 1 < mediaOne.SharingTypeMedias.Count)
+                            {
+                                shareTypeTranslation += ", ";
+                            }
+                        }
+
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items @shareTypeClass overlay-hover">
+                            <div class="overlay-effect">
+                                <a href="#"><img src="@(mediaOne.Source)" alt="@(mediaOne.AltrKey.Translate())"></a>
+                                <div class="gallery-hover-effect">
+                                    <a class="gallery-icon venobox" href="@(mediaOne.Source)"><i class="fa fa-image"></i></a>
+                                    <span class="gallery-text">@shareTypeTranslation</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
             </div>
         </div>

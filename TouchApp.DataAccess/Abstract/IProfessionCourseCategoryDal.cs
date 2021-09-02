@@ -6,7 +6,7 @@ using DataAccess.Concrete.EntityFramework.Contexts;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IProfessionCourseCategoryDal : IEntityRepository<ProfessionCourseCategory>
+    public interface IProfessionCourseCategoryDal : IEntityRepository<ProfessionCourseCategory>, IEntityQueryableRepository<ProfessionCourseCategory>
     {
         List<ProfessionCourseCategory> GetProfessionCourseCategoryList(int page, int count,string key);
         List<ProfessionCourseCategory> GetParentProfessionCourseCategory();

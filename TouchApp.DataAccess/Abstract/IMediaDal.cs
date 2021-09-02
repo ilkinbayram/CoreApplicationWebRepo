@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IMediaDal : IEntityRepository<Media>
+    public interface IMediaDal : IEntityRepository<Media>, IEntityQueryableRepository<Media>
     {
     }
 }

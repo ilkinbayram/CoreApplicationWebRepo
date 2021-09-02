@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface ITeacherCourseDal : IEntityRepository<TeacherCourse>
+    public interface ITeacherCourseDal : IEntityRepository<TeacherCourse>, IEntityQueryableRepository<TeacherCourse>
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface ITeacherSocialMediaDal : IEntityRepository<TeacherSocialMedia>
+    public interface ITeacherSocialMediaDal : IEntityRepository<TeacherSocialMedia>, IEntityQueryableRepository<TeacherSocialMedia>
     {
     }
 }

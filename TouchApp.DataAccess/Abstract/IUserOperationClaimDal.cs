@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IUserOperationClaimDal : IEntityRepository<UserOperationClaim>
+    public interface IUserOperationClaimDal : IEntityRepository<UserOperationClaim>, IEntityQueryableRepository<UserOperationClaim>
     {
     }
 }

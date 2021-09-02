@@ -24,29 +24,32 @@
             </div>
         </div>
         <div class="class-carousel carousel-style-one owl-carousel">
-            @foreach (var courseOne in Model)
+            @if (Model != null)
             {
-                <div class="single-class">
-                    <div class="single-class-image">
-                        <a href="#">
-                            @* TODO : Localization *@
-                            <img src="@(courseOne.CaptionImageSource)" alt="The Photo Was Not Found">
-                            <span class="class-date">@(courseOne.PublishDate)</span>
-                        </a>
-                    </div>
-                    <div class="single-class-text">
-                        <div class="class-des">
-                            <h4><a href="#">@(courseOne.TitleKey.Translate())</a></h4>
-                            <p>@(courseOne.DescriptionKey.Translate())</p>
+                foreach (var courseOne in Model)
+                {
+                    <div class="single-class">
+                        <div class="single-class-image">
+                            <a href="#">
+                                @* TODO : Localization *@
+                                <img src="@(courseOne.CaptionImageSource)" alt="The Photo Was Not Found">
+                                <span class="class-date">@(courseOne.PublishDate)</span>
+                            </a>
                         </div>
-                        <div class="class-schedule">
-                            @* TODO : Localization *@
-                            <span>Muddet: @(courseOne.MinTotalMonths)&minus;@(courseOne.MaxTotalMonths) Ay</span>
-                            <span>Kurs Qiymeti: @(courseOne.PricePerMonth) AZN</span>
-                            <span class="arrow"><a href="#"><i class="fa fa-angle-right"></i></a></span>
+                        <div class="single-class-text">
+                            <div class="class-des">
+                                <h4><a href="#">@(courseOne.TitleKey.Translate())</a></h4>
+                                <p>@(courseOne.DescriptionKey.Translate())</p>
+                            </div>
+                            <div class="class-schedule">
+                                @* TODO : Localization *@
+                                <span>Muddet: @(courseOne.MinTotalMonths)&minus;@(courseOne.MaxTotalMonths) Ay</span>
+                                <span>Kurs Qiymeti: @(courseOne.PricePerMonth) AZN</span>
+                                <span class="arrow"><a href="#"><i class="fa fa-angle-right"></i></a></span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>

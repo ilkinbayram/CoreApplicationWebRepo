@@ -25,24 +25,27 @@
             </div>
         </div>
         <div class="testimonial-carousel carousel-style-one border-white owl-carousel">
-            @foreach (var phraseOne in Model)
+            @if (Model != null)
             {
-                <div class="single-testimonial-carousel">
-                    <div class="testimonial-carousel-text">
-                        <h4>@(phraseOne.TitleKey.Translate())</h4>
-                        <p>“ @(phraseOne.ContentKey.Translate()) ”</p>
-                    </div>
-                    <div class="testimonial-information">
-                        <div class="testimonial-image">
-                            @* TODO : Localization *@
-                            <img src="@(phraseOne.CaptionSource)" alt="The Photo Was Not Found">
+                foreach (var phraseOne in Model)
+                {
+                    <div class="single-testimonial-carousel">
+                        <div class="testimonial-carousel-text">
+                            <h4>@(phraseOne.TitleKey.Translate())</h4>
+                            <p>“ @(phraseOne.ContentKey.Translate()) ”</p>
                         </div>
-                        <div class="testimonial-name">
-                            <h4>@(phraseOne.OwnerName)&nbsp;@(phraseOne.OwnerSurname)</h4>
-                            <span>@(phraseOne.ProfessionKey.Translate())</span>
+                        <div class="testimonial-information">
+                            <div class="testimonial-image">
+                                @* TODO : Localization *@
+                                <img src="@(phraseOne.CaptionSource)" alt="The Photo Was Not Found">
+                            </div>
+                            <div class="testimonial-name">
+                                <h4>@(phraseOne.OwnerName)&nbsp;@(phraseOne.OwnerSurname)</h4>
+                                <span>@(phraseOne.ProfessionKey.Translate())</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>

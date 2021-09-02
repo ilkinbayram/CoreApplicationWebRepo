@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TouchApp.Business.Abstract
 {
@@ -22,5 +23,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<int> UpdateList(List<CourseService> courseServices);
         IDataResult<int> DeletePermanentlyList(List<CourseService> courseServices);
         IDataResult<int> DeleteByStatusList(List<CourseService> courseServices);
+
+        Task<IDataResult<List<GetCourseServiceDto>>> GetDtoListAsync(Expression<Func<CourseService, bool>> filter = null, int takeCount = 2000);
+        Task<IDataResult<GetCourseServiceDto>> GetDtoAsync(Expression<Func<CourseService, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<CourseService> courseServices);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<CourseService> courseServices);
+        Task<IDataResult<List<CourseService>>> GetListAsync(Expression<Func<CourseService, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<CourseService> courseServices);
+        Task<IDataResult<int>> UpdateAsync(CourseService courseService);
+        Task<IDataResult<CourseService>> GetAsync(Expression<Func<CourseService, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(CourseService courseService);
     }
 }

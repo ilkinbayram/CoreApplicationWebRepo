@@ -6,7 +6,7 @@ using Core.Entities.Concrete;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IUserDal : IEntityRepository<User>
+    public interface IUserDal : IEntityRepository<User>, IEntityQueryableRepository<User>
     {
         List<OperationClaim> GetClaims(User user);
         User GetUserWithRelations(Expression<Func<User, bool>> filter);

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TouchApp.Business.Abstract
 {
@@ -22,5 +23,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<int> UpdateList(List<Teacher> teachers);
         IDataResult<int> DeletePermanentlyList(List<Teacher> teachers);
         IDataResult<int> DeleteByStatusList(List<Teacher> teachers);
+
+        Task<IDataResult<List<GetTeacherDto>>> GetDtoListAsync(Expression<Func<Teacher, bool>> filter = null, int takeCount = 2000);
+        Task<IDataResult<GetTeacherDto>> GetDtoAsync(Expression<Func<Teacher, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<Teacher> teachers);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<Teacher> teachers);
+        Task<IDataResult<List<Teacher>>> GetListAsync(Expression<Func<Teacher, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<Teacher> teachers);
+        Task<IDataResult<int>> UpdateAsync(Teacher teacher);
+        Task<IDataResult<Teacher>> GetAsync(Expression<Func<Teacher, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(Teacher teacher);
     }
 }

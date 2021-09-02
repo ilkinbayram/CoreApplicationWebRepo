@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TouchApp.Business.Abstract
 {
@@ -13,6 +14,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<List<GetBlogDto>> GetDtoList(Func<GetBlogDto, bool> filter = null, int takeCount = 2000);
         IDataResult<GetBlogDto> GetDto(Func<GetBlogDto, bool> filter);
         IDataResult<List<Blog>> GetList(Expression<Func<Blog, bool>> filter = null);
+        Task<IDataResult<List<GetBlogDto>>> GetDtoListAsync(Expression<Func<Blog, bool>> filter = null, int takeCount = 2000);
+        Task<IDataResult<GetBlogDto>> GetDtoAsync(Expression<Func<Blog, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<Blog> blogs);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<Blog> blogs);
+        Task<IDataResult<List<Blog>>> GetListAsync(Expression<Func<Blog, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<Blog> blogs);
+        Task<IDataResult<int>> UpdateAsync(Blog blog);
+        Task<IDataResult<Blog>> GetAsync(Expression<Func<Blog, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(Blog blog);
         IDataResult<Blog> Get(Expression<Func<Blog, bool>> filter);
         IDataResult<int> Add(Blog blog);
         IDataResult<int> Update(Blog blog);

@@ -12,32 +12,38 @@
 <div class="slider-area slider-five-area">
     <div class="preview-2">
         <div id="nivoslider" class="slides">
-            @foreach (var sliderOne in Model)
+            @if (Model != null)
             {
-                @* TODO : Localization *@
-                <img src="@(sliderOne.SliderMediaSource)" alt="Image was Not Found" title="@(sliderOne.SubTitleKey.Translate())" />
+                foreach (var sliderOne in Model)
+                {
+                    @* TODO : Localization *@
+                    <img src="@(sliderOne.SliderMediaSource)" alt="Image was Not Found" title="@(sliderOne.SubTitleKey.Translate())" />
+                }
             }
         </div>
-        @for (int i = 0; i < Model.Count; i++)
+        @if (Model != null)
         {
-            <div id="slider-1-caption1" class="nivo-html-caption nivo-caption">
-                <div class="banner-content slider-@(i%2==0?"1":"2")">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="text-content hidden-xs">
-                                    <p class="sub-title">@(Model[i].SubTitleKey.Translate())</p>
-                                    <h1 class="title1">@(Model[i].TitleKey.Translate())</h1>
-                                    <div class="banner-readmore">
-                                        @* TODO : Localization *@
-                                        <a title="Read more" href="#">Enroll your child</a>
+            for (int i = 0; i < Model.Count; i++)
+            {
+                <div id="slider-1-caption1" class="nivo-html-caption nivo-caption">
+                    <div class="banner-content slider-@(i%2==0?"1":"2")">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="text-content hidden-xs">
+                                        <p class="sub-title">@(Model[i].SubTitleKey.Translate())</p>
+                                        <h1 class="title1">@(Model[i].TitleKey.Translate())</h1>
+                                        <div class="banner-readmore">
+                                            @* TODO : Localization *@
+                                            <a title="Read more" href="#">Enroll your child</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         }
     </div>
 </div>

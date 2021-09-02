@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface ILocalizationDal : IEntityRepository<Localization>
+    public interface ILocalizationDal : IEntityRepository<Localization>, IEntityQueryableRepository<Localization>
     {
     }
 }

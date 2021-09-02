@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IPhraseDal : IEntityRepository<Phrase>
+    public interface IPhraseDal : IEntityRepository<Phrase>, IEntityQueryableRepository<Phrase>
     {
     }
 }

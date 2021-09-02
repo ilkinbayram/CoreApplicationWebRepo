@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TouchApp.Business.Abstract
 {
@@ -19,5 +20,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<int> UpdateList(List<UserOperationClaim> userOperationClaims);
         IDataResult<int> DeletePermanentlyList(List<UserOperationClaim> userOperationClaims);
         IDataResult<int> DeleteByStatusList(List<UserOperationClaim> userOperationClaims);
+
+        Task<IDataResult<List<GetUserOperationClaimDto>>> GetDtoListAsync(Expression<Func<UserOperationClaim, bool>> filter = null, int takeCount = 2000);
+        Task<IDataResult<GetUserOperationClaimDto>> GetDtoAsync(Expression<Func<UserOperationClaim, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<UserOperationClaim> userOperationClaims);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<UserOperationClaim> userOperationClaims);
+        Task<IDataResult<List<UserOperationClaim>>> GetListAsync(Expression<Func<UserOperationClaim, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<UserOperationClaim> userOperationClaims);
+        Task<IDataResult<int>> UpdateAsync(UserOperationClaim userOperationClaim);
+        Task<IDataResult<UserOperationClaim>> GetAsync(Expression<Func<UserOperationClaim, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(UserOperationClaim userOperationClaim);
     }
 }

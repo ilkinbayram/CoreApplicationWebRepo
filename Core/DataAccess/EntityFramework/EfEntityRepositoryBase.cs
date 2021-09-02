@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.DataAccess.EntityFramework
 {
-    public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
+    public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>, IEntityQueryableRepository<TEntity>
     where TEntity : class, IEntity, new()
     where TContext : DbContext
     {
@@ -70,7 +70,7 @@ namespace Core.DataAccess.EntityFramework
 
         public virtual TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            return Context.Set<TEntity>().SingleOrDefault(filter);
+            return Context.Set<TEntity>().FirstOrDefault(filter);
         }
 
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
@@ -131,6 +131,109 @@ namespace Core.DataAccess.EntityFramework
             Context.ChangeTracker.LazyLoadingEnabled = true;
           return  Context.Set<TEntity>().ToList();
 
+        }
+
+        public async virtual Task<IQueryable<TEntity>> GetAllAsQueryableAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            Context.ChangeTracker.LazyLoadingEnabled = true;
+            var result = Task.FromResult(Context.Set<TEntity>().Where(filter));
+            return await result;
+        }
+
+        public async virtual Task<IQueryable<TEntity>> GetAllAsQueryableAsync()
+        {
+            Context.ChangeTracker.LazyLoadingEnabled = true;
+            var result = Task.FromResult(Context.Set<TEntity>());
+            return await result;
+        }
+
+        public virtual IQueryable<TEntity> GetAllAsQueryable()
+        {
+            Context.ChangeTracker.LazyLoadingEnabled = true;
+            var result = Context.Set<TEntity>();
+            return result;
+        }
+
+        public async virtual Task<int> AddAsync(TEntity entity)
+        {
+            await Context.Set<TEntity>().AddAsync(entity);
+
+            return await Context.SaveChangesAsync();
+        }
+
+        public async Task<int> CommitAsync()
+        {
+            return await Context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Delete method must change the 'IsActive' status to the 'false' with its relations
+        /// </summary>
+        /// <param name="entity">The entity which will be deleted</param>
+        /// <returns></returns>
+        public async virtual Task<int> DeleteByStatusAsync(TEntity entity)
+        {
+            var deletedEntity = Context.Entry(entity);
+            deletedEntity.State = EntityState.Modified;
+            return await Context.SaveChangesAsync();
+        }
+
+        public async virtual Task AddBeforeCommitAsync(TEntity entity)
+        {
+            await Context.Set<TEntity>().AddAsync(entity);
+        }
+
+        public async virtual Task<int> DeletePermanentlyAsync(TEntity entity)
+        {
+            var deletedEntity = Context.Entry(entity);
+            deletedEntity.State = EntityState.Deleted;
+            return await Context.SaveChangesAsync();
+        }
+
+        public async virtual Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            return await Context.Set<TEntity>().FirstOrDefaultAsync(filter);
+        }
+
+        public async virtual Task<int> UpdateAsync(TEntity entity)
+        {
+            Context.Set<TEntity>().Update(entity);
+            return await Context.SaveChangesAsync();
+        }
+
+        public async virtual Task<int> AddAsync(List<TEntity> entities)
+        {
+            await Context.Set<List<TEntity>>().AddAsync(entities);
+            return await Context.SaveChangesAsync();
+        }
+
+
+        public async virtual Task<int> UpdateAndSaveAsync(List<TEntity> entities)
+        {
+            var updatedEntities = Context.Entry(entities);
+            updatedEntities.State = EntityState.Modified;
+            return await Context.SaveChangesAsync();
+        }
+
+        public async virtual Task<int> DeletePermanentlyAsync(List<TEntity> entities)
+        {
+            var deletedEntities = Context.Entry(entities);
+            deletedEntities.State = EntityState.Deleted;
+            return await Context.SaveChangesAsync();
+        }
+
+        public async virtual Task<int> DeleteByStatusAsync(List<TEntity> entities)
+        {
+            var deletedEntities = Context.Entry(entities);
+            deletedEntities.State = EntityState.Modified;
+            return await Context.SaveChangesAsync();
+        }
+
+        public async virtual Task<TEntity> GetByIdAsync(long id)
+        {
+
+            var result = Context.Set<TEntity>().FindAsync(id);
+            return await result;
         }
     }
 }

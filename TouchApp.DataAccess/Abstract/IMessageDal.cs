@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IMessageDal : IEntityRepository<Message>
+    public interface IMessageDal : IEntityRepository<Message>, IEntityQueryableRepository<Message>
     {
     }
 }

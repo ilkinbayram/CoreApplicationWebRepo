@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface ISliderDal : IEntityRepository<Slider>
+    public interface ISliderDal : IEntityRepository<Slider>, IEntityQueryableRepository<Slider>
     {
     }
 }

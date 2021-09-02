@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IBlogDal : IEntityRepository<Blog>
+    public interface IBlogDal : IEntityRepository<Blog>, IEntityQueryableRepository<Blog>
     {
     }
 }

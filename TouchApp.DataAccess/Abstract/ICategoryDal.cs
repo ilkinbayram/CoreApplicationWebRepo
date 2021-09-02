@@ -6,7 +6,7 @@ using DataAccess.Concrete.EntityFramework.Contexts;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface ICategoryDal : IEntityRepository<Category>
+    public interface ICategoryDal : IEntityRepository<Category>, IEntityQueryableRepository<Category>
     {
         List<Category> GetCategoryList(int page, int count,string key);
         List<Category> GetParentCategory();

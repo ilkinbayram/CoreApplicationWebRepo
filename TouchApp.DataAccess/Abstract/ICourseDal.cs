@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface ICourseDal : IEntityRepository<Course>
+    public interface ICourseDal : IEntityRepository<Course>, IEntityQueryableRepository<Course>
     {
     }
 }

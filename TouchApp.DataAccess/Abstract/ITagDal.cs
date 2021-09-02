@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface ITagDal : IEntityRepository<Tag>
+    public interface ITagDal : IEntityRepository<Tag>, IEntityQueryableRepository<Tag>
     {
     }
 }

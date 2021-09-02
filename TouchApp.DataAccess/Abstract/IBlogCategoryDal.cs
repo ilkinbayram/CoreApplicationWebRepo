@@ -6,7 +6,7 @@ using DataAccess.Concrete.EntityFramework.Contexts;
 
 namespace TouchApp.DataAccess.Abstract
 {
-    public interface IBlogCategoryDal : IEntityRepository<BlogCategory>
+    public interface IBlogCategoryDal : IEntityRepository<BlogCategory>, IEntityQueryableRepository<BlogCategory>
     {
         List<BlogCategory> GetBlogCategoryList(int page, int count,string key);
         List<BlogCategory> GetParentBlogCategory();

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TouchApp.Business.Abstract
 {
@@ -22,5 +23,17 @@ namespace TouchApp.Business.Abstract
         IDataResult<int> UpdateList(List<Slider> homeMetaTagGalleries);
         IDataResult<int> DeletePermanentlyList(List<Slider> homeMetaTagGalleries);
         IDataResult<int> DeleteByStatusList(List<Slider> homeMetaTagGalleries);
+
+        Task<IDataResult<List<GetSliderDto>>> GetDtoListAsync(Expression<Func<Slider, bool>> filter = null, int takeCount = 2000);
+        Task<IDataResult<GetSliderDto>> GetDtoAsync(Expression<Func<Slider, bool>> filter = null);
+        Task<IDataResult<int>> DeletePermanentlyListAsync(List<Slider> sliders);
+        Task<IDataResult<int>> UpdateListAndSaveAsync(List<Slider> sliders);
+        Task<IDataResult<List<Slider>>> GetListAsync(Expression<Func<Slider, bool>> filter = null);
+        Task<IDataResult<int>> AddListAsync(List<Slider> sliders);
+        Task<IDataResult<int>> UpdateAsync(Slider slider);
+        Task<IDataResult<Slider>> GetAsync(Expression<Func<Slider, bool>> filter);
+        Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
+        Task<IDataResult<int>> DeleteByStatusAsync(long Id);
+        Task<IDataResult<int>> AddAsync(Slider slider);
     }
 }
