@@ -11,6 +11,7 @@ using System.Text;
 using Core.Entities.Dtos.Media;
 using System.Linq;
 using Core.Aspects.Autofac.Caching;
+using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -309,5 +310,248 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<GetMediaDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
+
+        #region Asynchronous
+
+        public async Task<IDataResult<int>> AddAsync(Media media)
+        {
+            try
+            {
+                int affectedRows = await _mediaDal.AddAsync(media);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeleteByStatusAsync(long Id)
+        {
+            try
+            {
+                IDataResult<int> dataResult;
+
+                var deletableEntity = await _mediaDal.GetAsync(x => x.Id == Id);
+
+                if (deletableEntity == null)
+                {
+                    dataResult = new SuccessDataResult<int>(-1, Messages.DeletableDataWasNotFound);
+                    return dataResult;
+                }
+
+                DeleteByStatusForAllRelation(deletableEntity);
+
+                deletableEntity.IsActive = false;
+                int affectedRows = await _mediaDal.DeleteByStatusAsync(deletableEntity);
+
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeletePermanentlyAsync(long Id)
+        {
+            try
+            {
+                IDataResult<int> dataResult;
+
+                var deletableEntity = await _mediaDal.GetAsync(x => x.Id == Id);
+
+                if (deletableEntity == null)
+                {
+                    dataResult = new SuccessDataResult<int>(-1, Messages.DeletableDataWasNotFound);
+                    return dataResult;
+                }
+
+                int affectedRows = await _mediaDal.DeletePermanentlyAsync(deletableEntity);
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<Media>> GetAsync(Expression<Func<Media, bool>> filter)
+        {
+            try
+            {
+                var response = await _mediaDal.GetAsync(filter);
+                var mappingResult = _mapper.Map<Media>(response);
+                return new SuccessDataResult<Media>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<Media>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<List<Media>>> GetListAsync(Expression<Func<Media, bool>> filter = null)
+        {
+            try
+            {
+                var response = (await _mediaDal.GetAllAsQueryableAsync(filter)).ToList();
+                var mappingResult = _mapper.Map<List<Media>>(response);
+                return new SuccessDataResult<List<Media>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<Media>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> UpdateAsync(Media media)
+        {
+            try
+            {
+                int affectedRows = await _mediaDal.UpdateAsync(media);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataUpdated);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> AddListAsync(List<Media> medias)
+        {
+            try
+            {
+                int affectedRows = await _mediaDal.AddAsync(medias);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> UpdateListAndSaveAsync(List<Media> medias)
+        {
+            try
+            {
+                int affectedRows = await _mediaDal.UpdateAndSaveAsync(medias);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeletePermanentlyListAsync(List<Media> medias)
+        {
+            try
+            {
+                int affectedRows = await _mediaDal.DeletePermanentlyAsync(medias);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<GetMediaDto>> GetDtoAsync(Expression<Func<Media, bool>> filter = null)
+        {
+            try
+            {
+                var response = await _mediaDal.GetAsync(filter);
+                var mappingResult = _mapper.Map<GetMediaDto>(response);
+                return new SuccessDataResult<GetMediaDto>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetMediaDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<List<GetMediaDto>>> GetDtoListAsync(Expression<Func<Media, bool>> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var response = (await _mediaDal.GetAllAsQueryableAsync(filter)).ToList();
+                var mappingResult = _mapper.Map<List<GetMediaDto>>(response).Take(takeCount).ToList();
+                return new SuccessDataResult<List<GetMediaDto>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetMediaDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        #endregion
     }
 }

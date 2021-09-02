@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -31,12 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Global\Data\" />
     <Folder Include="Pages\" />
-    <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
@@ -46,6 +50,16 @@
     <Folder Include="wwwroot\lib\jquery-validation\dist\" />
     <Folder Include="wwwroot\lib\jquery\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\bootstrapManagementPanel\assets\demo\chart-area-demo.js" />
+    <None Include="wwwroot\bootstrapManagementPanel\assets\demo\chart-bar-demo.js" />
+    <None Include="wwwroot\bootstrapManagementPanel\assets\demo\chart-pie-demo.js" />
+    <None Include="wwwroot\bootstrapManagementPanel\assets\demo\datatables-demo.js" />
+    <None Include="wwwroot\bootstrapManagementPanel\assets\img\error-404-monochrome.svg" />
+    <None Include="wwwroot\bootstrapManagementPanel\js\datatables-simple-demo.js" />
+    <None Include="wwwroot\bootstrapManagementPanel\js\scripts.js" />
   </ItemGroup>
 
 </Project>

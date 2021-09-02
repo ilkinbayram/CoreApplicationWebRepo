@@ -23,6 +23,7 @@ using Core.Utilities.Security.Hashing;
 using Core.Utilities.Services.Rest;
 using TouchApp.DataAccess.Abstract;
 using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -432,13 +433,13 @@ namespace Business.Concrete
         {
             foreach (var user in users)
             {
-                
+
             }
         }
 
         private void DeleteByStatusForAllRelation(User user)
         {
-            
+
         }
 
         [ValidationAspect(typeof(UpdateUserDtoValidator), Priority = 1)]
@@ -460,17 +461,260 @@ namespace Business.Concrete
 
         public IDataResult<UserLangDto> GetUserBySlug(string userSlug, string lang)
         {
-           
-                try
-                {
-                    return new SuccessDataResult<UserLangDto>();
-                }
-                catch (Exception exception)
-                {
-                    return new ErrorDataResult<UserLangDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-                }
-            }
 
-        
+            try
+            {
+                return new SuccessDataResult<UserLangDto>();
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<UserLangDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+
+
+        #region Asynchronous
+
+        public async Task<IDataResult<int>> AddAsync(User user)
+        {
+            try
+            {
+                int affectedRows = await _userDal.AddAsync(user);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeleteByStatusAsync(long Id)
+        {
+            try
+            {
+                IDataResult<int> dataResult;
+
+                var deletableEntity = await _userDal.GetAsync(x => x.Id == Id);
+
+                if (deletableEntity == null)
+                {
+                    dataResult = new SuccessDataResult<int>(-1, Messages.DeletableDataWasNotFound);
+                    return dataResult;
+                }
+
+                DeleteByStatusForAllRelation(deletableEntity);
+
+                deletableEntity.IsActive = false;
+                int affectedRows = await _userDal.DeleteByStatusAsync(deletableEntity);
+
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeletePermanentlyAsync(long Id)
+        {
+            try
+            {
+                IDataResult<int> dataResult;
+
+                var deletableEntity = await _userDal.GetAsync(x => x.Id == Id);
+
+                if (deletableEntity == null)
+                {
+                    dataResult = new SuccessDataResult<int>(-1, Messages.DeletableDataWasNotFound);
+                    return dataResult;
+                }
+
+                int affectedRows = await _userDal.DeletePermanentlyAsync(deletableEntity);
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<User>> GetAsync(Expression<Func<User, bool>> filter)
+        {
+            try
+            {
+                var response = await _userDal.GetAsync(filter);
+                var mappingResult = _mapper.Map<User>(response);
+                return new SuccessDataResult<User>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<User>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<List<User>>> GetListAsync(Expression<Func<User, bool>> filter = null)
+        {
+            try
+            {
+                var response = (await _userDal.GetAllAsQueryableAsync(filter)).ToList();
+                var mappingResult = _mapper.Map<List<User>>(response);
+                return new SuccessDataResult<List<User>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<User>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> UpdateAsync(User user)
+        {
+            try
+            {
+                int affectedRows = await _userDal.UpdateAsync(user);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataUpdated);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> AddListAsync(List<User> users)
+        {
+            try
+            {
+                int affectedRows = await _userDal.AddAsync(users);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> UpdateListAndSaveAsync(List<User> users)
+        {
+            try
+            {
+                int affectedRows = await _userDal.UpdateAndSaveAsync(users);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeletePermanentlyListAsync(List<User> users)
+        {
+            try
+            {
+                int affectedRows = await _userDal.DeletePermanentlyAsync(users);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<GetUserDto>> GetDtoAsync(Expression<Func<User, bool>> filter = null)
+        {
+            try
+            {
+                var response = await _userDal.GetAsync(filter);
+                var mappingResult = _mapper.Map<GetUserDto>(response);
+                return new SuccessDataResult<GetUserDto>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetUserDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<List<GetUserDto>>> GetDtoListAsync(Expression<Func<User, bool>> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var response = (await _userDal.GetAllAsQueryableAsync(filter)).ToList();
+                var mappingResult = _mapper.Map<List<GetUserDto>>(response).Take(takeCount).ToList();
+                return new SuccessDataResult<List<GetUserDto>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetUserDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        #endregion
     }
 }

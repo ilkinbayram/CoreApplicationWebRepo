@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
+using System.Linq;
+using Core.Entities.Dtos.Tag;
 
 namespace Business.Concrete
 {
@@ -276,5 +279,252 @@ namespace Business.Concrete
         private void DeleteByStatusForAllRelation(Tag tag)
         {
         }
+
+
+
+
+
+        #region Asynchronous
+
+        public async Task<IDataResult<int>> AddAsync(Tag tag)
+        {
+            try
+            {
+                int affectedRows = await _tagDal.AddAsync(tag);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeleteByStatusAsync(long Id)
+        {
+            try
+            {
+                IDataResult<int> dataResult;
+
+                var deletableEntity = await _tagDal.GetAsync(x => x.Id == Id);
+
+                if (deletableEntity == null)
+                {
+                    dataResult = new SuccessDataResult<int>(-1, Messages.DeletableDataWasNotFound);
+                    return dataResult;
+                }
+
+                DeleteByStatusForAllRelation(deletableEntity);
+
+                deletableEntity.IsActive = false;
+                int affectedRows = await _tagDal.DeleteByStatusAsync(deletableEntity);
+
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeletePermanentlyAsync(long Id)
+        {
+            try
+            {
+                IDataResult<int> dataResult;
+
+                var deletableEntity = await _tagDal.GetAsync(x => x.Id == Id);
+
+                if (deletableEntity == null)
+                {
+                    dataResult = new SuccessDataResult<int>(-1, Messages.DeletableDataWasNotFound);
+                    return dataResult;
+                }
+
+                int affectedRows = await _tagDal.DeletePermanentlyAsync(deletableEntity);
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<Tag>> GetAsync(Expression<Func<Tag, bool>> filter)
+        {
+            try
+            {
+                var response = await _tagDal.GetAsync(filter);
+                var mappingResult = _mapper.Map<Tag>(response);
+                return new SuccessDataResult<Tag>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<Tag>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<List<Tag>>> GetListAsync(Expression<Func<Tag, bool>> filter = null)
+        {
+            try
+            {
+                var response = (await _tagDal.GetAllAsQueryableAsync(filter)).ToList();
+                var mappingResult = _mapper.Map<List<Tag>>(response);
+                return new SuccessDataResult<List<Tag>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<Tag>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> UpdateAsync(Tag tag)
+        {
+            try
+            {
+                int affectedRows = await _tagDal.UpdateAsync(tag);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataUpdated);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> AddListAsync(List<Tag> tags)
+        {
+            try
+            {
+                int affectedRows = await _tagDal.AddAsync(tags);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> UpdateListAndSaveAsync(List<Tag> tags)
+        {
+            try
+            {
+                int affectedRows = await _tagDal.UpdateAndSaveAsync(tags);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeletePermanentlyListAsync(List<Tag> tags)
+        {
+            try
+            {
+                int affectedRows = await _tagDal.DeletePermanentlyAsync(tags);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<GetTagDto>> GetDtoAsync(Expression<Func<Tag, bool>> filter = null)
+        {
+            try
+            {
+                var response = await _tagDal.GetAsync(filter);
+                var mappingResult = _mapper.Map<GetTagDto>(response);
+                return new SuccessDataResult<GetTagDto>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetTagDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<List<GetTagDto>>> GetDtoListAsync(Expression<Func<Tag, bool>> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var response = (await _tagDal.GetAllAsQueryableAsync(filter)).ToList();
+                var mappingResult = _mapper.Map<List<GetTagDto>>(response).Take(takeCount).ToList();
+                return new SuccessDataResult<List<GetTagDto>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetTagDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        #endregion
     }
 }

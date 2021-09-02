@@ -15,6 +15,7 @@ namespace Core.Entities.Concrete
         public string OwnerProfessionKey { get; set; }
         public string TitleKey { get; set; }
         public string SubtitleKey { get; set; }
+        public string PreviewDescriptionKey { get; set; }
         public string ContentHtmlRawKey { get; set; }
         public string OverviewHtmlRawKey { get; set; }
         public PostScreenType ScreenType { get; set; }

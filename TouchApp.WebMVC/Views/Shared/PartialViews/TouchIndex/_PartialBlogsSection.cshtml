@@ -1,9 +1,14 @@
-﻿@*
+﻿@using Core.Entities.Dtos.Blog;
+@using Core.Extensions;
+
+
+
+@model List<GetBlogDto>;
+
+
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-
-@using Core.Extensions
-
 
 
 <!--Blog Area Start-->
@@ -13,6 +18,7 @@
             <div class="col-md-12">
                 <div class="section-title-wrapper title-yellow">
                     <div class="section-title">
+                        @* TODO : Localization *@
                         <h3>Our Blog</h3>
                         <p>Latest news &amp; event of our schools</p>
                     </div>
@@ -20,78 +26,32 @@
             </div>
         </div>
         <div class="blog-carousel carousel-style-one owl-carousel">
-            <div class="single-blog-item overlay-hover">
-                <div class="single-blog-image">
-                    <div class="overlay-effect">
-                        <a href="#">
-                            <img src="~/img/blog/1.jpg" alt="">
-                            <span class="class-date">Dec 21 <span>2015</span></span>
-                        </a>
+            @if (Model != null)
+            {
+                foreach (var blogOne in Model)
+                {
+                    <div class="single-blog-item overlay-hover">
+                        <div class="single-blog-image">
+                            <div class="overlay-effect">
+                                <a href="#">
+                                    @* TODO : Localization *@
+                                    <img src="@(blogOne.CaptionSource)" alt="The Image Was Not Found">
+                                    <span class="class-date">@(blogOne.Created_at)</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="single-blog-text">
+                            <h4><a href="blog-details.html">@(blogOne.TitleKey.Translate())</a></h4>
+                            <div class="blog-date">
+                                <span><i class="fa fa-calendar"></i>@(blogOne.Created_at)</span>
+                            </div>
+                            <p>@(blogOne.PreviewDescriptionKey.Translate())</p>
+                            @* TODO : Localization *@
+                            <a href="blog-details.html">Read more.</a>
+                        </div>
                     </div>
-                </div>
-                <div class="single-blog-text">
-                    <h4><a href="blog-details.html">New Friends Everyday at Kiddie</a></h4>
-                    <div class="blog-date">
-                        <span><i class="fa fa-calendar"></i>08 Apr, 2016</span>
-                    </div>
-                    <p>The concept of the activity room is about 'Learning', through play, in a totally different environment. The perfect class for your child with the best.</p>
-                    <a href="blog-details.html">Read more.</a>
-                </div>
-            </div>
-            <div class="single-blog-item overlay-hover">
-                <div class="single-blog-image">
-                    <div class="overlay-effect">
-                        <a href="#">
-                            <img src="~/img/blog/2.jpg" alt="">
-                            <span class="class-date">Jan 24 <span>2016</span></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="single-blog-text">
-                    <h4><a href="blog-details.html">Swimming Lessons at the New Pool</a></h4>
-                    <div class="blog-date">
-                        <span><i class="fa fa-calendar"></i>27 Jan, 2014</span>
-                    </div>
-                    <p>The concept of the activity room is about 'Learning', through play, in a totally different environment. The perfect class for your child with the best.</p>
-                    <a href="blog-details.html">Read more.</a>
-                </div>
-            </div>
-            <div class="single-blog-item overlay-hover">
-                <div class="single-blog-image">
-                    <div class="overlay-effect">
-                        <a href="#">
-                            <img src="~/img/blog/3.jpg" alt="">
-                            <span class="class-date">May 18 <span>2016</span></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="single-blog-text">
-                    <h4><a href="blog-details.html">Play is Our Brain’s Favorite Way of</a></h4>
-                    <div class="blog-date">
-                        <span><i class="fa fa-calendar"></i>30 Feb, 2015</span>
-                    </div>
-                    <p>The concept of the activity room is about 'Learning', through play, in a totally different environment. The perfect class for your child with the best.</p>
-                    <a href="blog-details.html">Read more.</a>
-                </div>
-            </div>
-            <div class="single-blog-item overlay-hover">
-                <div class="single-blog-image">
-                    <div class="overlay-effect">
-                        <a href="#">
-                            <img src="~/img/blog/1.jpg" alt="">
-                            <span class="class-date">Feb 09 <span>2016</span></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="single-blog-text">
-                    <h4><a href="blog-details.html">New Friends Everyday at Kiddie</a></h4>
-                    <div class="blog-date">
-                        <span><i class="fa fa-calendar"></i>08 Apr, 2016</span>
-                    </div>
-                    <p>The concept of the activity room is about 'Learning', through play, in a totally different environment. The perfect class for your child with the best.</p>
-                    <a href="blog-details.html">Read more.</a>
-                </div>
-            </div>
+                }
+            }
         </div>
     </div>
 </div>

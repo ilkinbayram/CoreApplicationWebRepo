@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using Core.Entities.Dtos.Course;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -315,5 +316,248 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<GetCourseDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
+
+        #region Asynchronous
+
+        public async Task<IDataResult<int>> AddAsync(Course course)
+        {
+            try
+            {
+                int affectedRows = await _courseDal.AddAsync(course);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeleteByStatusAsync(long Id)
+        {
+            try
+            {
+                IDataResult<int> dataResult;
+
+                var deletableEntity = await _courseDal.GetAsync(x => x.Id == Id);
+
+                if (deletableEntity == null)
+                {
+                    dataResult = new SuccessDataResult<int>(-1, Messages.DeletableDataWasNotFound);
+                    return dataResult;
+                }
+
+                DeleteByStatusForAllRelation(deletableEntity);
+
+                deletableEntity.IsActive = false;
+                int affectedRows = await _courseDal.DeleteByStatusAsync(deletableEntity);
+
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeletePermanentlyAsync(long Id)
+        {
+            try
+            {
+                IDataResult<int> dataResult;
+
+                var deletableEntity = await _courseDal.GetAsync(x => x.Id == Id);
+
+                if (deletableEntity == null)
+                {
+                    dataResult = new SuccessDataResult<int>(-1, Messages.DeletableDataWasNotFound);
+                    return dataResult;
+                }
+
+                int affectedRows = await _courseDal.DeletePermanentlyAsync(deletableEntity);
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataDeleted);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<Course>> GetAsync(Expression<Func<Course, bool>> filter)
+        {
+            try
+            {
+                var response = await _courseDal.GetAsync(filter);
+                var mappingResult = _mapper.Map<Course>(response);
+                return new SuccessDataResult<Course>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<Course>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<List<Course>>> GetListAsync(Expression<Func<Course, bool>> filter = null)
+        {
+            try
+            {
+                var response = (await _courseDal.GetAllAsQueryableAsync(filter)).ToList();
+                var mappingResult = _mapper.Map<List<Course>>(response);
+                return new SuccessDataResult<List<Course>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<Course>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> UpdateAsync(Course course)
+        {
+            try
+            {
+                int affectedRows = await _courseDal.UpdateAsync(course);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataUpdated);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> AddListAsync(List<Course> courses)
+        {
+            try
+            {
+                int affectedRows = await _courseDal.AddAsync(courses);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> UpdateListAndSaveAsync(List<Course> courses)
+        {
+            try
+            {
+                int affectedRows = await _courseDal.UpdateAndSaveAsync(courses);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> DeletePermanentlyListAsync(List<Course> courses)
+        {
+            try
+            {
+                int affectedRows = await _courseDal.DeletePermanentlyAsync(courses);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<GetCourseDto>> GetDtoAsync(Expression<Func<Course, bool>> filter = null)
+        {
+            try
+            {
+                var response = await _courseDal.GetAsync(filter);
+                var mappingResult = _mapper.Map<GetCourseDto>(response);
+                return new SuccessDataResult<GetCourseDto>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetCourseDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<List<GetCourseDto>>> GetDtoListAsync(Expression<Func<Course, bool>> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var response = (await _courseDal.GetAllAsQueryableAsync(filter)).ToList();
+                var mappingResult = _mapper.Map<List<GetCourseDto>>(response).Take(takeCount).ToList();
+                return new SuccessDataResult<List<GetCourseDto>>(mappingResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetCourseDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        #endregion
     }
 }

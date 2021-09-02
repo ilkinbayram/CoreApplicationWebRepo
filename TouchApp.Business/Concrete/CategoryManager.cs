@@ -15,6 +15,7 @@ using System.Linq;
 using Business.ValidationRules.FluentValidation.Category;
 using DataAccess.Concrete.EntityFramework.Contexts;
 using Core.Utilities.Services.Rest;
+using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -41,12 +42,27 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public Task<IDataResult<int>> AddAsync(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<int> AddList(List<Category> categories)
         {
             throw new NotImplementedException();
         }
 
+        public Task<IDataResult<int>> AddListAsync(List<Category> categories)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<int> DeleteByStatus(long Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<int>> DeleteByStatusAsync(long Id)
         {
             throw new NotImplementedException();
         }
@@ -61,12 +77,27 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public Task<IDataResult<int>> DeletePermanentlyAsync(long Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<int> DeletePermanentlyList(List<Category> categories)
         {
             throw new NotImplementedException();
         }
 
+        public Task<IDataResult<int>> DeletePermanentlyListAsync(List<Category> categories)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<Category> Get(Expression<Func<Category, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<Category>> GetAsync(Expression<Func<Category, bool>> filter)
         {
             throw new NotImplementedException();
         }
@@ -101,6 +132,11 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public Task<IDataResult<List<Category>>> GetListAsync(Expression<Func<Category, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<List<ParentCategories>> GetParentCategory()
         {
             throw new NotImplementedException();
@@ -116,7 +152,17 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public Task<IDataResult<int>> UpdateAsync(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<int> UpdateList(List<Category> categories)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<int>> UpdateListAndSaveAsync(List<Category> categories)
         {
             throw new NotImplementedException();
         }

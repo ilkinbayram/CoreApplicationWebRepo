@@ -57,7 +57,16 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         {
             GeneralFunctionality.ConfigureLanguageLocalizationSetting(_sessionStorageHelper, _cacheManager, _configHelper, _localizationService, "staticLanguageCache", "ServerCache", 1440);
 
-            _viewModel = new HomeViewModel { Blogs = _blogService.GetDtoList(takeCount:6).Data, Courses = _courseService.GetDtoList().Data, CourseServices = _courseServiceService.GetDtoList().Data, Medias = _mediaService.GetDtoList().Data, Phrases = _phraseService.GetDtoList().Data, Sliders = _sliderService.GetDtoList().Data, Teachers =_teacherService.GetDtoList().Data };
+            _viewModel = new HomeViewModel 
+            { 
+                Blogs = (await _blogService.GetDtoListAsync(takeCount:6)).Data, 
+                Courses = (await _courseService.GetDtoListAsync()).Data, 
+                CourseServices = (await _courseServiceService.GetDtoListAsync()).Data, 
+                Medias = (await _mediaService.GetDtoListAsync()).Data, 
+                Phrases = (await _phraseService.GetDtoListAsync()).Data, 
+                Sliders = (await _sliderService.GetDtoListAsync()).Data, 
+                Teachers = (await _teacherService.GetDtoListAsync()).Data
+            };
 
             return View(_viewModel);
         }
