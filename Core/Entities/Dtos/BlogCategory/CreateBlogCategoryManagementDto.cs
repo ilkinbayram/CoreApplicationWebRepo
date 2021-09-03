@@ -1,5 +1,4 @@
 ﻿using Core.Entities.Abstract;
-using Core.Entities.Dtos.Blog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.BlogCategory
 {
-    public class GetBlogCategoryDto : IBaseDto
+    public class CreateBlogCategoryManagementDto : IBaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }
         public DateTime Created_at { get; set; }
 
         public string NameKey { get; set; }
-        public string NameTranslateAZE { get; set; }
-        public string NameTranslateRUS { get; set; }
-        public string NameTranslateTUR { get; set; }
         public string NameTranslateENG { get; set; }
+        public string NameTranslateAZE { get; set; }
+        public string NameTranslateTUR { get; set; }
+        public string NameTranslateRUS { get; set; }
         public string DescKey { get; set; }
         public string DescTranslateAZE { get; set; }
         public string DescTranslateRUS { get; set; }
@@ -27,7 +26,7 @@ namespace Core.Entities.Dtos.BlogCategory
         public string IconSource { get; set; }
         public long? ParentCategoryId { get; set; }
 
-        public HashSet<GetBlogCategoryDto> Children { get; set; } //ozunden ozune relation ucun ve childlari
-        public GetBlogCategoryDto ParentCategory { get; set; }
+        public HashSet<CreateBlogCategoryManagementDto> Children { get; set; } //ozunden ozune relation ucun ve childlari
+        public CreateBlogCategoryManagementDto ParentCategory { get; set; }
     }
 }

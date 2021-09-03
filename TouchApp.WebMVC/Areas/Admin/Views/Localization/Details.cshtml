@@ -1,0 +1,67 @@
+﻿@model Core.Entities.Dtos.Localization.GetLocalizationDto
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>GetLocalizationDto</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Created_by)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Created_by)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Created_at)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Created_at)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Key)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Key)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Translate_Ru)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Translate_Ru)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Translate_Az)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Translate_Az)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Translate_En)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Translate_En)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Translate_Tr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Translate_Tr)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

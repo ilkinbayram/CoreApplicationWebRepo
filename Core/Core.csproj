@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\Dtos\Blog\" />
     <Folder Include="Entities\Dtos\Media\" />
     <Folder Include="Entities\Dtos\Language\" />
     <Folder Include="Entities\Dtos\Phrase\" />

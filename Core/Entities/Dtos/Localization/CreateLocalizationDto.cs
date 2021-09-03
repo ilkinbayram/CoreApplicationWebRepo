@@ -18,6 +18,5 @@ namespace Core.Entities.Dtos.Localization
         public string Translate_Az { get; set; }
         public string Translate_En { get; set; }
         public string Translate_Tr { get; set; }
-        public long Project_oid { get; set; }
     }
 }
