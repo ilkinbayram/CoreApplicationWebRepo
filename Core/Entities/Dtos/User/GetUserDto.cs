@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Core.Entities.Dtos.User
 {
-    public class GetUserDto : IBaseDto
+    public class GetUserDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

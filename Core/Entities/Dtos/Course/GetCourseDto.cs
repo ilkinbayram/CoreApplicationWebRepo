@@ -1,19 +1,16 @@
-﻿using Core.Entities.Abstract;
+﻿using System;
+using System.Collections.Generic;
+using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.CourseComment;
 using Core.Entities.Dtos.ProfessionCourseCategory;
 using Core.Entities.Dtos.TeacherCourse;
 using Core.Entities.Dtos.UserCourse;
-using System;
-using System.Collections.Generic;
+
 
 namespace Core.Entities.Dtos.Course
 {
-    public class GetCourseDto : IBaseDto
+    public class GetCourseDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
-
         public string UniqueToken { get; set; }
         public string CaptionImageSource { get; set; }
         public string TitleKey { get; set; }

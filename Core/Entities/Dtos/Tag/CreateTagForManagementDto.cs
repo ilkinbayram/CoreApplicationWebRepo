@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.Tag
 {
-    public class CreateTagForManagementDto : IBaseDto
+    public class CreateTagForManagementDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

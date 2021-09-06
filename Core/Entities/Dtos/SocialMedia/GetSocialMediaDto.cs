@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.SocialMedia
 {
-    public class GetSocialMediaDto : IBaseDto
+    public class GetSocialMediaDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

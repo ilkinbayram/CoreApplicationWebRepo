@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.SharingType
 {
-    public class GetSharingTypeDto : IBaseDto
+    public class GetSharingTypeDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

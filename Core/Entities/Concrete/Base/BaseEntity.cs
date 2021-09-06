@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Abstract;
+using Core.Resources.Enums;
 using System;
 
 namespace Core.Entities.Concrete.Base
@@ -10,6 +11,7 @@ namespace Core.Entities.Concrete.Base
         public string Modified_by { get; set; }
         public DateTime Created_at { get; set; }
         public DateTime Modified_at { get; set; }
+        public ProjectModelType ModelType { get; set; }
         public bool IsActive { get; set; }
     }
 }

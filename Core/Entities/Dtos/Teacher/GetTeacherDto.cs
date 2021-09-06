@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Core.Entities.Dtos.Teacher
 {
-    public class GetTeacherDto : IBaseDto
+    public class GetTeacherDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

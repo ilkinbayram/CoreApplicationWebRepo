@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.UserCourse
 {
-    public class GetUserCourseDto : IBaseDto
+    public class GetUserCourseDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

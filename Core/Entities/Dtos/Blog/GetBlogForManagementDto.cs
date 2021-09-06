@@ -1,21 +1,18 @@
-﻿using Core.Entities.Abstract;
+﻿using System.Collections.Generic;
+using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.BlogCategory;
 using Core.Entities.Dtos.TagBlog;
 using Core.Entities.Dtos.User;
 using Core.Resources.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.Blog
 {
-    public class GetBlogForManagementDto : IBaseDto
+    public class GetBlogForManagementDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
+        public GetBlogForManagementDto()
+        {
+            ModelType = ProjectModelType.Blog;
+        }
 
         public string UniqueToken { get; set; }
         public string CaptionSource { get; set; }

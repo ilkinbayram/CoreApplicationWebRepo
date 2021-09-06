@@ -1,14 +1,9 @@
-﻿using Core.Entities.Abstract;
-using System;
+﻿using Core.Entities.Dtos.Base;
 
 namespace Core.Entities.Dtos.Phrase
 {
-    public class GetPhraseDto : IBaseDto
+    public class GetPhraseDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
-
         public string OwnerName { get; set; }
         public string OwnerSurname { get; set; }
         public string CaptionSource { get; set; }

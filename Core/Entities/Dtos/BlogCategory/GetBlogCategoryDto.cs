@@ -1,19 +1,15 @@
-﻿using Core.Entities.Abstract;
-using Core.Entities.Dtos.Blog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Core.Entities.Dtos.Base;
+using Core.Resources.Enums;
 
 namespace Core.Entities.Dtos.BlogCategory
 {
-    public class GetBlogCategoryDto : IBaseDto
+    public class GetBlogCategoryDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
-
+        public GetBlogCategoryDto()
+        {
+            ModelType = ProjectModelType.BlogCategory;
+        }
         public string NameKey { get; set; }
         public string NameTranslateAZE { get; set; }
         public string NameTranslateRUS { get; set; }

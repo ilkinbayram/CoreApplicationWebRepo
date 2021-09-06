@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.ProfessionCourseCategory
 {
-    public class GetProfessionCourseCategoryDto : IBaseDto
+    public class GetProfessionCourseCategoryDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

@@ -1,20 +1,17 @@
-﻿using Core.Entities.Abstract;
+﻿using System.Collections.Generic;
+using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.BlogCategory;
 using Core.Entities.Dtos.TagBlog;
 using Core.Resources.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.Blog
 {
-    public class CreateBlogForManagementDto : IBaseDto
+    public class CreateBlogForManagementDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
+        public CreateBlogForManagementDto()
+        {
+            ModelType = ProjectModelType.Blog;
+        }
 
         public string UniqueToken { get; set; }
         public string CaptionSource { get; set; }
@@ -48,6 +45,7 @@ namespace Core.Entities.Dtos.Blog
         public string OverviewHtmlRawTranslateRUS { get; set; }
         public string OverviewHtmlRawTranslateTUR { get; set; }
         public string OverviewHtmlRawTranslateENG { get; set; }
+        public string TagsConcat { get; set; }
         public List<PostScreenType> ScreenTypes { get; set; }
         public CreateBlogCategoryManagementDto BlogCategory { get; set; }
         public List<CreateTagBlogManagementDto> TagBlogs { get; set; }

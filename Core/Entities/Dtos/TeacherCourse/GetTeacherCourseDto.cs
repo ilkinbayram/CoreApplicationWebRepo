@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.TeacherCourse
 {
-    public class GetTeacherCourseDto : IBaseDto
+    public class GetTeacherCourseDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

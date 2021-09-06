@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.SharingTypeMedia
 {
-    public class GetSharingTypeMediaDto : IBaseDto
+    public class GetSharingTypeMediaDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

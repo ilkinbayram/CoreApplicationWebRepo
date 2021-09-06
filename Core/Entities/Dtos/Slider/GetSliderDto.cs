@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Entities.Dtos.Slider
 {
-    public class GetSliderDto : IBaseDto
+    public class GetSliderDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

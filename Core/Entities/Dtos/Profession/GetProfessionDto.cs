@@ -1,20 +1,13 @@
-﻿using Core.Entities.Abstract;
+﻿using System;
+using System.Collections.Generic;
+using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.Teacher;
 using Core.Resources.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.Profession
 {
-    public class GetProfessionDto : IBaseDto
+    public class GetProfessionDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
-
         public string NameKey { get; set; }
         public string SubnameKey { get; set; }
         public string ProfDescKey { get; set; }

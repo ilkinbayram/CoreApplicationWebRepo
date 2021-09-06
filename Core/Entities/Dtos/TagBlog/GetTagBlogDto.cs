@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Dtos.TagBlog
 {
-    public class GetTagBlogDto : IBaseDto
+    public class GetTagBlogDto : BaseDto
     {
         public long Id { get; set; }
         public string Created_by { get; set; }

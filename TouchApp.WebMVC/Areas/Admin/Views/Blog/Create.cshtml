@@ -9,7 +9,7 @@
     Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
 }
 
-<h1>Create</h1>
+<h1>@(string.Format("{0} {1}","","Model.CreateViewHeader".Translate()))</h1>
 
 <h4>CreateBlogForManagementDto</h4>
 <hr />
@@ -245,6 +245,14 @@
                                 <span asp-validation-for="OverviewHtmlRawTranslateAZE" class="text-danger"></span>
                             </div>
                         </div>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label asp-for="TagsConcat" class="control-label"><strong>@("GeneralTagsConcat.VisualLocalization".Translate())</strong></label>
+                        <input asp-for="TagsConcat" type="text" class="form-control">
+                        <span asp-validation-for="TagsConcat" class="text-danger"></span>
                     </div>
                     <hr />
                 </div>
