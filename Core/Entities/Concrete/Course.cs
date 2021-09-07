@@ -1,14 +1,18 @@
-﻿using Core.Entities.Concrete.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Entities.Concrete.Base;
+using Core.Resources.Enums;
+
 
 namespace Core.Entities.Concrete
 {
     public class Course : BaseEntity, IEntity
     {
+        public Course()
+        {
+            ModelType = ProjectModelType.Course;
+        }
+
         public string UniqueToken { get; set; }
         public string TitleKey { get; set; }
         public string DescriptionKey { get; set; }

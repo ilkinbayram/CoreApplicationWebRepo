@@ -1,9 +1,14 @@
 ﻿using Core.Entities.Dtos.Base;
+using Core.Resources.Enums;
 
 namespace Core.Entities.Dtos.Phrase
 {
     public class GetPhraseDto : BaseDto
     {
+        public GetPhraseDto()
+        {
+            ModelType = ProjectModelType.Phrase;
+        }
         public string OwnerName { get; set; }
         public string OwnerSurname { get; set; }
         public string CaptionSource { get; set; }

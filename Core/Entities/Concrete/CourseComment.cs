@@ -1,14 +1,15 @@
 ﻿using Core.Entities.Concrete.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Resources.Enums;
 
 namespace Core.Entities.Concrete
 {
     public class CourseComment : BaseEntity, IEntity
     {
+        public CourseComment()
+        {
+            ModelType = ProjectModelType.CourseComment;
+        }
+
         public string OwnerEmail { get; set; }
         public string CommentContent { get; set; }
 

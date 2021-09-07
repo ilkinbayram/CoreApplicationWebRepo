@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Core.Entities.Concrete.Base;
+using Core.Resources.Enums;
 
 namespace Core.Entities.Concrete
 {
-    public class Message : IEntity
+    public class Message : BaseEntity, IEntity
     {
-        public long Id { get; set; }
+        public Message()
+        {
+            ModelType = ProjectModelType.Message;
+        }
+
         public long MessageCode { get; set; }
-        public bool IsActive { get; set; }
     }
 }

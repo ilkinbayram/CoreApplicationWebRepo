@@ -1,14 +1,15 @@
 ﻿using Core.Entities.Concrete.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Resources.Enums;
 
 namespace Core.Entities.Concrete
 {
     public class SharingTypeMedia : BaseEntity, IEntity
     {
+        public SharingTypeMedia()
+        {
+            ModelType = ProjectModelType.SharingTypeMedia;
+        }
+
         public long MediaId { get; set; }
         public long SharingTypeId { get; set; }
 

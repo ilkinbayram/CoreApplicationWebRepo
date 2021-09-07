@@ -1,19 +1,22 @@
-﻿using Core.Entities.Abstract;
+﻿using System;
+using System.Collections.Generic;
+using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.Profession;
 using Core.Entities.Dtos.TeacherCourse;
 using Core.Entities.Dtos.TeacherSocialMedia;
 using Core.Entities.Dtos.UserCourse;
 using Core.Resources.Enums;
-using System;
-using System.Collections.Generic;
+
+
 
 namespace Core.Entities.Dtos.Teacher
 {
     public class GetTeacherDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
+        public GetTeacherDto()
+        {
+            ModelType = ProjectModelType.Teacher;
+        }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

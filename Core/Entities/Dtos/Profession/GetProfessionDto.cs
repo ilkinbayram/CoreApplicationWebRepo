@@ -8,6 +8,10 @@ namespace Core.Entities.Dtos.Profession
 {
     public class GetProfessionDto : BaseDto
     {
+        public GetProfessionDto()
+        {
+            ModelType = ProjectModelType.Profession;
+        }
         public string NameKey { get; set; }
         public string SubnameKey { get; set; }
         public string ProfDescKey { get; set; }

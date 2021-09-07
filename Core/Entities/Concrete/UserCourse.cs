@@ -1,14 +1,15 @@
-﻿using Core.Entities.Concrete.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Core.Entities.Concrete.Base;
 
 namespace Core.Entities.Concrete
 {
     public class UserCourse : BaseEntity, IEntity
     {
+        public UserCourse()
+        {
+            ModelType = Resources.Enums.ProjectModelType.UserCourse;
+        }
+
         public DateTime RegisteredDate { get; set; }
 
         public long TeacherId { get; set; }

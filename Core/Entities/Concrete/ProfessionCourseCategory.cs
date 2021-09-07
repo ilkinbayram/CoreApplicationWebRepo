@@ -1,14 +1,16 @@
-﻿using Core.Entities.Concrete.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Core.Entities.Concrete.Base;
+using Core.Resources.Enums;
 
 namespace Core.Entities.Concrete
 {
     public class ProfessionCourseCategory : BaseEntity, IEntity
     {
+        public ProfessionCourseCategory()
+        {
+            ModelType = ProjectModelType.ProfessionCourseCategory;
+        }
+
         public string NameKey { get; set; }
         public string IconSource { get; set; }
         public string DescriptionKey { get; set; }

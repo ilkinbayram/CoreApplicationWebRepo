@@ -1,15 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Core.Entities.Concrete.Base;
+using Core.Resources.Enums;
 
 namespace Core.Entities.Concrete
 {
-    public class Language : IEntity
+    public class Language : BaseEntity, IEntity
     {
-        public long Id { get; set; }
+        public Language()
+        {
+            ModelType = ProjectModelType.Language;
+        }
+
         public string NameKey { get; set; }
         public string FlagIconSource { get; set; }
         public string NameAbr { get; set; }
         public string FullName { get; set; }
-        public bool IsActive { get; set; }
         public string CourseLanguageKey { get; set; }
     }
 }

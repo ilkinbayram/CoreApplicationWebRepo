@@ -1,9 +1,15 @@
-﻿namespace Core.Entities.Concrete
+﻿using Core.Entities.Concrete.Base;
+using Core.Resources.Enums;
+
+namespace Core.Entities.Concrete
 {
-    public class UserOperationClaim:IEntity
+    public class UserOperationClaim: BaseEntity, IEntity
     {
-        public long Id { get; set; }
-        public bool IsActive { get; set; }
+        public UserOperationClaim()
+        {
+            ModelType = ProjectModelType.UserOperationClaim;
+        }
+
         public long UserId { get; set; }
         public long OperationClaimId { get; set; }
         public virtual User User { get; set; }

@@ -1,18 +1,17 @@
-﻿using Core.Entities.Abstract;
+﻿using System.Collections.Generic;
+using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.Course;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Resources.Enums;
+
 
 namespace Core.Entities.Dtos.ProfessionCourseCategory
 {
     public class GetProfessionCourseCategoryDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
+        public GetProfessionCourseCategoryDto()
+        {
+            ModelType = ProjectModelType.ProfessionCourseCategory;
+        }
 
         public string NameKey { get; set; }
         public string IconSource { get; set; }

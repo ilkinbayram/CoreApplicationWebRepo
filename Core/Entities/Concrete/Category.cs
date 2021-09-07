@@ -6,6 +6,10 @@ namespace Core.Entities.Concrete
 {
     public class Category:BaseEntity,IEntity
     {
+        public Category()
+        {
+            ModelType = ProjectModelType.BlogCategory;
+        }
         public string NameKey { get; set; }
         public string DescKey { get; set; }
         public long? ParentCategoryId { get; set; }

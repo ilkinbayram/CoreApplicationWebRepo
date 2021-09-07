@@ -7,6 +7,10 @@ namespace Core.Entities.Dtos.Media
 {
     public class GetMediaDto : BaseDto
     {
+        public GetMediaDto()
+        {
+            ModelType = ProjectModelType.Media;
+        }
         public string Source { get; set; }
         public string AltrKey { get; set; }
         public string UniqueParentToken { get; set; }

@@ -8,6 +8,11 @@ namespace Core.Entities.Concrete
 {
     public class User : BaseEntity, IEntity, IUserBaseEntity
     {
+        public User()
+        {
+            ModelType = ProjectModelType.User;
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

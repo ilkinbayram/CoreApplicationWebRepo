@@ -5,12 +5,16 @@ using Core.Entities.Dtos.CourseComment;
 using Core.Entities.Dtos.ProfessionCourseCategory;
 using Core.Entities.Dtos.TeacherCourse;
 using Core.Entities.Dtos.UserCourse;
-
+using Core.Resources.Enums;
 
 namespace Core.Entities.Dtos.Course
 {
     public class GetCourseDto : BaseDto
     {
+        public GetCourseDto()
+        {
+            ModelType = ProjectModelType.Course;
+        }
         public string UniqueToken { get; set; }
         public string CaptionImageSource { get; set; }
         public string TitleKey { get; set; }

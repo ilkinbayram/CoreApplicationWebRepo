@@ -1,14 +1,15 @@
 ﻿using Core.Entities.Concrete.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Resources.Enums;
 
 namespace Core.Entities.Concrete
 {
     public class TeacherSocialMedia : BaseEntity, IEntity
     {
+        public TeacherSocialMedia()
+        {
+            ModelType = ProjectModelType.TeacherSocialMedia;
+        }
+
         public string RedirectUrl { get; set; }
 
         public long TeacherId { get; set; }

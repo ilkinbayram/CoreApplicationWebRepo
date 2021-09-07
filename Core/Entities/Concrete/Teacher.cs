@@ -1,16 +1,19 @@
-﻿using Core.Entities.Abstract;
+﻿using System;
+using System.Collections.Generic;
+using Core.Entities.Abstract;
 using Core.Entities.Concrete.Base;
 using Core.Resources.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Core.Entities.Concrete
 {
     public class Teacher : BaseEntity, IEntity, IUserBaseEntity
     {
+        public Teacher()
+        {
+            ModelType = ProjectModelType.Teacher;
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
