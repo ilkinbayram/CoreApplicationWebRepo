@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entities\Dtos\Language\**" />
+    <EmbeddedResource Remove="Entities\Dtos\Language\**" />
+    <None Remove="Entities\Dtos\Language\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Entities\Dtos\Media\" />
-    <Folder Include="Entities\Dtos\Language\" />
     <Folder Include="Entities\Dtos\Phrase\" />
     <Folder Include="Entities\Dtos\Teacher\" />
     <Folder Include="Entities\Models\" />

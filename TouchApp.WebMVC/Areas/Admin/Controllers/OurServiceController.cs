@@ -8,30 +8,27 @@ using System.Threading.Tasks;
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : AdminBaseController
+    public class OurServiceController : Controller
     {
-        // GET: CategoryController
-        [HttpGet]
+        // GET: OurServiceController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: CategoryController/Details/5
-        [HttpGet]
+        // GET: OurServiceController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: CategoryController/Create
-        [HttpGet]
+        // GET: OurServiceController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CategoryController/Create
+        // POST: OurServiceController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -46,14 +43,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             }
         }
 
-        // GET: CategoryController/Edit/5
-        [HttpGet]
+        // GET: OurServiceController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CategoryController/Edit/5
+        // POST: OurServiceController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -68,14 +64,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             }
         }
 
-        // GET: CategoryController/Delete/5
-        [HttpGet]
+        // GET: OurServiceController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CategoryController/Delete/5
+        // POST: OurServiceController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

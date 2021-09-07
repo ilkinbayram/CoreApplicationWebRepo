@@ -1,19 +1,20 @@
-﻿using Core.Entities.Abstract;
+﻿using System;
+using System.Collections.Generic;
+using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.Blog;
 using Core.Entities.Dtos.UserCourse;
 using Core.Entities.Dtos.UserSocialMedia;
 using Core.Resources.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Core.Entities.Dtos.User
 {
     public class GetUserDto : BaseDto
     {
-        public long Id { get; set; }
-        public string Created_by { get; set; }
-        public DateTime Created_at { get; set; }
+        public GetUserDto()
+        {
+            ModelType = ProjectModelType.User;
+        }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

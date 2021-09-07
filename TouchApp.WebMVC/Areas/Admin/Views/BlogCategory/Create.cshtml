@@ -1,0 +1,106 @@
+﻿@model Core.Entities.Dtos.BlogCategory.CreateBlogCategoryManagementDto
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>CreateBlogCategoryManagementDto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NameKey" class="control-label"></label>
+                <input asp-for="NameKey" class="form-control" />
+                <span asp-validation-for="NameKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameTranslateENG" class="control-label"></label>
+                <input asp-for="NameTranslateENG" class="form-control" />
+                <span asp-validation-for="NameTranslateENG" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameTranslateAZE" class="control-label"></label>
+                <input asp-for="NameTranslateAZE" class="form-control" />
+                <span asp-validation-for="NameTranslateAZE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameTranslateTUR" class="control-label"></label>
+                <input asp-for="NameTranslateTUR" class="form-control" />
+                <span asp-validation-for="NameTranslateTUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameTranslateRUS" class="control-label"></label>
+                <input asp-for="NameTranslateRUS" class="form-control" />
+                <span asp-validation-for="NameTranslateRUS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescKey" class="control-label"></label>
+                <input asp-for="DescKey" class="form-control" />
+                <span asp-validation-for="DescKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescTranslateAZE" class="control-label"></label>
+                <input asp-for="DescTranslateAZE" class="form-control" />
+                <span asp-validation-for="DescTranslateAZE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescTranslateRUS" class="control-label"></label>
+                <input asp-for="DescTranslateRUS" class="form-control" />
+                <span asp-validation-for="DescTranslateRUS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescTranslateTUR" class="control-label"></label>
+                <input asp-for="DescTranslateTUR" class="form-control" />
+                <span asp-validation-for="DescTranslateTUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescTranslateENG" class="control-label"></label>
+                <input asp-for="DescTranslateENG" class="form-control" />
+                <span asp-validation-for="DescTranslateENG" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IconSource" class="control-label"></label>
+                <input asp-for="IconSource" class="form-control" />
+                <span asp-validation-for="IconSource" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentCategoryId" class="control-label"></label>
+                <input asp-for="ParentCategoryId" class="form-control" />
+                <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Created_by" class="control-label"></label>
+                <input asp-for="Created_by" class="form-control" />
+                <span asp-validation-for="Created_by" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Created_at" class="control-label"></label>
+                <input asp-for="Created_at" class="form-control" />
+                <span asp-validation-for="Created_at" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelType" class="control-label"></label>
+                <input asp-for="ModelType" class="form-control" />
+                <span asp-validation-for="ModelType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

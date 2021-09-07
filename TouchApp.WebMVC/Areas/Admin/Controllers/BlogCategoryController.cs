@@ -8,30 +8,27 @@ using System.Threading.Tasks;
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class SectionController : AdminBaseController
+    public class BlogCategoryController : Controller
     {
-        // GET: SectionController
-        [HttpGet]
+        // GET: BlogCategoryController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: SectionController/Details/5
-        [HttpGet]
+        // GET: BlogCategoryController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: SectionController/Create
-        [HttpGet]
+        // GET: BlogCategoryController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: SectionController/Create
+        // POST: BlogCategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -46,14 +43,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             }
         }
 
-        // GET: SectionController/Edit/5
-        [HttpGet]
+        // GET: BlogCategoryController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: SectionController/Edit/5
+        // POST: BlogCategoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -68,14 +64,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             }
         }
 
-        // GET: SectionController/Delete/5
-        [HttpGet]
+        // GET: BlogCategoryController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: SectionController/Delete/5
+        // POST: BlogCategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
