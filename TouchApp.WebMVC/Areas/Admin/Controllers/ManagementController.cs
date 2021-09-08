@@ -10,7 +10,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
     public class ManagementController : AdminBaseController
     {
         [HttpGet]
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
             return View();
         }

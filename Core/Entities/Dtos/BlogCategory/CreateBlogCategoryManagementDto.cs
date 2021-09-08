@@ -23,6 +23,7 @@ namespace Core.Entities.Dtos.BlogCategory
         public string DescTranslateENG { get; set; }
         public string IconSource { get; set; }
         public long? ParentCategoryId { get; set; }
+        public List<BlogCategorySelectModel> BlogCategories { get; set; }
 
         public HashSet<CreateBlogCategoryManagementDto> Children { get; set; } //ozunden ozune relation ucun ve childlari
         public CreateBlogCategoryManagementDto ParentCategory { get; set; }

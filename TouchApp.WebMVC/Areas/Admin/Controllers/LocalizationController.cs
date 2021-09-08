@@ -12,21 +12,21 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
     {
         // GET: LocalizationController
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             return View();
         }
 
         // GET: LocalizationController/Details/5
         [HttpGet]
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
             return View();
         }
 
         // GET: LocalizationController/Create
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             return View();
         }
@@ -34,7 +34,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: LocalizationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
 
         // GET: LocalizationController/Edit/5
         [HttpGet]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             return View();
         }
@@ -56,7 +56,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: LocalizationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
 
         // GET: LocalizationController/Delete/5
         [HttpGet]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             return View();
         }
@@ -78,7 +78,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: LocalizationController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
             try
             {
