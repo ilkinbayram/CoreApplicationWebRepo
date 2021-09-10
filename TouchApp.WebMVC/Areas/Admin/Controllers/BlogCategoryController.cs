@@ -1,10 +1,8 @@
-﻿using Core.Entities.Dtos.BlogCategory;
-using Core.Extensions;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Entities.Dtos.BlogCategory;
 using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
@@ -33,8 +31,16 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         public async Task<ActionResult> Create()
         {
             var model = new CreateBlogCategoryManagementDto();
+
             var resultBlogCatList = (await _blogCategoryService.GetDtoListAsync(x=>x.IsActive)).Data;
-            model.BlogCategories = resultBlogCatList.Select(x=> new BlogCategorySelectModel { Id = (int)x.Id, TranslateKey = x.NameKey.Translate()}).ToList() ?? new List<BlogCategorySelectModel>();
+
+            model.BlogCategories = resultBlogCatList != null ? resultBlogCatList.Select(x =>
+                        new BlogCategorySelectModel
+                        {
+                            Id = (int)x.Id,
+                            TranslateKey = x.NameKey
+                        }).ToList() : null;
+
             return View(model);
         }
 

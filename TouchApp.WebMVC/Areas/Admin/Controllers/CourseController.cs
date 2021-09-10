@@ -1,34 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class BlogController : Controller
+    public class CourseController : Controller
     {
-        // GET: BlogController
-        public async Task<ActionResult> Index()
+        // GET: CourseController
+        public ActionResult Index()
         {
             return View();
         }
 
-        // GET: BlogController/Details/5
-        public async Task<ActionResult> Details(int id)
+        // GET: CourseController/Details/5
+        public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: BlogController/Create
-        public async Task<ActionResult> Create()
+        // GET: CourseController/Create
+        public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BlogController/Create
+        // POST: CourseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public ActionResult Create(IFormCollection collection)
         {
             try
             {
@@ -40,16 +38,16 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             }
         }
 
-        // GET: BlogController/Edit/5
-        public async Task<ActionResult> Edit(int id)
+        // GET: CourseController/Edit/5
+        public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: BlogController/Edit/5
+        // POST: CourseController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -61,16 +59,16 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             }
         }
 
-        // GET: BlogController/Delete/5
-        public async Task<ActionResult> Delete(int id)
+        // GET: CourseController/Delete/5
+        public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: BlogController/Delete/5
+        // POST: CourseController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Entities.Dtos.BlogCategory
 {
@@ -21,6 +22,7 @@ namespace Core.Entities.Dtos.BlogCategory
         public string DescTranslateRUS { get; set; }
         public string DescTranslateTUR { get; set; }
         public string DescTranslateENG { get; set; }
+        public IFormFile IconFile { get; set; }
         public string IconSource { get; set; }
         public long? ParentCategoryId { get; set; }
         public List<BlogCategorySelectModel> BlogCategories { get; set; }

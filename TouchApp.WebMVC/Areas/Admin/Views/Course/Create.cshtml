@@ -1,0 +1,242 @@
+﻿@using Core.Entities.Dtos.Course
+@using Core.Extensions
+
+@model CreateManagementCourseDto
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>CreateManagementCourseDto</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-12 col-12 col-sm-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row  mb-1 mt-2">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="TitleKey" class="control-label"><strong>@("GeneralTitleKey.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="TitleKey" type="text" class="form-control" />
+                                <span asp-validation-for="TitleKey" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TitleTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="TitleTranslateAZE" type="text" class="form-control" />
+                                <span asp-validation-for="TitleTranslateAZE" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="TitleTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="TitleTranslateRUS" type="text" class="form-control" />
+                                <span asp-validation-for="TitleTranslateRUS" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TitleTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="TitleTranslateENG" type="text" class="form-control" />
+                                <span asp-validation-for="TitleTranslateENG" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                <label asp-for="TitleTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="TitleTranslateTUR" type="text" class="form-control" />
+                                <span asp-validation-for="TitleTranslateTUR" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="DescriptionKey" class="control-label"><strong>@("GeneralDescriptionKey.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="DescriptionKey" type="text" class="form-control" />
+                                <span asp-validation-for="DescriptionKey" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DescriptionTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="DescriptionTranslateAZE" type="text" class="form-control" />
+                                <span asp-validation-for="DescriptionTranslateAZE" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="DescriptionTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="DescriptionTranslateENG" type="text" class="form-control" />
+                                <span asp-validation-for="DescriptionTranslateENG" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DescriptionTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="DescriptionTranslateRUS" type="text" class="form-control" />
+                                <span asp-validation-for="DescriptionTranslateRUS" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                <label asp-for="DescriptionTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="DescriptionTranslateTUR" type="text" class="form-control" />
+                                <span asp-validation-for="DescriptionTranslateTUR" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="ScheduleHtmlRawKey" class="control-label"><strong>@("ScheduleHtmlRawKey.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ScheduleHtmlRawKey" type="text" class="form-control" />
+                                <span asp-validation-for="ScheduleHtmlRawKey" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ScheduleHtmlRawTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ScheduleHtmlRawTranslateAZE" type="text" class="form-control" />
+                                <span asp-validation-for="ScheduleHtmlRawTranslateAZE" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="ScheduleHtmlRawTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ScheduleHtmlRawTranslateENG" type="text" class="form-control" />
+                                <span asp-validation-for="ScheduleHtmlRawTranslateENG" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ScheduleHtmlRawTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ScheduleHtmlRawTranslateRUS" type="text" class="form-control" />
+                                <span asp-validation-for="ScheduleHtmlRawTranslateRUS" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                <label asp-for="ScheduleHtmlRawTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ScheduleHtmlRawTranslateTUR" type="text" class="form-control" />
+                                <span asp-validation-for="ScheduleHtmlRawTranslateTUR" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="ContentHtmlRawKey" class="control-label"><strong>@("ContentHtmlRawKey.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ContentHtmlRawKey" type="text" class="form-control" />
+                                <span asp-validation-for="ContentHtmlRawKey" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ContentHtmlRawTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ContentHtmlRawTranslateAZE" type="text" class="form-control" />
+                                <span asp-validation-for="ContentHtmlRawTranslateAZE" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="ContentHtmlRawTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ContentHtmlRawTranslateENG" type="text" class="form-control" />
+                                <span asp-validation-for="ContentHtmlRawTranslateENG" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ContentHtmlRawTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ContentHtmlRawTranslateRUS" type="text" class="form-control" />
+                                <span asp-validation-for="ContentHtmlRawTranslateRUS" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                <label asp-for="ContentHtmlRawTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="ContentHtmlRawTranslateTUR" type="text" class="form-control" />
+                                <span asp-validation-for="ContentHtmlRawTranslateTUR" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="OverViewHtmlRawKey" class="control-label"><strong>@("OverViewHtmlRawKey.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="OverViewHtmlRawKey" type="text" class="form-control" />
+                                <span asp-validation-for="OverViewHtmlRawKey" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="OverViewHtmlRawTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="OverViewHtmlRawTranslateAZE" type="text" class="form-control" />
+                                <span asp-validation-for="OverViewHtmlRawTranslateAZE" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="OverViewHtmlRawTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="OverViewHtmlRawTranslateENG" type="text" class="form-control" />
+                                <span asp-validation-for="OverViewHtmlRawTranslateENG" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="OverViewHtmlRawTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="OverViewHtmlRawTranslateRUS" type="text" class="form-control" />
+                                <span asp-validation-for="OverViewHtmlRawTranslateRUS" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                <label asp-for="OverViewHtmlRawTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="OverViewHtmlRawTranslateTUR" type="text" class="form-control" />
+                                <span asp-validation-for="OverViewHtmlRawTranslateTUR" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="MinTotalMonths" class="control-label"><strong>@("GeneralMinTotalMonths.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="MinTotalMonths" type="number" class="form-control">
+                                <span asp-validation-for="MinTotalMonths" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="MaxTotalMonths" class="control-label"><strong>@("GeneralMinTotalMonths.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="MaxTotalMonths" type="number" class="form-control">
+                                <span asp-validation-for="MaxTotalMonths" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label asp-for="CaptionImageFile" class="control-label"><strong>@("GeneralLocalize.MediaIconCaption".Translate())</strong></label>
+                        <input type="file" class="form-control mt-1 mb-1" asp-for="CaptionImageFile" />
+                        <span asp-validation-for="CaptionImageFile" class="text-danger"></span>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+            <div class="form-group mt-2 mb-2">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+</div>
+

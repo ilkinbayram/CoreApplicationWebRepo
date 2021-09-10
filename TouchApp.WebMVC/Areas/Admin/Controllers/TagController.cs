@@ -1,40 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class PostController : AdminBaseController
+    public class TagController : Controller
     {
-        // GET: PostController
-        [HttpGet]
-        public async Task<ActionResult> Index()
+        // GET: TagController
+        public ActionResult Index()
         {
             return View();
         }
 
-        // GET: PostController/Details/5
-        [HttpGet]
-        public async Task<ActionResult> Details(int id)
+        // GET: TagController/Details/5
+        public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: PostController/Create
-        [HttpGet]
-        public async Task<ActionResult> Create()
+        // GET: TagController/Create
+        public ActionResult Create()
         {
             return View();
         }
 
-        // POST: PostController/Create
+        // POST: TagController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public ActionResult Create(IFormCollection collection)
         {
             try
             {
@@ -46,17 +38,16 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             }
         }
 
-        // GET: PostController/Edit/5
-        [HttpGet]
-        public async Task<ActionResult> Edit(int id)
+        // GET: TagController/Edit/5
+        public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: PostController/Edit/5
+        // POST: TagController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -68,17 +59,16 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             }
         }
 
-        // GET: PostController/Delete/5
-        [HttpGet]
-        public async Task<ActionResult> Delete(int id)
+        // GET: TagController/Delete/5
+        public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: PostController/Delete/5
+        // POST: TagController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
