@@ -219,24 +219,64 @@
                     </div>
                     <hr />
                 </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="TotalHours" class="control-label"><strong>@("GeneralTotalHours.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="TotalHours" type="number" class="form-control">
+                                <span asp-validation-for="TotalHours" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="PricePerMonth" class="control-label"><strong>@("GeneralPricePerMonths.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="PricePerMonth" type="number" class="form-control">
+                                <span asp-validation-for="PricePerMonth" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
 
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
-                        <label asp-for="CaptionImageFile" class="control-label"><strong>@("GeneralLocalize.MediaIconCaption".Translate())</strong></label>
+                        <label asp-for="CaptionImageFile" class="control-label"><strong>@("GeneralLocalize.CaptionImage".Translate())</strong></label>
                         <input type="file" class="form-control mt-1 mb-1" asp-for="CaptionImageFile" />
                         <span asp-validation-for="CaptionImageFile" class="text-danger"></span>
                     </div>
                     <hr />
                 </div>
-            </div>
-            <div class="form-group mt-2 mb-2">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label asp-for="ProfessionCourseCategoryId" class="control-label"><strong>@("GeneralLocalize.ProfessionCourseCategoryId".Translate())</strong></label>
+                        <select asp-for="ProfessionCourseCategoryId" class="form-select">
+                            @*TODO : Localization*@
+                            <option value="#">Kateqoriya Secin</option>
+                            @if (Model != null && Model.CurrentListProfessionCourseCategoryIds.Count != 0)
+                            {
+                                foreach (var proCatOne in Model.CurrentListProfessionCourseCategoryIds)
+                                {
+                                    <option value="@proCatOne.Value_id">@proCatOne.Text_nameKey</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="ProfessionCourseCategoryId" class="text-danger"></span>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    @*TODO : Localize All Create Button*@
+                    <div class="form-group mt-2 mb-2">
+                        <input type="submit" value="@("CreateNew.LocalizationGeneral".Translate())" class="btn btn-primary" />
+                    </div>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+    <a class="btn btn-secondary" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
 </div>
-

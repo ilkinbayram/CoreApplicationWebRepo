@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Business.ValidationRules.FluentValidation.Slider
 {
-    public class CreateSliderDtoValidator : AbstractValidator<CreateSliderDto>
+    public class CreateSliderDtoValidator : AbstractValidator<CreateManagementSliderDto>
     {
         public CreateSliderDtoValidator()
         {

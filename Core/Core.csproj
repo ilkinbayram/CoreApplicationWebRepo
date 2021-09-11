@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Entities\Dtos\Media\" />
-    <Folder Include="Entities\Dtos\Phrase\" />
     <Folder Include="Entities\Dtos\Teacher\" />
     <Folder Include="Entities\Models\" />
   </ItemGroup>

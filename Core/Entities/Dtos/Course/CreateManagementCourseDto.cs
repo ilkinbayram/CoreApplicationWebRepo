@@ -48,10 +48,16 @@ namespace Core.Entities.Dtos.Course
         public string OverViewHtmlRawTranslateENG { get; set; }
         public string OverViewHtmlRawTranslateRUS { get; set; }
         public DateTime PublishDate { get; set; }
-        public List<short> CurrentListProfessionCourseCategoryIds { get; set; }
+        public List<ProfessionCategorySelectItemModel> CurrentListProfessionCourseCategoryIds { get; set; }
         public long ProfessionCourseCategoryId { get; set; }
 
         public List<CreateManagementTeacherCourseDto> TeacherCourses { get; set; }
-        public CreateManagementProfessionCourseCategoryDto ProfessionCourseCategory { get; set; }
+        public GetProfessionCourseCategoryDto ProfessionCourseCategory { get; set; }
+    }
+
+    public class ProfessionCategorySelectItemModel
+    {
+        public short Value_id { get; set; }
+        public string Text_nameKey { get; set; }
     }
 }

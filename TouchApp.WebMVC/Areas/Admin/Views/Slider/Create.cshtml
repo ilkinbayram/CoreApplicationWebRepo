@@ -1,7 +1,7 @@
-﻿@using Core.Entities.Dtos.CourseService
+﻿@using Core.Entities.Dtos.Slider
 @using Core.Extensions
 
-@model CreateCourseServiceDto
+@model CreateManagementSliderDto
 
 @{
     ViewData["Title"] = "Create";
@@ -10,7 +10,7 @@
 
 <h1>Create</h1>
 
-<h4>CreateCourseServiceDto</h4>
+<h4>CreateManagementSliderDto</h4>
 <hr />
 <div class="row">
     <div class="col-md-12 col-12 col-sm-12">
@@ -91,9 +91,9 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
-                        <label asp-for="IconSourceFile" class="control-label"><strong>@("GeneralLocalize.IconSourceImage".Translate())</strong></label>
-                        <input type="file" class="form-control mt-1 mb-1" asp-for="IconSourceFile" />
-                        <span asp-validation-for="IconSourceFile" class="text-danger"></span>
+                        <label asp-for="SliderMediaSourceFile" class="control-label"><strong>@("GeneralLocalize.SliderMediaSourceImage".Translate())</strong></label>
+                        <input type="file" class="form-control mt-1 mb-1" asp-for="SliderMediaSourceFile" />
+                        <span asp-validation-for="SliderMediaSourceFile" class="text-danger"></span>
                     </div>
                     <hr />
                 </div>
