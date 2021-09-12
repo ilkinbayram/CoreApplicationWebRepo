@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Dtos.BlogCategory;
 using TouchApp.Business.Abstract;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
@@ -35,10 +36,10 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
             var resultBlogCatList = (await _blogCategoryService.GetDtoListAsync(x=>x.IsActive)).Data;
 
             model.BlogCategories = resultBlogCatList != null ? resultBlogCatList.Select(x =>
-                        new BlogCategorySelectModel
+                        new SelectListItem
                         {
-                            Id = (int)x.Id,
-                            TranslateKey = x.NameKey
+                            Value = x.Id.ToString(),
+                            Text = x.NameKey
                         }).ToList() : null;
 
             return View(model);

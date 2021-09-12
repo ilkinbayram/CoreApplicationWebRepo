@@ -100,7 +100,7 @@
                                     {
                                         foreach (var blogCatOne in Model.BlogCategories)
                                         {
-                                            <option value="@(blogCatOne.Id)">@(blogCatOne.TranslateKey)</option>
+                                            <option value="@(blogCatOne.Value)">@(blogCatOne.Text.Translate())</option>
                                         }
                                     }
                                 </select>

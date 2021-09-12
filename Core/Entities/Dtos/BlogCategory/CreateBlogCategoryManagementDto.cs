@@ -2,6 +2,7 @@
 using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Core.Entities.Dtos.BlogCategory
 {
@@ -25,7 +26,7 @@ namespace Core.Entities.Dtos.BlogCategory
         public IFormFile IconFile { get; set; }
         public string IconSource { get; set; }
         public long? ParentCategoryId { get; set; }
-        public List<BlogCategorySelectModel> BlogCategories { get; set; }
+        public List<SelectListItem> BlogCategories { get; set; }
 
         public HashSet<CreateBlogCategoryManagementDto> Children { get; set; } //ozunden ozune relation ucun ve childlari
         public CreateBlogCategoryManagementDto ParentCategory { get; set; }

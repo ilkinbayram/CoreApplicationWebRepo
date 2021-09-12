@@ -1,0 +1,182 @@
+﻿@using Core.Entities.Dtos.Teacher
+@using Core.Extensions
+@using Core.Resources.Enums
+
+@model CreateManagementTeacherDto
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>CreateManagementTeacherDto</h4>
+<hr />
+
+
+<div class="row">
+    <div class="col-md-12 col-12 col-sm-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row  mb-1 mt-2">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="BiographyKey" class="control-label"><strong>@("BiographyKey.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="BiographyKey" type="text" class="form-control" />
+                                <span asp-validation-for="BiographyKey" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BiographyTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="BiographyTranslateAZE" type="text" class="form-control" />
+                                <span asp-validation-for="BiographyTranslateAZE" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="BiographyTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="BiographyTranslateRUS" type="text" class="form-control" />
+                                <span asp-validation-for="BiographyTranslateRUS" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BiographyTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="BiographyTranslateENG" type="text" class="form-control" />
+                                <span asp-validation-for="BiographyTranslateENG" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                <label asp-for="BiographyTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="BiographyTranslateTUR" type="text" class="form-control" />
+                                <span asp-validation-for="BiographyTranslateTUR" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="FirstName" class="control-label"><strong>@("GeneralFirstName.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="FirstName" type="text" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LastName" class="control-label"><strong>@("GeneralLastName.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="LastName" type="text" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="PhoneNumberPrefix" class="control-label"><strong>@("GeneralPhoneNumberPrefix.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="PhoneNumberPrefix" type="text" class="form-control" />
+                                <span asp-validation-for="PhoneNumberPrefix" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" class="control-label"><strong>@("GeneralPhoneNumber.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="PhoneNumber" type="text" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                <label asp-for="Email" class="control-label"><strong>@("GeneralEmail.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="Email" type="text" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="PreviewMovieFile" class="control-label"><strong>@("GeneralLocalize.PreviewMovieVideo".Translate())</strong></label>
+                                <input type="file" class="form-control mt-1 mb-1" asp-for="PreviewMovieFile" />
+                                <span asp-validation-for="PreviewMovieFile" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="IconSourceFile" class="control-label"><strong>@("GeneralLocalize.IconSourceFile".Translate())</strong></label>
+                                <input type="file" class="form-control mt-1 mb-1" asp-for="IconSourceFile" />
+                                <span asp-validation-for="IconSourceFile" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label asp-for="ProfilePhotoFile" class="control-label"><strong>@("GeneralLocalize.ProfilePhotoImage".Translate())</strong></label>
+                                <input type="file" class="form-control mt-1 mb-1" asp-for="ProfilePhotoFile" />
+                                <span asp-validation-for="ProfilePhotoFile" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="WallpaperFile" class="control-label"><strong>@("GeneralLocalize.WallpaperImage".Translate())</strong></label>
+                                <input type="file" class="form-control mt-1 mb-1" asp-for="WallpaperFile" />
+                                <span asp-validation-for="WallpaperFile" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="Gender" class="control-label"><strong>@("GeneralScreenType.VisualLocalization".Translate())</strong></label>
+                                <select asp-for="Gender" class="form-control">
+                                    <option value="#">@("SelectListGender.Localize".Translate())</option>
+                                    @foreach (var typeOne in Enum.GetValues<Gender>().Cast<byte>().ToList())
+                                    {
+                                        <option value="@(typeOne)">@(string.Format("{0}Gender.Localize", ((Gender)typeOne).ToString()).Translate())</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="Birthday" class="control-label"><strong>@("TeacherBirthday.VisualLocalization".Translate())</strong></label>
+                                <input asp-for="Birthday" type="datetime" class="form-control" />
+                                <span asp-validation-for="Birthday" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label asp-for="ProfessionId" class="control-label"><strong>@("GeneralLocalize.ProfessionCourseCategoryId".Translate())</strong></label>
+                        <select asp-for="ProfessionId" class="form-select">
+                            @*TODO : Localization*@
+                            <option value="#">Professiya Secin</option>
+                            @if (Model != null && Model.CurrentProfessionList.Count != 0)
+                            {
+                                foreach (var proCatOne in Model.CurrentProfessionList)
+                                {
+                                    <option value="@(proCatOne.Value)">@(proCatOne.Text.Translate())</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="ProfessionId" class="text-danger"></span>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    @*TODO : Localize All Create Button*@
+                    <div class="form-group mt-2 mb-2">
+                        <input type="submit" value="@("CreateNew.LocalizationGeneral".Translate())" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
+</div>

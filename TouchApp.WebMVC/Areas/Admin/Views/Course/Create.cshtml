@@ -258,7 +258,7 @@
                             {
                                 foreach (var proCatOne in Model.CurrentListProfessionCourseCategoryIds)
                                 {
-                                    <option value="@proCatOne.Value_id">@proCatOne.Text_nameKey</option>
+                                    <option value="@proCatOne.Value">@proCatOne.Text.Translate()</option>
                                 }
                             }
                         </select>
