@@ -1,6 +1,8 @@
 ﻿using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
 
+
+
 namespace Core.Entities.Dtos.Slider
 {
     public class EditSliderDto : BaseDto

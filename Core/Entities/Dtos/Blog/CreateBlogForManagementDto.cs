@@ -1,8 +1,14 @@
 ﻿using System.Collections.Generic;
+
 using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.BlogCategory;
 using Core.Entities.Dtos.TagBlog;
 using Core.Resources.Enums;
+
+
+
+
+
 
 namespace Core.Entities.Dtos.Blog
 {

@@ -1,12 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
-using TouchApp.DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Data.SqlClient;
+using TouchApp.DataAccess.Abstract;
 
 namespace TouchApp.DataAccess.Concrete.EntityFramework
 {

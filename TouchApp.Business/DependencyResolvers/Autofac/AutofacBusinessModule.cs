@@ -1,22 +1,22 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
-using TouchApp.Business.Abstract;
 using Business.Concrete;
-using Castle.DynamicProxy;
-using Core.Utilities.Interceptors;
-using Core.Utilities.Security.Jwt;
-using Core.Utilities.Helpers;
-using Core.Utilities.Helpers.Abstracts;
+using Business.ExternalServices.Cloudinarys;
 using Business.ExternalServices.Mail.Services;
 using Business.ExternalServices.Mail.Services.Abstract;
-using Core.Utilities.Services.Rest;
-using Business.ExternalServices.Cloudinarys;
 using Business.Libs;
-using TouchApp.DataAccess.Abstract;
-using TouchApp.DataAccess.Concrete.EntityFramework;
+using Castle.DynamicProxy;
 using Core.CrossCuttingConcerns.Caching;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
+using Core.Utilities.Helpers;
+using Core.Utilities.Helpers.Abstracts;
+using Core.Utilities.Interceptors;
+using Core.Utilities.Security.Jwt;
+using Core.Utilities.Services.Rest;
 using Microsoft.AspNetCore.Http;
+using TouchApp.Business.Abstract;
+using TouchApp.DataAccess.Abstract;
+using TouchApp.DataAccess.Concrete.EntityFramework;
 
 namespace TouchApp.Business.DependencyResolvers.Autofac
 {

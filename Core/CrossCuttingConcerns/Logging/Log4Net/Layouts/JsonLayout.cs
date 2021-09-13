@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using log4net.Core;
+﻿using log4net.Core;
 using log4net.Layout;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Core.CrossCuttingConcerns.Logging.Log4Net.Layouts
 {

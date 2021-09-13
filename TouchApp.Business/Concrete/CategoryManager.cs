@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using AutoMapper;
-using TouchApp.Business.Abstract;
-using Business.Constants;
+﻿using AutoMapper;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos.Category;
 using Core.Utilities.Results;
-using TouchApp.DataAccess.Abstract;
-using Microsoft.AspNetCore.Http;
-using Core.Extensions;
-using Core.Aspects.Autofac.Validation;
-using System.Linq;
-using Business.ValidationRules.FluentValidation.Category;
-using DataAccess.Concrete.EntityFramework.Contexts;
 using Core.Utilities.Services.Rest;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
+using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
 {

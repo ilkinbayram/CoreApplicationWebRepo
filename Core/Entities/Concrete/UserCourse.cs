@@ -1,5 +1,9 @@
 ﻿using System;
+
 using Core.Entities.Concrete.Base;
+
+
+
 
 namespace Core.Entities.Concrete
 {

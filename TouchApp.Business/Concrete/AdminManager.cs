@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TouchApp.Business.Abstract;
-using Core.Entities.Dtos.User;
+﻿using Core.Entities.Dtos.User;
 using Core.Resources.Enums;
 using Core.Utilities.Results;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TouchApp.Business.Abstract;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete

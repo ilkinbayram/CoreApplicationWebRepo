@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Core.Entities.Abstract;
 using Core.Entities.Concrete.Base;
 using Core.Resources.Enums;
+
+
 
 namespace Core.Entities.Concrete
 {

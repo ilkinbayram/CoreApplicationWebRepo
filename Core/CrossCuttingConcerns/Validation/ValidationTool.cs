@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Core.CrossCuttingConcerns.Validation
 {

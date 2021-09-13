@@ -1,6 +1,7 @@
-﻿using Core.Entities.Dtos.Base;
+﻿using System.Collections.Generic;
+
+using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.SharingTypeMedia;
-using System.Collections.Generic;
 using Core.Resources.Enums;
 
 

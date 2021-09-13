@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Core.Entities.Dtos.User;
+﻿using Core.Entities.Dtos.User;
 using Core.Utilities.Results;
+using System.Collections.Generic;
 
 namespace TouchApp.Business.Abstract
 {

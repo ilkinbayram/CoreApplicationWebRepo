@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Core.Resources.Custom;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using Core.Resources.Custom;
 
 namespace Core.Extensions
 {

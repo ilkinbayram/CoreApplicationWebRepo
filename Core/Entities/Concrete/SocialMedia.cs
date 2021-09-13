@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+
 using Core.Entities.Concrete.Base;
+
+
+
 
 namespace Core.Entities.Concrete
 {

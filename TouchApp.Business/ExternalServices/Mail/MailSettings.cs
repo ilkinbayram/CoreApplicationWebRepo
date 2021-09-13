@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Business.ExternalServices.Mail
+﻿namespace Business.ExternalServices.Mail
 {
     public class MailSettings
     {

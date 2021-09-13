@@ -1,6 +1,10 @@
-﻿using Core.Entities.Abstract;
+﻿using System;
+
+using Core.Entities.Abstract;
 using Core.Resources.Enums;
-using System;
+
+
+
 
 namespace Core.Entities.Concrete.Base
 {

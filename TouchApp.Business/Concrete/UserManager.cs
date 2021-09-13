@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using AutoMapper;
-using TouchApp.Business.Abstract;
+﻿using AutoMapper;
 using Business.Constants;
 using Business.ExternalServices.Mail;
 using Business.ExternalServices.Mail.Services.Abstract;
@@ -12,7 +6,6 @@ using Business.Libs;
 using Business.ValidationRules.FluentValidation.User;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
-using Core.Entities;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos.User;
 using Core.Extensions;
@@ -21,9 +14,15 @@ using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Services.Rest;
-using TouchApp.DataAccess.Abstract;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
+using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
 {

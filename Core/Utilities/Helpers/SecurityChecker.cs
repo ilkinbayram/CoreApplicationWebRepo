@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Utilities.Helpers
+﻿namespace Core.Utilities.Helpers
 {
     public class SecurityChecker
     {

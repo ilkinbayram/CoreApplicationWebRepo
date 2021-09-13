@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Core.Resources.Custom;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using Core.Resources.Custom;
 
 namespace Core.Extensions
 {

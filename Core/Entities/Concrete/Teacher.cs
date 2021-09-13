@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Core.Entities.Abstract;
 using Core.Entities.Concrete.Base;
 using Core.Resources.Enums;
+
+
 
 
 namespace Core.Entities.Concrete
@@ -34,9 +37,10 @@ namespace Core.Entities.Concrete
 
         public long ProfessionId { get; set; }
         
-        public virtual Profession Profession { get; set; }
+        public virtual List<Profession> Professions { get; set; }
         public virtual List<TeacherCourse> TeacherCourses { get; set; }
         public virtual List<TeacherSocialMedia> TeacherSocialMedias { get; set; }
+        public virtual List<TeacherOfficialCompany> TeacherOfficialCompanies { get; set; }
         public virtual List<UserCourse> UserCourses { get; set; }
     }
 }

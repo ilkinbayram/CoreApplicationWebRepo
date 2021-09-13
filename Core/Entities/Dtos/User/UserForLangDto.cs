@@ -1,8 +1,6 @@
-﻿using Core.Entities.Dtos.User;
-using Core.Resources.Enums;
+﻿using Core.Resources.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Core.Entities.Dtos.User
 {

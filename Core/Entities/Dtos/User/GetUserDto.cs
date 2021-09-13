@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Core.Entities.Dtos.Base;
+﻿using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.Blog;
 using Core.Entities.Dtos.UserCourse;
 using Core.Entities.Dtos.UserSocialMedia;
 using Core.Resources.Enums;
+using System;
+using System.Collections.Generic;
 
 
 namespace Core.Entities.Dtos.User

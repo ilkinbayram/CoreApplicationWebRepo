@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+
 using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.SharingTypeMedia;
 using Core.Resources.Enums;
+
+
+
 
 namespace Core.Entities.Dtos.Media
 {

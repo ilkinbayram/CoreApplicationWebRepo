@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Castle.DynamicProxy;
+using Core.Aspects.Autofac.Exception;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Castle.DynamicProxy;
-using Core.Aspects.Autofac.Exception;
-using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 
 namespace Core.Utilities.Interceptors
 {

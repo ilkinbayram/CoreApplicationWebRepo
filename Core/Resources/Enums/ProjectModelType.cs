@@ -28,6 +28,8 @@
         User = 24,
         UserCourse = 25,
         UserOperationClaim = 26,
-        UserSocialMedia = 27
+        UserSocialMedia = 27,
+        OfficialCompany = 28,
+        TeacherOfficialCompany = 29
     }
 }

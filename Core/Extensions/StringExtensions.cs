@@ -1,7 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
 using Core.DependencyResolvers;
 using Core.Entities.Concrete;
-using Core.Utilities.Helpers;
 using Core.Utilities.Helpers.Abstracts;
 using Microsoft.AspNetCore.Http;
 using System;

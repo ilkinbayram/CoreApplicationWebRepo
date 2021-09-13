@@ -1,5 +1,7 @@
 ﻿using Core.Entities.Concrete.Base;
 
+
+
 namespace Core.Entities.Concrete
 {
     public class TeacherCourse : BaseEntity, IEntity

@@ -1,7 +1,8 @@
-﻿using Core.Entities.Concrete;
-using Core.Resources.Enums;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Core.Entities.Concrete;
+using Core.Resources.Enums;
+
 
 namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
 {

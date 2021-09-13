@@ -1,16 +1,5 @@
 ﻿using Autofac;
-using Business.Concrete;
-using Core.CrossCuttingConcerns.Caching;
-using Core.CrossCuttingConcerns.Caching.Microsoft;
-using Core.Utilities.Helpers;
-using Core.Utilities.Helpers.Abstracts;
-using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TouchApp.Business.Abstract;
 
 namespace TouchApp.Business.DependencyResolvers.Autofac
 {

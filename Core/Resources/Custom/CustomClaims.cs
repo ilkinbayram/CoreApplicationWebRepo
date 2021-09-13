@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Resources.Custom
+﻿namespace Core.Resources.Custom
 {
     public static class CustomClaims
     {

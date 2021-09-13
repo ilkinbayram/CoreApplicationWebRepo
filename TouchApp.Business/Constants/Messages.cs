@@ -1,6 +1,4 @@
-﻿using Core.Entities.Concrete;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public static class Messages
     {

@@ -1,7 +1,4 @@
 ﻿using Core.Resources.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Business.ExternalServices.Mail
 {

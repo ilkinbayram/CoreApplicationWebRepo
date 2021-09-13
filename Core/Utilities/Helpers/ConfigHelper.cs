@@ -1,8 +1,6 @@
 ﻿using Core.Utilities.Helpers.Abstracts;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Core.Utilities.Helpers
 {

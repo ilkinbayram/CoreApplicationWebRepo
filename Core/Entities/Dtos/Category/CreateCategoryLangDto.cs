@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Entities.Dtos.Category
+﻿namespace Core.Entities.Dtos.Category
 {
     /// <summary>
     /// Kateqoriya əlavə et dilə görə

@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
-using TouchApp.Business.Abstract;
 using Business.Constants;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.Slider;
 using Core.Utilities.Results;
-using TouchApp.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using Core.Entities.Dtos.Slider;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
+using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
 {

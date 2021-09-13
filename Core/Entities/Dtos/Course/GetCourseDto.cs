@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.CourseComment;
 using Core.Entities.Dtos.ProfessionCourseCategory;
 using Core.Entities.Dtos.TeacherCourse;
 using Core.Entities.Dtos.UserCourse;
 using Core.Resources.Enums;
+
 
 namespace Core.Entities.Dtos.Course
 {

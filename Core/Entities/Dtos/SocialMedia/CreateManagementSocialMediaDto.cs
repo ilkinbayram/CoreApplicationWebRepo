@@ -1,6 +1,9 @@
-﻿using Core.Entities.Dtos.Base;
+﻿using Microsoft.AspNetCore.Http;
+
+using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
-using Microsoft.AspNetCore.Http;
+
+
 
 namespace Core.Entities.Dtos.SocialMedia
 {

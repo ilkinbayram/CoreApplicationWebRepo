@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Core.Entities.Concrete;
-using Core.Entities.Dtos.User;
 using TouchApp.DataAccess.Concrete.EntityFramework.Configurations;
 
 namespace DataAccess.Concrete.EntityFramework.Contexts
@@ -41,6 +40,9 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new TeacherCourseConfiguration());
             modelBuilder.ApplyConfiguration(new UserSocialMediaConfiguration());
             modelBuilder.ApplyConfiguration(new TeacherSocialMediaConfiguration());
+
+            modelBuilder.ApplyConfiguration(new OfficialCompanyConfiguration());
+            modelBuilder.ApplyConfiguration(new TeacherOfficialCompanyConfiguration());
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -56,6 +58,8 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<ProfessionCourseCategory> ProfessionCourseCategories { get; set; }
         public DbSet<BlogCategory> BlogCategories { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
+        public DbSet<OfficialCompany> OfficialCompanies { get; set; }
+        public DbSet<TeacherOfficialCompany> TeacherOfficialCompanies { get; set; }
 
         public DbSet<Localization> Localizations { get; set; }
         public DbSet<Media> Medias { get; set; }

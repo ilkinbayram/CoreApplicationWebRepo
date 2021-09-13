@@ -1,16 +1,9 @@
 ﻿using Business.ExternalServices.Mail.Services.Abstract;
-using Core.Utilities.Helpers;
 using Core.Utilities.Helpers.Abstracts;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Microsoft.Extensions.Options;
 using MimeKit;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.ExternalServices.Mail.Services
 {

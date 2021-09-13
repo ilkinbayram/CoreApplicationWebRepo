@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Core.Entities.Concrete;
-using Core.Entities.Dtos;
+﻿using Core.Entities.Dtos;
 using FluentValidation;
 using FluentValidation.Validators;
-using Microsoft.AspNetCore.Http;
 
 namespace Business.ValidationRules.FluentValidation
 {

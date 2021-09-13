@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
-using TouchApp.Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos;
-using Core.Resources.Enums;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.Jwt;
 using System;
 using System.Linq.Expressions;
+using TouchApp.Business.Abstract;
 
 namespace Business.Concrete
 {

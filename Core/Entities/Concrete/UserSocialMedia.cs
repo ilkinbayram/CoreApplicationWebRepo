@@ -1,6 +1,9 @@
 ﻿using Core.Entities.Concrete.Base;
 using Core.Resources.Enums;
 
+
+
+
 namespace Core.Entities.Concrete
 {
     public class UserSocialMedia : BaseEntity, IEntity

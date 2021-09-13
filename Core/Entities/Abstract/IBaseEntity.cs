@@ -1,5 +1,9 @@
 ﻿using System;
+
 using Core.Resources.Enums;
+
+
+
 
 namespace Core.Entities.Abstract
 {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using Core.Entities.Dtos.User;
+using Core.Utilities.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Core.Entities.Concrete;
-using Core.Entities.Dtos.User;
-using Core.Utilities.Results;
 
 namespace TouchApp.Business.Abstract
 {

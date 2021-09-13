@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+
 using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.ProfessionCourseCategory;
 using Core.Entities.Dtos.TeacherCourse;
 using Core.Resources.Enums;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
+
+
 
 namespace Core.Entities.Dtos.Course
 {
@@ -49,6 +53,7 @@ namespace Core.Entities.Dtos.Course
         public string OverViewHtmlRawTranslateENG { get; set; }
         public string OverViewHtmlRawTranslateRUS { get; set; }
         public DateTime PublishDate { get; set; }
+        public List<SelectListItem> Teachers { get; set; }
         public List<SelectListItem> CurrentListProfessionCourseCategoryIds { get; set; }
         public long ProfessionCourseCategoryId { get; set; }
 

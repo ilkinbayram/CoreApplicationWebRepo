@@ -1,9 +1,9 @@
-﻿using System;
-using Core.Entities.Dtos.Base;
+﻿using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.Course;
 using Core.Entities.Dtos.Teacher;
 using Core.Entities.Dtos.User;
 using Core.Resources.Enums;
+using System;
 
 namespace Core.Entities.Dtos.UserCourse
 {
