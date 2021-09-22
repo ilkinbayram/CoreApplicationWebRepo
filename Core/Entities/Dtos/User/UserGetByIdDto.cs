@@ -1,6 +1,5 @@
 ﻿using Core.Resources.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace Core.Entities.Dtos.User
 {
@@ -30,8 +29,6 @@ namespace Core.Entities.Dtos.User
 
         public long? CategoryId { get; set; }
         public bool ShowInHomePage { get; set; }
-
-        public virtual List<GetByIdUserFeatureValue> UserFeatureValues { get; set; }
     }
 
 }

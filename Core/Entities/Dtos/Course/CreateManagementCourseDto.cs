@@ -7,9 +7,7 @@ using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.ProfessionCourseCategory;
 using Core.Entities.Dtos.TeacherCourse;
 using Core.Resources.Enums;
-
-
-
+using Core.Entities.Dtos.Language;
 
 namespace Core.Entities.Dtos.Course
 {
@@ -53,11 +51,16 @@ namespace Core.Entities.Dtos.Course
         public string OverViewHtmlRawTranslateENG { get; set; }
         public string OverViewHtmlRawTranslateRUS { get; set; }
         public DateTime PublishDate { get; set; }
+
         public List<SelectListItem> Teachers { get; set; }
         public List<SelectListItem> CurrentListProfessionCourseCategoryIds { get; set; }
+        public List<SelectListItem> CurrentListLanguageIds { get; set; }
+
         public long ProfessionCourseCategoryId { get; set; }
+        public long LanguageId { get; set; }
 
         public List<CreateManagementTeacherCourseDto> TeacherCourses { get; set; }
         public GetProfessionCourseCategoryDto ProfessionCourseCategory { get; set; }
+        public GetLanguageDto Language { get; set; }
     }
 }

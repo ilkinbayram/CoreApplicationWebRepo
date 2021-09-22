@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TouchApp.WebMVC.Areas.Global.Controllers
 {
+    [Area("Global")]
     public class AboutController : Controller
     {
         [HttpGet]

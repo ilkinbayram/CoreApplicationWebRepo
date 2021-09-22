@@ -1,5 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Dtos.User;
+using Core.Extensions;
+using Core.Resources.Enums;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
@@ -25,7 +31,16 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Create()
         {
-            return View();
+            var dtoModel = new CreateManagementUserDto();
+
+            dtoModel.GenderSelectList = Enum.GetValues<Gender>().Cast<byte>().ToList().
+                               Select(x => new SelectListItem 
+                               { 
+                                   Value = x.ToString(), 
+                                   Text = string.Format("{0}Gender.Localize", ((Gender)x).ToString()).Translate() 
+                               }).ToList();
+
+            return View(dtoModel);
         }
 
         // POST: UserController/Create

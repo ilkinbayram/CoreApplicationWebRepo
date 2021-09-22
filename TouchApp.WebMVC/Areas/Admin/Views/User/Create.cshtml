@@ -1,0 +1,171 @@
+﻿@using Core.Entities.Dtos.User
+@using Core.Extensions
+
+@model CreateManagementUserDto
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>CreateManagementUserDto</h4>
+<hr />
+
+
+<div class="row">
+    <div class="col-md-12 col-12 col-sm-12">
+        @using (Html.BeginForm("Create", "User", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row  mb-1 mt-2">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.BiographyKey, "BiographyKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.BiographyKey, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BiographyKey, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.BiographyTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.BiographyTranslateAZE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BiographyTranslateAZE, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.BiographyTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.BiographyTranslateRUS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BiographyTranslateRUS, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.BiographyTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.BiographyTranslateENG, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BiographyTranslateENG, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                @Html.LabelFor(x => x.BiographyTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.BiographyTranslateTUR, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BiographyTranslateTUR, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.FirstName, "GeneralFirstName.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.LastName, "GeneralLastName.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.PhoneNumberPrefix, "GeneralPhoneNumberPrefix.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.PhoneNumberPrefix, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.PhoneNumberPrefix, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.PhoneNumber, "GeneralPhoneNumber.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.PhoneNumber, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                @Html.LabelFor(x => x.Email, "GeneralEmail.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.ProfilePhotoFile, "GeneralLocalize.ProfilePhotoImage".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ProfilePhotoFile, new { @class = "form-control mt-1 mb-1", @type = "file" })
+                                @Html.ValidationMessageFor(x => x.ProfilePhotoFile, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.WallpaperFile, "GeneralLocalize.WallpaperImage".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.WallpaperFile, new { @class = "form-control mt-1 mb-1", @type = "file" })
+                                @Html.ValidationMessageFor(x => x.WallpaperFile, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Gender, "GeneralGenderLabel.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.DropDownListFor(x => x.Gender, Model.GenderSelectList, "SelectListGender.SelectDefaultLocalize".Translate(), new { @class = "custom-select" })
+                                @Html.ValidationMessageFor(x => x.Gender, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Birthday, "Birthday.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-light"><i class="fas fa-calendar-alt"></i></span>
+                                    </div>
+                                    @Html.TextBoxFor(x => x.Birthday, new { @class = "form-control", placeholder = "DefaultClickHere.LocalizationThreeDot".Translate(), data_toggle = "datepicker" })
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-primary text-light">@("SetDateTime.InputLocalization".Translate())</span>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(x => x.Birthday, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <h6 class="mb-1">@("PersonSocialMedias.TableCreateLocalization".Translate())</h6>
+                            @Html.Partial("PartialViews/User/_PartialCreateSocialMediaCollectionForUser", Model)
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    @*TODO : Localize All Create Button*@
+                    <div class="form-group mt-2 mb-2">
+                        <input type="submit" value="@("CreateNew.LocalizationGeneral".Translate())" class="btn btn-primary" />
+                        <a class="ml-2 btn btn-secondary text-light" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section ScriptComponent{
+    <script src="~/js/CustomComponent.js"></script>
+}

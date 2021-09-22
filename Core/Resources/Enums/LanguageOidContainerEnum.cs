@@ -1,10 +1,10 @@
 ﻿namespace Core.Resources.Enums
 {
-    public enum LanguageOidContainerEnum : byte
+    public enum LanguageOidContainerEnum : short
     {
-        Azerbaijani = 1,
-        English = 2,
-        Russian = 3,
-        Turkish = 4
+        AZE = 1,
+        ENG = 2,
+        RUS = 3,
+        TUR = 4
     }
 }

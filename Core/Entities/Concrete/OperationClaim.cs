@@ -18,5 +18,7 @@ namespace Core.Entities.Concrete
         public string Name { get; set; }
 
         public virtual List<UserOperationClaim> UserOperationClaims { get; set; }
+        public virtual List<TeacherOperationClaim> TeacherOperationClaims { get; set; }
+        public virtual List<StudentOperationClaim> StudentOperationClaims { get; set; }
     }
 }

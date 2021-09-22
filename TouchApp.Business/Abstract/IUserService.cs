@@ -16,7 +16,7 @@ namespace TouchApp.Business.Abstract
         IDataResult<List<User>> GetList(Expression<Func<User, bool>> filter = null);
         IDataResult<User> Get(Expression<Func<User, bool>> filter);
         IDataResult<int> Add(User user);
-        IDataResult<int> CreateUserByAdmin(CreateUserDto createUserDto);
+        IDataResult<int> CreateUserByAdmin(CreateManagementUserDto createUserDto);
         IDataResult<int> Update(User user);
         IDataResult<int> UpdateUserByAdmin(UpdateUserDto updateUserDto);
 
@@ -29,9 +29,6 @@ namespace TouchApp.Business.Abstract
         IDataResult<UserGetByIdDto> GetUserById(long userId);
         IDataResult<User> GetByMailWithExpression(Expression<Func<User, bool>> filter);
         IDataResult<User> GetUserWithRelations(Expression<Func<User, bool>> filter);
-        IDataResult<List<GetFamousOfferFeatureDto>> GetUserOfferFeatures(long famousPersonId, string acceptedLang);
-
-        IDataResult<UserLangDto> GetUserBySlug(string userSlug , string lang);
 
 
         Task<IDataResult<List<GetUserDto>>> GetDtoListAsync(Expression<Func<User, bool>> filter = null, int takeCount = 2000);

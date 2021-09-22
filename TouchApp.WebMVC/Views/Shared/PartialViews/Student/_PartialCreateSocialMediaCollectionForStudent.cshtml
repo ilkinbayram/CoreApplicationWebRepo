@@ -1,0 +1,44 @@
+﻿@using Core.Entities.Dtos.Teacher
+@using Core.Extensions
+
+@model CreateManagementTeacherDto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPh_0ps94tjnKNnod0NQnr4cqt0kFksSVnkkEWC0cz0bC9IaQ-CFBDyvqmOZT7UqRnAXU&usqp=CAU" alt="Alternate Text" style="width:25px; height: 25px; border-radius: 10%;" /></th>
+            <th scope="col">@("SocialMediaColHeader.NameLocalization".Translate())</th>
+            <th style="display:none;" scope="col">@("SocialMediaId.Localization".Translate())</th>
+            <th scope="col">@("SocialMedia.CustomUrlLocalization".Translate())</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.SocialMedias != null && Model.SocialMedias.Count > 0)
+        {
+            for (int i = 0; i < Model.SocialMedias.Count; i++)
+            {
+                <tr>
+                    <th scope="row"><img src="@Model.SocialMedias[i].IconSource" alt="@("MediaWasNotFound.Localization".Translate())" style="width:25px; height: 25px;" /></th>
+                    <td>@Model.SocialMedias[i].NameSocial</td>
+                    <td style="display:none;">@Html.TextBoxFor(x => x.TeacherSocialMedias[i].SocialMediaId)</td>
+                    <td>@Html.TextBoxFor(x => x.TeacherSocialMedias[i].RedirectUrl, new { @class = "form-control", placeholder = "SetUrl.GeneralLocalization".Translate() })</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th>
+                    <h5 class="text-secondary">@("NoSocialMediaHasForEnrol.InfoLocalize".Translate())</h5>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

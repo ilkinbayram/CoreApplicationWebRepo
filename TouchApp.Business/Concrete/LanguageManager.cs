@@ -1,13 +1,22 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
+using Core.Aspects.Autofac.Transaction;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.FieUploud;
+using Core.Entities.Dtos.Language;
+using Core.Resources.Enums;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -17,33 +26,71 @@ namespace Business.Concrete
         private readonly ILanguageDal _languageDal;
         private readonly IMapper _mapper;
 
-        public LanguageManager(ILanguageDal languageDal, IMapper mapper)
+        private IFileManager _fileManager;
+        private ICloudinaryService _cloudinaryService;
+        private ILocalizationDal _localizationDal;
+
+        public LanguageManager(ILanguageDal languageDal,
+                               IMapper mapper,
+                               IFileManager fileManager,
+                               ICloudinaryService cloudinaryService,
+                               ILocalizationDal localizationDal)
         {
             _languageDal = languageDal;
             _mapper = mapper;
+            _fileManager = fileManager;
+            _cloudinaryService = cloudinaryService;
+            _localizationDal = localizationDal;
         }
 
-        public IDataResult<int> Add(Language language)
+        [TransactionScopeAspect(Priority = 1)]
+        public IDataResult<int> Add(CreateManagementLanguageDto language)
         {
-            try
-            {
-                int affectedRows = _languageDal.Add(language);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
-                {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
-                }
+            var langOid = Convert.ToInt16(language.NameAbr);
+            var langAbriveature = Enum.GetName(typeof(LanguageOidContainerEnum), langOid);
+            language.NameAbr = langAbriveature;
+            language.Language_oid = langOid;
 
-                return dataResult;
-            }
-            catch (Exception exception)
+            var listFileListAdded = new List<string>();
+
+            var fileUploadResult = _fileManager.UploadThumbnail(language.FlagIconFile);
+
+            if (!fileUploadResult.Success)
+                return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+            var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
+
+            var result = new FileName()
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                FilePath = fileUploadResult.Data["thumbnailPath"],
+                CdnPath = _cloudinaryService.BuildUrl(publicId),
+                PublicId = publicId
+            };
+
+            _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+            _fileManager.Delete(fileUploadResult.Data["thumbnailPath"]);
+
+            listFileListAdded.Add(publicId);
+
+            language.FlagIconSource = result.CdnPath;
+
+            var addLangModel = _mapper.Map<Language>(language);
+
+            int affectedRows = _languageDal.Add(addLangModel);
+
+            var localizationList = GeneralFunctionality.ConverModelToLocalizationList(language);
+
+            foreach (var localizationOne in localizationList)
+            {
+                var responseAddLocalization = _localizationDal.Add(localizationOne);
+                if (responseAddLocalization <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
             }
+
+            if (affectedRows <= 0)
+                throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+            return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
         }
 
         public IDataResult<int> DeleteByStatus(long Id)
@@ -281,27 +328,65 @@ namespace Business.Concrete
 
         #region Asynchronous
 
-        public async Task<IDataResult<int>> AddAsync(Language language)
+        [TransactionScopeAspectAsync(Priority = 1)]
+        public async Task<IDataResult<int>> AddAsync(CreateManagementLanguageDto language)
         {
-            try
-            {
-                int affectedRows = await _languageDal.AddAsync(language);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
-                {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
-                }
+            var listFileListAdded = new List<string>();
+            //try
+            //{
+            var fileUploadResult = _fileManager.UploadThumbnail(language.FlagIconFile);
 
-                return dataResult;
-            }
-            catch (Exception exception)
+            if (!fileUploadResult.Success)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, fileUploadResult.Message);
             }
+
+            var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
+
+            var result = new FileName()
+            {
+                FilePath = fileUploadResult.Data["thumbnailPath"],
+                CdnPath = _cloudinaryService.BuildUrl(publicId),
+                PublicId = publicId
+            };
+
+            _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+            _fileManager.Delete(fileUploadResult.Data["thumbnailPath"]);
+
+            listFileListAdded.Add(publicId);
+
+            language.FlagIconSource = result.CdnPath;
+
+            var addLangModel = _mapper.Map<Language>(language);
+
+            int affectedRows = await _languageDal.AddAsync(addLangModel);
+
+            var localizationList = GeneralFunctionality.ConverModelToLocalizationList(language);
+
+            foreach (var localizationOne in localizationList)
+            {
+                var responseAddLocalization = await _localizationDal.AddAsync(localizationOne);
+                if (responseAddLocalization <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+            }
+
+            throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+
+            if (affectedRows <= 0)
+                throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+            return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+            //}
+            //catch (Exception exception)
+            //{
+            //    listFileListAdded.ForEach(x =>
+            //    {
+            //        _cloudinaryService.Delete(x);
+            //    });
+
+            //    return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            //}
         }
 
         public async Task<IDataResult<int>> DeleteByStatusAsync(long Id)

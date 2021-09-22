@@ -14,7 +14,7 @@ namespace Core.Entities.Concrete
 
         public string Key { get; set; }
         public string Translate { get; set; }
-        public long Project_oid { get; set; }
-        public byte Lang_oid { get; set; }
+        public short Project_oid { get; set; }
+        public short Lang_oid { get; set; }
     }
 }

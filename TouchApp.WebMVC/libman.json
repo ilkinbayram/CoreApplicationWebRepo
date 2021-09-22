@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "datepicker@1.0.10",
+      "destination": "wwwroot/externalComponents/css/",
+      "files": [
+        "datepicker.min.css"
+      ]
+    },
+    {
+      "library": "datepicker@1.0.10",
+      "destination": "wwwroot/externalComponents/js/",
+      "files": [
+        "datepicker.min.js"
+      ]
+    }
+  ]
+}

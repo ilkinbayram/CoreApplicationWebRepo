@@ -1,6 +1,6 @@
 ﻿namespace Core.Resources.Enums
 {
-    public enum Gender
+    public enum Gender : byte
     {
         Male=1,
         Female=2,

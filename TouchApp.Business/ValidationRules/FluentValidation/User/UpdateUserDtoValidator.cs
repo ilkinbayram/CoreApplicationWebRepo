@@ -18,9 +18,6 @@ namespace Business.ValidationRules.FluentValidation.User
             RuleFor(p => p.UnitPrice).NotEmpty().WithMessage("Unit Price bos ola bilmez");
             RuleFor(p => p.ProfilePhotoPath).NotEmpty().WithMessage("Profile sekli bos ola bilmez");
             RuleFor(p => p.WallpaperPath).NotEmpty().WithMessage("Wallpaper  sekli bos ola bilmez");
-            RuleFor(p => p.PreviewMoviePath).NotEmpty().WithMessage("Video bos ola bilmez");
-            RuleFor(p => p.CategoryId).NotNull().WithMessage("Categoria bos qoyula bilmez").NotEmpty().WithMessage("Categoria bos qoyula bilmez");
-            RuleForEach(x => x.UserFeatureValues).SetValidator(new UpdateUserFeatureValueValidator());
         }
     }
 

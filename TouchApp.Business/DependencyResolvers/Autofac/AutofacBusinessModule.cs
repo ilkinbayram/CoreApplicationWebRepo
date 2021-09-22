@@ -26,9 +26,6 @@ namespace TouchApp.Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<AuthManager>().As<IAuthService>();
 
-            builder.RegisterType<CategoryManager>().As<ICategoryService>();
-            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>();
-
             builder.RegisterType<CourseManager>().As<ICourseService>();
             builder.RegisterType<EfCourseDal>().As<ICourseDal>();
 
@@ -65,9 +62,6 @@ namespace TouchApp.Business.DependencyResolvers.Autofac
             builder.RegisterType<BlogManager>().As<IBlogService>();
             builder.RegisterType<EfBlogDal>().As<IBlogDal>();
 
-            builder.RegisterType<ProfessionManager>().As<IProfessionService>();
-            builder.RegisterType<EfProfessionDal>().As<IProfessionDal>();
-
             builder.RegisterType<SharingTypeManager>().As<ISharingTypeService>();
             builder.RegisterType<EfSharingTypeDal>().As<ISharingTypeDal>();
 
@@ -98,12 +92,45 @@ namespace TouchApp.Business.DependencyResolvers.Autofac
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
+            builder.RegisterType<StudentManager>().As<IStudentService>();
+            builder.RegisterType<EfStudentDal>().As<IStudentDal>();
 
-
-
+            builder.RegisterType<StudentOperationClaimManager>().As<IStudentOperationClaimService>();
+            builder.RegisterType<EfStudentOperationClaimDal>().As<IStudentOperationClaimDal>();
 
             builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>();
+
+            builder.RegisterType<TeacherOperationClaimManager>().As<ITeacherOperationClaimService>();
+            builder.RegisterType<EfTeacherOperationClaimDal>().As<ITeacherOperationClaimDal>();
+
+            builder.RegisterType<AnswerVariationManager>().As<IAnswerVariationService>();
+            builder.RegisterType<EfAnswerVariationDal>().As<IAnswerVariationDal>();
+
+            builder.RegisterType<ExamManager>().As<IExamService>();
+            builder.RegisterType<EfExamDal>().As<IExamDal>();
+
+            builder.RegisterType<ExamQuestionManager>().As<IExamQuestionService>();
+            builder.RegisterType<EfExamQuestionDal>().As<IExamQuestionDal>();
+
+            builder.RegisterType<QuestionManager>().As<IQuestionService>();
+            builder.RegisterType<EfQuestionDal>().As<IQuestionDal>();
+
+            builder.RegisterType<QuestionResultExamManager>().As<IQuestionResultExamService>();
+            builder.RegisterType<EfQuestionResultExamDal>().As<IQuestionResultExamDal>();
+
+            builder.RegisterType<QuestionVariationManager>().As<IQuestionVariationService>();
+            builder.RegisterType<EfQuestionVariationDal>().As<IQuestionVariationDal>();
+
+            builder.RegisterType<ResultExamManager>().As<IResultExamService>();
+            builder.RegisterType<EfResultExamDal>().As<IResultExamDal>();
+
+            builder.RegisterType<StudentStudyingGroupManager>().As<IStudentStudyingGroupService>();
+            builder.RegisterType<EfStudentStudyingGroupDal>().As<IStudentStudyingGroupDal>();
+
+            builder.RegisterType<StudyingGroupManager>().As<IStudyingGroupService>();
+            builder.RegisterType<EfStudyingGroupDal>().As<IStudyingGroupDal>();
+
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 

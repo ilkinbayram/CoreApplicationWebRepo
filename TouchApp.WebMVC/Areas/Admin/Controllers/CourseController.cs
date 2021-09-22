@@ -1,24 +1,25 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     public class CourseController : Controller
     {
         // GET: CourseController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             return View();
         }
 
         // GET: CourseController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
             return View();
         }
 
         // GET: CourseController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             return View();
         }
@@ -26,7 +27,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: CourseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection)
         {
             try
             {
@@ -39,7 +40,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         }
 
         // GET: CourseController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             return View();
         }
@@ -47,7 +48,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: CourseController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -60,7 +61,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         }
 
         // GET: CourseController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             return View();
         }
@@ -68,7 +69,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: CourseController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
             try
             {

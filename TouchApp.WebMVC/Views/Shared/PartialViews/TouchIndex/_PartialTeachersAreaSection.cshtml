@@ -40,9 +40,9 @@
                             {
                                 <div class="sin-testiText">
                                     <h2>@(teacherOne.FirstName)&nbsp;@(teacherOne.LastName)</h2>
-                                    <span class="language">@(teacherOne.Profession.NameKey.Translate())</span>
+                                    <span class="language">@(teacherOne.ProfessionNameKey.Translate())</span>
                                     <div class="teacher-info-container">
-                                        <p><i class="fa fa-graduation-cap"></i>Degree: @(string.Format("{0}.ProfessionDegree",teacherOne.Profession.ProfessionDegree.ToString()).Translate())</p>
+                                        <p><i class="fa fa-graduation-cap"></i>Degree: @(string.Format("{0}.ProfessionDegree",teacherOne.ProfessionDegree.ToString()).Translate())</p>
                                         @* TODO : Localization *@
                                         <p><i class="fa fa-star"></i>Experience: 2 Years in Preschool Education (From)</p>
                                         <p>
@@ -79,7 +79,7 @@
                                 <div class="sin-testiImage">
                                     <div class="teacher-image-carousel">
                                         @* TODO : Localization *@
-                                        <img src="@(teacherOne.IconSource)" alt="The Image Was Not Found" />
+                                        <img src="@(teacherOne.CaptionSource)" alt="The Image Was Not Found" />
                                     </div>
                                 </div>
                             }

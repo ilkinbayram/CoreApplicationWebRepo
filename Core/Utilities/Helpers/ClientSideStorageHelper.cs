@@ -15,7 +15,7 @@ namespace Core.Utilities.Helpers
             _configHelper = configHelper;
         }
 
-        public void Remove(string key, string value)
+        public void Remove(string key)
         {
             _httpContextAccessor.HttpContext.Response.Cookies.Delete(key);
         }
@@ -29,6 +29,11 @@ namespace Core.Utilities.Helpers
 
         public void Set(string key, string value, int expirationMinute = 15)
         {
+            var currentSameKeyValue = GetValue(key);
+
+            if (!string.IsNullOrEmpty(currentSameKeyValue))
+                Remove(key);
+
             CookieOptions option = new CookieOptions();
 
             option.Expires = DateTime.Now.AddMinutes(expirationMinute);

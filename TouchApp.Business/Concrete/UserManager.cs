@@ -30,8 +30,7 @@ namespace Business.Concrete
     {
         private readonly IUserDal _userDal;
         private readonly IMapper _mapper;
-        private readonly IUserOperationClaimService _userOperationClaimService; //
-        private readonly ICategoryService _categoryService;
+        private readonly IUserOperationClaimService _userOperationClaimService;
         private readonly ILanguageService _languageService;
         private readonly ICloudinaryService _cloudinaryService;
         private readonly IFileManager _fileManager;
@@ -41,7 +40,6 @@ namespace Business.Concrete
         public UserManager(IUserDal userDal,
                            IMapper mapper,
                            IUserOperationClaimService userOperationClaimService,
-                           ICategoryService categoryService,
                            ICloudinaryService cloudinaryService,
                            IMailService mailService,
                            IFileManager fileManager,
@@ -51,7 +49,6 @@ namespace Business.Concrete
             _userDal = userDal;
             _mapper = mapper;
             _userOperationClaimService = userOperationClaimService;
-            _categoryService = categoryService;
             _cloudinaryService = cloudinaryService;
             _fileManager = fileManager;
             _mailService = mailService;
@@ -85,9 +82,9 @@ namespace Business.Concrete
             }
         }
 
-        [TransactionScopeAspect()]
+        [TransactionScopeAspectAsync()]
         [ValidationAspect(typeof(CreateUserValidator), Priority = 1)]
-        public IDataResult<int> CreateUserByAdmin(CreateUserDto createUserDto)
+        public IDataResult<int> CreateUserByAdmin(CreateManagementUserDto createUserDto)
         {
             try
             {
@@ -99,7 +96,7 @@ namespace Business.Concrete
                 byte[] passwordHash, passwordSalt;
                 HashingHelper.CreatePasswordHash(pas, out passwordHash, out passwordSalt);
 
-                var userModel = _mapper.Map<CreateUserDto, User>(createUserDto);
+                var userModel = _mapper.Map<CreateManagementUserDto, User>(createUserDto);
                 userModel.Created_at = DateTime.Now;
                 userModel.Modified_at = DateTime.Now;
                 userModel.Created_by = _httpContext.HttpContext.User.GetFirstName();
@@ -452,26 +449,6 @@ namespace Business.Concrete
             return null;
         }
 
-        public IDataResult<List<GetFamousOfferFeatureDto>> GetUserOfferFeatures(long famousPersonId, string acceptedLang)
-
-        {
-            return null;
-        }
-
-        public IDataResult<UserLangDto> GetUserBySlug(string userSlug, string lang)
-        {
-
-            try
-            {
-                return new SuccessDataResult<UserLangDto>();
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<UserLangDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-            }
-        }
-
-
 
         #region Asynchronous
 
@@ -713,7 +690,6 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<GetUserDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-
         #endregion
     }
 }

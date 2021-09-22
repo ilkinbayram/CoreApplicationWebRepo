@@ -1,6 +1,5 @@
 ﻿using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.Blog;
-using Core.Entities.Dtos.UserCourse;
 using Core.Entities.Dtos.UserSocialMedia;
 using Core.Resources.Enums;
 using System;
@@ -30,7 +29,6 @@ namespace Core.Entities.Dtos.User
         public string SecurityToken { get; set; }
         public virtual List<GetUserSocialMediaDto> UserSocialMedias { get; set; }
         public virtual List<GetBlogDto> Blogs { get; set; }
-        public virtual List<GetUserCourseDto> UserCourses { get; set; }
 
     }
 }

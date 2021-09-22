@@ -1,11 +1,13 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
 using Core.DependencyResolvers;
 using Core.Entities.Concrete;
+using Core.Utilities.Helpers;
 using Core.Utilities.Helpers.Abstracts;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Core.Extensions
 {
@@ -20,11 +22,11 @@ namespace Core.Extensions
                 return default;
 
             var initialArray = featureIdsJoined.Split(',');
-            
+
 
             if (initialArray.Length == 1)
             {
-                if(!long.TryParse(initialArray[0], out long result))
+                if (!long.TryParse(initialArray[0], out long result))
                     return emptyResult;
 
                 resultList.Add(result);
@@ -46,33 +48,55 @@ namespace Core.Extensions
         {
             get
             {
-                var _configHelper = CoreInstanceFactory.GetInstance<IConfigHelper>();
-                
-                HttpContextAccessor context = new HttpContextAccessor();
-                var response = context.HttpContext.Request.Cookies[_configHelper.GetSettingsData<string>("cookie_lang_oid_keyword", "CookieFixedKeywords")];
-
-                if (string.IsNullOrEmpty(response))
+                try
                 {
-                    response = context.HttpContext.Request.Cookies[_configHelper.GetSettingsData<string>("default_lang_oid", "CookieFixedKeywords")];
+                    // TODO : Hard Code Should Be Refactored
+
+                    HttpContextAccessor context = new HttpContextAccessor();
+                    var response = context.HttpContext.Request.Cookies["language_oid_static_keyword_session"];
+
+                    if (string.IsNullOrEmpty(response))
+                    {
+                        response = context.HttpContext.Request.Cookies["1"];
+                        return Convert.ToByte(response);
+                    }
+
                     return Convert.ToByte(response);
                 }
-
-                return Convert.ToByte(response);
+                catch (Exception ex)
+                {
+                    return 1;
+                }
             }
         }
 
         public static string Translate(this string key)
         {
-            var _cacheManager = CoreInstanceFactory.GetInstance<ICacheManager>();
-
-            var unfilteredResponse = _cacheManager.Get<List<Localization>>(key);
-
-            if (unfilteredResponse != null)
+            try
             {
-                return unfilteredResponse.FirstOrDefault(x => x.Lang_oid == lang_oid).Translate;
-            }
+                var _cacheManager = CoreInstanceFactory.GetInstance<ICacheManager>();
 
-            return key;
+                // TODO : Hard Code Should Be Refactored
+
+                var allResponse = _cacheManager.Get<Dictionary<string, string>>("language_oid_static_keyword_servercache");
+                if (allResponse != null)
+                {
+                    return allResponse.ContainsKey(key) ? allResponse[key] : key;
+                }
+
+                return key;
+            }
+            catch (Exception ex)
+            {
+                return key;
+            }
+        }
+
+        public static string GetStaticMediaURL(this string configKey)
+        {
+            var resultRead = ConfigHelper.GetSettingsDataStatic<string>(configKey, "StaticMediaURL");
+
+            return resultRead;
         }
     }
 }

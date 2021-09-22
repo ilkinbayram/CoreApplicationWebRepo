@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Core.Entities.Dtos.Base;
-using Core.Entities.Dtos.Profession;
+﻿using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.TeacherCourse;
 using Core.Entities.Dtos.TeacherSocialMedia;
-using Core.Entities.Dtos.UserCourse;
 using Core.Resources.Enums;
+using System;
+using System.Collections.Generic;
 
 
 
@@ -25,7 +22,7 @@ namespace Core.Entities.Dtos.Teacher
         public string PhoneNumberPrefix { get; set; }
         public string PhoneNumber { get; set; }
         public string PreviewMoviePath { get; set; }
-        public string IconSource { get; set; }
+        public string CaptionSource { get; set; }
         public string SecurityToken { get; set; }
         public DateTime? Birthday { get; set; }
         public Gender Gender { get; set; }
@@ -35,11 +32,15 @@ namespace Core.Entities.Dtos.Teacher
         public string ProfilePhotoPath { get; set; }
         public string WallpaperPath { get; set; }
 
-        public long ProfessionId { get; set; }
+        public string ProfessionNameKey { get; set; }
+        public string ProfessionDescriptionKey { get; set; }
+        public DateTime? StartProfessionCareer { get; set; }
+        public ProfessionDegree ProfessionDegree { get; set; }
 
-        public GetProfessionDto Profession { get; set; }
+        public string CompanyNameKey { get; set; }
+        public string JobDescriptionKey { get; set; }
+
         public List<GetTeacherSocialMediaDto> TeacherSocialMedias { get; set; }
         public List<GetTeacherCourseDto> TeacherCourses { get; set; }
-        public List<GetUserCourseDto> UserCourses { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace TouchApp.WebMVC
             services.AddControllersWithViews();
 
             var local = Configuration.GetConnectionString("LocalDB");
-            var testServer = Configuration.GetConnectionString("TestServerDB");
+            var testServer = Configuration.GetConnectionString("ServerDB");
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(testServer);

@@ -13,6 +13,7 @@ namespace Core.Entities.Concrete
 
         public string OwnerEmail { get; set; }
         public string CommentContent { get; set; }
+        public bool IsAccepted { get; set; }
 
         public long CourseId { get; set; }
 

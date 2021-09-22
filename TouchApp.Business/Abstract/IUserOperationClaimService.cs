@@ -19,9 +19,6 @@ namespace TouchApp.Business.Abstract
         IDataResult<int> UpdateList(List<UserOperationClaim> userOperationClaims);
         IDataResult<int> DeletePermanentlyList(List<UserOperationClaim> userOperationClaims);
         IDataResult<int> DeleteByStatusList(List<UserOperationClaim> userOperationClaims);
-
-        Task<IDataResult<List<GetUserOperationClaimDto>>> GetDtoListAsync(Expression<Func<UserOperationClaim, bool>> filter = null, int takeCount = 2000);
-        Task<IDataResult<GetUserOperationClaimDto>> GetDtoAsync(Expression<Func<UserOperationClaim, bool>> filter = null);
         Task<IDataResult<int>> DeletePermanentlyListAsync(List<UserOperationClaim> userOperationClaims);
         Task<IDataResult<int>> UpdateListAndSaveAsync(List<UserOperationClaim> userOperationClaims);
         Task<IDataResult<List<UserOperationClaim>>> GetListAsync(Expression<Func<UserOperationClaim, bool>> filter = null);

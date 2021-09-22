@@ -28,11 +28,12 @@ namespace Core.Entities.Concrete
         public DateTime PublishDate { get; set; }
 
         public long ProfessionCourseCategoryId { get; set; }
+        public long LanguageId { get; set; }
 
-
+        public virtual List<StudyingGroup> StudyingGroups { get; set; }
         public virtual List<TeacherCourse> TeacherCourses { get; set; }
-        public virtual List<UserCourse> UserCourses { get; set; }
         public virtual List<CourseComment> CourseComments { get; set; }
         public virtual ProfessionCourseCategory ProfessionCourseCategory { get; set; }
+        public virtual Language Language { get; set; }
     }
 }

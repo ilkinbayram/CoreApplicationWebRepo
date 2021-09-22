@@ -7,6 +7,35 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Dashboard - SB Admin</title>
+
+
+    <!-- Bootstrap min.CSS From Web
+    ============================================ -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- jquery From Web CDN
+    ==================================       -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha512-U6K1YLIFUWcvuw5ucmMtT9HH4t0uz3M366qrF5y4vnyH6dgDzndlcGvH/Lz5k8NFh80SN95aJ5rqGZEdaQZ7ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Popper From Web CDN JS
+    ============================================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <!-- bootstrap From Web CDN JS
+    ======================================= -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome Kit
+    ============================================-->
+    <script src="https://kit.fontawesome.com/8d2a2067a9.js" crossorigin="anonymous"></script>
+
+    <!-- External Component DateTimePicker CSS
+    ============================================ -->
+    <link href="~/externalComponents/css/datepicker.min.css" rel="stylesheet" />
+
+    <!-- External Component DateTimePicker JS
+    ============================================ -->
+    <script src="~/externalComponents/js/datepicker.min.js"></script>
+
+
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="~/bootstrapManagementPanel/css/styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -127,6 +156,11 @@
             </footer>
         </div>
     </div>
+    <!--End of Footer Area-->
+    <!-- jquery
+    ==================================
+    <script src="~/js/vendor/jquery-1.12.3.min.js"></script> ========== -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/bootstrapManagementPanel/js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -134,5 +168,7 @@
     <script src="~/bootstrapManagementPanel/assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="~/bootstrapManagementPanel/js/datatables-simple-demo.js"></script>
+
+    @RenderSection("ScriptComponent", false)
 </body>
 </html>

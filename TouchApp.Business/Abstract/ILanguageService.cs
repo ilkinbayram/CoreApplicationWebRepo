@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Core.Entities.Dtos.Language;
 using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<Language>> GetList(Expression<Func<Language, bool>> filter = null);
         IDataResult<Language> Get(Expression<Func<Language, bool>> filter);
-        IDataResult<int> Add(Language language);
+        IDataResult<int> Add(CreateManagementLanguageDto language);
         IDataResult<int> Update(Language language);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);
@@ -30,6 +31,6 @@ namespace TouchApp.Business.Abstract
         Task<IDataResult<Language>> GetAsync(Expression<Func<Language, bool>> filter);
         Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
         Task<IDataResult<int>> DeleteByStatusAsync(long Id);
-        Task<IDataResult<int>> AddAsync(Language language);
+        Task<IDataResult<int>> AddAsync(CreateManagementLanguageDto language);
     }
 }

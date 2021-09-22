@@ -57,6 +57,13 @@
             public static string SearchValueCannotBeEmpty = "Search value can not be empty";
             public static string UserIdCannotBeNull = "User id can not be null or its default value";
             public static string CategoryIdCannotBeNull = "Category id can not be null or its default value";
+
+            public static string NOT_ADDED_AND_ROLLED_BACK => "DataAddOperationRolledBackNotCompleted.LocalizationError";
+        }
+
+        public static class WarningMessages
+        {
+            public static string NOT_SUPPORTED_FileContentType => "NotSupportedFileContentType.LocalizationWarning";
         }
     }
 }

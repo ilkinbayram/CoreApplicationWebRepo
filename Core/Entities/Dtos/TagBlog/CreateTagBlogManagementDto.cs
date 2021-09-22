@@ -18,6 +18,6 @@ namespace Core.Entities.Dtos.TagBlog
         public long BlogId { get; set; }
 
         public CreateTagForManagementDto Tag { get; set; }
-        public CreateBlogForManagementDto Blog { get; set; }
+        public CreateManagementBlogDto Blog { get; set; }
     }
 }

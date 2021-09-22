@@ -1,24 +1,26 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class SharingTypeController : Controller
     {
         // GET: SharingTypeController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             return View();
         }
 
         // GET: SharingTypeController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
             return View();
         }
 
         // GET: SharingTypeController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             return View();
         }
@@ -26,7 +28,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: SharingTypeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection)
         {
             try
             {
@@ -39,7 +41,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         }
 
         // GET: SharingTypeController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             return View();
         }
@@ -47,7 +49,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: SharingTypeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -60,7 +62,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         }
 
         // GET: SharingTypeController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             return View();
         }
@@ -68,7 +70,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: SharingTypeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
             try
             {

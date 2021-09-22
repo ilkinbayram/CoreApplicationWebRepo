@@ -4,7 +4,7 @@
     {
         Blog = 1,
         BlogCategory = 2,
-        Category = 3,
+        StudentOperationClaim = 3,
         Course = 4,
         CourseComment = 5,
         CourseService = 6,
@@ -14,7 +14,7 @@
         Message = 10,
         OperationClaim = 11,
         Phrase = 12,
-        Profession = 13,
+        Exam = 13,
         ProfessionCourseCategory = 14,
         SharingType = 15,
         SharingTypeMedia = 16,
@@ -26,10 +26,17 @@
         TeacherCourse = 22,
         TeacherSocialMedia = 23,
         User = 24,
-        UserCourse = 25,
+        StudentStudyingGroup = 25,
         UserOperationClaim = 26,
         UserSocialMedia = 27,
-        OfficialCompany = 28,
-        TeacherOfficialCompany = 29
+        Student = 28,
+        TeacherOperationClaim = 29,
+        ExamQuestion = 30,
+        StudyingGroup = 31,
+        AnswerVariation = 32,
+        Question = 33,
+        QuestionResultExam = 34,
+        QuestionVariation = 35,
+        ResultExam = 36
     }
 }

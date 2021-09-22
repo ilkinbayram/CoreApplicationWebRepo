@@ -10,9 +10,11 @@ namespace Core.Entities.Dtos.Localization
             ModelType = ProjectModelType.Localization;
         }
         public string Key { get; set; }
-        public string Translate_Ru { get; set; }
-        public string Translate_Az { get; set; }
-        public string Translate_En { get; set; }
-        public string Translate_Tr { get; set; }
+        public string TranslateRUS { get; set; }
+        public string TranslateAZE { get; set; }
+        public string TranslateENG { get; set; }
+        public string TranslateTUR { get; set; }
+        public short Project_oid { get; set; }
+        public short Lang_oid { get; set; }
     }
 }

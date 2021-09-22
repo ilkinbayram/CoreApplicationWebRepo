@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Core.Aspects.Autofac.Transaction;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.Localization;
 using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -23,27 +26,21 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
-        public IDataResult<int> Add(Localization localization)
+        [TransactionScopeAspect(Priority = 1)]
+        public IDataResult<int> Add(CreateLocalizationDto localization)
         {
-            try
-            {
-                int affectedRows = _localizationDal.Add(localization);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
-                {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
-                }
+            int counterResult = 0;
+            var localizationList = GeneralFunctionality.ConverModelToLocalizationList(localization);
 
-                return dataResult;
-            }
-            catch (Exception exception)
+            foreach (var localizationOne in localizationList)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                var responseAddLocalization = _localizationDal.Add(localizationOne);
+                counterResult += responseAddLocalization;
+                if (responseAddLocalization <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
             }
+
+            return new SuccessDataResult<int>(counterResult, Messages.BusinessDataAdded);
         }
 
         public IDataResult<int> DeleteByStatus(long Id)
@@ -281,7 +278,31 @@ namespace Business.Concrete
 
         #region Asynchronous
 
-        public async Task<IDataResult<int>> AddAsync(Localization localization)
+        public async Task<IDataResult<int>> AddDtoAsync(CreateLocalizationDto localization)
+        {
+            try
+            {
+                var addLocalizeModel = _mapper.Map<Localization>(localization);
+                int affectedRows = await _localizationDal.AddAsync(addLocalizeModel);
+                IDataResult<int> dataResult;
+                if (affectedRows > 0)
+                {
+                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+                }
+                else
+                {
+                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                }
+
+                return dataResult;
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public async Task<IDataResult<int>> AddModelAsync(Localization localization)
         {
             try
             {

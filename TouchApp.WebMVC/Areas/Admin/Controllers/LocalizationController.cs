@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Dtos.Localization;
+using Core.ViewUsableModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class LocalizationController : AdminBaseController
     {
+        private ILocalizationService _localizationService;
+        public LocalizationController(ILocalizationService localizationService)
+        {
+            _localizationService = localizationService;
+        }
+
         // GET: LocalizationController
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -25,22 +34,42 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Create()
         {
-            return View();
+            try
+            {
+                CreateLocalizationDto createModel = new CreateLocalizationDto();
+                return View(createModel);
+            }
+            catch (System.Exception)
+            {
+                return View("ServerErrorPage");
+            }
         }
 
         // POST: LocalizationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateLocalizationDto createModel)
         {
-            try
+            var resultLocalizationService = _localizationService.Add(createModel);
+
+            if (resultLocalizationService != null)
             {
-                return RedirectToAction(nameof(Index));
+                if (resultLocalizationService.Success)
+                {
+                    var createLocalizationDtoModel = new CreateLocalizationDto();
+                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultLocalizationService.Message });
+
+                    return View(createLocalizationDtoModel);
+                }
+                else
+                {
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultLocalizationService.Message });
+
+                    return View(createModel);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("ServerErrorPage");
         }
 
         // GET: LocalizationController/Edit/5

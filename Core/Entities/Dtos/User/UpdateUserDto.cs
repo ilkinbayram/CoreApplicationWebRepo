@@ -1,6 +1,5 @@
 ﻿using Core.Resources.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace Core.Entities.Dtos.User
 {
@@ -20,10 +19,5 @@ namespace Core.Entities.Dtos.User
         public Gender Gender { get; set; }
         public string Biography { get; set; }
         public decimal? UnitPrice { get; set; }
-        public string PreviewMoviePath { get; set; }
-        //public string PreviewMoviePathUpdate { get; set; }
-        public long CategoryId { get; set; }
-        public bool ShowInHomePage { get; set; }
-        public List<UpdateUserFeatureValue> UserFeatureValues { get; set; }
     }
 }

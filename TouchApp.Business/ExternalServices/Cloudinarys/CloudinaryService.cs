@@ -31,7 +31,7 @@ namespace Business.ExternalServices.Cloudinarys
             {
                 File = new FileDescription(sourcePath),
                 UniqueFilename = true,
-                Folder = "mvp/uploads/",
+                Folder = "touchapp/uploads/",
             };
 
             var uploadResult = _cloudinary.Upload(uploadParams);
@@ -42,23 +42,13 @@ namespace Business.ExternalServices.Cloudinarys
         public string StoreVideo(string file)
         {
             string sourcePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", file);
-            //var uploadParams = new ImageUploadParams()
-            //{
-            //    File = new FileDescription(sourcePath),
-            //    UniqueFilename = true,
-            //    Folder = "mvp/uploads/",
-            //};
-
-            //var uploadResult = _cloudinary.Upload(uploadParams);
-
-            //return uploadResult.PublicId;
 
             var uploadParams = new VideoUploadParams()
             {
                 File = new FileDescription(sourcePath),
                 UniqueFilename = true,
                 Overwrite = true,
-                Folder = "mvp/uploads/"
+                Folder = "touchapp/uploads/"
                 //NotificationUrl = "https://mysite/my_notification_endpoint"
             };
             var uploadResult = _cloudinary.Upload(uploadParams);
@@ -72,7 +62,7 @@ namespace Business.ExternalServices.Cloudinarys
             {
                 File = new FileDescription(sourcePath),
                 UniqueFilename = true,
-                Folder = "mvp/uploads/",
+                Folder = "touchapp/uploads/",
                 Transformation = new Transformation().Width(width).Height(height).Crop(crop)
             };
 
@@ -99,7 +89,7 @@ namespace Business.ExternalServices.Cloudinarys
             {
                 File = new FileDescription(url),
                 UniqueFilename = true,
-                Folder = "mvp/uploads/"
+                Folder = "touchapp/uploads/"
             };
 
             var uploadResult = _cloudinary.Upload(uploadParams);

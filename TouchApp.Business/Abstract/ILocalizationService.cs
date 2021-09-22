@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Core.Entities.Dtos.Localization;
 using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<Localization>> GetList(Expression<Func<Localization, bool>> filter = null);
         IDataResult<Localization> Get(Expression<Func<Localization, bool>> filter);
-        IDataResult<int> Add(Localization localization);
+        IDataResult<int> Add(CreateLocalizationDto localization);
         IDataResult<int> Update(Localization localization);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);
@@ -30,6 +31,7 @@ namespace TouchApp.Business.Abstract
         Task<IDataResult<Localization>> GetAsync(Expression<Func<Localization, bool>> filter);
         Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
         Task<IDataResult<int>> DeleteByStatusAsync(long Id);
-        Task<IDataResult<int>> AddAsync(Localization localization);
+        Task<IDataResult<int>> AddDtoAsync(CreateLocalizationDto localization);
+        Task<IDataResult<int>> AddModelAsync(Localization localization);
     }
 }

@@ -8,48 +8,101 @@
     Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>CreateLocalizationDto</h4>
+<h1>@("ToCreate.TranslateLocalization".Translate())</h1>
 <hr />
+
+<h4>@("LocalizationCreateView.HeaderLocalization".Translate())</h4>
+<hr />
+
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group mt-2 mb-4">
-                <label asp-for="Key" class="control-label"><strong>@("Localization.KeywordGeneral".Translate())</strong></label>
-                <input asp-for="Key" type="text" class="form-control" />
-                <span asp-validation-for="Key" class="text-danger"></span>
+    <div class="col-md-12 col-12 col-sm-12">
+        @using (Html.BeginForm("Create", "Localization", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row  mb-1 mt-2">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mb-1 mt-2">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Key, "GeneralLanguageNameKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.Key, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Key, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.TranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TranslateAZE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TranslateAZE, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.TranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TranslateRUS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TranslateRUS, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.TranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TranslateENG, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TranslateENG, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <div class="form-group mb-1">
+                                @Html.LabelFor(x => x.TranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TranslateTUR, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TranslateTUR, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    @*TODO : Localize All Create Button*@
+                    <div class="form-group mt-2 mb-2">
+                        <input type="submit" value="@("CreateNew.LocalizationGeneral".Translate())" class="btn btn-primary" />
+                        <a class="ml-2 btn btn-secondary text-light" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
+                    </div>
+                </div>
             </div>
-            <hr /><hr />
-            <div class="form-group mt-2 mb-4">
-                <label asp-for="Translate_Ru" class="control-label"><strong>@("Localization.TranslateRUS".Translate())</strong></label>
-                <input asp-for="Translate_Ru" type="text" class="form-control" />
-                <span asp-validation-for="Translate_Ru" class="text-danger"></span>
-            </div>
-            <div class="form-group mt-2 mb-2">
-                <label asp-for="Translate_Az" class="control-label"><strong>@("Localization.TranslateAZE".Translate())</strong></label>
-                <input asp-for="Translate_Az" type="text" class="form-control" />
-                <span asp-validation-for="Translate_Az" class="text-danger"></span>
-            </div>
-            <div class="form-group mt-2 mb-2">
-                <label asp-for="Translate_En" class="control-label"><strong>@("Localization.TranslateENG".Translate())</strong></label>
-                <input asp-for="Translate_En" type="text" class="form-control" />
-                <span asp-validation-for="Translate_En" class="text-danger"></span>
-            </div>
-            <div class="form-group mt-2 mb-2">
-                <label asp-for="Translate_Tr" class="control-label"><strong>@("Localization.TranslateTUR".Translate())</strong></label>
-                <input asp-for="Translate_Tr" type="text" class="form-control" />
-                <span asp-validation-for="Translate_Tr" class="text-danger"></span>
-            </div>
-            <div class="form-group mt-2">
-                <input type="submit" value="Create" class="btn btn-success" />
-            </div>
-        </form>
+        }
     </div>
 </div>
-
-<div class="mt-1">
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+<div id="responseMessageContainer">
+    @if (Model.ResponseMessages != null && Model.ResponseMessages.Count > 0)
+    {
+        foreach (var message in Model.ResponseMessages)
+        {
+            <div class="responseMessage">
+                <div class="alert alert-@message.AlertColor alert-dismissible fade show" role="alert">
+                    <strong>@message.AlertMessage</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+    }
 </div>
 
+
+
+@section ScriptComponent{
+    <style>
+        .responseMessage {
+            position: relative;
+            right: 20px !important;
+            bottom: 20px !important;
+            opacity: 0.9 !important;
+        }
+    </style>
+    <script src="~/js/CustomComponent.js"></script>
+    <script>
+        setTimeout(function (e) {
+            $("#responseMessageContainer").fadeOut(500);
+        }, 3000)
+    </script>
+}

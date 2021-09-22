@@ -485,33 +485,33 @@ namespace Business.Concrete
             }
         }
 
-        public async Task<IDataResult<GetUserOperationClaimDto>> GetDtoAsync(Expression<Func<UserOperationClaim, bool>> filter = null)
-        {
-            try
-            {
-                var response = await _userOperationClaimDal.GetAsync(filter);
-                var mappingResult = _mapper.Map<GetUserOperationClaimDto>(response);
-                return new SuccessDataResult<GetUserOperationClaimDto>(mappingResult);
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<GetUserOperationClaimDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-            }
-        }
+        //public async Task<IDataResult<GetUserOperationClaimDto>> GetDtoAsync(Expression<Func<UserOperationClaim, bool>> filter = null)
+        //{
+        //    try
+        //    {
+        //        var response = await _userOperationClaimDal.GetAsync(filter);
+        //        var mappingResult = _mapper.Map<GetUserOperationClaimDto>(response);
+        //        return new SuccessDataResult<GetUserOperationClaimDto>(mappingResult);
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        return new ErrorDataResult<GetUserOperationClaimDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+        //    }
+        //}
 
-        public async Task<IDataResult<List<GetUserOperationClaimDto>>> GetDtoListAsync(Expression<Func<UserOperationClaim, bool>> filter = null, int takeCount = 2000)
-        {
-            try
-            {
-                var response = (await _userOperationClaimDal.GetAllAsQueryableAsync(filter)).ToList();
-                var mappingResult = _mapper.Map<List<GetUserOperationClaimDto>>(response).Take(takeCount).ToList();
-                return new SuccessDataResult<List<GetUserOperationClaimDto>>(mappingResult);
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<List<GetUserOperationClaimDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-            }
-        }
+        //public async Task<IDataResult<List<GetUserOperationClaimDto>>> GetDtoListAsync(Expression<Func<UserOperationClaim, bool>> filter = null, int takeCount = 2000)
+        //{
+        //    try
+        //    {
+        //        var response = (await _userOperationClaimDal.GetAllAsQueryableAsync(filter)).ToList();
+        //        var mappingResult = _mapper.Map<List<GetUserOperationClaimDto>>(response).Take(takeCount).ToList();
+        //        return new SuccessDataResult<List<GetUserOperationClaimDto>>(mappingResult);
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        return new ErrorDataResult<List<GetUserOperationClaimDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+        //    }
+        //}
 
         #endregion
     }

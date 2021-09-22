@@ -1,5 +1,8 @@
 ﻿using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
+using Core.ViewUsableModel;
+using System;
+using System.Collections.Generic;
 
 namespace Core.Entities.Dtos.Localization
 {
@@ -8,11 +11,17 @@ namespace Core.Entities.Dtos.Localization
         public CreateLocalizationDto()
         {
             ModelType = ProjectModelType.Localization;
+            Created_at = DateTime.Now;
+            Created_by = "System";
+
+            ResponseMessages = new List<AlertResult>();
         }
         public string Key { get; set; }
-        public string Translate_Ru { get; set; }
-        public string Translate_Az { get; set; }
-        public string Translate_En { get; set; }
-        public string Translate_Tr { get; set; }
+        public string TranslateRUS { get; set; }
+        public string TranslateAZE { get; set; }
+        public string TranslateENG { get; set; }
+        public string TranslateTUR { get; set; }
+
+        public List<AlertResult> ResponseMessages { get; set; }
     }
 }

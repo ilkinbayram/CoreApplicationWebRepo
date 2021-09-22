@@ -1,4 +1,5 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
+using Core.Entities.Concrete;
 using Core.Utilities.Helpers.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -67,6 +68,8 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
                 Sliders = (await _sliderService.GetDtoListAsync()).Data, 
                 Teachers = (await _teacherService.GetDtoListAsync()).Data
             };
+
+            var cacheData = _cacheManager.Get("");
 
             return View(_viewModel);
         }

@@ -1,6 +1,6 @@
 ﻿namespace Core.Resources.Enums
 {
-    public enum AccountType
+    public enum AccountType : byte
     {
         Admin = 1,
         Teacher = 2,

@@ -19,6 +19,60 @@ namespace TouchApp.DataAccess.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Core.Entities.Concrete.AnswerVariation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DefinitionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsTrue")
+                        .HasColumnType("bit");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("OptionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("QuestionResultId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionResultId");
+
+                    b.ToTable("AnswerVariations");
+                });
+
             modelBuilder.Entity("Core.Entities.Concrete.Blog", b =>
                 {
                     b.Property<long>("Id")
@@ -37,7 +91,8 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("ContentHtmlRawKey")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -50,7 +105,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -62,6 +121,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerProfessionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreviewDescriptionKey")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("ScreenType")
@@ -97,7 +159,8 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -116,7 +179,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -137,61 +204,6 @@ namespace TouchApp.DataAccess.Migrations
                     b.ToTable("BlogCategories");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.Category", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<byte>("CategoryType")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("Created_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Created_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("DescKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IconSource")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime>("Modified_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Modified_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("NameKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("ParentCategoryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("ShowInHomePage")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentCategoryId");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("Core.Entities.Concrete.Course", b =>
                 {
                     b.Property<long>("Id")
@@ -204,7 +216,8 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("ContentHtmlRawKey")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -220,13 +233,20 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<long>("LanguageId")
+                        .HasColumnType("bigint");
+
                     b.Property<byte>("MaxTotalMonths")
                         .HasColumnType("tinyint");
 
                     b.Property<byte>("MinTotalMonths")
                         .HasColumnType("tinyint");
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -260,6 +280,8 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LanguageId");
+
                     b.HasIndex("ProfessionCourseCategoryId");
 
                     b.ToTable("Courses");
@@ -280,7 +302,8 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<long>("CourseId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -288,12 +311,19 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -320,7 +350,8 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -339,7 +370,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -358,6 +393,113 @@ namespace TouchApp.DataAccess.Migrations
                     b.ToTable("CourseServices");
                 });
 
+            modelBuilder.Entity("Core.Entities.Concrete.Exam", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("AverageResulPercentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("ExamDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("ExamPeriodMinute")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("ExamTitleKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("StudyingGroupId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudyingGroupId");
+
+                    b.ToTable("Exams");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.ExamQuestion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("ExamId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("QuestionId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("ExamQuestions");
+                });
+
             modelBuilder.Entity("Core.Entities.Concrete.Language", b =>
                 {
                     b.Property<long>("Id")
@@ -367,17 +509,29 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CourseLanguageKey")
+                    b.Property<DateTime?>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Created_by")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FlagIconSource")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<short>("Language_oid")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modified_by")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameAbr")
                         .HasColumnType("nvarchar(max)");
@@ -399,7 +553,8 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -413,12 +568,16 @@ namespace TouchApp.DataAccess.Migrations
                         .HasDefaultValue(true);
 
                     b.Property<string>("Key")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<byte>("Lang_oid")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("Lang_oid")
+                        .HasColumnType("smallint");
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -426,13 +585,17 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long>("Project_oid")
-                        .HasColumnType("bigint");
+                    b.Property<short>("Project_oid")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Translate")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Key", "Lang_oid")
+                        .IsUnique()
+                        .HasFilter("[Key] IS NOT NULL");
 
                     b.ToTable("Localizations");
                 });
@@ -449,7 +612,8 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("AltrKey")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -465,7 +629,11 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<byte>("MediaType")
                         .HasColumnType("tinyint");
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -493,11 +661,26 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Created_by")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<long>("MessageCode")
                         .HasColumnType("bigint");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modified_by")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -513,8 +696,23 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Created_by")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modified_by")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -541,7 +739,8 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("ContentKey")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -554,7 +753,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -579,67 +782,6 @@ namespace TouchApp.DataAccess.Migrations
                     b.ToTable("Phrases");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.Profession", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Created_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("CurrentCompanyKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CurrentPositionAtCompanyKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime>("Modified_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Modified_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("NameKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("ParentProfessionId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("ProfDescKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("ProfessionDegree")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("StartProfession")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SubnameKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentProfessionId");
-
-                    b.ToTable("Professions");
-                });
-
             modelBuilder.Entity("Core.Entities.Concrete.ProfessionCourseCategory", b =>
                 {
                     b.Property<long>("Id")
@@ -649,7 +791,8 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -668,7 +811,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -689,7 +836,7 @@ namespace TouchApp.DataAccess.Migrations
                     b.ToTable("ProfessionCourseCategories");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.SharingType", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.Question", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -698,7 +845,63 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<byte>("DifficultyDegree")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("EvaluationPoint")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("QuestionTextKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuestionToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("QuestionType")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.QuestionResultExam", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -711,7 +914,186 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("QuestionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ResultExamId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("ResultExamId");
+
+                    b.ToTable("QuestionResultExams");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.QuestionVariation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DefinitionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsTrue")
+                        .HasColumnType("bit");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("OptionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("QuestionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("VariationToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("QuestionVariations");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.ResultExam", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("ExamId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsJoined")
+                        .HasColumnType("bit");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<byte>("NoAnswerCount")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("RightAnswerCount")
+                        .HasColumnType("tinyint");
+
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("TotalPoint")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalRightPercentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<byte>("WrongAnswerCount")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("ResultExams");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.SharingType", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -736,7 +1118,8 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -752,7 +1135,11 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<long>("MediaId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -781,7 +1168,7 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Created_by")
@@ -792,7 +1179,10 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modified_by")
@@ -824,7 +1214,8 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -840,7 +1231,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -859,7 +1254,7 @@ namespace TouchApp.DataAccess.Migrations
                     b.ToTable("SocialMedias");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.Tag", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.Student", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -868,7 +1263,129 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<string>("AccessToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("AccountType")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Gender")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumberPrefix")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.StudentOperationClaim", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Created_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modified_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("OperationClaimId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OperationClaimId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentOperationClaims");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.StudentStudyingGroup", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -881,7 +1398,109 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("RegisteredDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("StudyingGroupId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("StudyingGroupId");
+
+                    b.ToTable("StudentStudyingGroups");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.StudyingGroup", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CourseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Modified_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("StudyingGroups");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.Tag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Created_by")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -912,7 +1531,8 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<long>("BlogId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -925,7 +1545,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -960,7 +1584,14 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<string>("CaptionSource")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyNameKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -974,21 +1605,25 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IconSource")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte>("Gender")
+                        .HasColumnType("tinyint");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<string>("JobDescriptionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -1011,27 +1646,28 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("PreviewMoviePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ProfessionId")
-                        .HasColumnType("bigint");
+                    b.Property<byte>("ProfessionDegree")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("ProfessionDescriptionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfessionNameKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePhotoPath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("RateCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityToken")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("StartProfessionCareer")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("WallpaperPath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProfessionId");
 
                     b.ToTable("Teachers");
                 });
@@ -1048,7 +1684,8 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<long>("CourseId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -1061,7 +1698,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -1081,6 +1722,48 @@ namespace TouchApp.DataAccess.Migrations
                     b.ToTable("TeacherCourses");
                 });
 
+            modelBuilder.Entity("Core.Entities.Concrete.TeacherOperationClaim", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Created_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modified_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("OperationClaimId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TeacherId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OperationClaimId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherOperationClaims");
+                });
+
             modelBuilder.Entity("Core.Entities.Concrete.TeacherSocialMedia", b =>
                 {
                     b.Property<long>("Id")
@@ -1090,7 +1773,8 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -1103,7 +1787,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -1138,19 +1826,13 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccountType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BiographyKey")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte>("AccountType")
+                        .HasColumnType("tinyint");
 
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("CategoryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Created_by")
@@ -1164,10 +1846,10 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int>("Gender")
+                    b.Property<byte>("Gender")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(3);
+                        .HasColumnType("tinyint")
+                        .HasDefaultValue((byte)3);
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -1177,7 +1859,10 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modified_by")
@@ -1214,62 +1899,7 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.UserCourse", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CourseId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("Created_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Created_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime>("Modified_at")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Modified_by")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("RegisteredDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("TeacherId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCourses");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.UserOperationClaim", b =>
@@ -1281,8 +1911,23 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Created_by")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modified_by")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("OperationClaimId")
                         .HasColumnType("bigint");
@@ -1308,7 +1953,8 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime?>("Created_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
@@ -1321,7 +1967,11 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("Modified_at")
+                    b.Property<short>("ModelType")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("Modified_at")
+                        .IsRequired()
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
@@ -1345,6 +1995,17 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserSocialMedias");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.AnswerVariation", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.QuestionResultExam", "QuestionResult")
+                        .WithMany("AnswerVariations")
+                        .HasForeignKey("QuestionResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("QuestionResult");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Blog", b =>
@@ -1375,22 +2036,21 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("ParentCategory");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.Category", b =>
-                {
-                    b.HasOne("Core.Entities.Concrete.Category", "ParentCategory")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentCategoryId");
-
-                    b.Navigation("ParentCategory");
-                });
-
             modelBuilder.Entity("Core.Entities.Concrete.Course", b =>
                 {
+                    b.HasOne("Core.Entities.Concrete.Language", "Language")
+                        .WithMany("Courses")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Concrete.ProfessionCourseCategory", "ProfessionCourseCategory")
                         .WithMany("Courses")
                         .HasForeignKey("ProfessionCourseCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Language");
 
                     b.Navigation("ProfessionCourseCategory");
                 });
@@ -1406,13 +2066,34 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.Profession", b =>
+            modelBuilder.Entity("Core.Entities.Concrete.Exam", b =>
                 {
-                    b.HasOne("Core.Entities.Concrete.Profession", "ParentProfession")
-                        .WithMany("SubProfession")
-                        .HasForeignKey("ParentProfessionId");
+                    b.HasOne("Core.Entities.Concrete.StudyingGroup", "StudyingGroup")
+                        .WithMany("Exams")
+                        .HasForeignKey("StudyingGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ParentProfession");
+                    b.Navigation("StudyingGroup");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.ExamQuestion", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.Exam", "Exam")
+                        .WithMany("ExamQuestions")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.Question", "Question")
+                        .WithMany("ExamQuestions")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.ProfessionCourseCategory", b =>
@@ -1422,6 +2103,55 @@ namespace TouchApp.DataAccess.Migrations
                         .HasForeignKey("ParentCategoryId");
 
                     b.Navigation("ParentCategory");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.QuestionResultExam", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.Question", "Question")
+                        .WithMany("QuestionResults")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.ResultExam", "ResultExam")
+                        .WithMany("QuestionResults")
+                        .HasForeignKey("ResultExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+
+                    b.Navigation("ResultExam");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.QuestionVariation", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.Question", "Question")
+                        .WithMany("MultiDefinitionVariations")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.ResultExam", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.Exam", "Exam")
+                        .WithMany("Results")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.Student", "Student")
+                        .WithMany("ResultExams")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.SharingTypeMedia", b =>
@@ -1443,6 +2173,55 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("SharingType");
                 });
 
+            modelBuilder.Entity("Core.Entities.Concrete.StudentOperationClaim", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.OperationClaim", "OperationClaim")
+                        .WithMany("StudentOperationClaims")
+                        .HasForeignKey("OperationClaimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.Student", "Student")
+                        .WithMany("StudentOperationClaims")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OperationClaim");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.StudentStudyingGroup", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.Student", "Student")
+                        .WithMany("StudentStudyingGroups")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.StudyingGroup", "StudyingGroup")
+                        .WithMany("StudentStudyingGroups")
+                        .HasForeignKey("StudyingGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("StudyingGroup");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.StudyingGroup", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.Course", "Course")
+                        .WithMany("StudyingGroups")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("Core.Entities.Concrete.TagBlog", b =>
                 {
                     b.HasOne("Core.Entities.Concrete.Blog", "Blog")
@@ -1460,17 +2239,6 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("Blog");
 
                     b.Navigation("Tag");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.Teacher", b =>
-                {
-                    b.HasOne("Core.Entities.Concrete.Profession", "Profession")
-                        .WithMany("Teachers")
-                        .HasForeignKey("ProfessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profession");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.TeacherCourse", b =>
@@ -1492,6 +2260,25 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("Core.Entities.Concrete.TeacherOperationClaim", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.OperationClaim", "OperationClaim")
+                        .WithMany("TeacherOperationClaims")
+                        .HasForeignKey("OperationClaimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
+                        .WithMany("TeacherOperationClaims")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OperationClaim");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("Core.Entities.Concrete.TeacherSocialMedia", b =>
                 {
                     b.HasOne("Core.Entities.Concrete.SocialMedia", "SocialMedia")
@@ -1509,40 +2296,6 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("SocialMedia");
 
                     b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.User", b =>
-                {
-                    b.HasOne("Core.Entities.Concrete.Category", null)
-                        .WithMany("Users")
-                        .HasForeignKey("CategoryId");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.UserCourse", b =>
-                {
-                    b.HasOne("Core.Entities.Concrete.Course", "Course")
-                        .WithMany("UserCourses")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
-                        .WithMany("UserCourses")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.Concrete.User", "User")
-                        .WithMany("UserCourses")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Teacher");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.UserOperationClaim", b =>
@@ -1593,20 +2346,25 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("Children");
                 });
 
-            modelBuilder.Entity("Core.Entities.Concrete.Category", b =>
-                {
-                    b.Navigation("Children");
-
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("Core.Entities.Concrete.Course", b =>
                 {
                     b.Navigation("CourseComments");
 
-                    b.Navigation("TeacherCourses");
+                    b.Navigation("StudyingGroups");
 
-                    b.Navigation("UserCourses");
+                    b.Navigation("TeacherCourses");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.Exam", b =>
+                {
+                    b.Navigation("ExamQuestions");
+
+                    b.Navigation("Results");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.Language", b =>
+                {
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Media", b =>
@@ -1616,14 +2374,11 @@ namespace TouchApp.DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.OperationClaim", b =>
                 {
+                    b.Navigation("StudentOperationClaims");
+
+                    b.Navigation("TeacherOperationClaims");
+
                     b.Navigation("UserOperationClaims");
-                });
-
-            modelBuilder.Entity("Core.Entities.Concrete.Profession", b =>
-                {
-                    b.Navigation("SubProfession");
-
-                    b.Navigation("Teachers");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.ProfessionCourseCategory", b =>
@@ -1631,6 +2386,25 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("Children");
 
                     b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.Question", b =>
+                {
+                    b.Navigation("ExamQuestions");
+
+                    b.Navigation("MultiDefinitionVariations");
+
+                    b.Navigation("QuestionResults");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.QuestionResultExam", b =>
+                {
+                    b.Navigation("AnswerVariations");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.ResultExam", b =>
+                {
+                    b.Navigation("QuestionResults");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.SharingType", b =>
@@ -1645,6 +2419,22 @@ namespace TouchApp.DataAccess.Migrations
                     b.Navigation("UserSocialMedias");
                 });
 
+            modelBuilder.Entity("Core.Entities.Concrete.Student", b =>
+                {
+                    b.Navigation("ResultExams");
+
+                    b.Navigation("StudentOperationClaims");
+
+                    b.Navigation("StudentStudyingGroups");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.StudyingGroup", b =>
+                {
+                    b.Navigation("Exams");
+
+                    b.Navigation("StudentStudyingGroups");
+                });
+
             modelBuilder.Entity("Core.Entities.Concrete.Tag", b =>
                 {
                     b.Navigation("TagBlogs");
@@ -1654,16 +2444,14 @@ namespace TouchApp.DataAccess.Migrations
                 {
                     b.Navigation("TeacherCourses");
 
-                    b.Navigation("TeacherSocialMedias");
+                    b.Navigation("TeacherOperationClaims");
 
-                    b.Navigation("UserCourses");
+                    b.Navigation("TeacherSocialMedias");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.User", b =>
                 {
                     b.Navigation("Blogs");
-
-                    b.Navigation("UserCourses");
 
                     b.Navigation("UserOperationClaims");
 

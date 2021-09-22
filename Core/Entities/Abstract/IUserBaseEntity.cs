@@ -20,7 +20,6 @@ namespace Core.Entities.Abstract
         string PhoneNumber { get; set; }
         DateTime? Birthday { get; set; }
         Gender Gender { get; set; }
-        string BiographyKey { get; set; }
         string SecurityToken { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Global.Controllers
 {
+    [Area("Global")]
     public class LanguageController : Controller
     {
 
@@ -17,28 +18,47 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         private ISessionStorageHelper _sessionStorageHelper;
         private IConfigHelper _configHelper;
         private ILanguageService _languageService;
+        private ILocalizationService _localizationService;
         public LanguageController(ICacheManager cacheManager,
                               IConfigHelper configHelper,
                               ISessionStorageHelper sessionStorageHelper,
-                              ILanguageService languageService)
+                              ILanguageService languageService,
+                              ILocalizationService localizationService)
         {
             _cacheManager = cacheManager;
             _configHelper = configHelper;
             _sessionStorageHelper = sessionStorageHelper;
             _languageService = languageService;
+            _localizationService = localizationService;
         }
 
 
         // POST: LanguageController/Edit/id
         [HttpPost]
-        public async Task<IActionResult> SetLanguage(int id, string controllerName, string actionName)
+        public async Task<IActionResult> SetLanguage(int langOid, string areaName, string controllerName, string actionName)
         {
             try
             {
                 string key = _configHelper.GetSettingsData<string>("cookie_lang_oid_keyword", "CookieFixedKeywords");
-                _sessionStorageHelper.Set(key, id.ToString(), 1440);
 
-                return RedirectToAction(actionName, controllerName);
+                if (_sessionStorageHelper.GetValue(key) != langOid.ToString())
+                {
+                    var cacheKey = _configHelper.GetSettingsData<string>("staticLanguageCache", "ServerCache");
+                    _cacheManager.Remove(cacheKey);
+
+                    Dictionary<string, string> dictionaryLang = new Dictionary<string, string>();
+                    HttpContextAccessor context = new HttpContextAccessor();
+                    _localizationService.GetList(x => x.Lang_oid == langOid).Data.ForEach(x =>
+                    {
+                        dictionaryLang.Add(x.Key, x.Translate);
+                    });
+
+                    _cacheManager.Add(cacheKey, dictionaryLang, 1440);
+                }
+
+                _sessionStorageHelper.Set(key, langOid.ToString(), 1440);
+
+                return RedirectToAction(actionName, controllerName, new { area = areaName });
             }
             catch
             {
