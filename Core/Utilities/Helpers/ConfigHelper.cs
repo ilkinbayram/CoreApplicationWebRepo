@@ -13,14 +13,14 @@ namespace Core.Utilities.Helpers
             _configuration = configuration;
             _staticConfiguration = configuration;
         }
-        public T GetSettingsData<T>(string key, string parentProvider)
+        public T GetSettingsData<T>(string parentKey, string childKey)
         {
-            return (T)Convert.ChangeType(_configuration.GetSection(parentProvider)[key], typeof(T));
+            return (T)Convert.ChangeType(_configuration.GetSection(parentKey)[childKey], typeof(T));
         }
 
-        public static T GetSettingsDataStatic<T>(string key, string parentProvider)
+        public static T GetSettingsDataStatic<T>(string parentKey, string childKey)
         {
-            return (T)Convert.ChangeType(_staticConfiguration.GetSection(parentProvider)[key], typeof(T));
+            return (T)Convert.ChangeType(_staticConfiguration.GetSection(parentKey)[childKey], typeof(T));
         }
     }
 }

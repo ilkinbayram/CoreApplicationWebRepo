@@ -192,7 +192,7 @@ preview-2
   content: "";
 }
 .preview-2 .nivo-directionNav a:hover::after {
-  background: #1bb4b9 none repeat scroll 0 0;
+  background: #006998  none repeat scroll 0 0;
 }
 .preview-2 .nivo-controlNav {
     display: none

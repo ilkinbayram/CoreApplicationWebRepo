@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Controllers
 {
+    [LocalizationFilter]
     public class TouchBaseController : Controller
     {
         public override ViewResult View()

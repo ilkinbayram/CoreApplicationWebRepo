@@ -115,10 +115,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 a {-webkit-transition: all 0.3s ease 0s;transition: all 0.3s ease 0s;text-decoration:none; color: #444}
 a:hover {
-    color: #4c4c4c;
+    color: #333333;
     text-decoration: none;
 }
-a:active, a:hover, a:focus {outline: 0 none; text-decoration: none}
+
+a:active, a:hover, a:focus {
+    outline: 0 none;
+    text-decoration: none
+}
+
 ul{
     list-style: outside none none;
     margin: 0;
@@ -138,7 +143,7 @@ ul{
 ::-moz-placeholder {opacity: 1 !important;filter: alpha(opacity=100)}
 :-ms-input-placeholder {opacity: 1 !important;filter: alpha(opacity=100)}
 body {
-    color: #666;
+    color: #333333;
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     line-height: 24px;
@@ -166,7 +171,7 @@ body {
     margin-bottom: 20px;
 }
 .section-title-wrapper:before {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     bottom: 0;
     content: "";
     height: 1px;
@@ -180,7 +185,7 @@ body {
 .section-title-wrapper:after {
     background: #ffffff none repeat scroll 0 0;
     bottom: -6px;
-    color: #1bb4b9;
+    color: #006998 ;
     content: "";
     font-family: fontawesome;
     font-size: 14px;
@@ -193,13 +198,13 @@ body {
     width: 39px;
     z-index: 9;
 }
-.section-title-wrapper.title-yellow:before {background: #f5b120 none repeat scroll 0 0}
-.section-title-wrapper.title-yellow:after {color: #f5b120}
+.section-title-wrapper.title-yellow:before {background: #ff9100 none repeat scroll 0 0}
+.section-title-wrapper.title-yellow:after {color: #ff9100}
 .section-gray{background: #F0F0F0}
 .section-gray .section-title-wrapper:after {background: #f0f0f0}
 .section-sea-green{background: #1BB4B9}
 .button-default {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border: 0 none;
     border-radius: 30px;
     color: #ffffff;
@@ -213,23 +218,23 @@ body {
 }
 .button-default:hover {background: #F5B120; color: #fff}
 .button-default.button-yellow {background: #F5B120}
-.button-default.button-yellow:hover {background: #1bb4b9}
+.button-default.button-yellow:hover {background: #006998 }
 /*----------------------------------------*/
 /*  2. Header CSS
 /*----------------------------------------*/
 /*----------------------------------------*/
 /*  2.1 Header Top
 /*----------------------------------------*/
-.header-top {background: #1bb4b9 none repeat scroll 0 0}
+.header-top {background: #006998  none repeat scroll 0 0}
 .header-top-info span {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     color: #ffffff;
     display: inline-block;
     padding: 10px 13px 8px;
 }
 .social-links {
     display: inline-block;
-    margin-left: 18px;
+    margin-left: 40px;
 }
 .social-links > a {
     color: #ffffff;
@@ -322,17 +327,17 @@ ul.register li:hover .register-form, ul.login li:hover .login-form {
     width: 22px !important;
 }
 .toggle.btn .btn.btn-primary.toggle-on {
-    background: #1bb4b9 none repeat scroll 0 0;
-    border-color: #1bb4b9;
+    background: #006998  none repeat scroll 0 0;
+    border-color: #006998 ;
 }
-.btn-primary {border-color: #1bb4b9 !important}
+.btn-primary {border-color: #006998  !important}
 .toggle-handle {
     border-color: #ffffff;
     border-radius: 30px;
 }
 .button-box > span {padding-left: 8px}
 .register-btn, .login-btn {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border: 0 none;
     border-radius: 30px;
     color: #ffffff;
@@ -375,7 +380,7 @@ ul.register li:hover .register-form, ul.login li:hover .login-form {
 .mainmenu, .header-search {display: inline-block}
 .mainmenu ul#nav li {
     display: inline-block;
-    margin-right: 35px;
+    margin-right: 27px;
     position: relative;
 }
 .mainmenu ul#nav > li > a {
@@ -394,7 +399,7 @@ ul.register li:hover .register-form, ul.login li:hover .login-form {
     position: relative;
     top: -1px;
 }
-.mainmenu ul#nav > li:hover > a, .mainmenu ul#nav li ul.sub-menu > li a:hover {color: #1bb4b9}
+.mainmenu ul#nav > li:hover > a, .mainmenu ul#nav li ul.sub-menu > li a:hover {color: #006998 }
 .mobile-menu-area {
 	overflow: hidden;
 }
@@ -406,7 +411,7 @@ nav#dropdown {
 }
 .mainmenu ul.sub-menu {
     background-color: #ffffff;
-    border-top: 1px solid #1bb4b9;
+    border-top: 1px solid #006998 ;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     left: -23px;
     margin: 0;
@@ -469,12 +474,12 @@ nav#dropdown {
 .search.open {height: 50px}
 .search-form {
     background-color: #ffffff;
-    border-top: 1px solid #1bb4b9;
+    border-top: 1px solid #006998 ;
     float: right;
     width: 290px;
 }
 .search-menu {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     border-radius: 50px;
     display: inline-block;
     height: 36px;
@@ -504,7 +509,7 @@ nav#dropdown {
 .search-form button[type="submit"] {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
-    color: #1bb4b9;
+    color: #006998 ;
     display: block;
     font-size: 20px;
     height: 50px;
@@ -525,11 +530,11 @@ nav#dropdown {
 /*----------------------------------------*/
 /*  2.3 Mobile Menu
 /*----------------------------------------*/
-.mobile-menu-area {background: #1bb4b9; display: none}
+.mobile-menu-area {background: #006998 ; display: none}
 .mean-container .mean-bar:after {display: none}
 .mean-container .mean-nav ul li a:hover {
     background: #fff;
-    color: #1bb4b9;
+    color: #006998 ;
 }
 .mean-container a.meanmenu-reveal span {background: #fff}
 .mean-container .mean-nav ul li a {
@@ -549,7 +554,7 @@ nav#dropdown {
 .mean-container a.meanmenu-reveal {color: #444}
 .meanmenu-reveal.meanclose:hover {color: #000}
 .mean-container a.meanmenu-reveal:hover span {background: #000}
-.mobile-menu-area .mean-nav {background: #1bb4b9 none repeat scroll 0 0}
+.mobile-menu-area .mean-nav {background: #006998  none repeat scroll 0 0}
 .mean-last {margin-bottom: 20px}
 .mobile-menu {position: relative}
 .mean-container .mean-bar:before {
@@ -599,7 +604,7 @@ nav#dropdown {
     display: inline-block;
 }
 .banner-content .banner-readmore a {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     border-radius: 30px;
     color: #ffffff;
     display: inline-block;
@@ -632,9 +637,9 @@ nav#dropdown {
     text-align: center
 }
 .single-activity-icon {
-    border: 1px solid #1bb4b9;
+    border: 1px solid #006998 ;
     border-radius: 50%;
-    color: #1bb4b9;
+    color: #006998 ;
     display: inline-table;
     font-size: 72px;
     height: 162px;
@@ -649,15 +654,15 @@ nav#dropdown {
     vertical-align: middle;
 }
 .single-activity:hover .single-activity-icon {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     color: #ffffff;
 }
 .activity:nth-child(2) .single-activity .single-activity-icon {
-    border-color: #f5b120;
-    color: #f5b120;
+    border-color: #ff9100;
+    color: #ff9100;
 }
 .activity:nth-child(2) .single-activity:hover .single-activity-icon {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     color: #ffffff;
 }
 .activity:nth-child(3) .single-activity .single-activity-icon {
@@ -677,12 +682,12 @@ nav#dropdown {
     color: #ffffff;
 }
 .single-activity h4 {
-    color: #1bb4b9;
+    color: #006998 ;
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 17px;
 }
-.activity:nth-child(2) .single-activity h4 {color: #f5b120;}
+.activity:nth-child(2) .single-activity h4 {color: #ff9100;}
 .activity:nth-child(3) .single-activity h4 {color: #93c524;}
 .activity:nth-child(4) .single-activity h4 {color: #28a8e3;}
 .single-activity > p {margin-bottom: 0;}
@@ -701,7 +706,7 @@ nav#dropdown {
 }
 .advertise-area h2 span{font-weight: 500}
 .advertise-area a {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border-radius: 30px;
     color: #ffffff;
     display: inline-block;
@@ -712,7 +717,7 @@ nav#dropdown {
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
-.advertise-area a:hover {background: #f5b120 none repeat scroll 0 0;}
+.advertise-area a:hover {background: #ff9100 none repeat scroll 0 0;}
 /*----------------------------------------*/
 /*  6. Class Area
 /*----------------------------------------*/
@@ -773,7 +778,7 @@ nav#dropdown {
     overflow: hidden;
 }
 .class-date, .gallery-icon {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border-radius: 50%;
     bottom: 0;
     color: #ffffff;
@@ -815,7 +820,7 @@ nav#dropdown {
     font-size: 15px;
     font-weight: 500;
 }
-.class-des a:hover {color: #1bb4b9;}
+.class-des a:hover {color: #006998 ;}
 .single-class-text {
     border-bottom: 1px solid #f0f0f0;
     border-left: 1px solid #f0f0f0;
@@ -868,7 +873,7 @@ span.arrow > a{
     width: 100%
 }
 span.arrow > a:after {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border-radius: 0 0 4px;
     content: "";
     height: 50px;
@@ -911,7 +916,7 @@ span.arrow > a:after {
     line-height: 23px;
     margin-bottom: 17px;
 }
-.register-info h4 span {color: #f5b120}
+.register-info h4 span {color: #ff9100}
 .register-info {
     padding: 99px 0 97px 0;
     position: relative;
@@ -959,7 +964,7 @@ span.arrow > a:after {
     padding-bottom: 40px;
 }
 .register-title {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     border-radius: 3px 3px 0 0;
     padding-bottom: 7px;
     padding-top: 11px;
@@ -1020,8 +1025,8 @@ span.arrow > a:after {
 }
 .single-service-item:hover .single-service-text > p {display: block}
 .single-service-icon {
-    background: #f5b120 none repeat scroll 0 0;
-    border: 1px solid #f5b120;
+    background: #ff9100 none repeat scroll 0 0;
+    border: 1px solid #ff9100;
     border-radius: 50%;
     color: #ffffff;
     display: inline-table;
@@ -1040,7 +1045,7 @@ span.arrow > a:after {
 }
 .single-service-item:hover .single-service-icon {
     background: #ffffff none repeat scroll 0 0;
-    color: #f5b120;
+    color: #ff9100;
 }
 .service-area .col-md-4:first-child .single-service-item-wrapper {
     margin-right: 30px;
@@ -1136,7 +1141,7 @@ span.arrow > a:after {
     content: "";
     border-radius: 50%
 }
-.sin-testiImage.slick-current .teacher-image-carousel {border: 1px solid #1bb4b9;}
+.sin-testiImage.slick-current .teacher-image-carousel {border: 1px solid #006998 ;}
 .sin-testiImage.slick-current .teacher-image-carousel:after {background: transparent}
 .sin-testiText{outline: none; margin-left: 45px}
 .teacher-info-container {
@@ -1185,8 +1190,8 @@ span.arrow > a:after {
     vertical-align: middle;
 }
 .teacher-links > a:hover {
-    background: #1bb4b9 none repeat scroll 0 0;
-    border-color: #1bb4b9;
+    background: #006998  none repeat scroll 0 0;
+    border-color: #006998 ;
     color: #ffffff;
 }
 .teacher-links {
@@ -1254,9 +1259,9 @@ span.arrow > a:after {
 }
 .filter-menu > ul {text-align: center;}
 .gallery-area .section-title-wrapper {margin-bottom: 28px;}
-li.filter.active {color: #1bb4b9;}
+li.filter.active {color: #006998 ;}
 .filter-menu ul li.active:after {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border-radius: 50%;
     content: "";
     height: 6px;
@@ -1344,7 +1349,7 @@ span.gallery-text {
     color: #333333;
     font-size: 15px;
 }
-.single-blog-text h4 a:hover {color: #1bb4b9;}
+.single-blog-text h4 a:hover {color: #006998 ;}
 .single-blog-text {
     background: #ffffff none repeat scroll 0 0;
     border-radius: 0 0 4px 4px;
@@ -1356,10 +1361,10 @@ span.gallery-text {
     margin-right: 8px;
 }
 .single-blog-text > a {
-    color: #1bb4b9;
+    color: #006998 ;
     font-size: 12px;
 }
-.single-blog-text > a:hover {color: #f5b120;}
+.single-blog-text > a:hover {color: #ff9100;}
 .single-blog-text > p {
     margin-bottom: 12px;
     margin-top: 6px;
@@ -1414,7 +1419,7 @@ span.gallery-text {
 /*----------------------------------------*/
 /*  15. Footer Area
 /*----------------------------------------*/
-.footer-area {background: #1bb4b9 none repeat scroll 0 0;}
+.footer-area {background: #006998  none repeat scroll 0 0;}
 .footer-info {line-height: 15px;}
 .footer-info > span {
     color: #ffffff;
@@ -1447,9 +1452,9 @@ span.gallery-text {
 }
 .footer-widget-list li:last-child a {
 }
-.footer-widget-list li a:hover {color: #f5b120;}
+.footer-widget-list li a:hover {color: #ff9100;}
 .subscribe-container {
-    background: #13a0a5 none repeat scroll 0 0;
+    background: #005c86 none repeat scroll 0 0;
     border-radius: 4px;
     padding: 44px 40px 50px;
 }
@@ -1484,7 +1489,7 @@ span.gallery-text {
     top: 0;
 }
 .subscribe-form {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border-radius: 4px;
     display: block;
     height: 48px;
@@ -1574,13 +1579,13 @@ span.gallery-text {
     animation: 1300ms ease-in-out 0s normal none 1 running zoomInUp;
 }
 .banner-content.slider-2 .banner-readmore a {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     font-size: 16px;
     font-weight: 500;
     padding: 6px 26px;
 }
 .banner-content.slider-2 .banner-readmore a:hover {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
 }
 .slider-two-area .banner-content.slider-2.slider-right p {
     -webkit-animation: 1000ms ease-in-out 0s normal none 1 running rotateInDownLeft;
@@ -1607,7 +1612,7 @@ span.gallery-text {
 .gallery-fullwidth .gallery-icon:hover {
     background: #fff none repeat scroll 0 0;
     border-color: #fff;
-    color: #1bb4b9;
+    color: #006998 ;
 }
 .gallery-fullwidth .single-items:hover span.gallery-text {bottom: 23%;}
 .overlay-effect.sea-green-overlay a:before {background-color: rgba(27, 180, 185, 0.6);}
@@ -1646,7 +1651,7 @@ span.gallery-text {
     margin-bottom: 18px;
 }
 .teacher-large-item {-webkit-transition: all 0.3s ease 0s;transition: all 0.3s ease 0s}
-.teacher-large-item:hover {background: #1bb4b9 none repeat scroll 0 0;}
+.teacher-large-item:hover {background: #006998  none repeat scroll 0 0;}
 .single-teacher-large-carousel p {margin-bottom: 11px;}
 .teacher-large-item:hover p, .teacher-large-item:hover h4, .teacher-large-item:hover span {color: #ffffff;}
 .single-teacher-large-carousel .social-links > a {margin-right: 18px;}
@@ -1711,8 +1716,8 @@ span.gallery-text {
     color: #eaeaea;
 }
 .blog-two .blog-carousel.carousel-style-one.owl-theme .owl-controls .owl-buttons div:hover {
-    background: #f5b120 none repeat scroll 0 0;
-    border-color: #f5b120;
+    background: #ff9100 none repeat scroll 0 0;
+    border-color: #ff9100;
     color: #fff;
 }
 .blog-three .blog-carousel.carousel-style-one.owl-theme .owl-controls .owl-buttons div:hover {
@@ -1794,10 +1799,10 @@ span.gallery-text {
 /*----------------------------------------*/
 /*  17.1 Home Three Header
 /*----------------------------------------*/
-.header-three .header-top {background: #f5b120 none repeat scroll 0 0;}
+.header-three .header-top {background: #ff9100 none repeat scroll 0 0;}
 .header-three .header-top-info span i {color: #ffffff;}
 .header-three .header-login-register ul li:hover a, .header-three .header-login-register ul li:hover a i, .header-three .header-top-info .social-links > a:hover {color: #1BB4B9;}
-.header-three .search-menu {background: #1bb4b9 none repeat scroll 0 0;}
+.header-three .search-menu {background: #006998  none repeat scroll 0 0;}
 /*----------------------------------------*/
 /*  17.2 Home Three Slider
 /*----------------------------------------*/
@@ -1845,11 +1850,11 @@ span.gallery-text {
     font-weight: 500;
     padding: 6px 26px;
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: 1px solid #1bb4b9;
-    color: #1bb4b9;
+    border: 1px solid #006998 ;
+    color: #006998 ;
 }
 .slider-three-area .banner-content .banner-readmore a:hover {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     color: #ffffff;
 }
 .slider-three-area .banner-content.slider-2 p {
@@ -1874,7 +1879,7 @@ span.gallery-text {
 }
 .advertise-area.section-sea-green a:hover {
     background: #ffffff none repeat scroll 0 0;
-    color: #1bb4b9;
+    color: #006998 ;
 }
 .advertise-area.section-sea-green {padding: 50px 0;}
 /*----------------------------------------*/
@@ -1946,7 +1951,7 @@ span.gallery-text {
 }
 .single-teachers-column:hover .teachers-image-column > a:after {opacity: 1;filter: alpha(opacity=100);}
 .teachers-image-column a span span {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border-radius: 30px;
     color: #ffffff;
     display: inline-block;
@@ -1987,7 +1992,7 @@ span.gallery-text {
 }
 .image-hover span:hover {
     background: #fff;
-    color: #1bb4b9
+    color: #006998 
 }
 .teachers-column-carousel.carousel-style-one.owl-theme .owl-controls .owl-buttons div {top: 34%;}
 /*----------------------------------------------*/
@@ -2032,11 +2037,11 @@ span.gallery-text {
 .header-four .header-top {background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;}
 .header-four .header-top-info > span {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    color: #f5b120;
+    color: #ff9100;
     margin-right: 3px;
     position: relative;
 }
-.header-four .header-top-info > span i {color: #f5b120;}
+.header-four .header-top-info > span i {color: #ff9100;}
 .header-four .header-top-info > span:after, .header-four .register:after {
     background: rgba(255, 255, 255, 0.15) none repeat scroll 0 0;
     content: "";
@@ -2067,9 +2072,9 @@ header.header-four, header.header-five {
 }
 .header-four .logo {padding: 19px 0;}
 .header-four .mainmenu-area {padding: 10px 0 0;}
-.header-four .mainmenu ul#nav > li:hover > a, .header-four .mainmenu ul#nav li ul.sub-menu > li a:hover, .header-five .mainmenu ul#nav > li:hover > a, .header-five .mainmenu ul#nav li ul.sub-menu > li a:hover {color: #f5b120;}
+.header-four .mainmenu ul#nav > li:hover > a, .header-four .mainmenu ul#nav li ul.sub-menu > li a:hover, .header-five .mainmenu ul#nav > li:hover > a, .header-five .mainmenu ul#nav li ul.sub-menu > li a:hover {color: #ff9100;}
 .header-four .mainmenu ul#nav > li ul.sub-menu, .header-five .mainmenu ul#nav > li ul.sub-menu {
-    border-top: 2px solid #f5b120;
+    border-top: 2px solid #ff9100;
     top: 75px;
 }
 .header-four .mainmenu ul#nav > li > a, .header-five .mainmenu ul#nav > li > a {color: #ffffff;}
@@ -2078,9 +2083,9 @@ header.header-four, header.header-five {
     position: relative;
     top: -1px;
 }
-.header-four .search-form, .header-five .search-form {border-top: 2px solid #f5b120;}
+.header-four .search-form, .header-five .search-form {border-top: 2px solid #ff9100;}
 .header-four .search {top: 85px;}
-.header-four .search-form button[type="submit"], .header-five .search-form button[type="submit"] {color: #f5b120;}
+.header-four .search-form button[type="submit"], .header-five .search-form button[type="submit"] {color: #ff9100;}
 /*----------------------------------------*/
 /*  18.2 Home Four Slider
 /*----------------------------------------*/
@@ -2115,8 +2120,8 @@ header.header-four, header.header-five {
     padding: 6.5px 26px;
 }
 .slider-four-area .banner-content .banner-readmore a:hover {
-    background: #1bb4b9 none repeat scroll 0 0;
-    border-color: #1bb4b9;
+    background: #006998  none repeat scroll 0 0;
+    border-color: #006998 ;
 }
 /*----------------------------------------*/
 /*  18.3 Home Four About Skill Area
@@ -2307,7 +2312,7 @@ header.header-four, header.header-five {
     border-radius: 4px;
 }
 .single-blog-item .date {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     border-radius: 50%;
     bottom: -40px;
     color: #ffffff;
@@ -2380,6 +2385,11 @@ header.header-four, header.header-five {
     margin: 0 40px;
     position: relative
 }
+
+.logo-menu-bg {
+    margin: 0 40px;
+    position: relative
+}
 .header-right-tab {
     padding-top: 37px;
     float: right;
@@ -2415,10 +2425,10 @@ header.header-four, header.header-five {
     line-height: 37px;
     text-align: right;
 }
-.header-login-register.tab-style-hover:hover > a {color: #f5b120}
+.header-login-register.tab-style-hover:hover > a {color: #ff9100}
 .tab-style-hover .login-register-tab {
     background: #ffffff none repeat scroll 0 0;
-    border-top: 2px solid #f5b120;
+    border-top: 2px solid #ff9100;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14);
     height: 315px;
     padding: 12px 18px 10px;
@@ -2609,18 +2619,18 @@ header.header-four, header.header-five {
 /*----------------------------------------*/
 /*  19.5 Home Five Class Area
 /*----------------------------------------*/
-.class-yellow .class-date {background: #f5b120 none repeat scroll 0 0;}
-.class-yellow span.arrow a:after {background: #f5b120 none repeat scroll 0 0;}
+.class-yellow .class-date {background: #ff9100 none repeat scroll 0 0;}
+.class-yellow span.arrow a:after {background: #ff9100 none repeat scroll 0 0;}
 .class-yellow .carousel-style-one.owl-theme .owl-controls.clickable .owl-buttons div:hover {
-    background: #f5b120 none repeat scroll 0 0;
-    border-color: #f5b120;
+    background: #ff9100 none repeat scroll 0 0;
+    border-color: #ff9100;
 }
 .class-des a:hover {color: #F5B120;}
 /*----------------------------------------*/
 /*  19.6 Home Five Register Area
 /*----------------------------------------*/
 .register-style-two .account-form {margin: 64px 70px 62px 0;}
-.register-style-two .register-title {background: #1bb4b9 none repeat scroll 0 0;}
+.register-style-two .register-title {background: #006998  none repeat scroll 0 0;}
 .register-style-two .timer-grid .cdown:last-child {margin-right: 0;}
 .register-style-two .register-info {float: right;}
 /*----------------------------------------*/
@@ -2631,8 +2641,8 @@ header.header-four, header.header-five {
     margin-top: 73px;
 }
 .teachers-area-two .teacher-links > a:hover {
-    background: #f5b120 none repeat scroll 0 0;
-    border-color: #f5b120;
+    background: #ff9100 none repeat scroll 0 0;
+    border-color: #ff9100;
 }
 /*----------------------------------------*/
 /*  19.8 Home Five Blog Area
@@ -2677,14 +2687,14 @@ header.header-four, header.header-five {
     padding: 8px 25px;
 }
 .breadcrumb > li a {color: #333333;}
-.breadcrumb > li a:hover {color: #1bb4b9;}
+.breadcrumb > li a:hover {color: #006998 ;}
 .breadcrumb > li {
-    color: #1bb4b9;
+    color: #006998 ;
     margin-right: 24px;
     position: relative;
 }
 .breadcrumb > li:first-child:before {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     border-radius: 50%;
     content: "";
     display: inline-block;
@@ -2700,7 +2710,7 @@ header.header-four, header.header-five {
     padding: 0 0 30px;
 }
 .class-menu a {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     color: #ffffff;
     display: inline-table;
     float: left;
@@ -2773,7 +2783,7 @@ header.header-four, header.header-five {
     float: none;
     padding: 4.5px 10px;
 }
-.pagination li.current {background: #1bb4b9 none repeat scroll 0 0;}
+.pagination li.current {background: #006998  none repeat scroll 0 0;}
 .pagination li.current a{
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     color: #ffffff;
@@ -2781,7 +2791,7 @@ header.header-four, header.header-five {
 .pagination li.current:hover a {color: #ffffff;}
 .pagination li:hover a, .pagination > li:last-child:hover a i{
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    color: #1bb4b9;
+    color: #006998 ;
 }
 .pagination > li > a {padding: 0}
 .pagination > li:last-child {
@@ -2813,7 +2823,7 @@ header.header-four, header.header-five {
     margin-bottom: 10px;
 }
 .class-list-text h3 a {color: #333}
-.class-list-item:hover .class-list-text h3 a {color: #1bb4b9;}
+.class-list-item:hover .class-list-text h3 a {color: #006998 ;}
 .class-information > span {
     color: #333333;
     display: block;
@@ -2826,7 +2836,7 @@ header.header-four, header.header-five {
     padding: 0 19px;
 }
 .class-list-item:hover .class-list-text .button-default{
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     color: #ffffff;
 }
 .class-list-text .button-default i {margin-left: 6px;}
@@ -2834,7 +2844,7 @@ header.header-four, header.header-five {
 /*  21.2 Class List Sidebar
 /*----------------------------------------*/
 .single-title > h3 {
-    border-bottom: 1px solid #f5b120;
+    border-bottom: 1px solid #ff9100;
     bottom: -1px;
     display: inline-block;
     font-size: 20px;
@@ -2881,10 +2891,10 @@ header.header-four, header.header-five {
     transition: all 0.3s ease 0s;
     background: transparent
 }
-.single-widget-container ul.sidebar-categories li:hover a {color: #1bb4b9;}
-.single-widget-container ul.sidebar-categories li:hover:after {background: #1bb4b9}
+.single-widget-container ul.sidebar-categories li:hover a {color: #006998 ;}
+.single-widget-container ul.sidebar-categories li:hover:after {background: #006998 }
 .single-widget-container ul.sidebar-categories.class li:hover:after {
-    color: #1bb4b9;
+    color: #006998 ;
     background: transparent
 }
 .single-widget-container ul.sidebar-categories li:last-child, .recent-post-item:last-child {margin-bottom: 0;}
@@ -2905,13 +2915,13 @@ header.header-four, header.header-five {
 }
 .recent-post-text > span {color: #333333;}
 .recent-post-text span i {
-    color: #f5b120;
+    color: #ff9100;
     margin-right: 9px;
 }
 .recent-post-text {
     overflow: hidden
 }
-.recent-post-text a:hover {color: #1bb4b9;}
+.recent-post-text a:hover {color: #006998 ;}
 .recent-post-text a {color: #333333;}
 .tag-list {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -2929,8 +2939,8 @@ header.header-four, header.header-five {
     text-align: center;
 }
 .tag-list li a:hover {
-    border-color: #1bb4b9;
-    background: #1bb4b9;
+    border-color: #006998 ;
+    background: #006998 ;
     color: #fff
 }
 .single-widget-container > a {
@@ -3024,7 +3034,7 @@ header.header-four, header.header-five {
     background-color: #fff;
 }
 .class-details-tab-menu li > a.active:after {
-    background: #f5b120 none repeat scroll 0 0;
+    background: #ff9100 none repeat scroll 0 0;
     content: "";
     height: 3px;
     left: -1px;
@@ -3051,7 +3061,7 @@ header.header-four, header.header-five {
     position: relative;
 }
 .class-details-tab span.icon:after {
-    color: #f5b120;
+    color: #ff9100;
     content: "";
     font-family: fontawesome;
     font-size: 14px;
@@ -3060,7 +3070,7 @@ header.header-four, header.header-five {
     top: 0;
 }
 .class-details-tab table thead {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     color: #ffffff;
     font-weight: 500;
     line-height: 24px;
@@ -3097,7 +3107,7 @@ header.header-four, header.header-five {
     margin-bottom: 28px;
 }
 .class-infos > li i {
-    color: #f5b120;
+    color: #ff9100;
     font-size: 13px;
     margin-right: 14px;
 }
@@ -3128,7 +3138,7 @@ header.header-four, header.header-five {
     overflow: hidden;
 }
 .single-widget-container .teacher-info-widget:last-child {margin-bottom: 0;}
-.widget-infos h4 a:hover {color: #1bb4b9;}
+.widget-infos h4 a:hover {color: #006998 ;}
 .single-widget-container input, .contact-form-container input {
     border: 1px solid #e8e8e8;
     border-radius: 4px;
@@ -3165,7 +3175,7 @@ textarea {
     margin: 0 2px
 }
 .gallery-area.gallery-full-width .filter-menu ul li.active {
-    background: #1bb4b9 none repeat scroll 0 0;
+    background: #006998  none repeat scroll 0 0;
     color: #ffffff;
 }
 .gallery-area.gallery-full-width .filter-menu ul li.active:after {display: none}
@@ -3211,7 +3221,7 @@ textarea {
     font-size: 18px;
     margin: 0 12px;
 }
-.teacher-details-area .social-links a:hover {color: #1bb4b9;}
+.teacher-details-area .social-links a:hover {color: #006998 ;}
 .teacher-about-info {margin-bottom: 49px;}
 .teacher-details-info > h4 {
     font-size: 15px;
@@ -3248,7 +3258,7 @@ textarea {
     padding-bottom: 12px;
 }
 span.schedule-time {
-    color: #1bb4b9;
+    color: #006998 ;
     display: inline-block;
     float: right;
 }
@@ -3282,7 +3292,7 @@ span.schedule-time {
     margin-bottom: 25px;
 }
 .blog-post-details > span i {
-    color: #f5b120;
+    color: #ff9100;
     margin-right: 9px;
 }
 .blog-post-details-img {margin-bottom: 26px;}
@@ -3349,7 +3359,7 @@ span.schedule-time {
     padding-bottom: 22px;
 }
 .contact-icon {
-    color: #f5b120;
+    color: #ff9100;
     float: left;
     font-size: 14px;
     margin-right: 12px;
@@ -3386,7 +3396,7 @@ span.schedule-time {
 /*  30. Scrollup
 /*----------------------------------------*/
 #scrollUp {
-    background: #f5b120 none repeat scroll 0 0 padding-box;
+    background: #ff9100 none repeat scroll 0 0 padding-box;
     border: 3px solid rgba(245, 177, 32, 0.85);
     border-radius: 50%;
     bottom: 45px;
@@ -3406,6 +3416,10 @@ span.schedule-time {
     background-color: #fff;
     color: #1BB4B9;
     border-color: rgba(27, 180, 185, 0.7);
+}
+
+.custom-link-hover-orange:hover {
+    color: #ff9100 !important;
 }
 
 

@@ -1,5 +1,18 @@
 ﻿@using Core.Extensions
+@using Core.Utilities.Helpers
+@using Core.Resources.Enums
 
+@{
+    string emailInfo = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.GlobalAccessibility_ContainerKeyword.ToString(), ChildKeySettings.InfoMail_GlobalAccess.ToString());
+
+    string contactPhone = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.GlobalAccessibility_ContainerKeyword.ToString(), ChildKeySettings.MobileContactPhone_GlobalAccess.ToString());
+
+    string TouchLogoUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_URL_TouchAcademy_Logo.ToString());
+
+    string TouchLightenLogoUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_URL_TouchAcademy_Lighten_Logo.ToString());
+
+    string locationCourseKey = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.GlobalAccessibility_ContainerKeyword.ToString(), ChildKeySettings.Location_PortBaku.ToString());
+}
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -44,6 +57,10 @@
     ============================================ -->
     <script src="~/externalComponents/js/datepicker.min.js"></script>
 
+    <!-- Spinner CSS
+    ============================================ -->
+    <link rel="stylesheet" href="~/css/gspinner.css">
+
     <!-- Style CSS
     ============================================ -->
     <link rel="stylesheet" href="~/style.css">
@@ -61,13 +78,14 @@
         <div class="header-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-7 col-md-8">
+                    <div class="col-lg-12 col-md-12">
                         <div class="header-top-info">
                             <div class="social-links mt-2 mb-2">
-                                <a href="https://www.facebook.com/touchacademyaz-100488788899672" target="_blank"><i class="fa fa-facebook"></i></a>
-                                <a href="mailto:admin@touchacademy.az" target="_blank"><i class="fa fa-mail-reply"></i></a>
-                                <a href="https://www.linkedin.com/company/touch-academy/" target="_blank"><i class="fa fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/touchacademy.az/" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a title="Touch Academy Whatsapp" target="_blank" href="https://web.whatsapp.com/send?phone=994513898833&amp;text=@("TemplateMessageHiWantToJoinCourse.Localization".Translate())" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                                <a title="Touch Academy Telegram" href="https://t.me/touchacademy" target="_blank"><i class="fab fa-telegram"></i></a>
+                                <a title="Touch Academy Facebook" href="https://www.facebook.com/touchacademyaz-100488788899672" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a title="Touch Academy Linkedin" href="https://www.linkedin.com/company/touch-academy/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                <a title="Touch Academy Instagram" href="https://www.instagram.com/touchacademy.az/" target="_blank"><i class="fa fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
@@ -79,9 +97,9 @@
             <div class="container">
                 <div class="logo-menu-bg">
                     <div class="row">
-                        <div class="col-lg-2 col-md-12">
+                        <div class="col-lg-2 col-md-6 col-sm-6">
                             <div class="logo">
-                                <a href="~/Global/Home/TouchIndex"><img src="~/img/logo/logo.png" alt="TOUCH ACADEMY"></a>
+                                <a href="~/Global/Home/TouchIndex"><img style="height: 80px !important; width: 200px !important;" src="@(TouchLogoUrl)" alt="TOUCH ACADEMY"></a>
                             </div>
                         </div>
                         <div class="col-lg-10 d-none d-lg-block">
@@ -104,43 +122,44 @@
                                                     <li><a href="~/Global/TeachersInfo/Touch">@("TeachersInfoNavMenu.ViewLocalization".Translate())</a></li>
                                                     <li><a href="~/Global/BlogDetail/Touch">@("BlogDetailNavMenu.ViewLocalization".Translate())</a></li>
                                                     <li><a href="~/Global/Contact/Touch">@("ContactNavMenu.ViewLocalization".Translate())</a></li>
+                                                    <li><a href="~/Global/Exam/Touch">@("ExamNavMenu.ViewLocalization".Translate())</a></li>
                                                 </ul>
                                             </li>
                                             <li>
                                                 <a href="~/Global/StudyPackage/Touch">@("StudyPackageNavMenu.ViewLocalization".Translate())</a>
                                             </li>
-                                            <li><a href="~/Global/Exam/Touch">Imtahan</a></li>
+                                            <li><a href="~/Global/Exam/Touch">@("ExamNavMenu.ViewLocalization".Translate())</a></li>
                                             <li><a href="~/Global/Gallery/Touch">@("GalleryNavMenu.ViewLocalization".Translate())</a></li>
                                             <li>
-                                                <a href="#">Dil<i class="fa fa-angle-down"></i></a>
+                                                <a href="#">@("SelectedLanguageViewVisual.LocalizationTranslate".Translate())<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub-menu">
-                                                    <li class="setLangListItem" data-langoid="1"><a class="setLang" href="#">AZE</a></li>
-                                                    <li class="setLangListItem" data-langoid="3"><a class="setLang" href="#">RUS</a></li>
-                                                    <li class="setLangListItem" data-langoid="2"><a class="setLang" href="#">ENG</a></li>
-                                                    <li class="setLangListItem" data-langoid="4"><a class="setLang" href="#">TUR</a></li>
+                                                    <li class="setLangListItem" data-langoid="1"><a class="setLang" href="#">@("SelectedLanguageViewAZE.LocalizationTranslate".Translate())</a></li>
+                                                    <li class="setLangListItem" data-langoid="3"><a class="setLang" href="#">@("SelectedLanguageViewRUS.LocalizationTranslate".Translate())</a></li>
+                                                    <li class="setLangListItem" data-langoid="2"><a class="setLang" href="#">@("SelectedLanguageViewENG.LocalizationTranslate".Translate())</a></li>
+                                                    <li class="setLangListItem" data-langoid="4"><a class="setLang" href="#">@("SelectedLanguageViewTUR.LocalizationTranslate".Translate())</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </nav>
                                 </div>
                                 @*
-                                    <ul class="header-search">
-                                        <li class="search-menu">
-                                            <i id="toggle-search" class="fa fa-search"></i>
-                                        </li>
-                                    </ul>
-                                    <!--Search Form-->
-                                    <div class="search">
-                                        <div class="search-form">
-                                            <form id="search-form" action="#">
-                                                <input type="search" placeholder="Search here..." name="search" />
-                                                <button type="submit">
-                                                    <span><i class="fa fa-search"></i></span>
-                                                </button>
-                                            </form>
-                                        </div>
+                                <ul class="header-search">
+                                    <li class="search-menu">
+                                        <i id="toggle-search" class="fa fa-search"></i>
+                                    </li>
+                                </ul>
+                                <!--Search Form-->
+                                <div class="search">
+                                    <div class="search-form">
+                                        <form id="search-form" action="#">
+                                            <input type="search" placeholder="Search here..." name="search" />
+                                            <button type="submit">
+                                                <span><i class="fa fa-search"></i></span>
+                                            </button>
+                                        </form>
                                     </div>
-                                    <!--End of Search Form-->
+                                </div>
+                                <!--End of Search Form-->
                                 *@
                             </div>
                         </div>
@@ -168,12 +187,12 @@
                                     <li><a href="~/Global/Contact/Touch">@("ContactNavMenu.ViewLocalization".Translate())</a></li>
                                     <li><a href="~/Global/Exam/Touch">@("ExamNavMenu.ViewLocalization".Translate())</a></li>
                                     <li>
-                                        <a href="#">Dil</a>
+                                        <a href="#">@("SelectedLanguageViewVisual.LocalizationTranslate".Translate())</a>
                                         <ul class="sub-menu">
-                                            <li class="setLangListItem" data-langoid="1"><a class="setLang" href="#">AZE</a></li>
-                                            <li class="setLangListItem" data-langoid="3"><a class="setLang" href="#">RUS</a></li>
-                                            <li class="setLangListItem" data-langoid="2"><a class="setLang" href="#">ENG</a></li>
-                                            <li class="setLangListItem" data-langoid="4"><a class="setLang" href="#">TUR</a></li>
+                                            <li class="setLangListItem" data-langoid="1"><a class="setLang" href="#">@("SelectedLanguageViewAZE.LocalizationTranslate".Translate())</a></li>
+                                            <li class="setLangListItem" data-langoid="3"><a class="setLang" href="#">@("SelectedLanguageViewRUS.LocalizationTranslate".Translate())</a></li>
+                                            <li class="setLangListItem" data-langoid="2"><a class="setLang" href="#">@("SelectedLanguageViewENG.LocalizationTranslate".Translate())</a></li>
+                                            <li class="setLangListItem" data-langoid="4"><a class="setLang" href="#">@("SelectedLanguageViewTUR.LocalizationTranslate".Translate())</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -194,56 +213,47 @@
                 <div class="col-lg-12">
                     <div class="footer-info-container text-center section-padding">
                         <div class="footer-logo">
-                            <a href="~/Global/Home/TouchIndex"><img src="~/img/logo/footer-logo.png" alt=""></a>
+                            <a href="~/Global/Home/TouchIndex"><img style="width: 300px;" src="@(TouchLightenLogoUrl)" alt=""></a>
                         </div>
                         <div class="footer-info">
-                            <span><i class="fa fa-map-marker"></i>1st Floor New World Tower Miami</span>
-                            <span><i class="fa fa-envelope"></i>admin@power-boosts.com</span>
-                            <span><i class="fa fa-phone"></i>(801) 2345 - 6789</span>
+                            <span><a title="@(locationCourseKey.Translate())" id="locationModalTrigger" href="#" class="text-white ml-2 custom-link-hover-orange" data-toggle="modal" data-target=".locationModal"><i class="fas fa-map-marked-alt"></i>&nbsp;@("ShowLocationModal.VisualLocalization".Translate())</a></span>
+                            <span><i class="fa fa-envelope"></i>@(emailInfo)</span>
+                            <span><i class="fa fa-phone"></i>@(contactPhone)</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="footer-widget-container section-padding">
                 <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-4">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
                         <div class="single-footer-widget">
-                            <h4>Our School</h4>
+                            <h4>@("LinksHeaderGeneral.LocalizationFooter".Translate())</h4>
                             <ul class="footer-widget-list">
                                 <li><a href="~/Global/About/Touch">@("AboutUsNavMenu.ViewLocalization".Translate())</a></li>
                                 <li><a href="~/Global/Contact/Touch">@("ContactNavMenu.ViewLocalization".Translate())</a></li>
-                                <li><a href="~/Global/StudyPackage/Touch">@("StudyPackageNavMenu.ViewLocalization".Translate())</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-4">
-                        <div class="single-footer-widget">
-                            <h4>Links</h4>
-                            <ul class="footer-widget-list">
-                                <li><a href="~/Global/TeachersInfo/Touch">@("TeachersInfoNavMenu.ViewLocalization".Translate())</a></li>
+
                                 <li><a href="~/Global/BlogDetail/Touch">@("BlogDetailNavMenu.ViewLocalization".Translate())</a></li>
                                 <li><a href="~/Global/Gallery/Touch">@("GalleryNavMenu.ViewLocalization".Translate())</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-4">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
                         <div class="single-footer-widget">
-                            <h4>Support</h4>
+                            <h4>@("LinksHeaderEducation.LocalizationFooter".Translate())</h4>
                             <ul class="footer-widget-list">
-                                <li><a href="#">Documentation</a></li>
-                                <li><a href="#">Forums</a></li>
-                                <li><a href="#">Language Packs</a></li>
-                                <li><a href="#">Release Status</a></li>
+                                <li><a href="~/Global/Exam/Touch">@("ExamNavMenu.ViewLocalization".Translate())</a></li>
+                                <li><a href="~/Global/TeachersInfo/Touch">@("TeachersInfoNavMenu.ViewLocalization".Translate())</a></li>
+                                <li><a href="~/Global/StudyPackage/Touch">@("StudyPackageNavMenu.ViewLocalization".Translate())</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="subscribe-container">
-                            <p>Subscribe now and receive weekly newsletter with educational materials, new courses, interesting posts, popular books and much more!</p>
+                            <p>@("RegisterQuickInormation.Localization".Translate())</p>
                             <form action="#">
                                 <div class="subscribe-form">
-                                    <input type="email" name="email" placeholder="Your email here">
-                                    <button type="submit"><i class="fa fa-send"></i></button>
+                                    <input type="email" name="email" placeholder="@("QuickRegister.EmailPlaceholderLocalization".Translate())">
+                                    <button title="@("GeneralSendButton.LocalizationAll".Translate())" type="submit"><i class="fa fa-send"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -255,17 +265,54 @@
                     <div class="footer-container">
                         <div class="row">
                             <div class="col-lg-6">
-                                <span>&copy; 2016 <a href="#">Power-Boosts</a>. All rights reserved</span>
+                                <span>&copy; @(DateTime.Now.Date.ToString("dd.MM.yyyy")) @("AcademyInfoGeneral.AllRightsReservedLocalization".Translate())</span>
                             </div>
                             <div class="col-lg-6">
                                 <div class="social-links">
-                                    <a href="https://www.facebook.com/touchacademyaz-100488788899672" target="_blank"><i class="fa fa-facebook"></i></a>
-                                    <a href="mailto:admin@touchacademy.az"><i class="fa fa-mail-reply"></i></a>
-                                    <a href="https://www.linkedin.com/company/touch-academy/" target="_blank"><i class="fa fa-linkedin"></i></a>
-                                    <a href="https://www.instagram.com/touchacademy.az/" target="_blank"><i class="fa fa-instagram"></i></a>
+                                    <a title="Touch Academy Whatsapp" target="_blank" href="https://web.whatsapp.com/send?phone=994513898833&amp;text=@("TemplateMessageHiWantToJoinCourse.Localization".Translate())" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                                    <a title="Touch Academy Telegram" href="https://t.me/touchacademy" target="_blank"><i class="fab fa-telegram"></i></a>
+                                    <a title="Touch Academy Facebook" href="https://www.facebook.com/touchacademyaz-100488788899672" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    <a title="Touch Academy Linkedin" href="https://www.linkedin.com/company/touch-academy/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    <a title="Touch Academy Instagram" href="https://www.instagram.com/touchacademy.az/" target="_blank"><i class="fa fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="backgroundSpinner-loader displayNoneSpinner-loader" id="loaderSpinner"></div>
+    <div class="modal fade locationModal" id="locationCourseModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>@(locationCourseKey.Translate())</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mapouter">
+                        <div class="gmap_canvas"><iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Port Baku Residence&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://www.fnfgo.com/"></a></div>
+                        <style>
+                            .mapouter {
+                                position: relative;
+                                text-align: right;
+                                width: 100%;
+                            }
+
+                            .gmap_canvas {
+                                overflow: hidden;
+                                background: none !important;
+                                width: 100%;
+                            }
+
+                            .gmap_iframe {
+                                width: 100% !important;
+                                height: 400px !important;
+                            }
+                        </style>
                     </div>
                 </div>
             </div>
@@ -327,6 +374,10 @@
     <!-- plugins JS
     ============================================ -->
     <script src="~/js/plugins.js"></script>
+
+    <!-- Spinner JS
+    ============================================ -->
+    <script src="~/js/g-spinner.js"></script>
 
     <!-- main JS
     ============================================ -->

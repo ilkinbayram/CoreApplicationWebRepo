@@ -1,16 +1,16 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
+using Core.Resources.Enums;
 using Core.Utilities.Helpers.Abstracts;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Global.Controllers
 {
     [Area("Global")]
+    [LocalizationFilter]
     public class LanguageController : Controller
     {
 
@@ -39,24 +39,13 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         {
             try
             {
-                string key = _configHelper.GetSettingsData<string>("cookie_lang_oid_keyword", "CookieFixedKeywords");
+                string key = _configHelper.GetSettingsData<string>(ParentKeySettings.SessionCache_ContainerKeyword.ToString(), ChildKeySettings.Session_Language_CurrentLangOid.ToString());
 
-                if (_sessionStorageHelper.GetValue(key) != langOid.ToString())
-                {
-                    var cacheKey = _configHelper.GetSettingsData<string>("staticLanguageCache", "ServerCache");
-                    _cacheManager.Remove(cacheKey);
-
-                    Dictionary<string, string> dictionaryLang = new Dictionary<string, string>();
-                    HttpContextAccessor context = new HttpContextAccessor();
-                    _localizationService.GetList(x => x.Lang_oid == langOid).Data.ForEach(x =>
-                    {
-                        dictionaryLang.Add(x.Key, x.Translate);
-                    });
-
-                    _cacheManager.Add(cacheKey, dictionaryLang, 1440);
-                }
+                string cacheKey = _configHelper.GetSettingsData<string>(ParentKeySettings.ServerCache_ContainerKeyword.ToString(), ChildKeySettings.Server_Language_CachedForAll.ToString());
 
                 _sessionStorageHelper.Set(key, langOid.ToString(), 1440);
+
+                var data = _cacheManager.Get<Dictionary<short, Dictionary<string,string>>>(cacheKey);
 
                 return RedirectToAction(actionName, controllerName, new { area = areaName });
             }

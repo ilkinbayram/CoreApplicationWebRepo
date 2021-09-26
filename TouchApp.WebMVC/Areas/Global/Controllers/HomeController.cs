@@ -1,5 +1,5 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
-using Core.Entities.Concrete;
+using Core.Resources.Enums;
 using Core.Utilities.Helpers.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -56,7 +56,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         [HttpGet]
         public async Task<IActionResult> TouchIndex()
         {
-            GeneralFunctionality.ConfigureLanguageLocalizationSetting(_sessionStorageHelper, _cacheManager, _configHelper, _localizationService, "staticLanguageCache", "ServerCache", 1440);
+            GeneralFunctionality.ConfigureLanguageLocalizationSetting(_sessionStorageHelper, _cacheManager, _configHelper, _languageService, _localizationService, ParentKeySettings.ServerCache_ContainerKeyword, ChildKeySettings.Server_Language_CachedForAll, 1440);
 
             _viewModel = new HomeViewModel 
             { 

@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using TouchApp.WebMVC.Filters;
 using TouchApp.WebMVC.Models;
 
 namespace TouchApp.WebMVC.Controllers
 {
+    [LocalizationFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

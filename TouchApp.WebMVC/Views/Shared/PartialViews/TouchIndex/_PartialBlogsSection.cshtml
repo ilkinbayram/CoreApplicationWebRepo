@@ -19,8 +19,8 @@
                 <div class="section-title-wrapper title-yellow">
                     <div class="section-title">
                         @* TODO : Localization *@
-                        <h3>Our Blog</h3>
-                        <p>Latest news &amp; event of our schools</p>
+                        <h3>@("PublicTitleBlogs.Localization".Translate())</h3>
+                        <p>@("PublicSubtitleBlogs.Localization".Translate())</p>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                             </div>
                             <p>@(blogOne.PreviewDescriptionKey.Translate())</p>
                             @* TODO : Localization *@
-                            <a href="blog-details.html">Read more.</a>
+                            <a href="blog-details.html">@("GeneralReadMore.ButtonText".Translate())</a>
                         </div>
                     </div>
                 }

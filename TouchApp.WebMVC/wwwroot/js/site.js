@@ -9,12 +9,17 @@
     Custom JS START
 ---------------------------- */
 
-$(".setLang").click(function (e) {
+$("#locationModalTrigger").click(function (e) {
     e.preventDefault();
 });
 
 $(".setLangListItem").click(function (e) {
     e.preventDefault();
+
+    var loaderSpinner = $("#loaderSpinner");
+
+    loaderSpinner.removeClass("displayNoneSpinner-loader");
+    loaderSpinner.gSpinner();
 
     var langOid = 1;
 
@@ -26,14 +31,21 @@ $(".setLangListItem").click(function (e) {
 
     var pathName = window.location.pathname;
 
-    var controller = '';
-    var action = '';
+    var controller = "";
+    var action = "";
+    var areaName = "";
 
     if (pathName == '/') {
         controller = "Home";
         action = "TouchIndex";
         areaName = "Global";
-    } else {
+    }
+    else if (pathName == '/General') {
+        controller = "Home";
+        action = "TouchIndex";
+        areaName = "Global";
+    }
+    else {
         areaName = pathName.split('/')[1];
         controller = pathName.split('/')[2];
         action = pathName.split('/')[3];
@@ -45,6 +57,8 @@ $(".setLangListItem").click(function (e) {
     }).done(function (d) {
         $(document).ajaxStop(function () {
             window.location.reload();
+            loaderSpinner.gSpinner('hide');
+            loaderSpinner.addClass("displayNoneSpinner-loader");
         });
     }).fail(function (d) {
         alert("Opps :( Something Get Wrong!");

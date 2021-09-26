@@ -1,6 +1,7 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
 using Core.DependencyResolvers;
 using Core.Entities.Concrete;
+using Core.Resources.Enums;
 using Core.Utilities.Helpers;
 using Core.Utilities.Helpers.Abstracts;
 using Microsoft.AspNetCore.Http;
@@ -44,32 +45,6 @@ namespace Core.Extensions
             return resultList.ToArray();
         }
 
-        private static byte lang_oid
-        {
-            get
-            {
-                try
-                {
-                    // TODO : Hard Code Should Be Refactored
-
-                    HttpContextAccessor context = new HttpContextAccessor();
-                    var response = context.HttpContext.Request.Cookies["language_oid_static_keyword_session"];
-
-                    if (string.IsNullOrEmpty(response))
-                    {
-                        response = context.HttpContext.Request.Cookies["1"];
-                        return Convert.ToByte(response);
-                    }
-
-                    return Convert.ToByte(response);
-                }
-                catch (Exception ex)
-                {
-                    return 1;
-                }
-            }
-        }
-
         public static string Translate(this string key)
         {
             try
@@ -78,10 +53,17 @@ namespace Core.Extensions
 
                 // TODO : Hard Code Should Be Refactored
 
-                var allResponse = _cacheManager.Get<Dictionary<string, string>>("language_oid_static_keyword_servercache");
+                var serverLocalizationKey = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.ServerCache_ContainerKeyword.ToString(), ChildKeySettings.Server_Language_CachedForAll.ToString());
+
+                var currentLangOid = Convert.ToInt16(ClientSideStorageHelper.GetLangOidStatic());
+
+                var allResponse = _cacheManager.Get<Dictionary<short, Dictionary<string, string>>>(serverLocalizationKey);
+
                 if (allResponse != null)
                 {
-                    return allResponse.ContainsKey(key) ? allResponse[key] : key;
+                    return allResponse.ContainsKey(currentLangOid) && allResponse[currentLangOid].ContainsKey(key) 
+                        ? allResponse[currentLangOid][key] 
+                        : key;
                 }
 
                 return key;
@@ -94,7 +76,7 @@ namespace Core.Extensions
 
         public static string GetStaticMediaURL(this string configKey)
         {
-            var resultRead = ConfigHelper.GetSettingsDataStatic<string>(configKey, "StaticMediaURL");
+            var resultRead = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), configKey);
 
             return resultRead;
         }

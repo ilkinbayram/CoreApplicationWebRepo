@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Global.Controllers
 {
     [Area("Global")]
+    [LocalizationFilter]
     public class ContactController : Controller
     {
         [HttpGet]

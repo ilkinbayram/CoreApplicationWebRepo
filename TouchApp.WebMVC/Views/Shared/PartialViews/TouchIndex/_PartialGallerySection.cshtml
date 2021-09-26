@@ -36,8 +36,8 @@
                 <div class="section-title-wrapper">
                     <div class="section-title">
                         @* TODO : Localization *@
-                        <h3>Our Gallery</h3>
-                        <p>Discove Our Kindergarten Photo Gallery</p>
+                        <h3>@("PublicTitleGallery.Localization".Translate())</h3>
+                        <p>@("PublicSubtitleGallery.Localization".Translate())</p>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 <div class="filter-menu">
                     <ul>
                         @* TODO : Localization *@
-                        <li class="filter" data-filter="all">All</li>
+                        <li class="filter" data-filter="all">@("GeneralAllTextTranslate.Localization".Translate())</li>
                         @if (tagList != null)
                         {
                             foreach (var item in tagList)
@@ -97,8 +97,8 @@
             <div class="col-md-12">
                 <div class="view-gallery text-center">
                     @* TODO : Localization *@
-                    <h4>See Our Kindergarten <span>Photo Gallery!</span></h4>
-                    <a href="#" class="button-default button-yellow">View Now</a>
+                    <h4>@("GalleryFirstAdsText.BeforeViewLocalization".Translate()) <span>@("GallerySecondBoldAdsText.BeforeViewLocalization".Translate())</span></h4>
+                    <a href="/Global/Gallery/Touch" class="button-default button-yellow">@("GeneralViewNow.ButtonText".Translate())</a>
                 </div>
             </div>
         </div>

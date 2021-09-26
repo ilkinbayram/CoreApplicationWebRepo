@@ -2,6 +2,6 @@
 {
     public interface IConfigHelper
     {
-        T GetSettingsData<T>(string key, string parentProvider);
+        T GetSettingsData<T>(string parentKey, string childKey);
     }
 }

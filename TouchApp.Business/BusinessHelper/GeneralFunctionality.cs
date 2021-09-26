@@ -17,26 +17,33 @@ namespace TouchApp.Business.BusinessHelper
         public static void ConfigureLanguageLocalizationSetting(ISessionStorageHelper sessionStorageHelper,
                                                                 ICacheManager cacheManager,
                                                                 IConfigHelper configHelper,
+                                                                ILanguageService languageService,
                                                                 ILocalizationService localizationService,
-                                                                string configSettingKey,
-                                                                string configSettingParentProvider,
+                                                                ParentKeySettings parentKey,
+                                                                ChildKeySettings childKey,
                                                                 int expirationMinutes = 60)
         {
             sessionStorageHelper.SetSessionLangIfNotExist();
 
-            var checkCacheForLang = cacheManager.Get(configHelper.GetSettingsData<string>(configSettingKey, configSettingParentProvider));
+            var settingCacheKey = configHelper.GetSettingsData<string>(parentKey.ToString(), childKey.ToString());
+
+            var checkCacheForLang = (Dictionary<short, Dictionary<string, string>>)cacheManager.Get(settingCacheKey);
 
             if (checkCacheForLang == null)
             {
-                Dictionary<string, string> dictionaryLang = new Dictionary<string, string>();
-                HttpContextAccessor context = new HttpContextAccessor();
-                short langOid = Convert.ToInt16(context.HttpContext.Request.Cookies["language_oid_static_keyword_session"]);
-                localizationService.GetList(x=>x.Lang_oid == langOid).Data.ForEach(x =>
+                Dictionary<short, Dictionary<string,string>> dictionaryLang = new Dictionary<short, Dictionary<string, string>>();
+
+                languageService.GetList().Data.Select(x => x.Language_oid).ToList().ForEach(x =>
                 {
-                    dictionaryLang.Add(x.Key, x.Translate);
+                    var dictionaryKeyValue = new Dictionary<string, string>();
+                    localizationService.GetList(p=>p.Lang_oid==x).Data.ForEach(m =>
+                    {
+                        dictionaryKeyValue.Add(m.Key, m.Translate);
+                    });
+                    dictionaryLang.Add(x, dictionaryKeyValue);
                 });
 
-                cacheManager.Add(configHelper.GetSettingsData<string>(configSettingKey, configSettingParentProvider), dictionaryLang, expirationMinutes);
+                cacheManager.Add(settingCacheKey, dictionaryLang, expirationMinutes);
             }
         }
 

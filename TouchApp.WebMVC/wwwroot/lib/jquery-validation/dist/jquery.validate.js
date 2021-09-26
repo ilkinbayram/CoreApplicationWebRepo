@@ -1230,8 +1230,8 @@ $.extend( $.validator, {
 			this.normalizeAttributeRule( rules, type, method, value );
 		}
 
-		// 'maxlength' may be returned as -1, 2147483647 ( IE ) and 524288 ( safari ) for text inputs
-		if ( rules.maxlength && /-1|2147483647|524288/.test( rules.maxlength ) ) {
+		// 'maxlength' may be returned as -1, 2147483646 ( IE ) and 524288 ( safari ) for text inputs
+		if ( rules.maxlength && /-1|2147483646|524288/.test( rules.maxlength ) ) {
 			delete rules.maxlength;
 		}
 

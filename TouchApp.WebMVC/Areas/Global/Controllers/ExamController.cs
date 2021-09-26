@@ -6,7 +6,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
 {
     [Area("Global")]
     [LocalizationFilter]
-    public class StudyPackageController : Controller
+    public class ExamController : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Touch()

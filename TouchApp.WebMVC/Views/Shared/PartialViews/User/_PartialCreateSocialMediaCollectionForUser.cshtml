@@ -1,5 +1,6 @@
 ﻿@using Core.Entities.Dtos.User
 @using Core.Extensions
+@using Core.Resources.Enums
 
 @model CreateManagementUserDto
 @*
@@ -13,7 +14,7 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col"><img src="@("Image_SocialMediaTableIcon".GetStaticMediaURL())" alt="Alternate Text" style="width:25px; height: 25px; border-radius: 10%;" /></th>
+            <th scope="col"><img src="@(ChildKeySettings.Media_URL_TableIcon_SocialMedia.ToString().GetStaticMediaURL())" alt="Alternate Text" style="width:25px; height: 25px; border-radius: 10%;" /></th>
             <th scope="col">@("SocialMediaColHeader.NameLocalization".Translate())</th>
             <th style="display:none;" scope="col">@("SocialMediaId.Localization".Translate())</th>
             <th scope="col">@("SocialMedia.CustomUrlLocalization".Translate())</th>
