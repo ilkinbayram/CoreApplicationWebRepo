@@ -421,7 +421,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _mediaDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _mediaDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<Media>>(response);
                 return new SuccessDataResult<List<Media>>(mappingResult);
             }
@@ -541,7 +541,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _mediaDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _mediaDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<GetMediaDto>>(response).Take(takeCount).ToList();
                 return new SuccessDataResult<List<GetMediaDto>>(mappingResult);
             }

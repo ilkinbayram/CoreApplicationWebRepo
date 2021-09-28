@@ -383,7 +383,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _teacherOperationClaimDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _teacherOperationClaimDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<TeacherOperationClaim>>(response);
                 return new SuccessDataResult<List<TeacherOperationClaim>>(mappingResult);
             }
@@ -503,7 +503,7 @@ namespace Business.Concrete
         //{
         //    try
         //    {
-        //        var response = (await _teacherOperationClaimDal.GetAllAsQueryableAsync(filter)).ToList();
+        //        var response = (await _teacherOperationClaimDal.GetAllAsync(filter)).ToList();
         //        var mappingResult = _mapper.Map<List<GetTeacherOperationClaimDto>>(response).Take(takeCount).ToList();
         //        return new SuccessDataResult<List<GetTeacherOperationClaimDto>>(mappingResult);
         //    }

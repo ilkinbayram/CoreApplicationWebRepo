@@ -38,6 +38,7 @@ namespace Core.DataAccess
         Task AddBeforeCommitAsync(T entity);
         Task<int> DeletePermanentlyAsync(T entity);
         Task<T> GetAsync(Expression<Func<T, bool>> filter);
+        Task<List<T>> GetAllAsync(Expression<Func<T, bool>> expression = null);
         Task<int> UpdateAsync(T entity);
         Task<int> AddAsync(List<T> entities);
         Task<int> UpdateAndSaveAsync(List<T> entities);

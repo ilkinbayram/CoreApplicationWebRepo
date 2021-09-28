@@ -393,7 +393,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _teacherCourseDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _teacherCourseDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<TeacherCourse>>(response);
                 return new SuccessDataResult<List<TeacherCourse>>(mappingResult);
             }
@@ -513,7 +513,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _teacherCourseDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _teacherCourseDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<GetTeacherCourseDto>>(response).Take(takeCount).ToList();
                 return new SuccessDataResult<List<GetTeacherCourseDto>>(mappingResult);
             }

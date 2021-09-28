@@ -37,6 +37,11 @@ namespace Core.Entities.Dtos.Teacher
         public string BiographyTranslateTUR { get; set; }
         public string BiographyTranslateRUS { get; set; }
         public string BiographyTranslateENG { get; set; }
+        public string ShortBiographyKey { get; set; }
+        public string ShortBiographyTranslateAZE { get; set; }
+        public string ShortBiographyTranslateTUR { get; set; }
+        public string ShortBiographyTranslateRUS { get; set; }
+        public string ShortBiographyTranslateENG { get; set; }
         public IFormFile ProfilePhotoFile { get; set; }
         public string ProfilePhotoPath { get; set; }
         public IFormFile WallpaperFile { get; set; }

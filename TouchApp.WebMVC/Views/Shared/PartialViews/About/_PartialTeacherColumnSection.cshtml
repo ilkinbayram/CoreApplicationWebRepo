@@ -1,4 +1,9 @@
-﻿@*
+﻿@using Core.Extensions
+@using TouchApp.WebMVC.Areas.Global.Models.ViewModel
+@using Microsoft.AspNetCore.Html
+
+@model AboutViewModel
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -12,118 +17,38 @@
             <div class="col-md-12">
                 <div class="section-title-wrapper">
                     <div class="section-title">
-                        <h3>Our Teachers</h3>
-                        <p>We are glad to introduce our professional staff</p>
+                        <h3>@("PublicTitleOurTeacher.Localization".Translate())</h3>
+                        <p>@("PublicSubtitleOurTeacher.Localization".Translate())</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="teachers-column-carousel carousel-style-one owl-carousel">
-            <div class="single-teachers-column text-center">
-                <div class="teachers-image-column">
-                    <a href="teacher-info.html">
-                        <img src="~/img/teacher/6.jpg" alt="">
-                        <span class="image-hover">
-                            <span><i class="fa fa-edit"></i>View Profile</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="teacher-column-carousel-text">
-                    <h4>Kailo</h4>
-                    <span>Professor, Harvard College</span>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
+            @foreach (var teacherOne in Model.Teachers)
+            {
+                <div class="single-teachers-column text-center">
+                    <div class="teachers-image-column">
+                        <a href="teacher-info.html">
+                            <img src="@(teacherOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
+                            <span class="image-hover">
+                                <span><i class="fa fa-edit"></i>@("GeneralViewProfileButton.TextLocalization".Translate())</span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="teacher-column-carousel-text">
+                        <h4>@($"{teacherOne.LastName} {teacherOne.FirstName}")</h4>
+                        <span>@($"{teacherOne.ProfessionNameKey.Translate()}, {teacherOne.CompanyNameKey.Translate()}")</span>
+                        <p>@(teacherOne.ShortBiographyKey.Translate())</p>
+                        <div class="social-links">
+                            @foreach (var teacherSocialMediaOne in teacherOne.TeacherSocialMedias)
+                            {
+                                var socialMediaIconString = new HtmlString(teacherSocialMediaOne.SocialMedia.IconHtml);
+                                <a href="@(teacherSocialMediaOne.RedirectUrl)">@(Html.Raw(socialMediaIconString))</a>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="single-teachers-column text-center">
-                <div class="teachers-image-column">
-                    <a href="teacher-info.html">
-                        <img src="~/img/teacher/7.jpg" alt="">
-                        <span class="image-hover">
-                            <span><i class="fa fa-edit"></i>View Profile</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="teacher-column-carousel-text">
-                    <h4>graves</h4>
-                    <span>Professor, Harvard College</span>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry, has been the industry's standard dummy.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="single-teachers-column text-center">
-                <div class="teachers-image-column">
-                    <a href="teacher-info.html">
-                        <img src="~/img/teacher/10.jpg" alt="">
-                        <span class="image-hover">
-                            <span><i class="fa fa-edit"></i>View Profile</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="teacher-column-carousel-text">
-                    <h4>poppy</h4>
-                    <span>Professor, Harvard College</span>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="single-teachers-column text-center">
-                <div class="teachers-image-column">
-                    <a href="teacher-info.html">
-                        <img src="~/img/teacher/9.jpg" alt="">
-                        <span class="image-hover">
-                            <span><i class="fa fa-edit"></i>View Profile</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="teacher-column-carousel-text">
-                    <h4>maokai</h4>
-                    <span>Professor, Harvard College</span>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="single-teachers-column text-center">
-                <div class="teachers-image-column">
-                    <a href="teacher-info.html">
-                        <img src="~/img/teacher/8.jpg" alt="">
-                        <span class="image-hover">
-                            <span><i class="fa fa-edit"></i>View Profile</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="teacher-column-carousel-text">
-                    <h4>graves</h4>
-                    <span>Professor, Harvard College</span>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry, has been the industry's standard dummy.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>

@@ -475,7 +475,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _languageDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _languageDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<Language>>(response);
                 return new SuccessDataResult<List<Language>>(mappingResult);
             }
@@ -595,7 +595,7 @@ namespace Business.Concrete
         //{
         //    try
         //    {
-        //        var response = (await _languageDal.GetAllAsQueryableAsync(filter)).ToList();
+        //        var response = (await _languageDal.GetAllAsync(filter)).ToList();
         //        var mappingResult = _mapper.Map<List<GetLanguageDto>>(response).Take(takeCount).ToList();
         //        return new SuccessDataResult<List<GetLanguageDto>>(mappingResult);
         //    }

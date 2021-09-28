@@ -1,4 +1,6 @@
-﻿@*
+﻿@using Core.Extensions
+
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -10,19 +12,19 @@
             <div class="col-lg-3 col-md-6 col-sm-6 activity">
                 <div class="single-activity">
                     <div class="single-activity-icon">
-                        <i class="fa fa-gamepad"></i>
+                        <i class="fas fa-trophy"></i>
                     </div>
-                    <h4>Funny Games</h4>
-                    <p>Fusce pretium, est at aliquam semper, leo ante facilisis risus in feugiat ipsum augue pellent esque metu.</p>
+                    <h4>@("AboutUsCompetitionTitle.LocalizationTranslate".Translate())</h4>
+                    <p>@("AboutUsCompetitionDescription.LocalizationTranslate".Translate())</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 activity">
                 <div class="single-activity">
                     <div class="single-activity-icon">
-                        <i class="fa fa-fort-awesome"></i>
+                        <i class="fas fa-hands-helping"></i>
                     </div>
-                    <h4>Toys</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
+                    <h4>@("AboutUsHelpTitle.LocalizationTranslate".Translate())</h4>
+                    <p>@("AboutUsHelpDescription.LocalizationTranslate".Translate())</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 activity">
@@ -30,8 +32,8 @@
                     <div class="single-activity-icon">
                         <i class="fa fa-futbol-o"></i>
                     </div>
-                    <h4>Activities</h4>
-                    <p>It was popularised in the 1960s with the release of Letraset sheets release containing Lorem Ipsum passages</p>
+                    <h4>@("AboutUsActivityTitle.LocalizationTranslate".Translate())</h4>
+                    <p>@("AboutUsActivityDescription.LocalizationTranslate".Translate())</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 activity">
@@ -39,8 +41,8 @@
                     <div class="single-activity-icon">
                         <i class="fa fa-pencil"></i>
                     </div>
-                    <h4>Education</h4>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page looking at layout</p>
+                    <h4>@("AboutUsEducationTitle.LocalizationTranslate".Translate())</h4>
+                    <p>@("AboutUsEducationDescription.LocalizationTranslate".Translate())</p>
                 </div>
             </div>
         </div>

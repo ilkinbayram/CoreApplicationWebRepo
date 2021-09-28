@@ -14,9 +14,11 @@ namespace Core.Entities.Dtos.SocialMedia
             ModelType = ProjectModelType.SocialMedia;
         }
 
+        public SocialMediaType SocialMediaType { get; set; }
         public string NameSocial { get; set; }
         public string Uri { get; set; }
         public string IconSource { get; set; }
+        public string IconHtml { get; set; }
 
         public List<GetUserSocialMediaDto> UserSocialMedias { get; set; }
         public List<GetTeacherSocialMediaDto> TeacherSocialMedias { get; set; }

@@ -393,7 +393,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _teacherSocialMediaDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _teacherSocialMediaDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<TeacherSocialMedia>>(response);
                 return new SuccessDataResult<List<TeacherSocialMedia>>(mappingResult);
             }
@@ -513,7 +513,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _teacherSocialMediaDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _teacherSocialMediaDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<GetTeacherSocialMediaDto>>(response).Take(takeCount).ToList();
                 return new SuccessDataResult<List<GetTeacherSocialMediaDto>>(mappingResult);
             }

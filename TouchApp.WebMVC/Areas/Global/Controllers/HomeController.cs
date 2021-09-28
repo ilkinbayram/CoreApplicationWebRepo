@@ -60,7 +60,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
 
             _viewModel = new HomeViewModel 
             { 
-                Blogs = (await _blogService.GetDtoListAsync(takeCount:6)).Data, 
+                Blogs = (await _blogService.GetDtoListAsync(takeCount:100)).Data, 
                 Courses = (await _courseService.GetDtoListAsync()).Data, 
                 CourseServices = (await _courseServiceService.GetDtoListAsync()).Data, 
                 Medias = (await _mediaService.GetDtoListAsync()).Data, 

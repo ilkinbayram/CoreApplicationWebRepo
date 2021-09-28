@@ -393,7 +393,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _blogCategoryDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _blogCategoryDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<BlogCategory>>(response);
                 return new SuccessDataResult<List<BlogCategory>>(mappingResult);
             }
@@ -513,7 +513,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _blogCategoryDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _blogCategoryDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<GetBlogCategoryDto>>(response).Take(takeCount).ToList();
                 return new SuccessDataResult<List<GetBlogCategoryDto>>(mappingResult);
             }

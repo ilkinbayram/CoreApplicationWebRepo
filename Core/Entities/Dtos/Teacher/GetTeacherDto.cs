@@ -29,6 +29,7 @@ namespace Core.Entities.Dtos.Teacher
         public decimal? Rate { get; set; }
         public int? RateCount { get; set; }
         public string BiographyKey { get; set; }
+        public string ShortBiographyKey { get; set; }
         public string ProfilePhotoPath { get; set; }
         public string WallpaperPath { get; set; }
 

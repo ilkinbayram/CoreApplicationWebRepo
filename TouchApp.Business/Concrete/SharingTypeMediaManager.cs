@@ -391,7 +391,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _sharingTypeMediaDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _sharingTypeMediaDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<SharingTypeMedia>>(response);
                 return new SuccessDataResult<List<SharingTypeMedia>>(mappingResult);
             }
@@ -511,7 +511,7 @@ namespace Business.Concrete
         {
             try
             {
-                var response = (await _sharingTypeMediaDal.GetAllAsQueryableAsync(filter)).ToList();
+                var response = (await _sharingTypeMediaDal.GetAllAsync(filter)).ToList();
                 var mappingResult = _mapper.Map<List<GetSharingTypeMediaDto>>(response).Take(takeCount).ToList();
                 return new SuccessDataResult<List<GetSharingTypeMediaDto>>(mappingResult);
             }

@@ -149,6 +149,15 @@ namespace Core.DataAccess.EntityFramework
             return await result;
         }
 
+        public async virtual Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression = null)
+        {
+            Context.ChangeTracker.LazyLoadingEnabled = true;
+            var result = expression != null
+                ? Context.Set<TEntity>().Where(expression).ToListAsync()
+                : Context.Set<TEntity>().ToListAsync();
+            return await result;
+        }
+
         public virtual IQueryable<TEntity> GetAllAsQueryable()
         {
             Context.ChangeTracker.LazyLoadingEnabled = true;

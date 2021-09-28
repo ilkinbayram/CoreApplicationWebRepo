@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Areas.Global.Models.ViewModel;
 using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Global.Controllers
@@ -8,10 +10,21 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
     [LocalizationFilter]
     public class AboutController : Controller
     {
+        private ITeacherService _teacherService;
+
+        public AboutController(ITeacherService teacherService)
+        {
+            _teacherService = teacherService;
+        }
+
         [HttpGet]
         public async Task<IActionResult> Touch()
         {
-            return View();
+            var aboutViewModel = new AboutViewModel
+            {
+                Teachers = (await _teacherService.GetDtoListAsync()).Data
+            };
+            return View(aboutViewModel);
         }
     }
 }
