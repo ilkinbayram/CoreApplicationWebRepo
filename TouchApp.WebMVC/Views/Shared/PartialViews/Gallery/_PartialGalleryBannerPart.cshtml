@@ -1,4 +1,6 @@
-﻿@*
+﻿@using Core.Extensions
+
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -10,11 +12,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-text">
-                    <h1 class="text-center">Gallery</h1>
+                    <h1 class="text-center">@("GalleryPageCaptionText.ViewLocalization".Translate())</h1>
                     <div class="breadcrumb-bar">
                         <ul class="breadcrumb">
-                            <li><a href="index.html">Home Page</a></li>
-                            <li>Gallery</li>
+                            <li>@Html.ActionLink("HomePageNavMenu.ViewLocalization".Translate(), "TouchIndex", "Home", new { area = "Global" })</li>
+                            <li>@("GalleryPageCaptionText.ViewLocalization".Translate())</li>
                         </ul>
                     </div>
                 </div>

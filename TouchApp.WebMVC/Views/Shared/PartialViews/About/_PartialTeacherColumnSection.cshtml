@@ -24,30 +24,33 @@
             </div>
         </div>
         <div class="teachers-column-carousel carousel-style-one owl-carousel">
-            @foreach (var teacherOne in Model.Teachers)
+            @if (Model != null && Model.Teachers != null && Model.Teachers.Count > 0)
             {
-                <div class="single-teachers-column text-center">
-                    <div class="teachers-image-column">
-                        <a href="teacher-info.html">
-                            <img src="@(teacherOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
-                            <span class="image-hover">
-                                <span><i class="fa fa-edit"></i>@("GeneralViewProfileButton.TextLocalization".Translate())</span>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="teacher-column-carousel-text">
-                        <h4>@($"{teacherOne.LastName} {teacherOne.FirstName}")</h4>
-                        <span>@($"{teacherOne.ProfessionNameKey.Translate()}, {teacherOne.CompanyNameKey.Translate()}")</span>
-                        <p>@(teacherOne.ShortBiographyKey.Translate())</p>
-                        <div class="social-links">
-                            @foreach (var teacherSocialMediaOne in teacherOne.TeacherSocialMedias)
-                            {
-                                var socialMediaIconString = new HtmlString(teacherSocialMediaOne.SocialMedia.IconHtml);
-                                <a href="@(teacherSocialMediaOne.RedirectUrl)">@(Html.Raw(socialMediaIconString))</a>
-                            }
+                @foreach (var teacherOne in Model.Teachers)
+                {
+                    <div class="single-teachers-column text-center">
+                        <div class="teachers-image-column">
+                            <a href="teacher-info.html">
+                                <img src="@(teacherOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
+                                <span class="image-hover">
+                                    <span><i class="fa fa-edit"></i>@("GeneralViewProfileButton.TextLocalization".Translate())</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="teacher-column-carousel-text">
+                            <h4>@($"{teacherOne.LastName} {teacherOne.FirstName}")</h4>
+                            <span>@($"{teacherOne.ProfessionNameKey.Translate()}, {teacherOne.CompanyNameKey.Translate()}")</span>
+                            <p>@(teacherOne.ShortBiographyKey.Translate())</p>
+                            <div class="social-links">
+                                @foreach (var teacherSocialMediaOne in teacherOne.TeacherSocialMedias)
+                                {
+                                    var socialMediaIconString = new HtmlString(teacherSocialMediaOne.SocialMedia.IconHtml);
+                                    <a href="@(teacherSocialMediaOne.RedirectUrl)">@(Html.Raw(socialMediaIconString))</a>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>

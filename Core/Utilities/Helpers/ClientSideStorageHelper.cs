@@ -40,16 +40,28 @@ namespace Core.Utilities.Helpers
 
             option.Expires = DateTime.Now.AddMinutes(expirationMinute);
 
-            _httpContextAccessor.HttpContext.Response.Cookies.Append(key, value,option);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(key, value, option);
         }
 
         public void SetSessionLangIfNotExist()
         {
             var settingKeyParameterLangOid = _configHelper.GetSettingsData<string>(ParentKeySettings.SessionCache_ContainerKeyword.ToString(), ChildKeySettings.Session_Language_CurrentLangOid.ToString());
-            var settledLangOid = GetValue(settingKeyParameterLangOid);
-            if (settledLangOid == null || string.IsNullOrEmpty(settledLangOid))
+
+            var defaultValue = _configHelper.GetSettingsData<string>(ParentKeySettings.SessionCache_ContainerKeyword.ToString(), ChildKeySettings.Session_Language_DefaultLangOid.ToString());
+
+            try
             {
-                var defaultValue = _configHelper.GetSettingsData<string>(ParentKeySettings.SessionCache_ContainerKeyword.ToString(), ChildKeySettings.Session_Language_CurrentLangOid.ToString());
+                var settledLangOid = GetValue(settingKeyParameterLangOid);
+
+                int convertedLangOid = Convert.ToInt32(settledLangOid);
+
+                if (string.IsNullOrEmpty(settledLangOid) || convertedLangOid <= 0)
+                {
+                    Set(settingKeyParameterLangOid, defaultValue, 1440);
+                }
+            }
+            catch (FormatException ex)
+            {
                 Set(settingKeyParameterLangOid, defaultValue, 1440);
             }
         }
@@ -103,10 +115,22 @@ namespace Core.Utilities.Helpers
         public static void SetSessionLangIfNotExistStatic()
         {
             var settingKeyParameterLangOid = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.SessionCache_ContainerKeyword.ToString(), ChildKeySettings.Session_Language_CurrentLangOid.ToString());
-            var settledLangOid = GetValueStatic(settingKeyParameterLangOid);
-            if (settledLangOid == null || string.IsNullOrEmpty(settledLangOid))
+
+            var defaultValue = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.SessionCache_ContainerKeyword.ToString(), ChildKeySettings.Session_Language_DefaultLangOid.ToString());
+
+            try
             {
-                var defaultValue = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.SessionCache_ContainerKeyword.ToString(), ChildKeySettings.Session_Language_CurrentLangOid.ToString());
+                var settledLangOid = GetValueStatic(settingKeyParameterLangOid);
+
+                var convertedLangOid = Convert.ToInt32(settledLangOid);
+
+                if (string.IsNullOrEmpty(settledLangOid) || convertedLangOid <= 0)
+                {
+                    SetStatic(settingKeyParameterLangOid, defaultValue, 1440);
+                }
+            }
+            catch (FormatException ex)
+            {
                 SetStatic(settingKeyParameterLangOid, defaultValue, 1440);
             }
         }
