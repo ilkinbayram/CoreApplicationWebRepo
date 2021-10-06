@@ -10,6 +10,8 @@
         Media_URL_TableIcon_SocialMedia = 300,
         Media_URL_TouchAcademy_Logo = 301,
         Media_URL_TouchAcademy_Lighten_Logo = 302,
+        Media_URL_AboutUs_WhoAreWe_Caption = 303,
+        Media_URL_Enroll_YourChildBackground_Caption = 304,
 
         InfoMail_GlobalAccess = 400,
         RegisterMail_GlobalAccess = 401,

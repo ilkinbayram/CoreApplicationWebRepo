@@ -65,8 +65,29 @@ $(".setLangListItem").click(function (e) {
     });
 });
 
+$(".teachers-navigator").click(function (e) {
+    e.preventDefault();
 
-//var azeLangBtn = document.querySelector("#setLangAze");
+    $('html, body').animate({
+        scrollTop: $("#teachersAreaContainer").offset().top-110
+    }, 700);
+});
+
+$(".blogs-navigator").click(function (e) {
+    e.preventDefault();
+
+    $('html, body').animate({
+        scrollTop: $("#blogsAreaContainer").offset().top-50
+    }, 700);
+});
+
+$(".courses-navigator").click(function (e) {
+    e.preventDefault();
+
+    $('html, body').animate({
+        scrollTop: $("#coursesAreaContainer").offset().top-50
+    }, 700);
+});
 
 /*--------------------------
     Custom JS END

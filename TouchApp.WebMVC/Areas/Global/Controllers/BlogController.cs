@@ -6,10 +6,16 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
 {
     [Area("Global")]
     [LocalizationFilter]
-    public class BlogDetailController : Controller
+    public class BlogController : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Touch()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCurrent(long id)
         {
             return View();
         }

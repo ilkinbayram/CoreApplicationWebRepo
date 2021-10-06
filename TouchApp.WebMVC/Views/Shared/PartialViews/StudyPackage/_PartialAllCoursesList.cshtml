@@ -1,0 +1,104 @@
+﻿@using Core.Extensions
+@using TouchApp.WebMVC.Areas.Global.Models.ViewModel
+@using Core.Utilities.Helpers
+@using Core.Resources.Enums
+
+@model AllCoursesViewModel
+
+@{
+    string EnrollChildBackImageUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_URL_Enroll_YourChildBackground_Caption.ToString());
+}
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+
+<div class="class-list-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8">
+                @if (Model != null && Model.AllCourses != null && Model.AllCourses.Count > 0)
+                {
+                    foreach (var courseOne in Model.AllCourses)
+                    {
+                        <div class="class-list-item">
+                            <div class="row">
+                                <div class="col-xl-5 col-lg-6 col-md-6">
+                                    <a href="#"><img src="@(courseOne.CaptionImageSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
+                                </div>
+                                <div class="col-xl-7 col-lg-6 col-md-6">
+                                    <div class="class-list-text">
+                                        <h3><a href="#">@(courseOne.TitleKey.Translate())</a></h3>
+                                        <div class="class-information">
+                                            <span><i class="fa fa-calendar"></i>&nbsp;@(courseOne.PublishDate.ToString("dd.MM.yyyy"))</span>
+                                            @if (courseOne.TeacherCourses != null && courseOne.TeacherCourses.Count > 0)
+                                            {
+                                                foreach (var teacher in courseOne.TeacherCourses.Select(x => x.Teacher).ToList())
+                                                {
+                                                    <span><i class="fas fa-chalkboard-teacher"></i>&nbsp;@($"{teacher.FirstName} {teacher.LastName}")</span>
+                                                }
+                                            }
+                                        </div>
+                                        <p>@(courseOne.PreviewDescriptionKey.Translate())</p>
+                                        <a href="#" class="button-default">@("GeneralReadMore.ButtonText".Translate())&nbsp;<i class="fa fa-angle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-xl-3 col-lg-4">
+                <div class="single-widget-item res-mrg-top-xs">
+                    <div class="single-title">
+                        <h3>@("BlogCategoryListHeader.TranslateLocalization".Translate())</h3>
+                    </div>
+                    <div class="single-widget-container">
+                        <ul class="sidebar-categories class">
+                            <li>@Html.ActionLink("GeneralAllTextTranslate.Localization".Translate(), "", "", new { area = "Global" })</li>
+                            @if (Model != null && Model.CourseCategories != null && Model.CourseCategories.Count > 0)
+                            {
+                                foreach (var blogCatOne in Model.CourseCategories)
+                                {
+                                    <li>@Html.ActionLink(blogCatOne.NameKey.Translate(), "", "", new { area = "Global" })</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="single-widget-item">
+                    <div class="single-title">
+                        <h3>@("RecentCoursesListHeader.TranslateLocalization".Translate())</h3>
+                    </div>
+                    <div class="single-widget-container">
+                        @if (Model != null && Model.RecentBlogs != null && Model.RecentBlogs.Count > 0)
+                        {
+                            foreach (var blogOne in Model.RecentBlogs)
+                            {
+                                <div class="recent-post-item">
+                                    <div class="recent-post-image">
+                                        <a href="#"><img src="@(blogOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
+                                    </div>
+                                    <div class="recent-post-text">
+                                        <h4><a href="#">@(blogOne.TitleKey.Translate())</a></h4>
+                                        <span><i class="fa fa-calendar"></i>@(blogOne.Created_at.ToString("dd.MM.yyyy"))</span>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="single-widget-item hidden-sm">
+                    <div class="single-widget-container">
+                        <a href="#">
+                            <img src="@(EnrollChildBackImageUrl)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
+                            <span>@("EnrollYourChildButtonText.TranslateLocalization".Translate())</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,6 +31,11 @@ namespace Core.Entities.Dtos.Course
         public string DescriptionTranslateRUS { get; set; }
         public string DescriptionTranslateENG { get; set; }
         public string DescriptionTranslateTUR { get; set; }
+        public string PreviewDescriptionKey { get; set; }
+        public string PreviewDescriptionTranslateAZE { get; set; }
+        public string PreviewDescriptionTranslateRUS { get; set; }
+        public string PreviewDescriptionTranslateENG { get; set; }
+        public string PreviewDescriptionTranslateTUR { get; set; }
         public byte MinTotalMonths { get; set; }
         public byte MaxTotalMonths { get; set; }
         public short TotalHours { get; set; }

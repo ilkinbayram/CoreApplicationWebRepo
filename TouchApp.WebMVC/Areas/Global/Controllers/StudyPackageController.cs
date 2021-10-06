@@ -13,5 +13,11 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCurrent(long id)
+        {
+            return View();
+        }
     }
 }

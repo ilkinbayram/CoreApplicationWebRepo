@@ -40,7 +40,7 @@
                 {
                     foreach (var mediaOne in Model.Medias)
                     {
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mix @(mediaOne.SharingTypeFilterConcat.Replace(","," ")) overlay-hover">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mix @(mediaOne.SharingTypeFilterConcat.Replace(","," "))  overlay-hover">
                             <div class="overlay-effect">
                                 <a href="#"><img src="@(mediaOne.Source)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
                                 <div class="gallery-hover-effect">
@@ -72,7 +72,7 @@
             </div>
             <div class="col-md-12">
                 <div class="button text-center">
-                    <a class="button-default button-yellow" href="#"><i class="fa fa-refresh"></i>Load More</a>
+                    <a class="button-default button-yellow" href="#"><i class="fa fa-refresh"></i>@("GeneralLoadMore.ButtonTextLocalization".Translate())</a>
                 </div>
             </div>
         </div>

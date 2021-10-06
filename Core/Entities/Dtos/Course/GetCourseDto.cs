@@ -28,6 +28,7 @@ namespace Core.Entities.Dtos.Course
         public string ScheduleHtmlRawKey { get; set; }
         public string ContentHtmlRawKey { get; set; }
         public string OverViewHtmlRawKey { get; set; }
+        public string PreviewDescriptionKey { get; set; }
         public DateTime PublishDate { get; set; }
 
         public long ProfessionCourseCategoryId { get; set; }

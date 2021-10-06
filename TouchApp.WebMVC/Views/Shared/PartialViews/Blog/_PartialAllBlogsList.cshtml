@@ -3,7 +3,7 @@
 @using Core.Utilities.Helpers
 @using Core.Resources.Enums
 
-@model BlogViewModel
+@model AllBlogsViewModel
 
 @{
     string EnrollChildBackImageUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_URL_Enroll_YourChildBackground_Caption.ToString());
@@ -15,65 +15,66 @@
 
 
 
-<!--Blog Details Area Start-->
-<div class="blog-details-area section-padding blog-two">
+<div class="class-list-area section-padding">
     <div class="container">
         <div class="row">
             <div class="col-xl-9 col-lg-8">
-                <div class="blog-post-wrapper">
-                    @if (Model != null && Model.CurrentBlog != null)
-                    {
-                        <div class="blog-post-details">
-                            <h1>@(Model.CurrentBlog.TitleKey.Translate())</h1>
-                            <span><i class="fa fa-calendar"></i>@(Model.CurrentBlog.Created_at.ToString("dd.MM.yyyy"))/&nbsp;@(Model.CurrentBlog.Created_by)</span>
-                        </div>
-                        <div class="blog-post-details-img">
-                            <img src="@(Model.CurrentBlog.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
-                        </div>
-                        <div class="blog-post-details-text">
-                            @(Model.CurrentBlog.ContentHtmlRawKey.Translate())
-                        </div>
-                    }
-                    <div class="single-title">
-                        <h3>@("RelatedBlogsHeader.TranslateLocalization".Translate())</h3>
-                    </div>
-                    <div class="row">
-                        @if (Model != null && Model.RelatedBlogs != null && Model.RelatedBlogs.Count > 0)
+                @if (Model != null && Model.AllBlogs != null && Model.AllBlogs.Count > 0)
+                {
+                    <div class="class-carousel carousel-style-one owl-carousel">
+                        @foreach (var blogOne in Model.AllBlogs)
                         {
-                            <div class="class-carousel carousel-style-one owl-carousel">
-                                @foreach (var relatedBlogOne in Model.RelatedBlogs)
-                                {
-                                    <div class="single-blog-item overlay-hover">
-                                        <div class="single-blog-image">
-                                            <div class="overlay-effect">
-                                                <a href="#">
-                                                    <img src="@(relatedBlogOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
-                                                    <span class="class-date">@(relatedBlogOne.Created_at.ToString("dd.MM"))&nbsp;<span>@(relatedBlogOne.Modified_at.Year)</span></span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="single-blog-text">
-                                            <h4><a href="blog-details.html">@(relatedBlogOne.TitleKey.Translate())</a></h4>
-                                            <div class="blog-date">
-                                                <span><i class="fa fa-calendar"></i>@(relatedBlogOne.Created_at.ToString("dd.MM.yyyy"))</span>
-                                            </div>
-                                            <p>@(relatedBlogOne.PreviewDescriptionKey.Translate())</p>
-                                            @Html.ActionLink("GeneralReadMore.ButtonText".Translate(), "", "", new { area = "Global" })
-                                        </div>
+                            <div class="single-blog-item overlay-hover">
+                                <div class="single-blog-image">
+                                    <div class="overlay-effect">
+                                        <a href="#">
+                                            <img src="@(blogOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
+                                            <span class="class-date">@(blogOne.Created_at.ToString("dd.MM"))&nbsp;<span>@(blogOne.Modified_at.Year)</span></span>
+                                        </a>
                                     </div>
-                                }
+                                </div>
+                                <div class="single-blog-text">
+                                    <h4><a href="blog-details.html">@(blogOne.TitleKey.Translate())</a></h4>
+                                    <div class="blog-date">
+                                        <span><i class="fa fa-calendar"></i>&nbsp;@(blogOne.Created_at.ToString("dd.MM.yyyy"))</span>
+                                    </div>
+                                    <p>@(blogOne.PreviewDescriptionKey.Translate())</p>
+                                    @Html.ActionLink("GeneralReadMore.ButtonText".Translate(), "", "", new { area = "Global" })
+                                </div>
                             </div>
                         }
                     </div>
-                </div>
+
+                    foreach (var blogOne in Model.AllBlogs)
+                    {
+                        <div class="class-list-item">
+                            <div class="row">
+                                <div class="col-xl-5 col-lg-6 col-md-6">
+                                    <a href="#"><img src="@(blogOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
+                                </div>
+                                <div class="col-xl-7 col-lg-6 col-md-6">
+                                    <div class="class-list-text">
+                                        <h3><a href="#">@(blogOne.TitleKey.Translate())</a></h3>
+                                        <div class="class-information">
+                                            <span><i class="fa fa-calendar"></i>&nbsp;@(blogOne.Created_at.ToString("dd.MM.yyyy"))</span>
+                                            <span><i class="fas fa-user-edit"></i>&nbsp;@(blogOne.Modified_by)</span>
+                                        </div>
+                                        <p>@(blogOne.PreviewDescriptionKey.Translate())</p>
+                                        <a href="#" class="button-default">@("GeneralReadMore.ButtonText".Translate())&nbsp;<i class="fa fa-angle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
             </div>
             <div class="col-xl-3 col-lg-4">
-                <div class="single-widget-item">
+                <div class="single-widget-item res-mrg-top-xs">
                     <div class="single-title">
                         <h3>@("BlogCategoryListHeader.TranslateLocalization".Translate())</h3>
                     </div>
                     <div class="single-widget-container">
-                        <ul class="sidebar-categories">
+                        <ul class="sidebar-categories class">
                             <li>@Html.ActionLink("GeneralAllTextTranslate.Localization".Translate(), "", "", new { area = "Global" })</li>
                             @if (Model != null && Model.BlogCategories != null && Model.BlogCategories.Count > 0)
                             {
@@ -135,4 +136,3 @@
         </div>
     </div>
 </div>
-<!--End of Blog Details Area-->

@@ -1,21 +1,22 @@
-﻿@*
+﻿@using Core.Extensions
+
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
 
 
-
-<!--StudyPackage Banner Area Start-->
-<div class="breadcrumb-banner-area">
+<!--Breadcrumb Banner Area Start-->
+<div class="breadcrumb-banner-area course">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-text">
-                    <h1 class="text-center">Classes</h1>
+                    <h1 class="text-center">@("StudyPackageDetailPageCaptionText.ViewLocalization".Translate())</h1>
                     <div class="breadcrumb-bar">
                         <ul class="breadcrumb">
-                            <li><a href="index.html">Home Page</a></li>
-                            <li>Studying Details</li>
+                            <li>@Html.ActionLink("HomePageNavLink.ViewLocalization".Translate(), "TouchIndex", "Home", new { area = "Global" })</li>
+                            <li>@("StudyPackageDetailPageCaptionText.ViewLocalization".Translate())</li>
                         </ul>
                     </div>
                 </div>
@@ -23,4 +24,4 @@
         </div>
     </div>
 </div>
-<!--End of StudyPackage Banner Area-->
+<!--End of Breadcrumb Banner Area-->

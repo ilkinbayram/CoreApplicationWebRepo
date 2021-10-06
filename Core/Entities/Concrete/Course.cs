@@ -16,6 +16,7 @@ namespace Core.Entities.Concrete
         }
 
         public string UniqueToken { get; set; }
+        public string CaptionImageSource { get; set; }
         public string TitleKey { get; set; }
         public string DescriptionKey { get; set; }
         public byte MinTotalMonths { get; set; }
@@ -25,6 +26,7 @@ namespace Core.Entities.Concrete
         public string ScheduleHtmlRawKey { get; set; }
         public string ContentHtmlRawKey { get; set; }
         public string OverViewHtmlRawKey { get; set; }
+        public string PreviewDescriptionKey { get; set; }
         public DateTime PublishDate { get; set; }
 
         public long ProfessionCourseCategoryId { get; set; }
