@@ -7,12 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class TeacherController : AdminBaseController
     {
+
+        private ITeacherService _teacherService;
+        
+        public TeacherController(ITeacherService teacherService)
+        {
+            _teacherService = teacherService;
+        }
+        
         // GET: TeacherController
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -53,10 +62,12 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: TeacherController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateManagementTeacherDto createModel)
         {
+            var createResult = await _teacherService.AddAsync(createModel);
             try
             {
+                
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -312,11 +312,12 @@ namespace Business.Concrete
 
         #region Asynchronous
 
-        public async Task<IDataResult<int>> AddAsync(Teacher teacher)
+        public async Task<IDataResult<int>> AddAsync(CreateManagementTeacherDto teacher)
         {
             try
             {
-                int affectedRows = await _teacherDal.AddAsync(teacher);
+                var dbModel = _mapper.Map<Teacher>(teacher);
+                int affectedRows = await _teacherDal.AddAsync(dbModel);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {

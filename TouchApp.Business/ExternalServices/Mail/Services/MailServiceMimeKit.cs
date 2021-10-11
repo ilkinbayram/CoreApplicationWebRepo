@@ -4,6 +4,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 using System.IO;
+using TouchApp.Business.ExternalServices.Mail;
 
 namespace Business.ExternalServices.Mail.Services
 {
@@ -39,7 +40,7 @@ namespace Business.ExternalServices.Mail.Services
                     }
                 }
             }
-            builder.HtmlBody = mailRequest.Body;
+            builder.HtmlBody = mailRequest.BodyHtml;
             email.Body = builder.ToMessageBody();
             using(var smtp = new SmtpClient())
             {

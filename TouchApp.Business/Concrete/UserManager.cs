@@ -22,6 +22,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.ExternalServices.Mail;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -116,7 +117,7 @@ namespace Business.Concrete
                 {
                     MailRequest mailRequest = new MailRequest
                     {
-                        Body = string.Format(Messages.AdminCreatedUserMailMessage, pas),
+                        BodyHtml = string.Format(Messages.AdminCreatedUserMailMessage, pas),
                         ToEmail = createUserDto.Email,
                         Subject = MailUtilityHelper.GetMailSubject(MailSubjectStatus.AccountCreatedByAdmin)
                     };

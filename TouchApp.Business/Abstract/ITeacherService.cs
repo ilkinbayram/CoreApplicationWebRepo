@@ -33,6 +33,6 @@ namespace TouchApp.Business.Abstract
         Task<IDataResult<Teacher>> GetAsync(Expression<Func<Teacher, bool>> filter);
         Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
         Task<IDataResult<int>> DeleteByStatusAsync(long Id);
-        Task<IDataResult<int>> AddAsync(Teacher teacher);
+        Task<IDataResult<int>> AddAsync(CreateManagementTeacherDto teacher);
     }
 }

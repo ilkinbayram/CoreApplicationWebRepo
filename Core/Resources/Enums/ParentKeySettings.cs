@@ -7,6 +7,7 @@ namespace Core.Resources.Enums
         SessionCache_ContainerKeyword = 1,
         ServerCache_ContainerKeyword = 2,
         MediaServiceURL_ContainerKeyword = 3,
-        GlobalAccessibility_ContainerKeyword = 4
+        GlobalAccessibility_ContainerKeyword = 4,
+        EmailConfiguration = 5
     }
 }

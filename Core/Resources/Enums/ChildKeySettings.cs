@@ -15,9 +15,12 @@
 
         InfoMail_GlobalAccess = 400,
         RegisterMail_GlobalAccess = 401,
-        MobileContactPhone_GlobalAccess = 402,
+        Static_ClientEmailEquivalent = 402,
+        MobileContactPhone_GlobalAccess = 403,
 
         Location_PortBaku = 500,
-        Location_Colab = 501
+        Location_Colab = 501,
+        
+        Email_SendGrid_ApiKey = 600
     }
 }

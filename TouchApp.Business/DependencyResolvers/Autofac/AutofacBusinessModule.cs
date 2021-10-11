@@ -148,6 +148,8 @@ namespace TouchApp.Business.DependencyResolvers.Autofac
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
             builder.RegisterType<ClientSideStorageHelper>().As<ISessionStorageHelper>();
 
+            builder.RegisterType<SendGridService>().As<ISendgridMailService>();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

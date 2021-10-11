@@ -1,10 +1,13 @@
-﻿using Core.CrossCuttingConcerns.Caching;
+﻿using Business.ExternalServices.Mail.Services.Abstract;
+using Core.CrossCuttingConcerns.Caching;
 using Core.Resources.Enums;
 using Core.Utilities.Helpers.Abstracts;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
 using TouchApp.Business.BusinessHelper;
+using TouchApp.Business.ExternalServices.Mail;
 using TouchApp.WebMVC.Areas.Global.Models.ViewModel;
 
 namespace TouchApp.WebMVC.Areas.Global.Controllers
@@ -24,6 +27,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         private ITeacherService _teacherService;
         private ILanguageService _languageService;
         private IConfigHelper _configHelper;
+        private ISendgridMailService _mailService;
 
         private HomeViewModel _viewModel;
         public HomeController(ICacheManager cacheManager, 
@@ -37,7 +41,8 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
                               IMediaService mediaService,
                               IPhraseService phraseService,
                               ISliderService sliderService,
-                              ITeacherService teacherService)
+                              ITeacherService teacherService,
+                              ISendgridMailService mailService)
         {
             _cacheManager = cacheManager;
             _localizationService = localizationService;
@@ -51,6 +56,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             _phraseService = phraseService;
             _sliderService = sliderService;
             _teacherService = teacherService;
+            _mailService = mailService;
         }
 
         [HttpGet]
@@ -72,6 +78,22 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             var cacheData = _cacheManager.Get("");
 
             return View(_viewModel);
+        }
+
+        [HttpPost("/Global/Home/SendMailAsync")]
+        public async Task<string> SendMailAsync(MailRequest mailRequest)
+        {
+            var languageOid = _sessionStorageHelper.GetValue(_configHelper.GetSettingsData<string>(
+                    ParentKeySettings.SessionCache_ContainerKeyword.ToString(),
+                    ChildKeySettings.Session_Language_CurrentLangOid.ToString()));
+
+            mailRequest.LanguageID = Convert.ToByte(languageOid);
+
+            var response = await _mailService.SendMailFromClientAsync(mailRequest);
+            if (response)
+                return "Mail Is Sent";
+
+            return "No Email Sent! Problem Detected";
         }
     }
 }

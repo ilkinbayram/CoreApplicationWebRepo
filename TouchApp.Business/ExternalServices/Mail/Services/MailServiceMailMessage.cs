@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
+using TouchApp.Business.ExternalServices.Mail;
 
 namespace Business.ExternalServices.Mail.Services
 {
@@ -19,7 +20,7 @@ namespace Business.ExternalServices.Mail.Services
 
         public bool SendMail(MailRequest mailRequest)
         {
-            return SendMail(mailRequest.Body, new List<string> { mailRequest.ToEmail }, mailRequest.Subject);
+            return SendMail(mailRequest.BodyHtml, new List<string> { mailRequest.ToEmail }, mailRequest.Subject);
         }
         public bool SendMail(string body, List<string> to, string subject, bool isHMTL = true)
         {
