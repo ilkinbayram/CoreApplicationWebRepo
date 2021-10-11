@@ -29,7 +29,7 @@ namespace TouchApp.Business.ExternalServices.Mail
         public string BodyHtml { get; set; }
 
         public byte MailType { get; set; }
-        public byte LanguageID { get; set; }
+        public short LanguageID { get; set; }
         public List<IFormFile> Attachments { get; set; }
     }
 }

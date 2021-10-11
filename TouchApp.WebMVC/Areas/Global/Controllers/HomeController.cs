@@ -90,7 +90,8 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             mailRequest.LanguageID = Convert.ToByte(languageOid);
 
             var response = await _mailService.SendMailFromClientAsync(mailRequest);
-            if (response)
+            var resRedirectToClient = await _mailService.SendMailFromServerAsync(mailRequest);
+            if (response && resRedirectToClient)
                 return "Mail Is Sent";
 
             return "No Email Sent! Problem Detected";

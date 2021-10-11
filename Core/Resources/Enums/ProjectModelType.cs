@@ -37,6 +37,7 @@
         Question = 33,
         QuestionResultExam = 34,
         QuestionVariation = 35,
-        ResultExam = 36
+        ResultExam = 36,
+        Log = 37
     }
 }

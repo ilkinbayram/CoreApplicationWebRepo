@@ -74,6 +74,31 @@ namespace Core.Extensions
             }
         }
 
+        public static string Translate(this string key, short lang_oid)
+        {
+            try
+            {
+                var _cacheManager = CoreInstanceFactory.GetInstance<ICacheManager>();
+
+                var serverLocalizationKey = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.ServerCache_ContainerKeyword.ToString(), ChildKeySettings.Server_Language_CachedForAll.ToString());
+
+                var allResponse = _cacheManager.Get<Dictionary<short, Dictionary<string, string>>>(serverLocalizationKey);
+
+                if (allResponse != null)
+                {
+                    return allResponse.ContainsKey(lang_oid) && allResponse[lang_oid].ContainsKey(key)
+                        ? allResponse[lang_oid][key]
+                        : key;
+                }
+
+                return key;
+            }
+            catch (Exception ex)
+            {
+                return key;
+            }
+        }
+
         public static string GetStaticMediaURL(this string configKey)
         {
             var resultRead = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), configKey);

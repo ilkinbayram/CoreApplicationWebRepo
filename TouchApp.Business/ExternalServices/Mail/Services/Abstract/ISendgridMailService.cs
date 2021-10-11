@@ -7,6 +7,6 @@ namespace Business.ExternalServices.Mail.Services.Abstract
     public interface ISendgridMailService
     {
         Task<bool> SendMailFromClientAsync(MailRequest mailRequest);
-        Task SendMailFromServerAsync(MailRequest mailRequest);
+        Task<bool> SendMailFromServerAsync(MailRequest mailRequest);
     }
 }

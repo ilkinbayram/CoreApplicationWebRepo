@@ -9,6 +9,22 @@ namespace TouchApp.Business.ExternalServices.Mail.MailTemplateModels.SendGrid
 {
     public class WelcomeMailTemplate
     {
+        public WelcomeMailTemplate()
+        {
+            Welcome_Message = "";
+            Hello_Name = "";
+            Information_After_Hello_List_Header = "";
+            List1_Text = "";
+            List2_Text = "";
+            List3_Text = "";
+            Last_Information = "";
+            Best_Regards = "";
+            Message_By = "";
+            Go_To_Our_Website = "";
+            Link_Of_Navigation = "";
+            SubjectMail = "";
+        }
+
         [JsonProperty("Welcome_Message")]
         public string Welcome_Message { get; set; }
 
