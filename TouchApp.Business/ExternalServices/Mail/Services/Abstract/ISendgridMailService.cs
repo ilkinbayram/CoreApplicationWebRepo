@@ -8,5 +8,10 @@ namespace Business.ExternalServices.Mail.Services.Abstract
     {
         Task<bool> SendMailFromClientAsync(MailRequest mailRequest);
         Task<bool> SendMailFromServerAsync(MailRequest mailRequest);
+
+        bool SendQuickRequestFromClientMail(MailRequest mailRequest);
+        bool SendQuickRequestFromServerMail(MailRequest mailRequest);
+        bool SendRegisterFromClientMail(MailRequest mailRequest);
+        bool SendRegisterFromServerMail(MailRequest mailRequest);
     }
 }

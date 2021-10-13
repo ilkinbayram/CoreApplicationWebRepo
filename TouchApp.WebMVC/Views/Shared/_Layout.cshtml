@@ -83,7 +83,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="header-top-info">
                             <div class="social-links mt-2 mb-2">
-                                <a title="Touch Academy Whatsapp" target="_blank" href="https://web.whatsapp.com/send?phone=994513898833&amp;text=@("TemplateMessageHiWantToJoinCourse.Localization".Translate())" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                                <a title="Touch Academy Whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=994503788833&amp;text=@("TemplateMessageHiWantToJoinCourse.Localization".Translate())" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
                                 <a title="Touch Academy Telegram" href="https://t.me/touchacademy" target="_blank"><i class="fab fa-telegram"></i></a>
                                 <a title="Touch Academy Facebook" href="https://www.facebook.com/touchacademyaz-100488788899672" target="_blank"><i class="fa fa-facebook"></i></a>
                                 <a title="Touch Academy Linkedin" href="https://www.linkedin.com/company/touch-academy/" target="_blank"><i class="fa fa-linkedin"></i></a>
@@ -116,7 +116,7 @@
                                             <li><a href="~/Global/Contact/Touch">@("ContactNavMenu.ViewLocalization".Translate())</a></li>
 
                                             <li>
-                                                <a href="#">@("AllPagesNavMenu.ViewLocalization".Translate()) <i class="fa fa-angle-down"></i></a>
+                                                <a  class="allPagesNavBtn" href="#">@("AllPagesNavMenu.ViewLocalization".Translate()) <i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub-menu">
                                                     <li><a href="~/Global/About/Touch">@("AboutUsNavMenu.ViewLocalization".Translate())</a></li>
                                                     <li><a href="~/Global/Gallery/Touch">@("GalleryNavMenu.ViewLocalization".Translate())</a></li>
@@ -132,7 +132,7 @@
                                             </li>
                                             <li><a href="~/Global/Exam/Touch">@("ExamNavMenu.ViewLocalization".Translate())</a></li>
                                             <li><a href="~/Global/Gallery/Touch">@("GalleryNavMenu.ViewLocalization".Translate())</a></li>
-                                            <li>
+                                            <li class="languagesNavBtn">
                                                 <a href="#">@("SelectedLanguageViewVisual.LocalizationTranslate".Translate())<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub-menu">
                                                     <li class="setLangListItem" data-langoid="1"><a class="setLang" href="#">@("SelectedLanguageViewAZE.LocalizationTranslate".Translate())</a></li>
@@ -145,23 +145,23 @@
                                     </nav>
                                 </div>
                                 @*
-                                <ul class="header-search">
-                                    <li class="search-menu">
-                                        <i id="toggle-search" class="fa fa-search"></i>
-                                    </li>
-                                </ul>
-                                <!--Search Form-->
-                                <div class="search">
-                                    <div class="search-form">
-                                        <form id="search-form" action="#">
-                                            <input type="search" placeholder="Search here..." name="search" />
-                                            <button type="submit">
-                                                <span><i class="fa fa-search"></i></span>
-                                            </button>
-                                        </form>
+                                    <ul class="header-search">
+                                        <li class="search-menu">
+                                            <i id="toggle-search" class="fa fa-search"></i>
+                                        </li>
+                                    </ul>
+                                    <!--Search Form-->
+                                    <div class="search">
+                                        <div class="search-form">
+                                            <form id="search-form" action="#">
+                                                <input type="search" placeholder="Search here..." name="search" />
+                                                <button type="submit">
+                                                    <span><i class="fa fa-search"></i></span>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--End of Search Form-->
+                                    <!--End of Search Form-->
                                 *@
                             </div>
                         </div>
@@ -235,7 +235,7 @@
                             <ul class="footer-widget-list">
                                 <li><a href="~/Global/About/Touch">@("AboutUsNavMenu.ViewLocalization".Translate())</a></li>
                                 <li><a href="~/Global/Contact/Touch">@("ContactNavMenu.ViewLocalization".Translate())</a></li>
-                                
+
                                 <li><a href="~/Global/Blog/Touch">@("BlogsNavMenu.ViewLocalization".Translate())</a></li>
                                 <li><a href="~/Global/Gallery/Touch">@("GalleryNavMenu.ViewLocalization".Translate())</a></li>
                             </ul>
@@ -254,12 +254,14 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="subscribe-container">
                             <p>@("RegisterQuickInormation.Localization".Translate())</p>
-                            <form action="#">
+                            <div>
                                 <div class="subscribe-form">
-                                    <input type="email" name="email" placeholder="@("QuickRegister.EmailPlaceholderLocalization".Translate())">
-                                    <button title="@("GeneralSendButton.LocalizationAll".Translate())" type="submit"><i class="fa fa-send"></i></button>
+                                    <input type="email" id="quickRegisterFieldEmail" name="email" placeholder="@("QuickRegister.EmailPlaceholderLocalization".Translate())">
+                                    <button id="quickRegisterFieldBtn" title="@("GeneralSendButton.LocalizationAll".Translate())" type="button" data-mailtype="@((byte)MailType.Quick_Register)">
+                                        <i class="fa fa-send"></i>
+                                    </button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -273,7 +275,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="social-links">
-                                    <a title="Touch Academy Whatsapp" target="_blank" href="https://web.whatsapp.com/send?phone=994513898833&amp;text=@("TemplateMessageHiWantToJoinCourse.Localization".Translate())" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                                    <a title="Touch Academy Whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=994503788833&amp;text=@("TemplateMessageHiWantToJoinCourse.Localization".Translate())" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
                                     <a title="Touch Academy Telegram" href="https://t.me/touchacademy" target="_blank"><i class="fab fa-telegram"></i></a>
                                     <a title="Touch Academy Facebook" href="https://www.facebook.com/touchacademyaz-100488788899672" target="_blank"><i class="fa fa-facebook"></i></a>
                                     <a title="Touch Academy Linkedin" href="https://www.linkedin.com/company/touch-academy/" target="_blank"><i class="fa fa-linkedin"></i></a>

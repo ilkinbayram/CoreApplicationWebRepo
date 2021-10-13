@@ -12,7 +12,12 @@
 ///////////////////////////////
 // FUNCTION  DECLARATION  START
 
-function mailSend(propComponentIdContainer, successCallBack=null, errorCallBack=null) {
+function ajaxMailSend(propComponentIdContainer, mailAction, successCallBack = null, errorCallBack = null) {
+
+    var loaderSpinner = $("#loaderSpinner");
+
+    loaderSpinner.removeClass("displayNoneSpinner-loader");
+    loaderSpinner.gSpinner();
 
     var phone = '';
     var fromEmail = '';
@@ -21,17 +26,6 @@ function mailSend(propComponentIdContainer, successCallBack=null, errorCallBack=
     var subject = '';
     var nameSurname = '';
     var mailType = 0;
-
-    console.log("registerMailSend(parameters[...]) FUNCTION TRIGGERED");
-    console.log("phoneId => " + propComponentIdContainer.phoneId);
-    console.log("fromEmailId => " + propComponentIdContainer.fromEmailId);
-    console.log("toEmailId => " + propComponentIdContainer.toEmailId);
-    console.log("subjectId => " + propComponentIdContainer.subjectId);
-    console.log("nameSurnameId => " + propComponentIdContainer.nameSurnameId);
-    console.log("messageId => " + propComponentIdContainer.messageId);
-    console.log("successCallBack => " + propComponentIdContainer.successCallBack);
-    console.log("errorCallBack => " + propComponentIdContainer.errorCallBack);
-    console.log("mailType => " + propComponentIdContainer.mailType);
 
     if (propComponentIdContainer.phoneId != '' && propComponentIdContainer.phoneId != undefined && propComponentIdContainer.phoneId != null) {
         phone = $("#" + propComponentIdContainer.phoneId).val();
@@ -52,7 +46,7 @@ function mailSend(propComponentIdContainer, successCallBack=null, errorCallBack=
         message = $("#" + propComponentIdContainer.messageId).val();
     }
     if (propComponentIdContainer.mailType != '' && propComponentIdContainer.mailType != undefined && propComponentIdContainer.mailType != null && propComponentIdContainer.mailType != 0 && propComponentIdContainer.mailType != NaN) {
-        mailType = propComponentIdContainer.mailType;
+        mailType = propComponentIdContainer.mailType;   
     }
 
     var emailContainer = {
@@ -66,7 +60,7 @@ function mailSend(propComponentIdContainer, successCallBack=null, errorCallBack=
     }
 
     $.ajax({
-        url: "/Global/Home/SendMailAsync",
+        url: "/Global/Home/"+mailAction,
         method: "POST",
         data: { mailRequest: emailContainer }
     }).done(function (data) {
@@ -76,6 +70,34 @@ function mailSend(propComponentIdContainer, successCallBack=null, errorCallBack=
             alert(data);
             // TODO : For Success Email Response
         }
+
+        // phoneId, fromEmailId, toEmailId, subjectId, mailTypeId, nameSurnameId, messageId
+
+        if (propComponentIdContainer.phoneId != '' && propComponentIdContainer.phoneId != undefined && propComponentIdContainer.phoneId != null) {
+            $("#" + propComponentIdContainer.phoneId).val('');
+        }
+        if (propComponentIdContainer.fromEmailId != '' && propComponentIdContainer.fromEmailId != undefined && propComponentIdContainer.fromEmailId != null) {
+            $("#" + propComponentIdContainer.fromEmailId).val('');
+        }
+        if (propComponentIdContainer.toEmailId != '' && propComponentIdContainer.toEmailId != undefined && propComponentIdContainer.toEmailId != null) {
+            $("#" + propComponentIdContainer.toEmailId).val('');
+        }
+        if (propComponentIdContainer.subjectId != '' && propComponentIdContainer.subjectId != undefined && propComponentIdContainer.subjectId != null) {
+            $("#" + propComponentIdContainer.subjectId).val('');
+        }
+        if (propComponentIdContainer.mailTypeId != '' && propComponentIdContainer.mailTypeId != undefined && propComponentIdContainer.mailTypeId != null) {
+            $("#" + propComponentIdContainer.mailTypeId).val('');
+        }
+        if (propComponentIdContainer.nameSurnameId != '' && propComponentIdContainer.nameSurnameId != undefined && propComponentIdContainer.nameSurnameId != null) {
+            $("#" + propComponentIdContainer.nameSurnameId).val('');
+        }
+        if (propComponentIdContainer.messageId != '' && propComponentIdContainer.messageId != undefined && propComponentIdContainer.messageId != null) {
+            $("#" + propComponentIdContainer.messageId).val('');
+        }
+
+        loaderSpinner.gSpinner('hide');
+        loaderSpinner.addClass("displayNoneSpinner-loader");
+
     }).fail(function (data) {
         if (errorCallBack != null && errorCallBack != undefined) {
             errorCallBack(data);
@@ -83,6 +105,10 @@ function mailSend(propComponentIdContainer, successCallBack=null, errorCallBack=
             alert("OPPS! Something Get Wrong!");
             // TODO : For Error Email Response
         }
+
+        loaderSpinner.gSpinner('hide');
+        loaderSpinner.addClass("displayNoneSpinner-loader");
+        
     });
 }
 
@@ -91,7 +117,10 @@ function mailSend(propComponentIdContainer, successCallBack=null, errorCallBack=
 
 
 $("#registerPartial_EmailSubmitButton").click(function (e) {
-    var buttonMailType = $(e.target).data('mailtype');
+
+    var element = $("#registerPartial_EmailSubmitButton");
+
+    var buttonMailType = $(element).data("mailtype");
 
     // phoneId, fromEmailId, toEmailId, subjectId, mailTypeId, nameSurnameId, messageId, mailType
 
@@ -101,9 +130,71 @@ $("#registerPartial_EmailSubmitButton").click(function (e) {
         nameSurnameId: 'layoutRegisterPartial_EmailName',
         mailType: buttonMailType
     }
-    mailSend(propComponentIdContainer);
+    ajaxMailSend(propComponentIdContainer, "SendMailAsync");
 });
 
+$("#quickRegisterFieldBtn").click(function (e) {
+
+    var element = $("#quickRegisterFieldBtn");
+
+    var buttonMailType = $(element).data("mailtype");
+
+    // phoneId, fromEmailId, toEmailId, subjectId, mailTypeId, nameSurnameId, messageId, mailType
+
+    var propComponentIdContainer = {
+        fromEmailId: 'quickRegisterFieldEmail',
+        mailType: buttonMailType
+    }
+
+    ajaxMailSend(propComponentIdContainer, "SendMailAsync");
+});
+
+$("#layoutInformaionMailPartial_SendBtn").click(function (e) {
+
+    var element = $("#layoutInformaionMailPartial_SendBtn");
+
+    var buttonMailType = $(element).data("mailtype");
+
+    // phoneId, fromEmailId, toEmailId, subjectId, mailTypeId, nameSurnameId, messageId, mailType
+
+    var propComponentIdContainer = {
+        subjectId: 'layoutInformaionMailPartial_Subject',
+        fromEmailId: 'layoutInformaionMailPartial_Email',
+        nameSurnameId: 'layoutInformaionMailPartial_Name',
+        messageId: 'layoutInformaionMailPartial_Message',
+
+        mailType: buttonMailType
+    }
+
+    ajaxMailSend(propComponentIdContainer, "SendMailAsync");
+});
+
+$("#contactInformaionMailPartial_SendBtn").click(function (e) {
+
+    var element = $("#contactInformaionMailPartial_SendBtn");
+
+    var buttonMailType = $(element).data("mailtype");
+
+    // phoneId, fromEmailId, toEmailId, subjectId, mailTypeId, nameSurnameId, messageId, mailType
+
+    var propComponentIdContainer = {
+        subjectId: 'contactInformaionMailPartial_Subject',
+        fromEmailId: 'contactInformaionMailPartial_Email',
+        nameSurnameId: 'contactInformaionMailPartial_Name',
+        messageId: 'contactInformaionMailPartial_Message',
+        mailType: buttonMailType
+    }
+
+    ajaxMailSend(propComponentIdContainer, "SendMailAsync");
+});
+
+$(".languagesNavBtn").click(function (e) {
+    e.preventDefault();
+});
+
+$(".allPagesNavBtn").click(function (e) {
+    e.preventDefault();
+});
 
 
 $("#locationModalTrigger").click(function (e) {

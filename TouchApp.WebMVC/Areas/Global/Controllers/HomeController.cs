@@ -1,5 +1,6 @@
 ﻿using Business.ExternalServices.Mail.Services.Abstract;
 using Core.CrossCuttingConcerns.Caching;
+using Core.Extensions;
 using Core.Resources.Enums;
 using Core.Utilities.Helpers.Abstracts;
 using Microsoft.AspNetCore.Mvc;
@@ -83,18 +84,43 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         [HttpPost("/Global/Home/SendMailAsync")]
         public async Task<string> SendMailAsync(MailRequest mailRequest)
         {
+            var successMessage = string.Empty;
+
             var languageOid = _sessionStorageHelper.GetValue(_configHelper.GetSettingsData<string>(
                     ParentKeySettings.SessionCache_ContainerKeyword.ToString(),
                     ChildKeySettings.Session_Language_CurrentLangOid.ToString()));
 
-            mailRequest.LanguageID = Convert.ToByte(languageOid);
+            languageOid = string.IsNullOrEmpty(languageOid) ? "1" : languageOid;
 
-            var response = await _mailService.SendMailFromClientAsync(mailRequest);
-            var resRedirectToClient = await _mailService.SendMailFromServerAsync(mailRequest);
-            if (response && resRedirectToClient)
-                return "Mail Is Sent";
+            mailRequest.Lang_oid = Convert.ToByte(languageOid);
 
-            return "No Email Sent! Problem Detected";
+            bool responseIsTrueClient = false;
+            bool responseIsTrueServer = false;
+
+            switch (mailRequest.MailType)
+            {
+                case (byte)MailType.Information_Email:
+                    responseIsTrueClient = responseIsTrueServer = await _mailService.SendMailFromClientAsync(mailRequest);
+                    successMessage = "GeneralMailSuccessNotificationForMail.Localization".Translate();
+                    break;
+                case (byte)MailType.Register_email:
+                    responseIsTrueClient = _mailService.SendRegisterFromClientMail(mailRequest);
+                    responseIsTrueServer = _mailService.SendRegisterFromServerMail(mailRequest);
+                    successMessage = "EmailSuccessNotificationGeneralRegister.Localization".Translate();
+                    break;
+                case (byte)MailType.Quick_Register:
+                    responseIsTrueClient = _mailService.SendQuickRequestFromClientMail(mailRequest);
+                    responseIsTrueServer = _mailService.SendQuickRequestFromServerMail(mailRequest);
+                    successMessage = "EmailSuccessNotificationQuickRegister.Localization".Translate();
+                    break;
+                default:
+                    break;
+            }
+
+            if (responseIsTrueClient && responseIsTrueServer)
+                return successMessage;
+
+            return "EmailFailedNotification.GeneralLocalization".Translate();
         }
     }
 }

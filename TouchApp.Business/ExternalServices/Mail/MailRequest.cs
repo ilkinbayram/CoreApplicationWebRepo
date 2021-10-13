@@ -7,7 +7,7 @@ namespace TouchApp.Business.ExternalServices.Mail
     {
         public MailRequest()
         {
-            LanguageID = 0;
+            Lang_oid = 0;
             MailType = 0;
             ToEmail = "";
             FromEmail = "";
@@ -29,7 +29,7 @@ namespace TouchApp.Business.ExternalServices.Mail
         public string BodyHtml { get; set; }
 
         public byte MailType { get; set; }
-        public short LanguageID { get; set; }
+        public short Lang_oid { get; set; }
         public List<IFormFile> Attachments { get; set; }
     }
 }

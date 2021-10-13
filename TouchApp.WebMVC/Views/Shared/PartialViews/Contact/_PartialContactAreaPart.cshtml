@@ -65,19 +65,19 @@
                         <h3>@("GeneralSendMessageHeaderPart.Localization".Translate())</h3>
                     </div>
                     <div class="contact-form-container">
-                        <form id="contact-form" action="" method="post">
+                        <div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" name="name" placeholder="@("GeneralYourName.LocalizationAll".Translate())">
+                                    <input type="text" id="contactInformaionMailPartial_Name" name="name" placeholder="@("GeneralYourName.LocalizationAll".Translate())">
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" name="email" placeholder="@("GeneralYourEmail.LocalizationAll".Translate())">
+                                    <input type="email" id="contactInformaionMailPartial_Email" name="email" placeholder="@("GeneralYourEmail.LocalizationAll".Translate())">
                                 </div>
                             </div>
-                            <input type="text" name="subject" placeholder="@("Subject.LocalizationRecourseForm".Translate())">
-                            <textarea name="message" class="yourmessage" placeholder="@("GeneralMessageText.LocalizationAll".Translate())"></textarea>
-                            <button type="submit" class="button-default button-yellow submit"><i class="fa fa-send"></i>@("GeneralSendButton.LocalizationAll".Translate())</button>
-                        </form>
+                            <input type="text" id="contactInformaionMailPartial_Subject" name="subject" placeholder="@("Subject.LocalizationRecourseForm".Translate())">
+                            <textarea name="message" id="contactInformaionMailPartial_Message" class="yourmessage" placeholder="@("GeneralMessageText.LocalizationAll".Translate())"></textarea>
+                            <button type="button" id="contactInformaionMailPartial_SendBtn" data-mailtype="@((byte)MailType.Information_Email)" class="button-default button-yellow submit"><i class="fa fa-send"></i>@("GeneralSendButton.LocalizationAll".Translate())</button>
+                        </div>
                         <p class="form-messege"></p>
                     </div>
                 </div>

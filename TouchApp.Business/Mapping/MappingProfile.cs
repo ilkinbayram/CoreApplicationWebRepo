@@ -99,9 +99,8 @@ namespace TouchApp.Business.Mapping
                 .ForMember(x => x.Client_Description, from => from.MapFrom(p => p.Message))
                 .ForMember(x => x.Client_Subject, from => from.MapFrom(p => p.Subject))
                 .ForMember(x => x.Client_Phone, from => from.MapFrom(p => p.Phone))
-                .ForMember(x => x.Client_Language_Id, from => from.MapFrom(p => p.LanguageID))
+                .ForMember(x => x.Client_Language_Id, from => from.MapFrom(p => p.Lang_oid))
                 .ForMember(x => x.Client_Email, from => from.MapFrom(p => p.FromEmail));
-
             #endregion
         }
     }

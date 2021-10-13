@@ -1,4 +1,5 @@
 ﻿@using Core.Extensions
+@using Core.Resources.Enums
 
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,21 +12,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form class="newsletter-container">
+                <div class="newsletter-container">
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-sm-12">
                         </div>
                         <div class="col-lg-3 col-md-4 col-sm-6">
-                            <input type="text" name="subject" placeholder="@("Subject.LocalizationRecourseForm".Translate())">
-                            <input type="text" name="name" placeholder="@("GeneralYourName.LocalizationAll".Translate())">
-                            <input type="email" name="email" placeholder="@("GeneralYourEmail.LocalizationAll".Translate())">
+                            <input type="text" id="layoutInformaionMailPartial_Subject" name="subject" placeholder="@("Subject.LocalizationRecourseForm".Translate())">
+                            <input type="text" id="layoutInformaionMailPartial_Name" name="name" placeholder="@("GeneralYourName.LocalizationAll".Translate())">
+                            <input type="email" id="layoutInformaionMailPartial_Email" name="email" placeholder="@("GeneralYourEmail.LocalizationAll".Translate())">
                         </div>
                         <div class="col-lg-6 col-md-4 col-sm-6">
-                            <textarea name="message" id="newsletter-msg" placeholder="@("GeneralMessageText.LocalizationAll".Translate())"></textarea>
-                            <button class="button-default">@("GeneralSendButton.LocalizationAll".Translate())</button>
+                            <textarea name="message" id="layoutInformaionMailPartial_Message" placeholder="@("GeneralMessageText.LocalizationAll".Translate())"></textarea>
+                            <button id="layoutInformaionMailPartial_SendBtn" data-mailtype="@((byte)MailType.Information_Email)" class="button-default">@("GeneralSendButton.LocalizationAll".Translate())</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
