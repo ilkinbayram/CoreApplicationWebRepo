@@ -65,6 +65,10 @@
     ============================================ -->
     <link rel="stylesheet" href="~/style.css">
 
+    <!-- Custom Style CSS
+    ============================================ -->
+    <link rel="stylesheet" href="~/css/customstyle.css">
+
     <!-- Modernizr JS
     ============================================ -->
     <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -114,7 +118,7 @@
                                             <li><a href="~/Global/Contact/Touch">@("ContactNavMenu.ViewLocalization".Translate())</a></li>
 
                                             <li>
-                                                <a  class="allPagesNavBtn" href="#">@("AllPagesNavMenu.ViewLocalization".Translate()) <i class="fa fa-angle-down"></i></a>
+                                                <a class="allPagesNavBtn" href="#">@("AllPagesNavMenu.ViewLocalization".Translate()) <i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub-menu">
                                                     <li><a href="~/Global/About/Touch">@("AboutUsNavMenu.ViewLocalization".Translate())</a></li>
                                                     <li><a href="~/Global/Gallery/Touch">@("GalleryNavMenu.ViewLocalization".Translate())</a></li>
@@ -143,23 +147,23 @@
                                     </nav>
                                 </div>
                                 @*
-                                <ul class="header-search">
-                                    <li class="search-menu">
-                                        <i id="toggle-search" class="fa fa-search"></i>
-                                    </li>
-                                </ul>
-                                <!--Search Form-->
-                                <div class="search">
-                                    <div class="search-form">
-                                        <form id="search-form" action="#">
-                                            <input type="search" placeholder="Search here..." name="search" />
-                                            <button type="submit">
-                                                <span><i class="fa fa-search"></i></span>
-                                            </button>
-                                        </form>
+                                    <ul class="header-search">
+                                        <li class="search-menu">
+                                            <i id="toggle-search" class="fa fa-search"></i>
+                                        </li>
+                                    </ul>
+                                    <!--Search Form-->
+                                    <div class="search">
+                                        <div class="search-form">
+                                            <form id="search-form" action="#">
+                                                <input type="search" placeholder="Search here..." name="search" />
+                                                <button type="submit">
+                                                    <span><i class="fa fa-search"></i></span>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--End of Search Form-->
+                                    <!--End of Search Form-->
                                 *@
                             </div>
                         </div>
@@ -318,6 +322,10 @@
             </div>
         </div>
     </div>
+
+    <div id="notification-container" class="notification-container">
+    </div>
+
     <!--End of Footer Area-->
     <!-- jquery
     ==================================

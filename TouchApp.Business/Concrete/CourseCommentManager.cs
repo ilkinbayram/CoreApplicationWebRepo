@@ -129,6 +129,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetCourseCommentDto> GetDto(Expression<Func<CourseComment, bool>> filter = null)
+        {
+            try
+            {
+                var response = _courseCommentDal.Get(filter);
+                var mappedModel = _mapper.Map<GetCourseCommentDto>(response);
+                return new SuccessDataResult<GetCourseCommentDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetCourseCommentDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<CourseComment>> GetList(Expression<Func<CourseComment, bool>> filter = null)
         {
             try

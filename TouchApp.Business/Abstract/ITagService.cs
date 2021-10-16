@@ -11,7 +11,9 @@ namespace TouchApp.Business.Abstract
     public interface ITagService
     {
         IDataResult<List<Tag>> GetList(Expression<Func<Tag, bool>> filter = null);
+        IDataResult<List<GetTagDto>> GetListDto(Expression<Func<Tag, bool>> filter = null);
         IDataResult<Tag> Get(Expression<Func<Tag, bool>> filter);
+        IDataResult<GetTagDto> GetDto(Expression<Func<Tag, bool>> filter = null);
         IDataResult<int> Add(Tag tag);
         IDataResult<int> Update(Tag tag);
         IDataResult<int> DeletePermanently(long Id);

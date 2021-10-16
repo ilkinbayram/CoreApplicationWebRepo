@@ -1,5 +1,5 @@
 ﻿using Core.Entities.Dtos.Language;
-using Core.ViewUsableModel;
+using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

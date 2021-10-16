@@ -15,6 +15,7 @@ namespace TouchApp.Business.Abstract
 
         IDataResult<List<User>> GetList(Expression<Func<User, bool>> filter = null);
         IDataResult<User> Get(Expression<Func<User, bool>> filter);
+        IDataResult<GetUserDto> GetDto(Expression<Func<User, bool>> filter = null);
         IDataResult<int> Add(User user);
         IDataResult<int> CreateUserByAdmin(CreateManagementUserDto createUserDto);
         IDataResult<int> Update(User user);

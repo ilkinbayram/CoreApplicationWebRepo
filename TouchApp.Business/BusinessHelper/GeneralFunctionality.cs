@@ -69,7 +69,7 @@ namespace TouchApp.Business.BusinessHelper
             return model;
         }
 
-        public static List<Localization> ConverModelToLocalizationList(BaseDto model, short projectOid = 1)
+        public static List<Localization> ConvertModelToLocalizationList(BaseDto model, short projectOid = 1)
         {
             var localizationList = new List<Localization>();
             var keyPropertyNames = model.GetType().GetProperties().ToList()
@@ -88,7 +88,7 @@ namespace TouchApp.Business.BusinessHelper
                 string parentKeyValue = model.GetType().GetProperty(keyOne).GetValue(model, null).ToString();
 
                 var currentTranslateProperties = model.GetType().GetProperties().ToList()
-                .Select(x => x.Name).Where(x => x.ToLower().Contains(keyOne.ToLower().Replace("key", string.Empty) + "translate")).ToList();
+                .Select(x => x.Name).Where(x => x.Contains(keyOne.Replace("Key", string.Empty) + "Translate")).ToList();
 
                 foreach (var translateOne in currentTranslateProperties)
                 {

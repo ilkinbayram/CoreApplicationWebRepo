@@ -129,6 +129,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetProfessionCourseCategoryDto> GetDto(Expression<Func<ProfessionCourseCategory, bool>> filter = null)
+        {
+            try
+            {
+                var response = _professionCourseCategoryDal.Get(filter);
+                var mappedModel = _mapper.Map<GetProfessionCourseCategoryDto>(response);
+                return new SuccessDataResult<GetProfessionCourseCategoryDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetProfessionCourseCategoryDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<ProfessionCourseCategory>> GetList(Expression<Func<ProfessionCourseCategory, bool>> filter = null)
         {
             try

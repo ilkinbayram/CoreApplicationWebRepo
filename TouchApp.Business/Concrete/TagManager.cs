@@ -129,6 +129,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetTagDto> GetDto(Expression<Func<Tag, bool>> filter = null)
+        {
+            try
+            {
+                var response = _tagDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetTagDto>(response);
+                return new SuccessDataResult<GetTagDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetTagDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<Tag>> GetList(Expression<Func<Tag, bool>> filter = null)
         {
             try
@@ -140,6 +154,24 @@ namespace Business.Concrete
             catch (Exception exception)
             {
                 return new ErrorDataResult<List<Tag>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetTagDto>> GetListDto(Expression<Func<Tag, bool>> filter = null)
+        {
+            try
+            {
+                var dtoListResult = new List<GetTagDto>();
+                _tagDal.GetList(filter).ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetTagDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetTagDto>>(dtoListResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetTagDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 

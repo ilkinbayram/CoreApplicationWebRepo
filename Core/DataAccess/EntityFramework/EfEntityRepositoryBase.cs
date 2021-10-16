@@ -158,10 +158,12 @@ namespace Core.DataAccess.EntityFramework
             return await result;
         }
 
-        public virtual IQueryable<TEntity> GetAllAsQueryable()
+        public virtual IQueryable<TEntity> GetAllAsQueryable(Expression<Func<TEntity, bool>> expression = null)
         {
             Context.ChangeTracker.LazyLoadingEnabled = true;
-            var result = Context.Set<TEntity>();
+            var result = expression == null ?
+                Context.Set<TEntity>() :
+                Context.Set<TEntity>().Where(expression);
             return result;
         }
 

@@ -279,13 +279,13 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetCourseServiceDto> GetDto(Func<GetCourseServiceDto, bool> filter = null)
+        public IDataResult<GetCourseServiceDto> GetDto(Expression<Func<CourseService, bool>> filter = null)
         {
             try
             {
-                var response = _courseServiceDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetCourseServiceDto>>(response);
-                return new SuccessDataResult<GetCourseServiceDto>(mappingResult.FirstOrDefault(filter));
+                var response = _courseServiceDal.Get(filter);
+                var mappedModel = _mapper.Map<GetCourseServiceDto>(response);
+                return new SuccessDataResult<GetCourseServiceDto>(mappedModel);
             }
             catch (Exception exception)
             {
@@ -293,13 +293,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<List<GetCourseServiceDto>> GetDtoList(Func<GetCourseServiceDto, bool> filter = null, int takeCount = 2000)
+        public IDataResult<List<GetCourseServiceDto>> GetDtoList(Expression<Func<CourseService, bool>> filter = null, int takeCount = 2000)
         {
             try
             {
-                var response = _courseServiceDal.GetList();
-                var mappingResult = _mapper.Map<List<GetCourseServiceDto>>(response).Where(filter).Take(takeCount).ToList();
-                return new SuccessDataResult<List<GetCourseServiceDto>>(mappingResult);
+                var dtoListResult = new List<GetCourseServiceDto>();
+                _courseServiceDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetCourseServiceDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetCourseServiceDto>>(dtoListResult);
             }
             catch (Exception exception)
             {

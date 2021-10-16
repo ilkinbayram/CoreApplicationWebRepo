@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Core.Entities.Dtos.BlogCategory;
 using TouchApp.Business.Abstract;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Core.Utilities.UsableModel;
+using Core.Extensions;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
@@ -33,14 +35,14 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         {
             var model = new CreateBlogCategoryManagementDto();
 
-            var resultBlogCatList = (await _blogCategoryService.GetDtoListAsync(x=>x.IsActive)).Data;
+            var resultBlogCatList = _blogCategoryService.GetList(x=>x.IsActive).Data;
 
-            model.BlogCategories = resultBlogCatList != null ? resultBlogCatList.Select(x =>
+            model.ParentBlogCategories = resultBlogCatList != null ? resultBlogCatList.Select(x =>
                         new SelectListItem
                         {
                             Value = x.Id.ToString(),
-                            Text = x.NameKey
-                        }).ToList() : null;
+                            Text = x.NameKey.Translate()
+                        }).ToList() : new System.Collections.Generic.List<SelectListItem>();
 
             return View(model);
         }
@@ -48,16 +50,38 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // POST: BlogCategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateBlogCategoryManagementDto createModel)
         {
-            try
+            var resultBlogService = _blogCategoryService.Add(createModel);
+
+            if (resultBlogService != null)
             {
-                return RedirectToAction(nameof(Index));
+                if (resultBlogService.Success)
+                {
+                    var createBlogDtoModel = new CreateBlogCategoryManagementDto();
+
+                    var resultBlogCatList = _blogCategoryService.GetList(x => x.IsActive).Data;
+
+                    createBlogDtoModel.ParentBlogCategories = resultBlogCatList != null ? resultBlogCatList.Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.Id.ToString(),
+                                    Text = x.NameKey.Translate()
+                                }).ToList() : new System.Collections.Generic.List<SelectListItem>();
+
+                    createBlogDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultBlogService.Message });
+
+                    return View(createBlogDtoModel);
+                }
+                else
+                {
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultBlogService.Message });
+
+                    return View(createModel);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("ServerErrorPage");
         }
 
         // GET: BlogCategoryController/Edit/5

@@ -22,18 +22,19 @@ namespace Core.Entities.Dtos.Blog
 
         public string UniqueToken { get; set; }
         public string CaptionSource { get; set; }
-        public string OwnerProfessionKey { get; set; }
+        //public string OwnerProfessionKey { get; set; }
         public string TitleKey { get; set; }
         public string SubtitleKey { get; set; }
         public string PreviewDescriptionKey { get; set; }
         public string ContentHtmlRawKey { get; set; }
-        public string OverviewHtmlRawKey { get; set; }
+        //public string OverviewHtmlRawKey { get; set; }
         public PostScreenType ScreenType { get; set; }
 
-        public long UserId { get; set; }
+        public long BlogCategoryId { get; set; }
+        //public long UserId { get; set; }
 
         public GetBlogCategoryDto BlogCategory { get; set; }
         public List<GetTagBlogDto> TagBlogs { get; set; }
-        public GetUserDto User { get; set; }
+        //public GetUserDto User { get; set; }
     }
 }

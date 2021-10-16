@@ -125,6 +125,20 @@ namespace Business.Concrete
             }
         }
 
+        //public IDataResult<GetUserOperationClaimDto> GetDto(Expression<Func<UserOperationClaim, bool>> filter = null)
+        //{
+        //    try
+        //    {
+        //        var response = _userOperationClaimDal.GetWithRelations(filter);
+        //        var mappedModel = _mapper.Map<GetUserOperationClaimDto>(response);
+        //        return new SuccessDataResult<GetUserOperationClaimDto>(mappedModel);
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        return new ErrorDataResult<GetUserOperationClaimDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+        //    }
+        //}
+
         public IDataResult<List<UserOperationClaim>> GetList(Expression<Func<UserOperationClaim, bool>> filter = null)
         {
             try

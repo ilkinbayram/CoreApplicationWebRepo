@@ -12,6 +12,7 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<UserSocialMedia>> GetList(Expression<Func<UserSocialMedia, bool>> filter = null);
         IDataResult<UserSocialMedia> Get(Expression<Func<UserSocialMedia, bool>> filter);
+        IDataResult<GetUserSocialMediaDto> GetDto(Expression<Func<UserSocialMedia, bool>> filter = null);
         IDataResult<int> Add(UserSocialMedia userSocialMedia);
         IDataResult<int> Update(UserSocialMedia userSocialMedia);
         IDataResult<int> DeletePermanently(long Id);

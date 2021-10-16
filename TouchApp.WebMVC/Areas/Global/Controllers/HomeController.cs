@@ -3,6 +3,7 @@ using Core.CrossCuttingConcerns.Caching;
 using Core.Extensions;
 using Core.Resources.Enums;
 using Core.Utilities.Helpers.Abstracts;
+using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -67,13 +68,13 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
 
             _viewModel = new HomeViewModel 
             { 
-                Blogs = (await _blogService.GetDtoListAsync(takeCount:100)).Data, 
-                Courses = (await _courseService.GetDtoListAsync()).Data, 
-                CourseServices = (await _courseServiceService.GetDtoListAsync()).Data, 
-                Medias = (await _mediaService.GetDtoListAsync()).Data, 
-                Phrases = (await _phraseService.GetDtoListAsync()).Data, 
-                Sliders = (await _sliderService.GetDtoListAsync()).Data, 
-                Teachers = (await _teacherService.GetDtoListAsync()).Data
+                Blogs = _blogService.GetDtoList(takeCount:100).Data, 
+                Courses = _courseService.GetDtoList().Data, 
+                CourseServices = _courseServiceService.GetDtoList().Data, 
+                Medias = _mediaService.GetDtoList().Data, 
+                Phrases = _phraseService.GetDtoList().Data, 
+                Sliders = _sliderService.GetDtoList().Data, 
+                Teachers = _teacherService.GetDtoList().Data
             };
 
             var cacheData = _cacheManager.Get("");
@@ -82,10 +83,8 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         }
 
         [HttpPost("/Global/Home/SendMailAsync")]
-        public async Task<string> SendMailAsync(MailRequest mailRequest)
+        public async Task<PartialViewResult> SendMailAsync(MailRequest mailRequest)
         {
-            var successMessage = string.Empty;
-
             var languageOid = _sessionStorageHelper.GetValue(_configHelper.GetSettingsData<string>(
                     ParentKeySettings.SessionCache_ContainerKeyword.ToString(),
                     ChildKeySettings.Session_Language_CurrentLangOid.ToString()));
@@ -97,30 +96,37 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             bool responseIsTrueClient = false;
             bool responseIsTrueServer = false;
 
+            var notificationModel = new AlertResult();
+
             switch (mailRequest.MailType)
             {
                 case (byte)MailType.Information_Email:
                     responseIsTrueClient = responseIsTrueServer = await _mailService.SendMailFromClientAsync(mailRequest);
-                    successMessage = "GeneralMailSuccessNotificationForMail.Localization".Translate();
+                    notificationModel.Status = AlertStatus.Success;
+                    notificationModel.AlertMessage = "GeneralMailSuccessNotificationForMail.Localization".Translate();
                     break;
                 case (byte)MailType.Register_email:
                     responseIsTrueClient = _mailService.SendRegisterFromClientMail(mailRequest);
                     responseIsTrueServer = _mailService.SendRegisterFromServerMail(mailRequest);
-                    successMessage = "EmailSuccessNotificationGeneralRegister.Localization".Translate();
+                    notificationModel.Status = AlertStatus.Success;
+                    notificationModel.AlertMessage = "EmailSuccessNotificationGeneralRegister.Localization".Translate();
                     break;
                 case (byte)MailType.Quick_Register:
                     responseIsTrueClient = _mailService.SendQuickRequestFromClientMail(mailRequest);
                     responseIsTrueServer = _mailService.SendQuickRequestFromServerMail(mailRequest);
-                    successMessage = "EmailSuccessNotificationQuickRegister.Localization".Translate();
+                    notificationModel.Status = AlertStatus.Success;
+                    notificationModel.AlertMessage = "EmailSuccessNotificationQuickRegister.Localization".Translate();
                     break;
                 default:
                     break;
             }
 
             if (responseIsTrueClient && responseIsTrueServer)
-                return successMessage;
+                return PartialView("_PartialNotificationAlert",notificationModel);
 
-            return "EmailFailedNotification.GeneralLocalization".Translate();
+            notificationModel.Status = AlertStatus.Danger;
+            notificationModel.AlertMessage = "EmailFailedNotification.GeneralLocalization".Translate();
+            return PartialView("_PartialNotificationAlert", notificationModel);
         }
     }
 }

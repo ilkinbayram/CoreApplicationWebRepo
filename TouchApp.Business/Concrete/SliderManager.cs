@@ -265,13 +265,17 @@ namespace Business.Concrete
 
         }
 
-        public IDataResult<List<GetSliderDto>> GetDtoList(Func<GetSliderDto, bool> filter = null, int takeCount = 2000)
+        public IDataResult<List<GetSliderDto>> GetDtoList(Expression<Func<Slider, bool>> filter = null, int takeCount = 2000)
         {
             try
             {
-                var response = _sliderDal.GetList();
-                var mappingResult = _mapper.Map<List<GetSliderDto>>(response).Where(filter).Take(takeCount).ToList();
-                return new SuccessDataResult<List<GetSliderDto>>(mappingResult);
+                var dtoListResult = new List<GetSliderDto>();
+                _sliderDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetSliderDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetSliderDto>>(dtoListResult);
             }
             catch (Exception exception)
             {
@@ -279,13 +283,13 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<GetSliderDto> GetDto(Func<GetSliderDto, bool> filter)
+        public IDataResult<GetSliderDto> GetDto(Expression<Func<Slider, bool>> filter = null)
         {
             try
             {
-                var response = _sliderDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetSliderDto>>(response);
-                return new SuccessDataResult<GetSliderDto>(mappingResult.FirstOrDefault(filter));
+                var response = _sliderDal.Get(filter);
+                var mappedModel = _mapper.Map<GetSliderDto>(response);
+                return new SuccessDataResult<GetSliderDto>(mappedModel);
             }
             catch (Exception exception)
             {

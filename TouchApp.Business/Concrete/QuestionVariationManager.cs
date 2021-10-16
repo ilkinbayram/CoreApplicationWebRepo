@@ -277,13 +277,13 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetQuestionVariationDto> GetDto(Func<GetQuestionVariationDto, bool> filter = null)
+        public IDataResult<GetQuestionVariationDto> GetDto(Expression<Func<QuestionVariation, bool>> filter = null)
         {
             try
             {
-                var response = _questionVariationDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetQuestionVariationDto>>(response);
-                return new SuccessDataResult<GetQuestionVariationDto>(mappingResult.FirstOrDefault(filter));
+                var response = _questionVariationDal.Get(filter);
+                var mappedModel = _mapper.Map<GetQuestionVariationDto>(response);
+                return new SuccessDataResult<GetQuestionVariationDto>(mappedModel);
             }
             catch (Exception exception)
             {

@@ -21,30 +21,6 @@
             <div class="col-xl-9 col-lg-8">
                 @if (Model != null && Model.AllBlogs != null && Model.AllBlogs.Count > 0)
                 {
-                    <div class="class-carousel carousel-style-one owl-carousel">
-                        @foreach (var blogOne in Model.AllBlogs)
-                        {
-                            <div class="single-blog-item overlay-hover">
-                                <div class="single-blog-image">
-                                    <div class="overlay-effect">
-                                        <a href="#">
-                                            <img src="@(blogOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
-                                            <span class="class-date">@(blogOne.Created_at.ToString("dd.MM"))&nbsp;<span>@(blogOne.Modified_at.Year)</span></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="single-blog-text">
-                                    <h4><a href="blog-details.html">@(blogOne.TitleKey.Translate())</a></h4>
-                                    <div class="blog-date">
-                                        <span><i class="fa fa-calendar"></i>&nbsp;@(blogOne.Created_at.ToString("dd.MM.yyyy"))</span>
-                                    </div>
-                                    <p>@(blogOne.PreviewDescriptionKey.Translate())</p>
-                                    @Html.ActionLink("GeneralReadMore.ButtonText".Translate(), "", "", new { area = "Global" })
-                                </div>
-                            </div>
-                        }
-                    </div>
-
                     foreach (var blogOne in Model.AllBlogs)
                     {
                         <div class="class-list-item">
@@ -57,10 +33,10 @@
                                         <h3><a href="#">@(blogOne.TitleKey.Translate())</a></h3>
                                         <div class="class-information">
                                             <span><i class="fa fa-calendar"></i>&nbsp;@(blogOne.Created_at.ToString("dd.MM.yyyy"))</span>
-                                            <span><i class="fas fa-user-edit"></i>&nbsp;@(blogOne.Modified_by)</span>
+                                            @*<span><i class="fas fa-user-edit"></i>&nbsp;@(blogOne.Modified_by)</span>*@
                                         </div>
                                         <p>@(blogOne.PreviewDescriptionKey.Translate())</p>
-                                        <a href="#" class="button-default">@("GeneralReadMore.ButtonText".Translate())&nbsp;<i class="fa fa-angle-right"></i></a>
+                                        <a href="/Global/Blog/GetCurrent/@(blogOne.Id)" class="button-default">@("GeneralReadMore.ButtonText".Translate())&nbsp;<i class="fa fa-angle-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -75,25 +51,26 @@
                     </div>
                     <div class="single-widget-container">
                         <ul class="sidebar-categories class">
-                            <li>@Html.ActionLink("GeneralAllTextTranslate.Localization".Translate(), "", "", new { area = "Global" })</li>
+                            <li>&nbsp;<a href="/Global/Blog/FilterByBlogCategoryId/999">@("GeneralAllTextTranslate.Localization".Translate())</a></li>
                             @if (Model != null && Model.BlogCategories != null && Model.BlogCategories.Count > 0)
                             {
                                 foreach (var blogCatOne in Model.BlogCategories)
                                 {
-                                    <li>@Html.ActionLink(blogCatOne.NameKey.Translate(), "", "", new { area = "Global" })</li>
+                                    <li>&nbsp;<a href="/Global/Blog/FilterByBlogCategoryId/@(blogCatOne.Id)">@(blogCatOne.NameKey.Translate())</a></li>
                                 }
                             }
                         </ul>
                     </div>
                 </div>
-                <div class="single-widget-item">
-                    <div class="single-title">
-                        <h3>@("RecentCoursesListHeader.TranslateLocalization".Translate())</h3>
-                    </div>
-                    <div class="single-widget-container">
-                        @if (Model != null && Model.RecentCourses != null && Model.RecentCourses.Count > 0)
-                        {
-                            foreach (var courseOne in Model.RecentCourses)
+                @if (Model != null && Model.RecentCourses != null && Model.RecentCourses.Count > 0)
+                {
+                    <div class="single-widget-item">
+                        <div class="single-title">
+                            <h3>@("RecentCoursesListHeader.TranslateLocalization".Translate())</h3>
+                        </div>
+                        <div class="single-widget-container">
+
+                            @foreach (var courseOne in Model.RecentCourses)
                             {
                                 <div class="recent-post-item">
                                     <div class="recent-post-image">
@@ -105,9 +82,9 @@
                                     </div>
                                 </div>
                             }
-                        }
+                        </div>
                     </div>
-                </div>
+                }
                 <div class="single-widget-item hidden-sm">
                     <div class="single-widget-container">
                         <a href="#">
@@ -126,7 +103,7 @@
                             {
                                 foreach (var tagOne in Model.Tags)
                                 {
-                                    <li>@Html.ActionLink(tagOne.Name, "", "", new { area = "Global" })</li>
+                                    <li><a href="/Global/Blog/FilterByTagName/@(tagOne.Id)">@(tagOne.Name)</a></li>
                                 }
                             }
                         </ul>

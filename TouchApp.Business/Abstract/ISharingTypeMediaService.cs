@@ -12,6 +12,7 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<SharingTypeMedia>> GetList(Expression<Func<SharingTypeMedia, bool>> filter = null);
         IDataResult<SharingTypeMedia> Get(Expression<Func<SharingTypeMedia, bool>> filter);
+        IDataResult<GetSharingTypeMediaDto> GetDto(Expression<Func<SharingTypeMedia, bool>> filter = null);
         IDataResult<int> Add(SharingTypeMedia sharingTypeMedia);
         IDataResult<int> Update(SharingTypeMedia sharingTypeMedia);
         IDataResult<int> DeletePermanently(long id);

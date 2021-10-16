@@ -46,51 +46,58 @@ namespace Business.Concrete
         [TransactionScopeAspect(Priority = 1)]
         public IDataResult<int> Add(CreateManagementLanguageDto language)
         {
-            var langOid = Convert.ToInt16(language.NameAbr);
-            var langAbriveature = Enum.GetName(typeof(LanguageOidContainerEnum), langOid);
-            language.NameAbr = langAbriveature;
-            language.Language_oid = langOid;
-
-            var listFileListAdded = new List<string>();
-
-            var fileUploadResult = _fileManager.UploadThumbnail(language.FlagIconFile);
-
-            if (!fileUploadResult.Success)
-                return new ErrorDataResult<int>(-1, fileUploadResult.Message);
-
-            var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
-
-            var result = new FileName()
+            try
             {
-                FilePath = fileUploadResult.Data["thumbnailPath"],
-                CdnPath = _cloudinaryService.BuildUrl(publicId),
-                PublicId = publicId
-            };
+                var langOid = Convert.ToInt16(language.NameAbr);
+                var langAbriveature = Enum.GetName(typeof(LanguageOidContainerEnum), langOid);
+                language.NameAbr = langAbriveature;
+                language.Language_oid = langOid;
 
-            _fileManager.Delete(fileUploadResult.Data["imagePath"]);
-            _fileManager.Delete(fileUploadResult.Data["thumbnailPath"]);
+                var listFileListAdded = new List<string>();
 
-            listFileListAdded.Add(publicId);
+                var fileUploadResult = _fileManager.UploadThumbnail(language.FlagIconFile);
 
-            language.FlagIconSource = result.CdnPath;
+                if (!fileUploadResult.Success)
+                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
 
-            var addLangModel = _mapper.Map<Language>(language);
+                var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
 
-            int affectedRows = _languageDal.Add(addLangModel);
+                var result = new FileName()
+                {
+                    FilePath = fileUploadResult.Data["thumbnailPath"],
+                    CdnPath = _cloudinaryService.BuildUrl(publicId),
+                    PublicId = publicId
+                };
 
-            var localizationList = GeneralFunctionality.ConverModelToLocalizationList(language);
+                _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+                _fileManager.Delete(fileUploadResult.Data["thumbnailPath"]);
 
-            foreach (var localizationOne in localizationList)
-            {
-                var responseAddLocalization = _localizationDal.Add(localizationOne);
-                if (responseAddLocalization <= 0)
+                listFileListAdded.Add(publicId);
+
+                language.FlagIconSource = result.CdnPath;
+
+                var addLangModel = _mapper.Map<Language>(language);
+
+                int affectedRows = _languageDal.Add(addLangModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(language);
+
+                foreach (var localizationOne in localizationList)
+                {
+                    var responseAddLocalization = _localizationDal.Add(localizationOne);
+                    if (responseAddLocalization <= 0)
+                        throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+                }
+
+                if (affectedRows <= 0)
                     throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
-
-            if (affectedRows <= 0)
-                throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
-
-            return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<int>(-500, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
         }
 
         public IDataResult<int> DeleteByStatus(long Id)
@@ -172,6 +179,20 @@ namespace Business.Concrete
             catch (Exception exception)
             {
                 return new ErrorDataResult<Language>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<GetLanguageDto> GetDto(Expression<Func<Language, bool>> filter = null)
+        {
+            try
+            {
+                var response = _languageDal.Get(filter);
+                var mappedModel = _mapper.Map<GetLanguageDto>(response);
+                return new SuccessDataResult<GetLanguageDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetLanguageDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -361,7 +382,7 @@ namespace Business.Concrete
 
             int affectedRows = await _languageDal.AddAsync(addLangModel);
 
-            var localizationList = GeneralFunctionality.ConverModelToLocalizationList(language);
+            var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(language);
 
             foreach (var localizationOne in localizationList)
             {

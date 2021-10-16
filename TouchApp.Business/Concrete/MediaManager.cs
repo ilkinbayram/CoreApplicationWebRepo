@@ -281,13 +281,13 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetMediaDto> GetDto(Func<GetMediaDto, bool> filter = null)
+        public IDataResult<GetMediaDto> GetDto(Expression<Func<Media, bool>> filter = null)
         {
             try
             {
-                var response = _mediaDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetMediaDto>>(response);
-                return new SuccessDataResult<GetMediaDto>(mappingResult.FirstOrDefault(filter));
+                var response = _mediaDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetMediaDto>(response);
+                return new SuccessDataResult<GetMediaDto>(mappedModel);
             }
             catch (Exception exception)
             {
@@ -296,13 +296,17 @@ namespace Business.Concrete
         }
 
         [CacheAspect(1440)]
-        public IDataResult<List<GetMediaDto>> GetDtoList(Func<GetMediaDto, bool> filter = null, int takeCount = 2000)
+        public IDataResult<List<GetMediaDto>> GetDtoList(Expression<Func<Media, bool>> filter = null, int takeCount = 2000)
         {
             try
             {
-                var response = _mediaDal.GetList();
-                var mappingResult = _mapper.Map<List<GetMediaDto>>(response).Where(filter).Take(takeCount).ToList();
-                return new SuccessDataResult<List<GetMediaDto>>(mappingResult);
+                var dtoListResult = new List<GetMediaDto>();
+                _mediaDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetMediaDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetMediaDto>>(dtoListResult);
             }
             catch (Exception exception)
             {

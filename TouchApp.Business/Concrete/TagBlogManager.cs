@@ -129,6 +129,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetTagBlogDto> GetDto(Expression<Func<TagBlog, bool>> filter = null)
+        {
+            try
+            {
+                var response = _tagBlogDal.Get(filter);
+                var mappedModel = _mapper.Map<GetTagBlogDto>(response);
+                return new SuccessDataResult<GetTagBlogDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetTagBlogDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<TagBlog>> GetList(Expression<Func<TagBlog, bool>> filter = null)
         {
             try

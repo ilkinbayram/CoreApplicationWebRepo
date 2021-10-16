@@ -67,8 +67,16 @@ function ajaxMailSend(propComponentIdContainer, mailAction, successCallBack = nu
         if (successCallBack != null && successCallBack != undefined) {
             successCallBack(data);
         } else {
-            alert(data);
-            // TODO : For Success Email Response
+            $("#notification-container").html(data);
+            $("#notification-container").animate({
+                opacity: 1
+            }, 1500, function () {
+                setTimeout(function (e) {
+                    $("#notification-container").animate({
+                        opacity: 0
+                    }, 1500);
+                }, 4500);
+            });
         }
 
         // phoneId, fromEmailId, toEmailId, subjectId, mailTypeId, nameSurnameId, messageId
@@ -102,8 +110,16 @@ function ajaxMailSend(propComponentIdContainer, mailAction, successCallBack = nu
         if (errorCallBack != null && errorCallBack != undefined) {
             errorCallBack(data);
         } else {
-            alert("OPPS! Something Get Wrong!");
-            // TODO : For Error Email Response
+            $("#notification-container").html(data);
+            $("#notification-container").animate({
+                opacity: 1
+            }, 1500, function () {
+                setTimeout(function (e) {
+                    $("#notification-container").animate({
+                        opacity: 0
+                    }, 1500);
+                }, 4500);
+            });
         }
 
         loaderSpinner.gSpinner('hide');

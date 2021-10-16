@@ -21,6 +21,8 @@
         Location_PortBaku = 500,
         Location_Colab = 501,
         
-        Email_SendGrid_ApiKey = 600
+        Email_SendGrid_ApiKey = 600,
+
+        SendGrid_API_Key = 700
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
-using Core.ViewUsableModel;
+using Core.Utilities.UsableModel;
 using System;
 using System.Collections.Generic;
 

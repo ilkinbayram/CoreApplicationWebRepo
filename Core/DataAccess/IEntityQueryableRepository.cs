@@ -11,7 +11,7 @@ namespace Core.DataAccess
     public interface IEntityQueryableRepository<T> 
         where T: class, IEntity, new() 
     {
-        IQueryable<T> GetAllAsQueryable();
+        IQueryable<T> GetAllAsQueryable(Expression<Func<T, bool>> expression = null);
         Task<IQueryable<T>> GetAllAsQueryableAsync();
         Task<IQueryable<T>> GetAllAsQueryableAsync(Expression<Func<T, bool>> filter);
     }

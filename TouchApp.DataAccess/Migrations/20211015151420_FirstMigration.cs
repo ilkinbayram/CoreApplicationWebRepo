@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TouchApp.DataAccess.Migrations
 {
-    public partial class CreateDbMigration : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -86,7 +86,7 @@ namespace TouchApp.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Key = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Translate = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Translate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Project_oid = table.Column<short>(type: "smallint", nullable: false),
                     Lang_oid = table.Column<short>(type: "smallint", nullable: false),
                     Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -149,12 +149,12 @@ namespace TouchApp.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Created_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Modified_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Modified_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     ModelType = table.Column<short>(type: "smallint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
@@ -282,9 +282,11 @@ namespace TouchApp.DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    SocialMediaType = table.Column<int>(type: "int", nullable: false),
                     NameSocial = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Uri = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IconSource = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IconHtml = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
@@ -336,9 +338,9 @@ namespace TouchApp.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TagType = table.Column<byte>(type: "tinyint", nullable: false),
-                    Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, defaultValue: "System Manager"),
                     Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2021, 10, 15, 19, 14, 18, 436, DateTimeKind.Local).AddTicks(9322)),
                     Modified_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     ModelType = table.Column<short>(type: "smallint", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
@@ -365,6 +367,7 @@ namespace TouchApp.DataAccess.Migrations
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Gender = table.Column<byte>(type: "tinyint", nullable: false),
                     BiographyKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShortBiographyKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfilePhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WallpaperPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
@@ -406,16 +409,50 @@ namespace TouchApp.DataAccess.Migrations
                     Gender = table.Column<byte>(type: "tinyint", nullable: false, defaultValue: (byte)3),
                     AccountType = table.Column<byte>(type: "tinyint", nullable: false),
                     SecurityToken = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Created_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Modified_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Modified_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     ModelType = table.Column<short>(type: "smallint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UniqueToken = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "6b201d21-52a7-41da-9d8d-ed78b74c6d05"),
+                    CaptionSource = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerProfessionKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubtitleKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PreviewDescriptionKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentHtmlRawKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OverviewHtmlRawKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ScreenType = table.Column<byte>(type: "tinyint", nullable: false),
+                    BlogCategoryId = table.Column<long>(type: "bigint", nullable: false),
+                    Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    ModelType = table.Column<short>(type: "smallint", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Blogs_BlogCategories_BlogCategoryId",
+                        column: x => x.BlogCategoryId,
+                        principalTable: "BlogCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -425,6 +462,7 @@ namespace TouchApp.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UniqueToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CaptionImageSource = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TitleKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DescriptionKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MinTotalMonths = table.Column<byte>(type: "tinyint", nullable: false),
@@ -434,6 +472,7 @@ namespace TouchApp.DataAccess.Migrations
                     ScheduleHtmlRawKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContentHtmlRawKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OverViewHtmlRawKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PreviewDescriptionKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PublishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProfessionCourseCategoryId = table.Column<long>(type: "bigint", nullable: false),
                     LanguageId = table.Column<long>(type: "bigint", nullable: false),
@@ -620,47 +659,6 @@ namespace TouchApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Blogs",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UniqueToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CaptionSource = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OwnerProfessionKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TitleKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SubtitleKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PreviewDescriptionKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContentHtmlRawKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OverviewHtmlRawKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ScreenType = table.Column<byte>(type: "tinyint", nullable: false),
-                    BlogCategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
-                    Modified_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
-                    ModelType = table.Column<short>(type: "smallint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blogs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Blogs_BlogCategories_BlogCategoryId",
-                        column: x => x.BlogCategoryId,
-                        principalTable: "BlogCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Blogs_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserOperationClaims",
                 columns: table => new
                 {
@@ -683,7 +681,7 @@ namespace TouchApp.DataAccess.Migrations
                         column: x => x.OperationClaimId,
                         principalTable: "OperationClaims",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserOperationClaims_Users_UserId",
                         column: x => x.UserId,
@@ -721,6 +719,38 @@ namespace TouchApp.DataAccess.Migrations
                         name: "FK_UserSocialMedias_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TagBlogs",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TagId = table.Column<long>(type: "bigint", nullable: false),
+                    BlogId = table.Column<long>(type: "bigint", nullable: false),
+                    Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, defaultValue: "System Manager"),
+                    Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, defaultValue: "System Manager"),
+                    Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2021, 10, 15, 19, 14, 18, 439, DateTimeKind.Local).AddTicks(7680)),
+                    Modified_at = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2021, 10, 15, 19, 14, 18, 439, DateTimeKind.Local).AddTicks(8774)),
+                    ModelType = table.Column<short>(type: "smallint", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TagBlogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TagBlogs_Blogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "Blogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TagBlogs_Tags_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -806,38 +836,6 @@ namespace TouchApp.DataAccess.Migrations
                         name: "FK_TeacherCourses_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TagBlogs",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TagId = table.Column<long>(type: "bigint", nullable: false),
-                    BlogId = table.Column<long>(type: "bigint", nullable: false),
-                    Created_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Modified_by = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Created_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
-                    Modified_at = table.Column<DateTime>(type: "smalldatetime", nullable: false),
-                    ModelType = table.Column<short>(type: "smallint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TagBlogs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TagBlogs_Blogs_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Blogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TagBlogs_Tags_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1050,11 +1048,6 @@ namespace TouchApp.DataAccess.Migrations
                 column: "BlogCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Blogs_UserId",
-                table: "Blogs",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CourseComments_CourseId",
                 table: "CourseComments",
                 column: "CourseId");
@@ -1085,11 +1078,11 @@ namespace TouchApp.DataAccess.Migrations
                 column: "StudyingGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Localizations_Key_Translate",
+                name: "IX_Localizations_Key_Lang_oid",
                 table: "Localizations",
-                columns: new[] { "Key", "Translate" },
+                columns: new[] { "Key", "Lang_oid" },
                 unique: true,
-                filter: "[Key] IS NOT NULL AND [Translate] IS NOT NULL");
+                filter: "[Key] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProfessionCourseCategories_ParentCategoryId",
@@ -1298,6 +1291,9 @@ namespace TouchApp.DataAccess.Migrations
                 name: "SocialMedias");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Questions");
 
             migrationBuilder.DropTable(
@@ -1305,9 +1301,6 @@ namespace TouchApp.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "BlogCategories");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Exams");

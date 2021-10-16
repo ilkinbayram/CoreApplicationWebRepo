@@ -12,7 +12,8 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<BlogCategory>> GetList(Expression<Func<BlogCategory, bool>> filter = null);
         IDataResult<BlogCategory> Get(Expression<Func<BlogCategory, bool>> filter);
-        IDataResult<int> Add(BlogCategory blogCategory);
+        IDataResult<GetBlogCategoryDto> GetDto(Expression<Func<BlogCategory, bool>> filter = null);
+        IDataResult<int> Add(CreateBlogCategoryManagementDto blogCategory);
         IDataResult<int> Update(BlogCategory blogCategory);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);
@@ -32,5 +33,6 @@ namespace TouchApp.Business.Abstract
         Task<IDataResult<int>> DeletePermanentlyAsync(long Id);
         Task<IDataResult<int>> DeleteByStatusAsync(long Id);
         Task<IDataResult<int>> AddAsync(BlogCategory blogCategory);
+        IDataResult<List<GetBlogCategoryDto>> GetListDto(Expression<Func<BlogCategory, bool>> filter = null);
     }
 }

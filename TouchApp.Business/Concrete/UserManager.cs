@@ -235,6 +235,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetUserDto> GetDto(Expression<Func<User, bool>> filter = null)
+        {
+            try
+            {
+                var response = _userDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetUserDto>(response);
+                return new SuccessDataResult<GetUserDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetUserDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<User> GetUserWithRelations(Expression<Func<User, bool>> filter)
         {
             try

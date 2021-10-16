@@ -12,6 +12,7 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<TagBlog>> GetList(Expression<Func<TagBlog, bool>> filter = null);
         IDataResult<TagBlog> Get(Expression<Func<TagBlog, bool>> filter);
+        IDataResult<GetTagBlogDto> GetDto(Expression<Func<TagBlog, bool>> filter = null);
         IDataResult<int> Add(TagBlog tagBlog);
         IDataResult<int> Update(TagBlog tagBlog);
         IDataResult<int> DeletePermanently(long Id);

@@ -1,7 +1,7 @@
 ﻿using Core.Entities.Dtos.Base;
 using Core.Entities.Dtos.Course;
 using Core.Resources.Enums;
-using Core.ViewUsableModel;
+using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;

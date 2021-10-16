@@ -117,12 +117,6 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("OverviewHtmlRawKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OwnerProfessionKey")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PreviewDescriptionKey")
                         .HasColumnType("nvarchar(max)");
 
@@ -136,16 +130,14 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UniqueToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("9a6e5fb1-cf36-4670-96e3-cbec355bfb74");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BlogCategoryId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Blogs");
                 });
@@ -213,6 +205,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CaptionImageSource")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ContentHtmlRawKey")
                         .HasColumnType("nvarchar(max)");
 
@@ -255,6 +250,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("OverViewHtmlRawKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreviewDescriptionKey")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PricePerMonth")
@@ -697,22 +695,30 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("Created_at")
-                        .HasColumnType("datetime2");
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<short>("ModelType")
                         .HasColumnType("smallint");
 
                     b.Property<DateTime?>("Modified_at")
-                        .HasColumnType("datetime2");
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1223,6 +1229,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("IconHtml")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IconSource")
                         .HasColumnType("nvarchar(max)");
 
@@ -1245,6 +1254,9 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<string>("NameSocial")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SocialMediaType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Uri")
                         .HasColumnType("nvarchar(max)");
@@ -1484,12 +1496,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 16, 5, 10, 53, 66, DateTimeKind.Local).AddTicks(2513));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -1533,12 +1549,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 16, 5, 10, 53, 70, DateTimeKind.Local).AddTicks(483));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -1550,12 +1570,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 16, 5, 10, 53, 70, DateTimeKind.Local).AddTicks(1938));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<long>("TagId")
                         .HasColumnType("bigint");
@@ -1659,6 +1683,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortBiographyKey")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("StartProfessionCareer")
@@ -1833,10 +1860,13 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Created_at")
-                        .HasColumnType("datetime2");
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
 
                     b.Property<string>("Created_by")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -1852,7 +1882,9 @@ namespace TouchApp.DataAccess.Migrations
                         .HasDefaultValue((byte)3);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -1863,10 +1895,13 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("smallint");
 
                     b.Property<DateTime?>("Modified_at")
-                        .HasColumnType("datetime2");
+                        .IsRequired()
+                        .HasColumnType("smalldatetime");
 
                     b.Property<string>("Modified_by")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
@@ -2016,15 +2051,7 @@ namespace TouchApp.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Concrete.User", "User")
-                        .WithMany("Blogs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("BlogCategory");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.BlogCategory", b =>
@@ -2082,8 +2109,7 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.Exam", "Exam")
                         .WithMany("ExamQuestions")
                         .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.Question", "Question")
                         .WithMany("ExamQuestions")
@@ -2146,8 +2172,7 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.Student", "Student")
                         .WithMany("ResultExams")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Exam");
 
@@ -2159,14 +2184,12 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.Media", "Media")
                         .WithMany("SharingTypeMedias")
                         .HasForeignKey("MediaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.SharingType", "SharingType")
                         .WithMany("SharingTypeMedias")
                         .HasForeignKey("SharingTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Media");
 
@@ -2178,14 +2201,12 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.OperationClaim", "OperationClaim")
                         .WithMany("StudentOperationClaims")
                         .HasForeignKey("OperationClaimId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.Student", "Student")
                         .WithMany("StudentOperationClaims")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("OperationClaim");
 
@@ -2197,14 +2218,12 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.Student", "Student")
                         .WithMany("StudentStudyingGroups")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.StudyingGroup", "StudyingGroup")
                         .WithMany("StudentStudyingGroups")
                         .HasForeignKey("StudyingGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Student");
 
@@ -2227,14 +2246,12 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.Blog", "Blog")
                         .WithMany("TagBlogs")
                         .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.Tag", "Tag")
                         .WithMany("TagBlogs")
                         .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Blog");
 
@@ -2246,14 +2263,12 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.Course", "Course")
                         .WithMany("TeacherCourses")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
                         .WithMany("TeacherCourses")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Course");
 
@@ -2265,14 +2280,12 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.OperationClaim", "OperationClaim")
                         .WithMany("TeacherOperationClaims")
                         .HasForeignKey("OperationClaimId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
                         .WithMany("TeacherOperationClaims")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("OperationClaim");
 
@@ -2284,14 +2297,12 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.SocialMedia", "SocialMedia")
                         .WithMany("TeacherSocialMedias")
                         .HasForeignKey("SocialMediaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.Teacher", "Teacher")
                         .WithMany("TeacherSocialMedias")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("SocialMedia");
 
@@ -2302,13 +2313,13 @@ namespace TouchApp.DataAccess.Migrations
                 {
                     b.HasOne("Core.Entities.Concrete.OperationClaim", "OperationClaim")
                         .WithMany("UserOperationClaims")
-                        .HasForeignKey("OperationClaimId");
+                        .HasForeignKey("OperationClaimId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.User", "User")
                         .WithMany("UserOperationClaims")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("OperationClaim");
 
@@ -2320,14 +2331,12 @@ namespace TouchApp.DataAccess.Migrations
                     b.HasOne("Core.Entities.Concrete.SocialMedia", "SocialMedia")
                         .WithMany("UserSocialMedias")
                         .HasForeignKey("SocialMediaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Entities.Concrete.User", "User")
                         .WithMany("UserSocialMedias")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("SocialMedia");
 
@@ -2451,8 +2460,6 @@ namespace TouchApp.DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.User", b =>
                 {
-                    b.Navigation("Blogs");
-
                     b.Navigation("UserOperationClaims");
 
                     b.Navigation("UserSocialMedias");

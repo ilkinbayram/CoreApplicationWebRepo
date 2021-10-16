@@ -129,6 +129,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetSharingTypeMediaDto> GetDto(Expression<Func<SharingTypeMedia, bool>> filter = null)
+        {
+            try
+            {
+                var response = _sharingTypeMediaDal.Get(filter);
+                var mappedModel = _mapper.Map<GetSharingTypeMediaDto>(response);
+                return new SuccessDataResult<GetSharingTypeMediaDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetSharingTypeMediaDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<SharingTypeMedia>> GetList(Expression<Func<SharingTypeMedia, bool>> filter = null)
         {
             try

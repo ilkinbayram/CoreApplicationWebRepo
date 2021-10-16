@@ -19,6 +19,8 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(p => p.Modified_at).HasColumnType("smalldatetime").IsRequired();
             builder.Property(p => p.IsActive).IsRequired().HasDefaultValue(true);
 
+            builder.HasMany(p => p.SharingTypeMedias).WithOne(x => x.Media).OnDelete(DeleteBehavior.Cascade).IsRequired(false);
+
             //builder
             //    .HasOne(x => x.ParentCategory).WithMany(z => z.Children).HasForeignKey(x => x.ParentCategoryId).IsRequired(false);
         }

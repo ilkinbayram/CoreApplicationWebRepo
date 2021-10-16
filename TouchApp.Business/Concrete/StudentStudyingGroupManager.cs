@@ -277,13 +277,13 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetStudentStudyingGroupDto> GetDto(Func<GetStudentStudyingGroupDto, bool> filter = null)
+        public IDataResult<GetStudentStudyingGroupDto> GetDto(Expression<Func<StudentStudyingGroup, bool>> filter = null)
         {
             try
             {
-                var response = _studentStudyingGroupDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetStudentStudyingGroupDto>>(response);
-                return new SuccessDataResult<GetStudentStudyingGroupDto>(mappingResult.FirstOrDefault(filter));
+                var response = _studentStudyingGroupDal.Get(filter);
+                var mappedModel = _mapper.Map<GetStudentStudyingGroupDto>(response);
+                return new SuccessDataResult<GetStudentStudyingGroupDto>(mappedModel);
             }
             catch (Exception exception)
             {

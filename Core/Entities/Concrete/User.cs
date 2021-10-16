@@ -32,6 +32,6 @@ namespace Core.Entities.Concrete
 
         public virtual List<UserOperationClaim> UserOperationClaims { get; set; }
         public virtual List<UserSocialMedia> UserSocialMedias { get; set; }
-        public virtual List<Blog> Blogs { get; set; }
+        //public virtual List<Blog> Blogs { get; set; }
     }
 }

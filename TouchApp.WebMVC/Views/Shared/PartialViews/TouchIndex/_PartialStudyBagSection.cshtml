@@ -39,12 +39,12 @@
                         <div class="single-class-text">
                             <div class="class-des">
                                 <h4><a href="#">@(courseOne.TitleKey.Translate())</a></h4>
-                                <p>@(courseOne.DescriptionKey.Translate())</p>
+                                <p>@(courseOne.PreviewDescriptionKey.Translate())</p>
                             </div>
                             <div class="class-schedule">
                                 @* TODO : Localization *@
-                                <span>Muddet: @(courseOne.MinTotalMonths)&minus;@(courseOne.MaxTotalMonths) Ay</span>
-                                <span>Kurs Qiymeti: @(courseOne.PricePerMonth) AZN</span>
+                                <span>@("GeneralCoursePeriodDefiner.TranslateLocalization".Translate())&nbsp;@(courseOne.TotalMonths)</span>
+                                <span>@("PricePerMonthPayment.TranslateLocalization")&nbsp;@(courseOne.PricePerMonth)&nbsp;AZN</span>
                                 <span class="arrow"><a href="#"><i class="fa fa-angle-right"></i></a></span>
                             </div>
                         </div>

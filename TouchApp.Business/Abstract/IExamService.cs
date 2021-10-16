@@ -13,7 +13,7 @@ namespace TouchApp.Business.Abstract
         IDataResult<List<Exam>> GetList(Expression<Func<Exam, bool>> filter = null);
         IDataResult<List<GetExamDto>> GetDtoList(Func<GetExamDto, bool> filter = null, int takeCount = 2000);
         IDataResult<Exam> Get(Expression<Func<Exam, bool>> filter);
-        IDataResult<GetExamDto> GetDto(Func<GetExamDto, bool> filter);
+        IDataResult<GetExamDto> GetDto(Expression<Func<Exam, bool>> filter = null);
         IDataResult<int> Add(Exam exam);
         IDataResult<int> Update(Exam exam);
         IDataResult<int> DeletePermanently(long Id);

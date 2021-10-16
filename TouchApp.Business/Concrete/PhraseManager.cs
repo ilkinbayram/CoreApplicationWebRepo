@@ -279,13 +279,13 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetPhraseDto> GetDto(Func<GetPhraseDto, bool> filter = null)
+        public IDataResult<GetPhraseDto> GetDto(Expression<Func<Phrase, bool>> filter = null)
         {
             try
             {
-                var response = _phraseDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetPhraseDto>>(response);
-                return new SuccessDataResult<GetPhraseDto>(mappingResult.FirstOrDefault(filter));
+                var response = _phraseDal.Get(filter);
+                var mappedModel = _mapper.Map<GetPhraseDto>(response);
+                return new SuccessDataResult<GetPhraseDto>(mappedModel);
             }
             catch (Exception exception)
             {
@@ -293,13 +293,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<List<GetPhraseDto>> GetDtoList(Func<GetPhraseDto, bool> filter = null, int takeCount = 2000)
+        public IDataResult<List<GetPhraseDto>> GetDtoList(Expression<Func<Phrase, bool>> filter = null, int takeCount = 2000)
         {
             try
             {
-                var response = _phraseDal.GetList();
-                var mappingResult = _mapper.Map<List<GetPhraseDto>>(response).Where(filter).Take(takeCount).ToList();
-                return new SuccessDataResult<List<GetPhraseDto>>(mappingResult);
+                var dtoListResult = new List<GetPhraseDto>();
+                _phraseDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetPhraseDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetPhraseDto>>(dtoListResult);
             }
             catch (Exception exception)
             {

@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos.BlogCategory;
+using Core.Entities.Dtos.FieUploud;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -17,29 +21,72 @@ namespace Business.Concrete
     {
         private readonly IBlogCategoryDal _blogCategoryDal;
         private readonly IMapper _mapper;
+        private readonly IFileManager _fileManager;
+        private readonly ICloudinaryService _cloudinaryService;
+        private readonly ILocalizationDal _localizationDal;
 
-        public BlogCategoryManager(IBlogCategoryDal blogCategoryDal, IMapper mapper)
+        public BlogCategoryManager(IBlogCategoryDal blogCategoryDal,
+                                   IMapper mapper,
+                                   IFileManager fileManager,
+                                   ICloudinaryService cloudinaryService,
+                                   ILocalizationDal localizationDal)
         {
             _blogCategoryDal = blogCategoryDal;
             _mapper = mapper;
+            _fileManager = fileManager;
+            _cloudinaryService = cloudinaryService;
+            _localizationDal = localizationDal;
         }
 
-        public IDataResult<int> Add(BlogCategory blogCategory)
+        public IDataResult<int> Add(CreateBlogCategoryManagementDto blogCategory)
         {
             try
             {
-                int affectedRows = _blogCategoryDal.Add(blogCategory);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
+                if (blogCategory.IconFile != null)
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+
+                    var listFileListAdded = new List<string>();
+
+                    var fileUploadResult = _fileManager.UploadThumbnail(blogCategory.IconFile);
+
+                    if (!fileUploadResult.Success)
+                        return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+                    var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
+
+                    var result = new FileName()
+                    {
+                        FilePath = fileUploadResult.Data["thumbnailPath"],
+                        CdnPath = _cloudinaryService.BuildUrl(publicId),
+                        PublicId = publicId
+                    };
+
+                    _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+                    _fileManager.Delete(fileUploadResult.Data["thumbnailPath"]);
+
+                    listFileListAdded.Add(publicId);
+
+                    blogCategory.IconSource = result.CdnPath;
+
                 }
 
-                return dataResult;
+                var mappedModel = _mapper.Map<BlogCategory>(blogCategory);
+
+                int affectedRows = _blogCategoryDal.Add(mappedModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(blogCategory);
+
+                foreach (var localizationOne in localizationList)
+                {
+                    var responseAddLocalization = _localizationDal.Add(localizationOne);
+                    if (responseAddLocalization <= 0)
+                        throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+                }
+
+                if (affectedRows <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
             catch (Exception exception)
             {
@@ -129,6 +176,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetBlogCategoryDto> GetDto(Expression<Func<BlogCategory, bool>> filter = null)
+        {
+            try
+            {
+                var response = _blogCategoryDal.Get(filter);
+                var mappedModel = _mapper.Map<GetBlogCategoryDto>(response);
+                return new SuccessDataResult<GetBlogCategoryDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetBlogCategoryDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<BlogCategory>> GetList(Expression<Func<BlogCategory, bool>> filter = null)
         {
             try
@@ -140,6 +201,24 @@ namespace Business.Concrete
             catch (Exception exception)
             {
                 return new ErrorDataResult<List<BlogCategory>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetBlogCategoryDto>> GetListDto(Expression<Func<BlogCategory, bool>> filter = null)
+        {
+            try
+            {
+                var dtoListResult = new List<GetBlogCategoryDto>();
+                _blogCategoryDal.GetList(filter).ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetBlogCategoryDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetBlogCategoryDto>>(dtoListResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetBlogCategoryDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -522,7 +601,6 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<GetBlogCategoryDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-
         #endregion
     }
 }

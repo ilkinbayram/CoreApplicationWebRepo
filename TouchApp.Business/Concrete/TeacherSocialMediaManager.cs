@@ -129,6 +129,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetTeacherSocialMediaDto> GetDto(Expression<Func<TeacherSocialMedia, bool>> filter = null)
+        {
+            try
+            {
+                var response = _teacherSocialMediaDal.Get(filter);
+                var mappedModel = _mapper.Map<GetTeacherSocialMediaDto>(response);
+                return new SuccessDataResult<GetTeacherSocialMediaDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetTeacherSocialMediaDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<TeacherSocialMedia>> GetList(Expression<Func<TeacherSocialMedia, bool>> filter = null)
         {
             try

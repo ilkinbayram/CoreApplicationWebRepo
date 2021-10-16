@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework.Contexts;
+using Microsoft.EntityFrameworkCore;
 using TouchApp.DataAccess.Abstract;
 
 namespace TouchApp.DataAccess.Concrete.EntityFramework
@@ -13,6 +15,36 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework
         public EfUserDal(ApplicationDbContext context) : base(context)
         {
         }
+
+        public List<User> GetAllWithRelations(Expression<Func<User, bool>> filter)
+        {
+            Context.ChangeTracker.LazyLoadingEnabled = false;
+            return filter == null ?
+                Context.Users.
+                Include(x => x.UserOperationClaims).ThenInclude(x => x.User).
+                Include(x => x.UserSocialMedias).ThenInclude(x => x.User).
+                Include(x => x.UserOperationClaims).ThenInclude(x => x.OperationClaim).
+                Include(x => x.UserSocialMedias).ThenInclude(x => x.SocialMedia).ToList() :
+                Context.Users.
+                Include(x => x.UserOperationClaims).ThenInclude(x => x.User).
+                Include(x => x.UserSocialMedias).ThenInclude(x => x.User).
+                Include(x => x.UserOperationClaims).ThenInclude(x => x.OperationClaim).
+                Include(x => x.UserSocialMedias).ThenInclude(x => x.SocialMedia).Where(filter).ToList();
+        }
+
+        public User GetWithRelations(Expression<Func<User, bool>> filter)
+        {
+            Context.ChangeTracker.LazyLoadingEnabled = false;
+            return Context.Users.
+                Include(x => x.UserOperationClaims).ThenInclude(x => x.User).
+                Include(x => x.UserSocialMedias).ThenInclude(x => x.User).
+                Include(x => x.UserOperationClaims).ThenInclude(x => x.OperationClaim).
+                Include(x => x.UserSocialMedias).ThenInclude(x => x.SocialMedia).FirstOrDefault(filter);
+        }
+
+
+
+
 
         public List<OperationClaim> GetClaims(User user)
         {

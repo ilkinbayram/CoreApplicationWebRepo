@@ -129,6 +129,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetTeacherDto> GetDto(Expression<Func<Teacher, bool>> filter = null)
+        {
+            try
+            {
+                var response = _teacherDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetTeacherDto>(response);
+                return new SuccessDataResult<GetTeacherDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetTeacherDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<Teacher>> GetList(Expression<Func<Teacher, bool>> filter = null)
         {
             try
@@ -293,13 +307,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<List<GetTeacherDto>> GetDtoList(Func<GetTeacherDto, bool> filter = null, int takeCount = 2000)
+        public IDataResult<List<GetTeacherDto>> GetDtoList(Expression<Func<Teacher, bool>> filter = null, int takeCount = 2000)
         {
             try
             {
-                var response = _teacherDal.GetList();
-                var mappingResult = _mapper.Map<List<GetTeacherDto>>(response).Where(filter).Take(takeCount).ToList();
-                return new SuccessDataResult<List<GetTeacherDto>>(mappingResult);
+                var dtoListResult = new List<GetTeacherDto>();
+                _teacherDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetTeacherDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetTeacherDto>>(dtoListResult);
             }
             catch (Exception exception)
             {

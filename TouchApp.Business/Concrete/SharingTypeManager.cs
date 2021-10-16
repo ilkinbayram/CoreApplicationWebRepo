@@ -129,6 +129,20 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<GetSharingTypeDto> GetDto(Expression<Func<SharingType, bool>> filter = null)
+        {
+            try
+            {
+                var response = _sharingTypeDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetSharingTypeDto>(response);
+                return new SuccessDataResult<GetSharingTypeDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetSharingTypeDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<SharingType>> GetList(Expression<Func<SharingType, bool>> filter = null)
         {
             try

@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Dtos.Base;
+using Core.Entities.Dtos.Course;
 using Core.Resources.Enums;
 
 namespace Core.Entities.Dtos.TeacherCourse
@@ -9,5 +10,10 @@ namespace Core.Entities.Dtos.TeacherCourse
         {
             ModelType = ProjectModelType.TeacherCourse;
         }
+
+        public long TeacherId { get; set; }
+        public long CourseId { get; set; }
+
+        public CreateManagementCourseDto Course { get; set; }
     }
 }

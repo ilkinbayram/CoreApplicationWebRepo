@@ -1,14 +1,19 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos.Course;
+using Core.Entities.Dtos.FieUploud;
+using Core.Entities.Dtos.TeacherCourse;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -19,33 +24,74 @@ namespace Business.Concrete
         private readonly IMediaService _mediaService;
         private readonly IMapper _mapper;
 
-        public CourseManager(ICourseDal courseDal, IMapper mapper, IMediaService mediaService)
+        private readonly IFileManager _fileManager;
+        private readonly ICloudinaryService _cloudinaryService;
+        private readonly ILocalizationDal _localizationDal;
+
+        public CourseManager(ICourseDal courseDal, 
+                             IMapper mapper, 
+                             IMediaService mediaService,
+                             IFileManager fileManager,
+                             ICloudinaryService cloudinaryService,
+                             ILocalizationDal localizationDal)
         {
             _courseDal = courseDal;
             _mapper = mapper;
             _mediaService = mediaService;
+            _localizationDal = localizationDal;
+            _cloudinaryService = cloudinaryService;
+            _fileManager = fileManager;
         }
 
-        public IDataResult<int> Add(Course course)
+        public IDataResult<int> Add(CreateManagementCourseDto course)
         {
             try
             {
-                int affectedRows = _courseDal.Add(course);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
+                var listFileListAdded = new List<string>();
+
+                var fileUploadResult = _fileManager.UploadSaveDictionary(course.CaptionImageFile);
+
+                if (!fileUploadResult.Success)
+                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+                var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["imagePath"]);
+
+                var result = new FileName()
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
+                    FilePath = fileUploadResult.Data["imagePath"],
+                    CdnPath = _cloudinaryService.BuildUrl(publicId),
+                    PublicId = publicId
+                };
+
+                _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+
+                listFileListAdded.Add(publicId);
+
+                course.CaptionImageSource = result.CdnPath;
+
+                course.TeacherCourses.Add(new CreateManagementTeacherCourseDto { TeacherId = course.TeacherId});
+
+                var addCourseModel = _mapper.Map<Course>(course);
+
+                int affectedRows = _courseDal.Add(addCourseModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(course);
+
+                foreach (var localizationOne in localizationList)
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    var responseAddLocalization = _localizationDal.Add(localizationOne);
+                    if (responseAddLocalization <= 0)
+                        throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
                 }
 
-                return dataResult;
+                if (affectedRows <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-500, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -281,13 +327,13 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetCourseDto> GetDto(Func<GetCourseDto, bool> filter = null)
+        public IDataResult<GetCourseDto> GetDto(Expression<Func<Course, bool>> filter = null)
         {
             try
             {
-                var response = _courseDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetCourseDto>>(response);
-                return new SuccessDataResult<GetCourseDto>(mappingResult.FirstOrDefault(filter));
+                var response = _courseDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetCourseDto>(response);
+                return new SuccessDataResult<GetCourseDto>(mappedModel);
             }
             catch (Exception exception)
             {
@@ -295,20 +341,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<List<GetCourseDto>> GetDtoList(Func<GetCourseDto, bool> filter = null, int takeCount = 2000)
+        public IDataResult<List<GetCourseDto>> GetDtoList(Expression<Func<Course, bool>> filter = null, int takeCount = 2000)
         {
             try
             {
-                var response = _courseDal.GetList();
-                var mediaList = _mediaService.GetList().Data;
-                var mappingResult = _mapper.Map<List<GetCourseDto>>(response).Where(filter).Take(takeCount).ToList();
-
-                mappingResult.ForEach(item =>
+                var dtoListResult = new List<GetCourseDto>();
+                _courseDal.GetAllWithRelations(filter).Take(takeCount).ToList().ForEach(x =>
                 {
-                    item.CaptionImageSource = mediaList.FirstOrDefault(m => m.UniqueParentToken == item.UniqueToken).Source;
+                    dtoListResult.Add(_mapper.Map<GetCourseDto>(x));
                 });
 
-                return new SuccessDataResult<List<GetCourseDto>>(mappingResult);
+                return new SuccessDataResult<List<GetCourseDto>>(dtoListResult);
             }
             catch (Exception exception)
             {

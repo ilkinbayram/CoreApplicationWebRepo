@@ -1,14 +1,21 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos.Blog;
+using Core.Entities.Dtos.FieUploud;
+using Core.Entities.Dtos.Tag;
+using Core.Entities.Dtos.TagBlog;
+using Core.Extensions;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -18,32 +25,111 @@ namespace Business.Concrete
         private readonly IBlogDal _blogDal;
         private readonly IMapper _mapper;
 
-        public BlogManager(IBlogDal blogDal, IMapper mapper)
+        private readonly IFileManager _fileManager;
+        private readonly ICloudinaryService _cloudinaryService;
+        private readonly ILocalizationDal _localizationDal;
+        private readonly ITagDal _tagDal;
+        private readonly ITagBlogDal _tagBlogDal;
+
+        public BlogManager(IBlogDal blogDal,
+                           IMapper mapper,
+                           IFileManager fileManager,
+                           ICloudinaryService cloudinaryService,
+                           ILocalizationDal localizationDal,
+                           ITagBlogDal tagBlogDal,
+                           ITagDal tagDal)
         {
             _blogDal = blogDal;
             _mapper = mapper;
+            _fileManager = fileManager;
+            _cloudinaryService = cloudinaryService;
+            _localizationDal = localizationDal;
+            _tagDal = tagDal;
+            _tagBlogDal = tagBlogDal;
         }
 
-        public IDataResult<int> Add(Blog blog)
+        public IDataResult<int> Add(CreateManagementBlogDto blog)
         {
             try
             {
-                int affectedRows = _blogDal.Add(blog);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
+                var listFileListAdded = new List<string>();
+
+                var fileUploadResult = _fileManager.UploadSaveDictionary(blog.CaptionSourceFile);
+
+                if (!fileUploadResult.Success)
+                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+                var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["imagePath"]);
+
+                var result = new FileName()
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
+                    FilePath = fileUploadResult.Data["imagePath"],
+                    CdnPath = _cloudinaryService.BuildUrl(publicId),
+                    PublicId = publicId
+                };
+
+                _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+
+                listFileListAdded.Add(publicId);
+
+                blog.CaptionSource = result.CdnPath;
+
+                var blogTagsList = blog.TagsConcat.Split('|').ToList();
+
+                var addedTagIds = new List<long>();
+
+                foreach(var item in blogTagsList)
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    if (_tagDal.Get(k => k.Name.ToLower().Trim() == item.ToLower().Trim()) == null)
+                    {
+                        var tag = new Tag
+                        {
+                            TagType = Core.Resources.Enums.TagTypeEnum.ForGlobalSearching,
+                            Name = item.Trim(),
+                            Modified_at = DateTime.Now,
+                            Modified_by = "System Manager"
+                        };
+
+                        var resultTagAddOpt = _tagDal.Add(tag);
+
+                        if (resultTagAddOpt <= 0)
+                            throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                        var dbGetTagModelOne = _tagDal.GetWithRelations(x => x.Name.ToLower().Trim() == item.ToLower().Trim());
+
+                        var tagCurrent = _mapper.Map<CreateTagForManagementDto>(dbGetTagModelOne);
+                        blog.TagBlogs.Add(new CreateTagBlogManagementDto { TagId = tagCurrent.Id});
+                    }
+                    else
+                    {
+                        var dbGetTagModelOne = _tagDal.GetWithRelations(x => x.Name.ToLower().Trim() == item.ToLower().Trim());
+
+                        var foundTag = _mapper.Map<CreateTagForManagementDto>(dbGetTagModelOne);
+                        blog.TagBlogs.Add(new CreateTagBlogManagementDto { TagId = foundTag.Id});
+                    }
+                };
+
+                var addBlogModel = _mapper.Map<Blog>(blog);
+
+                int affectedRows = _blogDal.Add(addBlogModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(blog);
+
+                foreach (var localizationOne in localizationList)
+                {
+                    var responseAddLocalization = _localizationDal.Add(localizationOne);
+                    if (responseAddLocalization <= 0)
+                        throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
                 }
 
-                return dataResult;
+                if (affectedRows <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-500, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -119,9 +205,8 @@ namespace Business.Concrete
         {
             try
             {
-                var response = _blogDal.Get(filter);
-                var mappingResult = _mapper.Map<Blog>(response);
-                return new SuccessDataResult<Blog>(mappingResult);
+                var response = _blogDal.GetWithRelations(filter);
+                return new SuccessDataResult<Blog>(response);
             }
             catch (Exception exception)
             {
@@ -140,6 +225,103 @@ namespace Business.Concrete
             catch (Exception exception)
             {
                 return new ErrorDataResult<List<Blog>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetBlogDto>> GetListDto(Expression<Func<Blog, bool>> filter = null)
+        {
+            try
+            {
+                var dtoListResult = new List<GetBlogDto>();
+                _blogDal.GetAllWithRelations(filter).ForEach(x=>
+                {
+                    dtoListResult.Add(_mapper.Map<GetBlogDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetBlogDto>>(dtoListResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetBlogDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetBlogDto>> GetRelatedBlogsByBlogCategoryId(long id, long savingId = -1)
+        {
+            try
+            {
+                var resultDtoList = new List<GetBlogDto>();
+
+                if (_blogDal.GetAllWithRelations(x => x.BlogCategoryId == id && x.Id != savingId) != null && 
+                    _blogDal.GetAllWithRelations(x => x.BlogCategoryId == id && x.Id != savingId).Count > 0)
+                {
+                    _blogDal.GetAllWithRelations(x => x.BlogCategoryId == id && x.Id != savingId).ForEach(blog =>
+                    {
+                        resultDtoList.Add(_mapper.Map<GetBlogDto>(blog));
+                    });
+                }
+
+                return new SuccessDataResult<List<GetBlogDto>>(resultDtoList);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetBlogDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetBlogDto>> GetFilteredBlogsByTagId(long id)
+        {
+            try
+            {
+                var filteredBlogsByTag = new List<GetBlogDto>();
+                var foundTag = _tagDal.Get(x=>x.Id==id);
+
+                if (foundTag!=null)
+                {
+                    _tagBlogDal.GetList(x => x.Tag.Id == foundTag.Id).Select(p => p.Blog).ToList().ForEach(blog=>
+                    {
+                        filteredBlogsByTag.Add(_mapper.Map<GetBlogDto>(blog));
+                    });
+                }
+
+                return new SuccessDataResult<List<GetBlogDto>>(filteredBlogsByTag);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetBlogDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetBlogDto>> GetFilteredBlogsByBlogCategoryId(long id)
+        {
+            try
+            {
+                var resultDtoList = new List<GetBlogDto>();
+
+                List<Blog> blogs = null;
+
+                if (id < 999 && id > 0)
+                {
+                    blogs = _blogDal.GetAllWithRelations(x => x.BlogCategoryId == id);
+                }
+                else if(id == 999)
+                {
+                    blogs = _blogDal.GetAllWithRelations();
+                }
+
+                if (blogs != null && blogs.Count > 0)
+                {
+                    blogs.ForEach(x =>
+                    {
+                        resultDtoList.Add(_mapper.Map<GetBlogDto>(x));
+                    });
+                }
+                
+                return new SuccessDataResult<List<GetBlogDto>>(resultDtoList);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetBlogDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -277,13 +459,13 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetBlogDto> GetDto(Func<GetBlogDto, bool> filter = null)
+        public IDataResult<GetBlogDto> GetDto(Expression<Func<Blog, bool>> filter = null)
         {
             try
             {
-                var response = _blogDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetBlogDto>>(response);
-                return new SuccessDataResult<GetBlogDto>(mappingResult.FirstOrDefault(filter));
+                var response = _blogDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetBlogDto>(response);
+                return new SuccessDataResult<GetBlogDto>(mappedModel);
             }
             catch (Exception exception)
             {
@@ -291,13 +473,17 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<List<GetBlogDto>> GetDtoList(Func<GetBlogDto, bool> filter = null, int takeCount = 2000)
+        public IDataResult<List<GetBlogDto>> GetDtoList(Expression<Func<Blog, bool>> filter = null, int takeCount = 2000)
         {
             try
             {
-                var response = _blogDal.GetList();
-                var mappingResult = _mapper.Map<List<GetBlogDto>>(response).Where(filter).Take(takeCount).ToList();
-                return new SuccessDataResult<List<GetBlogDto>>(mappingResult);
+                var dtoListResult = new List<GetBlogDto>();
+                _blogDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetBlogDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetBlogDto>>(dtoListResult);
             }
             catch (Exception exception)
             {
@@ -309,11 +495,12 @@ namespace Business.Concrete
 
         #region Asynchronous
 
-        public async Task<IDataResult<int>> AddAsync(Blog blog)
+        public async Task<IDataResult<int>> AddAsync(CreateManagementBlogDto blog)
         {
             try
             {
-                int affectedRows = await _blogDal.AddAsync(blog);
+                var mmappedModel = _mapper.Map<Blog>(blog);
+                int affectedRows = await _blogDal.AddAsync(mmappedModel);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {

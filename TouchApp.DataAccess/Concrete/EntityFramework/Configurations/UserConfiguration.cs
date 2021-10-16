@@ -19,10 +19,19 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(x => x.LastName).IsRequired().HasColumnType("nvarchar").HasMaxLength(250);
             builder.Property(x => x.SecurityToken).IsRequired().HasColumnType("nvarchar").HasMaxLength(250);
 
+            builder.Property(p => p.Created_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired();
+            builder.Property(p => p.Created_at).HasColumnType("smalldatetime").IsRequired();
+            builder.Property(p => p.Modified_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired();
+            builder.Property(p => p.Modified_at).HasColumnType("smalldatetime").IsRequired();
+            builder.Property(p => p.IsActive).IsRequired().HasDefaultValue(true);
+
             builder.Property(x => x.PasswordHash).IsRequired().HasMaxLength(1000);
             builder.Property(x => x.PasswordSalt).IsRequired().HasMaxLength(1000);
             builder.Property(x => x.PhoneNumber).IsRequired(false).HasMaxLength(250);
             builder.Property(x => x.PhoneNumberPrefix).IsRequired(false).HasMaxLength(10);
+
+            builder.HasMany(p => p.UserSocialMedias).WithOne(x => x.User).OnDelete(DeleteBehavior.Cascade).IsRequired(false);
+            builder.HasMany(p => p.UserOperationClaims).WithOne(x => x.User).OnDelete(DeleteBehavior.Cascade).IsRequired(false);
 
             builder.ToTable("Users");
 

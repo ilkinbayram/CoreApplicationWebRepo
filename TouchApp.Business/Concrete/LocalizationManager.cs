@@ -30,7 +30,7 @@ namespace Business.Concrete
         public IDataResult<int> Add(CreateLocalizationDto localization)
         {
             int counterResult = 0;
-            var localizationList = GeneralFunctionality.ConverModelToLocalizationList(localization);
+            var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(localization);
 
             foreach (var localizationOne in localizationList)
             {
@@ -124,6 +124,22 @@ namespace Business.Concrete
                 return new ErrorDataResult<Localization>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
+
+
+        public IDataResult<GetLocalizationDto> GetDto(Expression<Func<Localization, bool>> filter = null)
+        {
+            try
+            {
+                var response = _localizationDal.Get(filter);
+                var mappedModel = _mapper.Map<GetLocalizationDto>(response);
+                return new SuccessDataResult<GetLocalizationDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetLocalizationDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
 
         public IDataResult<List<Localization>> GetList(Expression<Func<Localization, bool>> filter = null)
         {

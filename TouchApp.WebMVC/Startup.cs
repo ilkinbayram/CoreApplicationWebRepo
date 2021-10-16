@@ -33,11 +33,11 @@ namespace TouchApp.WebMVC
         {
             services.AddControllersWithViews();
 
-            var local = Configuration.GetConnectionString("LocalDB");
-            var testServer = Configuration.GetConnectionString("ServerDB");
+            var localDb = Configuration.GetConnectionString("LocalDB");
+            var serverDb = Configuration.GetConnectionString("ServerDB");
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(testServer);
+                options.UseSqlServer(localDb);
             });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -742,7 +742,8 @@
         font-size: 32px;
         line-height: 47px;
     }
-    .single-blog-image a img {width: 100%;}
+    .single-blog-image a img {width: 100%; height: 260px !important;}
+    .image-blog-list-custom {height: 260px !important;}
     .google-map-area .breadcrumb-bar {width: 56.1%;}
     .teacher-about-info .teacher-info-text span i {
         width: 23px;

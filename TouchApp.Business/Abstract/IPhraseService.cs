@@ -12,8 +12,8 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<Phrase>> GetList(Expression<Func<Phrase, bool>> filter = null);
         IDataResult<Phrase> Get(Expression<Func<Phrase, bool>> filter);
-        IDataResult<List<GetPhraseDto>> GetDtoList(Func<GetPhraseDto, bool> filter = null, int takeCount = 2000);
-        IDataResult<GetPhraseDto> GetDto(Func<GetPhraseDto, bool> filter);
+        IDataResult<List<GetPhraseDto>> GetDtoList(Expression<Func<Phrase, bool>> filter = null, int takeCount = 2000);
+        IDataResult<GetPhraseDto> GetDto(Expression<Func<Phrase, bool>> filter = null);
         IDataResult<int> Add(Phrase phrase);
         IDataResult<int> Update(Phrase phrase);
         IDataResult<int> DeletePermanently(long Id);

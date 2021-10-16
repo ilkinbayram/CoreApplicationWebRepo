@@ -279,13 +279,13 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetStudentDto> GetDto(Func<GetStudentDto, bool> filter = null)
+        public IDataResult<GetStudentDto> GetDto(Expression<Func<Student, bool>> filter = null)
         {
             try
             {
-                var response = _studentDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetStudentDto>>(response);
-                return new SuccessDataResult<GetStudentDto>(mappingResult.FirstOrDefault(filter));
+                var response = _studentDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetStudentDto>(response);
+                return new SuccessDataResult<GetStudentDto>(mappedModel);
             }
             catch (Exception exception)
             {

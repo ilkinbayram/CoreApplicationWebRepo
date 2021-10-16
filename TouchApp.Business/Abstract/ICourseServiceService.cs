@@ -11,8 +11,8 @@ namespace TouchApp.Business.Abstract
     public interface ICourseServiceService
     {
         IDataResult<List<CourseService>> GetList(Expression<Func<CourseService, bool>> filter = null);
-        IDataResult<List<GetCourseServiceDto>> GetDtoList(Func<GetCourseServiceDto, bool> filter = null, int takeCount = 2000);
-        IDataResult<GetCourseServiceDto> GetDto(Func<GetCourseServiceDto, bool> filter);
+        IDataResult<List<GetCourseServiceDto>> GetDtoList(Expression<Func<CourseService, bool>> filter = null, int takeCount = 2000);
+        IDataResult<GetCourseServiceDto> GetDto(Expression<Func<CourseService, bool>> filter = null);
         IDataResult<CourseService> Get(Expression<Func<CourseService, bool>> filter);
         IDataResult<int> Add(CourseService courseService);
         IDataResult<int> Update(CourseService courseService);

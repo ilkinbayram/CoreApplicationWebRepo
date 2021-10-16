@@ -8,6 +8,7 @@ using Core.Entities.Dtos.ProfessionCourseCategory;
 using Core.Entities.Dtos.TeacherCourse;
 using Core.Resources.Enums;
 using Core.Entities.Dtos.Language;
+using Core.Utilities.UsableModel;
 
 namespace Core.Entities.Dtos.Course
 {
@@ -15,6 +16,7 @@ namespace Core.Entities.Dtos.Course
     {
         public CreateManagementCourseDto()
         {
+            ResponseMessages = new List<AlertResult>();
             ModelType = ProjectModelType.Course;
         }
 
@@ -36,8 +38,7 @@ namespace Core.Entities.Dtos.Course
         public string PreviewDescriptionTranslateRUS { get; set; }
         public string PreviewDescriptionTranslateENG { get; set; }
         public string PreviewDescriptionTranslateTUR { get; set; }
-        public byte MinTotalMonths { get; set; }
-        public byte MaxTotalMonths { get; set; }
+        public byte TotalMonths { get; set; }
         public short TotalHours { get; set; }
         public decimal PricePerMonth { get; set; }
         public string ScheduleHtmlRawKey { get; set; }
@@ -50,22 +51,19 @@ namespace Core.Entities.Dtos.Course
         public string ContentHtmlRawTranslateTUR { get; set; }
         public string ContentHtmlRawTranslateENG { get; set; }
         public string ContentHtmlRawTranslateRUS { get; set; }
-        public string OverViewHtmlRawKey { get; set; }
-        public string OverViewHtmlRawTranslateAZE { get; set; }
-        public string OverViewHtmlRawTranslateTUR { get; set; }
-        public string OverViewHtmlRawTranslateENG { get; set; }
-        public string OverViewHtmlRawTranslateRUS { get; set; }
-        public DateTime PublishDate { get; set; }
 
-        public List<SelectListItem> Teachers { get; set; }
+        public List<SelectListItem> CurrentListTeachers { get; set; }
         public List<SelectListItem> CurrentListProfessionCourseCategoryIds { get; set; }
         public List<SelectListItem> CurrentListLanguageIds { get; set; }
 
         public long ProfessionCourseCategoryId { get; set; }
         public long LanguageId { get; set; }
+        public long TeacherId { get; set; }
 
         public List<CreateManagementTeacherCourseDto> TeacherCourses { get; set; }
         public GetProfessionCourseCategoryDto ProfessionCourseCategory { get; set; }
         public GetLanguageDto Language { get; set; }
+
+        public List<AlertResult> ResponseMessages { get; set; }
     }
 }

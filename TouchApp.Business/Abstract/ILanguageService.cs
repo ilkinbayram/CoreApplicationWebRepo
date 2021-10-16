@@ -12,6 +12,7 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<Language>> GetList(Expression<Func<Language, bool>> filter = null);
         IDataResult<Language> Get(Expression<Func<Language, bool>> filter);
+        IDataResult<GetLanguageDto> GetDto(Expression<Func<Language, bool>> filter = null);
         IDataResult<int> Add(CreateManagementLanguageDto language);
         IDataResult<int> Update(Language language);
         IDataResult<int> DeletePermanently(long Id);

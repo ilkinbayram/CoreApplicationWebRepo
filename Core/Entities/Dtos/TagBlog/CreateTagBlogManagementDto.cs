@@ -12,6 +12,10 @@ namespace Core.Entities.Dtos.TagBlog
         public CreateTagBlogManagementDto()
         {
             ModelType = ProjectModelType.TagBlog;
+            Created_at = System.DateTime.Now;
+            Created_by = "System Manager";
+            Modified_at = System.DateTime.Now;
+            Modified_by = "System Manager";
         }
 
         public long TagId { get; set; }

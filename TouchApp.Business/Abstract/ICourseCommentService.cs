@@ -12,6 +12,7 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<CourseComment>> GetList(Expression<Func<CourseComment, bool>> filter = null);
         IDataResult<CourseComment> Get(Expression<Func<CourseComment, bool>> filter);
+        IDataResult<GetCourseCommentDto> GetDto(Expression<Func<CourseComment, bool>> filter = null);
         IDataResult<int> Add(CourseComment courseComment);
         IDataResult<int> Update(CourseComment courseComment);
         IDataResult<int> DeletePermanently(long Id);

@@ -11,10 +11,10 @@ namespace TouchApp.Business.Abstract
     public interface ICourseService
     {
         IDataResult<List<Course>> GetList(Expression<Func<Course, bool>> filter = null);
-        IDataResult<List<GetCourseDto>> GetDtoList(Func<GetCourseDto, bool> filter = null, int takeCount = 2000);
+        IDataResult<List<GetCourseDto>> GetDtoList(Expression<Func<Course, bool>> filter = null, int takeCount = 2000);
         IDataResult<Course> Get(Expression<Func<Course, bool>> filter);
-        IDataResult<GetCourseDto> GetDto(Func<GetCourseDto, bool> filter);
-        IDataResult<int> Add(Course course);
+        IDataResult<GetCourseDto> GetDto(Expression<Func<Course, bool>> filter = null);
+        IDataResult<int> Add(CreateManagementCourseDto course);
         IDataResult<int> Update(Course course);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);

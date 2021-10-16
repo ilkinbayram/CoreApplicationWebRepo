@@ -33,21 +33,21 @@
                     <div class="single-blog-item overlay-hover">
                         <div class="single-blog-image">
                             <div class="overlay-effect">
-                                <a href="#">
+                                <a href="/Global/Blog/GetCurrent/@(blogOne.Id)">
                                     @* TODO : Localization *@
-                                    <img src="@(blogOne.CaptionSource)" alt="The Image Was Not Found">
-                                    <span class="class-date">@(blogOne.Created_at)</span>
+                                    <img style="height: 260px !important;" src="@(blogOne.CaptionSource)" alt="The Image Was Not Found">
+                                    <span class="class-date">@(blogOne.Created_at.ToString("dd-MM-yyyy"))&nbsp;<i class="fa fa-calendar"></i></span>
                                 </a>
                             </div>
                         </div>
                         <div class="single-blog-text">
                             <h4><a href="blog-details.html">@(blogOne.TitleKey.Translate())</a></h4>
                             <div class="blog-date">
-                                <span><i class="fa fa-calendar"></i>@(blogOne.Created_at)</span>
+                                <span><i class="fa fa-calendar"></i>@(blogOne.Created_at.ToString("dd-MM-yyyy"))</span>
                             </div>
                             <p>@(blogOne.PreviewDescriptionKey.Translate())</p>
                             @* TODO : Localization *@
-                            <a href="blog-details.html">@("GeneralReadMore.ButtonText".Translate())</a>
+                            <a href="/Global/Blog/GetCurrent/@(blogOne.Id)">@("GeneralReadMore.ButtonText".Translate())</a>
                         </div>
                     </div>
                 }

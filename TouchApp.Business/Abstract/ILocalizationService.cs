@@ -12,6 +12,7 @@ namespace TouchApp.Business.Abstract
     {
         IDataResult<List<Localization>> GetList(Expression<Func<Localization, bool>> filter = null);
         IDataResult<Localization> Get(Expression<Func<Localization, bool>> filter);
+        IDataResult<GetLocalizationDto> GetDto(Expression<Func<Localization, bool>> filter = null);
         IDataResult<int> Add(CreateLocalizationDto localization);
         IDataResult<int> Update(Localization localization);
         IDataResult<int> DeletePermanently(long Id);
