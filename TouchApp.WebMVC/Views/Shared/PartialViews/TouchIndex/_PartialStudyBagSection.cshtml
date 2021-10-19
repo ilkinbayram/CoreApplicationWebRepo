@@ -30,22 +30,22 @@
                 {
                     <div class="single-class">
                         <div class="single-class-image">
-                            <a href="#">
+                            <a href="/Global/StudyPackage/GetCurrent/@(courseOne.Id)">
                                 @* TODO : Localization *@
-                                <img src="@(courseOne.CaptionImageSource)" alt="The Photo Was Not Found">
-                                <span class="class-date">@(courseOne.PublishDate)</span>
+                                <img src="@(courseOne.CaptionImageSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
+                                <span class="class-date">@(courseOne.PublishDate.ToString("dd-MM-yyyy"))&nbsp;<i class="fa fa-calendar"></i></span>
                             </a>
                         </div>
                         <div class="single-class-text">
                             <div class="class-des">
-                                <h4><a href="#">@(courseOne.TitleKey.Translate())</a></h4>
-                                <p>@(courseOne.PreviewDescriptionKey.Translate())</p>
+                                <h4><a href="/Global/StudyPackage/GetCurrent/@(courseOne.Id)">@(courseOne.TitleKey.Translate())</a></h4>
+                                <p>@(courseOne.PreviewDescKey.Translate())</p>
                             </div>
                             <div class="class-schedule">
                                 @* TODO : Localization *@
-                                <span>@("GeneralCoursePeriodDefiner.TranslateLocalization".Translate())&nbsp;@(courseOne.TotalMonths)</span>
-                                <span>@("PricePerMonthPayment.TranslateLocalization")&nbsp;@(courseOne.PricePerMonth)&nbsp;AZN</span>
-                                <span class="arrow"><a href="#"><i class="fa fa-angle-right"></i></a></span>
+                                <span>@("GeneralCoursePeriodDefiner.TranslateLocalization".Translate()):&nbsp;@(courseOne.TotalMonths)&nbsp;@("MonthsDefinerLocalization.TranslatePerLang".Translate())</span>
+                                <span>@("PricePerMonthPayment.TranslateLocalization"):&nbsp;@(courseOne.PricePerMonth)&nbsp;@("PriceAZNDefinerLocalization.TranslatePerLang".Translate())</span>
+                                <span class="arrow"><a href="/Global/StudyPackage/GetCurrent/@(courseOne.Id)"><i class="fa fa-angle-right"></i></a></span>
                             </div>
                         </div>
                     </div>

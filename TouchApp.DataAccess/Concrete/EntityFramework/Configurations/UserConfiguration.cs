@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Core.Entities.Concrete;
 using Core.Resources.Enums;
-
+using System;
 
 namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
 {
@@ -19,10 +19,10 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(x => x.LastName).IsRequired().HasColumnType("nvarchar").HasMaxLength(250);
             builder.Property(x => x.SecurityToken).IsRequired().HasColumnType("nvarchar").HasMaxLength(250);
 
-            builder.Property(p => p.Created_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired();
-            builder.Property(p => p.Created_at).HasColumnType("smalldatetime").IsRequired();
-            builder.Property(p => p.Modified_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired();
-            builder.Property(p => p.Modified_at).HasColumnType("smalldatetime").IsRequired();
+            builder.Property(p => p.Created_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired().HasDefaultValue("System Manager");
+            builder.Property(p => p.Created_at).HasColumnType("smalldatetime").IsRequired().HasDefaultValue(DateTime.Now);
+            builder.Property(p => p.Modified_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired().HasDefaultValue("System Manager");
+            builder.Property(p => p.Modified_at).HasColumnType("smalldatetime").IsRequired().HasDefaultValue(DateTime.Now);
             builder.Property(p => p.IsActive).IsRequired().HasDefaultValue(true);
 
             builder.Property(x => x.PasswordHash).IsRequired().HasMaxLength(1000);

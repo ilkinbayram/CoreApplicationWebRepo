@@ -17,5 +17,6 @@ namespace Core.Entities.Concrete
         public string DescriptionKey { get; set; }
         public string UniqueToken { get; set; }
         public string IconSource { get; set; }
+        public string IconHtml { get; set; }
     }
 }

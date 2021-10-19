@@ -13,10 +13,10 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
             builder.HasKey(k => k.Id);
 
             builder.Property(x => x.Id).UseIdentityColumn();
-            builder.Property(p => p.Created_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired();
-            builder.Property(p => p.Created_at).HasColumnType("smalldatetime").IsRequired();
-            builder.Property(p => p.Modified_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired();
-            builder.Property(p => p.Modified_at).HasColumnType("smalldatetime").IsRequired();
+            builder.Property(p => p.Created_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired().HasDefaultValue("System Manager");
+            builder.Property(p => p.Created_at).HasColumnType("smalldatetime").IsRequired().HasDefaultValue(DateTime.Now);
+            builder.Property(p => p.Modified_by).HasColumnType("nvarchar").HasMaxLength(100).IsRequired().HasDefaultValue("System Manager");
+            builder.Property(p => p.Modified_at).HasColumnType("smalldatetime").IsRequired().HasDefaultValue(DateTime.Now);
             builder.Property(p => p.IsActive).IsRequired().HasDefaultValue(true);
             builder.Property(p => p.UniqueToken).IsRequired().HasDefaultValue(Guid.NewGuid().ToString());
 

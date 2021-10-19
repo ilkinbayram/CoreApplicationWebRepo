@@ -22,7 +22,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         {
             var aboutViewModel = new AboutViewModel
             {
-                Teachers = (await _teacherService.GetDtoListAsync()).Data
+                Teachers = _teacherService.GetDtoList().Data
             };
             return View(aboutViewModel);
         }

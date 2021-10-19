@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -17,33 +18,42 @@ namespace Business.Concrete
     {
         private readonly ISharingTypeDal _sharingTypeDal;
         private readonly IMapper _mapper;
+        private readonly ILocalizationDal _localizationDal;
 
-        public SharingTypeManager(ISharingTypeDal sharingTypeDal, IMapper mapper)
+        public SharingTypeManager(ISharingTypeDal sharingTypeDal, 
+                                  IMapper mapper,
+                                  ILocalizationDal localizationDal)
         {
             _sharingTypeDal = sharingTypeDal;
             _mapper = mapper;
+            _localizationDal = localizationDal;
         }
 
-        public IDataResult<int> Add(SharingType sharingType)
+        public IDataResult<int> Add(CreateManagementSharingTypeDto sharingType)
         {
             try
             {
-                int affectedRows = _sharingTypeDal.Add(sharingType);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
+                var mappedModel = _mapper.Map<SharingType>(sharingType);
+
+                int affectedRows = _sharingTypeDal.Add(mappedModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(sharingType);
+
+                foreach (var localizationOne in localizationList)
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    var responseAddLocalization = _localizationDal.Add(localizationOne);
+                    if (responseAddLocalization <= 0)
+                        throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
                 }
 
-                return dataResult;
+                if (affectedRows <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-500, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -154,6 +164,23 @@ namespace Business.Concrete
             catch (Exception exception)
             {
                 return new ErrorDataResult<List<SharingType>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+        public IDataResult<List<GetSharingTypeDto>> GetDtoList(Expression<Func<SharingType, bool>> filter = null)
+        {
+            try
+            {
+                var dtoListResult = new List<GetSharingTypeDto>();
+                _sharingTypeDal.GetAllWithRelations(filter).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetSharingTypeDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetSharingTypeDto>>(dtoListResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetSharingTypeDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 

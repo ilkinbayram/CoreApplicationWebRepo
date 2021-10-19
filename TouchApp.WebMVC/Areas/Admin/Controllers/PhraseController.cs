@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Dtos.Phrase;
+using Core.Utilities.UsableModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class PhraseController : Controller
     {
+        private readonly IPhraseService _phraseService;
+        public PhraseController(IPhraseService phraseService)
+        {
+            _phraseService = phraseService;
+        }
+
         // GET: PhraseController
         public async Task<ActionResult> Index()
         {
@@ -22,22 +31,35 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // GET: PhraseController/Create
         public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new CreateManagementPhraseDto();
+            return View(model);
         }
 
         // POST: PhraseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateManagementPhraseDto createModel)
         {
-            try
+            var resulPhraseService = _phraseService.Add(createModel);
+
+            if (resulPhraseService != null)
             {
-                return RedirectToAction(nameof(Index));
+                if (resulPhraseService.Success)
+                {
+                    var createLocalizationDtoModel = new CreateManagementPhraseDto();
+                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resulPhraseService.Message });
+
+                    return View(createLocalizationDtoModel);
+                }
+                else
+                {
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resulPhraseService.Message });
+
+                    return View(createModel);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("ServerErrorPage");
         }
 
         // GET: PhraseController/Edit/5

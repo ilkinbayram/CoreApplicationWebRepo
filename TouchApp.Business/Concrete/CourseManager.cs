@@ -177,6 +177,39 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<List<GetCourseDto>> GetFilteredCoursesByCourseCategoryId(long id)
+        {
+            try
+            {
+                var resultDtoList = new List<GetCourseDto>();
+
+                List<Course> courses = null;
+
+                if (id < 999 && id > 0)
+                {
+                    courses = _courseDal.GetAllWithRelations(x => x.ProfessionCourseCategoryId == id);
+                }
+                else if (id == 999)
+                {
+                    courses = _courseDal.GetAllWithRelations();
+                }
+
+                if (courses != null && courses.Count > 0)
+                {
+                    courses.ForEach(x =>
+                    {
+                        resultDtoList.Add(_mapper.Map<GetCourseDto>(x));
+                    });
+                }
+
+                return new SuccessDataResult<List<GetCourseDto>>(resultDtoList);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetCourseDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
         public IDataResult<List<Course>> GetList(Expression<Func<Course, bool>> filter = null)
         {
             try
@@ -332,6 +365,22 @@ namespace Business.Concrete
             try
             {
                 var response = _courseDal.GetWithRelations(filter);
+                var mappedModel = _mapper.Map<GetCourseDto>(response);
+                return new SuccessDataResult<GetCourseDto>(mappedModel);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<GetCourseDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<GetCourseDto> GetDtoForGlobalView(Expression<Func<Course, bool>> filter = null)
+        {
+            try
+            {
+                var response = _courseDal.GetWithRelations(filter);
+                if (response.CourseComments != null && response.CourseComments.Count > 0)
+                    response.CourseComments = response.CourseComments.Where(x => x.IsAccepted).ToList();
                 var mappedModel = _mapper.Map<GetCourseDto>(response);
                 return new SuccessDataResult<GetCourseDto>(mappedModel);
             }

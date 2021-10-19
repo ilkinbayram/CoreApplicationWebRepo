@@ -1,14 +1,20 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.FieUploud;
 using Core.Entities.Dtos.Teacher;
+using Core.Entities.Dtos.TeacherSocialMedia;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -18,32 +24,103 @@ namespace Business.Concrete
         private readonly ITeacherDal _teacherDal;
         private readonly IMapper _mapper;
 
-        public TeacherManager(ITeacherDal TeacherDal, IMapper mapper)
+        private readonly IFileManager _fileManager;
+        private readonly ICloudinaryService _cloudinaryService;
+        private readonly ILocalizationDal _localizationDal;
+
+        public TeacherManager(ITeacherDal TeacherDal, 
+                              IMapper mapper,
+                              IFileManager fileManager,
+                              ICloudinaryService cloudinaryService,
+                              ILocalizationDal localizationDal)
         {
             _teacherDal = TeacherDal;
             _mapper = mapper;
+            _fileManager = fileManager;
+            _localizationDal = localizationDal;
+            _cloudinaryService = cloudinaryService;
         }
 
-        public IDataResult<int> Add(Teacher Teacher)
+        public IDataResult<int> Add(CreateManagementTeacherDto teacher)
         {
             try
             {
-                int affectedRows = _teacherDal.Add(Teacher);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
+                List<IFormFile> fileList = new List<IFormFile>();
+                fileList.Add(teacher.CaptionFile);
+                fileList.Add(teacher.ProfilePhotoFile);
+                fileList.Add(teacher.WallpaperFile);
+
+                List<FileName> fileNames = new List<FileName>();
+
+                var fileUploadResult = _fileManager.UploadListFileSaveDictionary(fileList);
+
+                if (!fileUploadResult.Success)
+                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+                for (int i = 0; i < fileList.Count; i++)
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["imagePath"+i.ToString()]);
+
+                    var result = new FileName()
+                    {
+                        FilePath = fileUploadResult.Data["imagePath" + i.ToString()],
+                        CdnPath = _cloudinaryService.BuildUrl(publicId),
+                        PublicId = publicId
+                    };
+
+                    fileNames.Add(result);
+
+                    _fileManager.Delete(fileUploadResult.Data["imagePath" + i.ToString()]);
                 }
 
-                return dataResult;
+                teacher.CaptionSource = fileNames[0].CdnPath;
+                teacher.ProfilePhotoPath = fileNames[1].CdnPath;
+                teacher.WallpaperPath = fileNames[2].CdnPath;
+
+                var movieUploadResult = _fileManager.UploadVideoSaveDictionary(teacher.PreviewMovieFile);
+
+                if (!movieUploadResult.Success)
+                    return new ErrorDataResult<int>(-1, movieUploadResult.Message);
+
+                var publicVideoId = _cloudinaryService.StoreVideo(movieUploadResult.Data["videoPath"]);
+
+                var resultVideo = new FileName()
+                {
+                    FilePath = movieUploadResult.Data["videoPath"],
+                    CdnPath = _cloudinaryService.BuildUrlVideo(publicVideoId),
+                    PublicId = publicVideoId
+                };
+
+                _fileManager.Delete(movieUploadResult.Data["videoPath"]);
+
+                teacher.PreviewMoviePath = resultVideo.CdnPath;
+
+                teacher.TeacherSocialMedias.Where(x => string.IsNullOrEmpty(x.RedirectUrl)).ToList().ForEach(x =>
+                {
+                    teacher.TeacherSocialMedias.Remove(x);
+                });
+
+                var addTeacherModel = _mapper.Map<Teacher>(teacher);
+
+                int affectedRows = _teacherDal.Add(addTeacherModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(teacher);
+
+                foreach (var localizationOne in localizationList)
+                {
+                    var responseAddLocalization = _localizationDal.Add(localizationOne);
+                    if (responseAddLocalization <= 0)
+                        throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+                }
+
+                if (affectedRows <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-500, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -129,7 +206,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<GetTeacherDto> GetDto(Expression<Func<Teacher, bool>> filter = null)
+        public IDataResult<GetTeacherDto> GetDto(Expression<Func<Teacher, bool>> filter)
         {
             try
             {
@@ -293,26 +370,12 @@ namespace Business.Concrete
         {
         }
 
-        public IDataResult<GetTeacherDto> GetDto(Func<GetTeacherDto, bool> filter = null)
-        {
-            try
-            {
-                var response = _teacherDal.GetAll();
-                var mappingResult = _mapper.Map<List<GetTeacherDto>>(response);
-                return new SuccessDataResult<GetTeacherDto>(mappingResult.FirstOrDefault(filter));
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<GetTeacherDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-            }
-        }
-
         public IDataResult<List<GetTeacherDto>> GetDtoList(Expression<Func<Teacher, bool>> filter = null, int takeCount = 2000)
         {
             try
             {
                 var dtoListResult = new List<GetTeacherDto>();
-                _teacherDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                _teacherDal.GetAllWithRelations(filter).Take(takeCount).ToList().ForEach(x =>
                 {
                     dtoListResult.Add(_mapper.Map<GetTeacherDto>(x));
                 });

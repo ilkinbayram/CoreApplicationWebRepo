@@ -9,6 +9,21 @@
     Custom JS START
 ---------------------------- */
 
+$(".vbox-close").click(function (e) {
+    console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
+});
+
+$('body').click(function (e) {
+    if (e.target.className=='stop-media-redirect-link') {
+        e.preventDefault();
+    }
+
+    if (e.target.className == 'vbox-close') {
+        var removableElement = document.getElementsByClassName('vbox-overlay')[0];
+        removableElement.parentNode.removeChild(removableElement);
+    }
+});
+
 ///////////////////////////////
 // FUNCTION  DECLARATION  START
 

@@ -891,16 +891,16 @@ span.arrow > a:after {
 /*  7. Register Area
 /*----------------------------------------*/
 .register-area {
-    background-image: url("../img/banner/1.jpg");
-	background-size:cover;
-	background-position:center center;
-	background-repeat:no-repeat;
+    background-image: url("https://res.cloudinary.com/touchacademyrepo/image/upload/v1634447801/touchapp/manualUploads/cropped-image-2_mccu1b.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     overflow: hidden;
     position: relative;
     z-index: 1
 }
 .register-area:after {
-    background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0;
     content: "";
     height: 100%;
     left: 0;
@@ -1379,7 +1379,7 @@ span.gallery-text {
 /*  13. Newsletter Area
 /*----------------------------------------*/
 .newsletter-area {
-    background: rgba(0, 0, 0, 0) url("../img/banner/4.jpg") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("https://res.cloudinary.com/touchacademyrepo/image/upload/v1634446131/touchapp/manualUploads/resize-163444610213083996GlowingBackgroundEmailManagementHdWallpapers_wuvlkt.jpg") no-repeat scroll center center;
     padding-bottom: 159px;
     padding-top: 233px;
 }
@@ -2655,10 +2655,10 @@ header.header-four, header.header-five {
 /*  20. Class Grid Page
 /*----------------------------------------*/
 .breadcrumb-banner-area {
-    background: url("../img/banner/9.jpg");
-	background-size:cover;
-	background-position:center top;
-	background-repeat:no-repeat;
+    background: url("https://res.cloudinary.com/touchacademyrepo/image/upload/v1634450231/touchapp/manualUploads/best-hp-laptops-for-programming-hero1539740528465_qaehwv.jpg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     padding: 151px 0 0;
     position: relative;
     z-index: 1;
@@ -3162,7 +3162,7 @@ textarea {
 /*  23. Gallery Page
 /*----------------------------------------*/
 .breadcrumb-banner-area.gallery, .breadcrumb-banner-area.blog {
-    background: rgba(0, 0, 0, 0) url("../img/banner/10.jpg") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("https://res.cloudinary.com/touchacademyrepo/image/upload/v1634450579/touchapp/manualUploads/banner-images-gallery_pqqt1w.jpg") no-repeat scroll center top / cover;
 }
 .gallery-area.gallery-full-width .single-items {margin-bottom: 30px;}
 .gallery-area.gallery-full-width .filter-menu {margin-bottom: 30px;}
@@ -3192,7 +3192,7 @@ textarea {
 /*  24. Teachers Page
 /*----------------------------------------*/
 .breadcrumb-banner-area.teachers {
-    background: rgba(0, 0, 0, 0) url("../img/banner/12.jpg") no-repeat scroll center top / cover ;
+    background: rgba(0, 0, 0, 0) url("https://res.cloudinary.com/touchacademyrepo/image/upload/v1634450231/touchapp/manualUploads/best-hp-laptops-for-programming-hero1539740528465_qaehwv.jpg") no-repeat scroll center top / cover;
 }
 .teacher-fullwidth-area .teachers-image-column {margin-top: 0;}
 .teacher-fullwidth-area .single-teachers-column {margin-bottom: 60px;}

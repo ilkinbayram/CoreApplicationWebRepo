@@ -14,6 +14,7 @@ namespace Core.Entities.Dtos.SharingType
             ModelType = ProjectModelType.SharingType;
         }
         public string NameKey { get; set; }
+        public string AbriveatureClass { get; set; }
 
         public List<GetSharingTypeMediaDto> SharingTypeMedias { get; set; }
     }

@@ -2,9 +2,8 @@
 
 using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
-
-
-
+using Core.Utilities.UsableModel;
+using System.Collections.Generic;
 
 namespace Core.Entities.Dtos.OurService
 {
@@ -12,6 +11,7 @@ namespace Core.Entities.Dtos.OurService
     {
         public CreateManagementCourseServiceDto()
         {
+            ResponseMessages = new List<AlertResult>();
             ModelType = ProjectModelType.CourseService;
         }
 
@@ -28,5 +28,8 @@ namespace Core.Entities.Dtos.OurService
         public string UniqueToken { get; set; }
         public IFormFile IconSourceFile { get; set; }
         public string IconSource { get; set; }
+        public string IconHtml { get; set; }
+
+        public List<AlertResult> ResponseMessages { get; set; }
     }
 }

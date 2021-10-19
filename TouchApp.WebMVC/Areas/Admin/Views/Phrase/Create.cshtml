@@ -8,30 +8,33 @@
     Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
 }
 
-<h1>Create</h1>
+<h1>@("ToCreate.TranslateLocalization".Translate())</h1>
+<hr />
 
-<h4>CreateManagementPhraseDto</h4>
+<h4>@("PhraseCreateView.HeaderLocalization".Translate())</h4>
 <hr />
 
 <div class="row">
     <div class="col-md-12 col-12 col-sm-12">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @using (Html.BeginForm("Create", "Phrase", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="row  mb-1 mt-2">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="row mb-1 mt-2">
                         <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-group">
-                                <label asp-for="OwnerName" class="control-label"><strong>@("PhraseOwnerName.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="OwnerName" type="text" class="form-control">
-                                <span asp-validation-for="OwnerName" class="text-danger"></span>
+                                @Html.LabelFor(x => x.OwnerName, "OwnerNameGeneralPhrase.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.OwnerName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.OwnerName, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-group">
-                                <label asp-for="OwnerSurname" class="control-label"><strong>@("PhraseOwnerSurname.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="OwnerSurname" type="text" class="form-control">
-                                <span asp-validation-for="OwnerSurname" class="text-danger"></span>
+                                @Html.LabelFor(x => x.OwnerSurname, "OwnerSurnameGeneralPhrase.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.OwnerSurname, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.OwnerSurname, null, new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -42,33 +45,33 @@
                     <div class="row mb-1 mt-2">
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="ProfessionKey" class="control-label"><strong>@("GeneralProfessionKey.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ProfessionKey" type="text" class="form-control" />
-                                <span asp-validation-for="ProfessionKey" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ProfessionKey, "GeneralProfessionKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ProfessionKey, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ProfessionKey, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label asp-for="ProfessionTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ProfessionTranslateAZE" type="text" class="form-control" />
-                                <span asp-validation-for="ProfessionTranslateAZE" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ProfessionTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ProfessionTranslateAZE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ProfessionTranslateAZE, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="ProfessionTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ProfessionTranslateRUS" type="text" class="form-control" />
-                                <span asp-validation-for="ProfessionTranslateRUS" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ProfessionTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ProfessionTranslateRUS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ProfessionTranslateRUS, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label asp-for="ProfessionTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ProfessionTranslateENG" type="text" class="form-control" />
-                                <span asp-validation-for="ProfessionTranslateENG" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ProfessionTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ProfessionTranslateENG, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ProfessionTranslateENG, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group mb-1">
-                                <label asp-for="ProfessionTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ProfessionTranslateTUR" type="text" class="form-control" />
-                                <span asp-validation-for="ProfessionTranslateTUR" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ProfessionTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ProfessionTranslateTUR, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ProfessionTranslateTUR, null, new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -78,33 +81,33 @@
                     <div class="row mb-1 mt-2">
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="ContentKey" class="control-label"><strong>@("GeneralContentKey.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ContentKey" type="text" class="form-control" />
-                                <span asp-validation-for="ContentKey" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ContentKey, "GeneralContentKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ContentKey, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ContentKey, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label asp-for="ContentTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ContentTranslateAZE" type="text" class="form-control" />
-                                <span asp-validation-for="ContentTranslateAZE" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ContentTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ContentTranslateAZE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ContentTranslateAZE, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="ContentTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ContentTranslateENG" type="text" class="form-control" />
-                                <span asp-validation-for="ContentTranslateENG" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ContentTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ContentTranslateRUS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ContentTranslateRUS, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label asp-for="ContentTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ContentTranslateRUS" type="text" class="form-control" />
-                                <span asp-validation-for="ContentTranslateRUS" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ContentTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ContentTranslateENG, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ContentTranslateENG, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group mb-1">
-                                <label asp-for="ContentTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="ContentTranslateTUR" type="text" class="form-control" />
-                                <span asp-validation-for="ContentTranslateTUR" class="text-danger"></span>
+                                @Html.LabelFor(x => x.ContentTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.ContentTranslateTUR, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ContentTranslateTUR, null, new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -114,33 +117,33 @@
                     <div class="row mb-1 mt-2">
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="TitleKey" class="control-label"><strong>@("GeneralTitleKey.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="TitleKey" type="text" class="form-control" />
-                                <span asp-validation-for="TitleKey" class="text-danger"></span>
+                                @Html.LabelFor(x => x.TitleKey, "GeneralTitleKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TitleKey, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TitleKey, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label asp-for="TitleTranslateAZE" class="control-label"><strong>@("TranslateToAzerbaijani.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="TitleTranslateAZE" type="text" class="form-control" />
-                                <span asp-validation-for="TitleTranslateAZE" class="text-danger"></span>
+                                @Html.LabelFor(x => x.TitleTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TitleTranslateAZE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TitleTranslateAZE, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="TitleTranslateENG" class="control-label"><strong>@("TranslateToEnglish.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="TitleTranslateENG" type="text" class="form-control" />
-                                <span asp-validation-for="TitleTranslateENG" class="text-danger"></span>
+                                @Html.LabelFor(x => x.TitleTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TitleTranslateRUS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TitleTranslateRUS, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label asp-for="TitleTranslateRUS" class="control-label"><strong>@("TranslateToRussian.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="TitleTranslateRUS" type="text" class="form-control" />
-                                <span asp-validation-for="TitleTranslateRUS" class="text-danger"></span>
+                                @Html.LabelFor(x => x.TitleTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TitleTranslateENG, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TitleTranslateENG, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group mb-1">
-                                <label asp-for="TitleTranslateTUR" class="control-label"><strong>@("TranslateToTurkish.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="TitleTranslateTUR" type="text" class="form-control" />
-                                <span asp-validation-for="TitleTranslateTUR" class="text-danger"></span>
+                                @Html.LabelFor(x => x.TitleTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.TitleTranslateTUR, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TitleTranslateTUR, null, new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -149,24 +152,57 @@
 
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
-                        <label asp-for="CaptionSourceFile" class="control-label"><strong>@("GeneralLocalize.CaptionSourceImage".Translate())</strong></label>
-                        <input type="file" class="form-control mt-1 mb-1" asp-for="CaptionSourceFile" />
-                        <span asp-validation-for="CaptionSourceFile" class="text-danger"></span>
+                        @Html.LabelFor(x => x.CaptionSourceFile, "GeneralLocalize.CaptionSourceFile".Translate(), new { @class = "control-label h6" })
+                        @Html.TextBoxFor(x => x.CaptionSourceFile, new { @class = "form-control mt-1 mb-1", @type = "file" })
+                        @Html.ValidationMessageFor(x => x.CaptionSourceFile, null, new { @class = "text-danger" })
                     </div>
                     <hr />
                 </div>
+
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     @*TODO : Localize All Create Button*@
                     <div class="form-group mt-2 mb-2">
                         <input type="submit" value="@("CreateNew.LocalizationGeneral".Translate())" class="btn btn-primary" />
+                        <a class="ml-2 btn btn-secondary text-light" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
                     </div>
                 </div>
             </div>
-            
-        </form>
+
+        }
     </div>
 </div>
-
-<div>
-    <a class="btn btn-secondary" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
+<div id="responseMessageContainer">
+    @if (Model.ResponseMessages != null && Model.ResponseMessages.Count > 0)
+    {
+        foreach (var message in Model.ResponseMessages)
+        {
+            <div class="responseMessage">
+                <div class="alert alert-@message.AlertColor alert-dismissible fade show" role="alert">
+                    <strong>@message.AlertMessage</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+    }
 </div>
+
+
+
+@section ScriptComponent{
+    <style>
+        .responseMessage {
+            position: relative;
+            right: 20px !important;
+            bottom: 20px !important;
+            opacity: 0.9 !important;
+        }
+    </style>
+    <script src="~/js/CustomComponent.js"></script>
+    <script>
+        setTimeout(function (e) {
+            $("#responseMessageContainer").fadeOut(500);
+        }, 3000)
+    </script>
+}

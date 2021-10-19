@@ -16,6 +16,7 @@ namespace Core.Entities.Concrete
         }
 
         public string UniqueToken { get; set; }
+        public string CourseInfoHtmlMaintenanceKey { get; set; }
         public string CaptionImageSource { get; set; }
         public string TitleKey { get; set; }
         public string DescriptionKey { get; set; }
@@ -24,7 +25,7 @@ namespace Core.Entities.Concrete
         public decimal PricePerMonth { get; set; }
         public string ScheduleHtmlRawKey { get; set; }
         public string ContentHtmlRawKey { get; set; }
-        public string PreviewDescriptionKey { get; set; }
+        public string PreviewDescKey { get; set; }
         public DateTime PublishDate { get; set; }
 
         public long ProfessionCourseCategoryId { get; set; }

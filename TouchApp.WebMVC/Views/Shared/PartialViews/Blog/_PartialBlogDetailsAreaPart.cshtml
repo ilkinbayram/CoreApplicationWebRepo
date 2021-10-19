@@ -6,7 +6,7 @@
 @model BlogViewModel
 
 @{
-    string EnrollChildBackImageUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_URL_Enroll_YourChildBackground_Caption.ToString());
+    string EnrollChildBackImageUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_Url_Enroll_SideImage.ToString());
 }
 
 @*
@@ -47,14 +47,14 @@
                                     <div class="single-blog-item overlay-hover">
                                         <div class="single-blog-image">
                                             <div class="overlay-effect">
-                                                <a href="#">
+                                                <a href="/Global/Blog/GetCurrent/@(relatedBlogOne.Id)">
                                                     <img src="@(relatedBlogOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
                                                     <span class="class-date">@(relatedBlogOne.Created_at.ToString("dd.MM"))&nbsp;<span>@(relatedBlogOne.Modified_at.Year)</span></span>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="single-blog-text">
-                                            <h4><a href="blog-details.html">@(relatedBlogOne.TitleKey.Translate())</a></h4>
+                                            <h4><a href="/Global/Blog/GetCurrent/@(relatedBlogOne.Id)">@(relatedBlogOne.TitleKey.Translate())</a></h4>
                                             <div class="blog-date">
                                                 <span><i class="fa fa-calendar"></i>@(relatedBlogOne.Created_at.ToString("dd.MM.yyyy"))</span>
                                             </div>
@@ -99,10 +99,10 @@
                             {
                                 <div class="recent-post-item">
                                     <div class="recent-post-image">
-                                        <a href="#"><img src="@(courseOne.CaptionImageSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
+                                        <a href="/Global/StudyPackage/GetCurrent/@(courseOne.Id)"><img src="@(courseOne.CaptionImageSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
                                     </div>
                                     <div class="recent-post-text">
-                                        <h4><a href="#">@(courseOne.TitleKey.Translate())</a></h4>
+                                        <h4><a href="/Global/StudyPackage/GetCurrent/@(courseOne.Id)">@(courseOne.TitleKey.Translate())</a></h4>
                                         <span><i class="fa fa-calendar"></i>@(courseOne.PublishDate.ToString("dd.MM.yyyy"))</span>
                                     </div>
                                 </div>

@@ -27,7 +27,7 @@ namespace Core.Entities.Concrete
         public DateTime? Birthday { get; set; }
         public Gender Gender { get; set; }
         public string BiographyKey { get; set; }
-        public string ShortBiographyKey { get; set; }
+        public string BiographyShortKey { get; set; }
         public string ProfilePhotoPath { get; set; }
         public string WallpaperPath { get; set; }
         public byte[] PasswordSalt { get; set; }

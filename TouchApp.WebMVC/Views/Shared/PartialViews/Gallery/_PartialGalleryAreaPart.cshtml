@@ -1,7 +1,5 @@
 ﻿@using Core.Extensions
 @using TouchApp.WebMVC.Areas.Global.Models.ViewModel
-@using Core.Entities.Dtos.Media
-@using Core.Entities.Dtos.SharingType
 
 @model GalleryViewModel
 
@@ -23,13 +21,9 @@
                             foreach (var item in Model.SharingTypes)
                             {
 
-                    <li class="filter" data-filter=".@(item.NameKey.Translate().ToLower())">@(item.NameKey.Translate())</li>
+                    <li class="filter" data-filter=".@(item.AbriveatureClass)">@(item.NameKey.Translate())</li>
                             }
                         }
-                        @*<li class="filter" data-filter=".drawing">Drawing</li>
-                        <li class="filter" data-filter=".excursions">Excursions</li>
-                        <li class="filter" data-filter=".courses">Courses</li>
-                        <li class="filter" data-filter=".play">Play time</li>*@
                     </ul>
                 </div>
             </div>
@@ -40,41 +34,23 @@
                 {
                     foreach (var mediaOne in Model.Medias)
                     {
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mix @(mediaOne.SharingTypeFilterConcat.Replace(","," "))  overlay-hover">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mix @(mediaOne.NavigationClassesConcatSharingType) overlay-hover">
                             <div class="overlay-effect">
                                 <a href="#"><img src="@(mediaOne.Source)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
                                 <div class="gallery-hover-effect">
                                     <a class="gallery-icon venobox" href="@(mediaOne.Source)"><i class="fa fa-image"></i></a>
-                                    <span class="gallery-text">@(mediaOne.SharingTypeFilterConcat)</span>
+                                    <span class="gallery-text">@(mediaOne.NavigationClassesConcatSharingType)</span>
                                 </div>
                             </div>
                         </div>
                     }
                 }
-                <div class="col-lg-4 col-md-4 col-sm-6 col-12 mix single-items drawing overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/1.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/1.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Drawings</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-12 mix single-items play courses overlay-hover">
-                    <div class="overlay-effect">
-                        <a href="#"><img src="~/img/gallery/2.jpg" alt=""></a>
-                        <div class="gallery-hover-effect">
-                            <a class="gallery-icon venobox" href="img/gallery/2.jpg"><i class="fa fa-image"></i></a>
-                            <span class="gallery-text">Activities, Photos</span>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="col-md-12">
+            @*<div class="col-md-12">
                 <div class="button text-center">
                     <a class="button-default button-yellow" href="#"><i class="fa fa-refresh"></i>@("GeneralLoadMore.ButtonTextLocalization".Translate())</a>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>

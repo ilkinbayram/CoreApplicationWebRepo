@@ -13,7 +13,7 @@ namespace TouchApp.DataAccess.Concrete.EntityFramework.Configurations
             builder.HasKey(k => k.Id);
 
             builder.Property(x => x.Id).UseIdentityColumn();
-            builder.Property(p => p.TitleKey).HasColumnType("nvarchar").HasMaxLength(500).IsRequired();
+            builder.Property(p => p.MainTitleKey).HasColumnType("nvarchar").HasMaxLength(500).IsRequired();
             builder.Property(p => p.SubTitleKey).HasColumnType("nvarchar").HasMaxLength(500).IsRequired(false);
             builder.Property(p => p.IsActive).IsRequired().HasDefaultValue(true);
         }

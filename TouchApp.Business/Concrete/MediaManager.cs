@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
 using Core.Aspects.Autofac.Caching;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.FieUploud;
 using Core.Entities.Dtos.Media;
+using Core.Entities.Dtos.SharingTypeMedia;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +23,50 @@ namespace Business.Concrete
         private readonly IMediaDal _mediaDal;
         private readonly IMapper _mapper;
 
-        public MediaManager(IMediaDal mediaDal, IMapper mapper)
+        private readonly IFileManager _fileManager;
+        private readonly ICloudinaryService _cloudinaryService;
+
+        public MediaManager(IMediaDal mediaDal,
+                             IMapper mapper,
+                             IFileManager fileManager,
+                             ICloudinaryService cloudinaryService)
         {
             _mediaDal = mediaDal;
             _mapper = mapper;
+            _fileManager = fileManager;
+            _cloudinaryService = cloudinaryService;
         }
 
-        public IDataResult<int> Add(Media media)
+        public IDataResult<int> Add(CreateManagementMediaDto media)
         {
             try
             {
-                int affectedRows = _mediaDal.Add(media);
+                var fileUploadResult = _fileManager.UploadSaveDictionary(media.SourceFile);
+
+                if (!fileUploadResult.Success)
+                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+                var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["imagePath"]);
+
+                var result = new FileName()
+                {
+                    FilePath = fileUploadResult.Data["imagePath"],
+                    CdnPath = _cloudinaryService.BuildUrl(publicId),
+                    PublicId = publicId
+                };
+
+                _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+
+                media.Source = result.CdnPath;
+
+                foreach (var idOne in media.SelectedSharingTypes)
+                {
+                    media.SharingTypeMedias.Add(new CreateManagementSharingTypeMediaDto { SharingTypeId = idOne });
+                }
+
+                media.UniqueParentToken = Guid.NewGuid().ToString().Replace("-", "");
+                var mappedModel = _mapper.Map<Media>(media);
+                int affectedRows = _mediaDal.Add(mappedModel);
                 IDataResult<int> dataResult;
                 if (affectedRows > 0)
                 {
@@ -301,9 +338,16 @@ namespace Business.Concrete
             try
             {
                 var dtoListResult = new List<GetMediaDto>();
-                _mediaDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                _mediaDal.GetAllWithRelations(filter).Take(takeCount).ToList().ForEach(x =>
                 {
-                    dtoListResult.Add(_mapper.Map<GetMediaDto>(x));
+                    var addableItem = _mapper.Map<GetMediaDto>(x);
+                    var concatString = "";
+                    x.SharingTypeMedias.Select(x => x.SharingType).ToList().ForEach(x =>
+                    {
+                        concatString += string.Format(" {0} ", x.AbriveatureClass);
+                    });
+                    addableItem.NavigationClassesConcatSharingType = concatString.Trim();
+                    dtoListResult.Add(addableItem);
                 });
 
                 return new SuccessDataResult<List<GetMediaDto>>(dtoListResult);

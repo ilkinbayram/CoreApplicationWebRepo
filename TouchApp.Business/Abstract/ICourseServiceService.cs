@@ -14,7 +14,7 @@ namespace TouchApp.Business.Abstract
         IDataResult<List<GetCourseServiceDto>> GetDtoList(Expression<Func<CourseService, bool>> filter = null, int takeCount = 2000);
         IDataResult<GetCourseServiceDto> GetDto(Expression<Func<CourseService, bool>> filter = null);
         IDataResult<CourseService> Get(Expression<Func<CourseService, bool>> filter);
-        IDataResult<int> Add(CourseService courseService);
+        IDataResult<int> Add(CreateManagementCourseServiceDto courseService);
         IDataResult<int> Update(CourseService courseService);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);

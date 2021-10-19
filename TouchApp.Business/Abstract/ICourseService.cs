@@ -13,7 +13,9 @@ namespace TouchApp.Business.Abstract
         IDataResult<List<Course>> GetList(Expression<Func<Course, bool>> filter = null);
         IDataResult<List<GetCourseDto>> GetDtoList(Expression<Func<Course, bool>> filter = null, int takeCount = 2000);
         IDataResult<Course> Get(Expression<Func<Course, bool>> filter);
+        IDataResult<List<GetCourseDto>> GetFilteredCoursesByCourseCategoryId(long id);
         IDataResult<GetCourseDto> GetDto(Expression<Func<Course, bool>> filter = null);
+        IDataResult<GetCourseDto> GetDtoForGlobalView(Expression<Func<Course, bool>> filter = null);
         IDataResult<int> Add(CreateManagementCourseDto course);
         IDataResult<int> Update(Course course);
         IDataResult<int> DeletePermanently(long Id);

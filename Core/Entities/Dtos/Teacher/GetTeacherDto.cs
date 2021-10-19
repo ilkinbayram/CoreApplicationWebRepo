@@ -29,7 +29,7 @@ namespace Core.Entities.Dtos.Teacher
         public decimal? Rate { get; set; }
         public int? RateCount { get; set; }
         public string BiographyKey { get; set; }
-        public string ShortBiographyKey { get; set; }
+        public string BioShortKey { get; set; }
         public string ProfilePhotoPath { get; set; }
         public string WallpaperPath { get; set; }
 
@@ -39,8 +39,8 @@ namespace Core.Entities.Dtos.Teacher
         public ProfessionDegree ProfessionDegree { get; set; }
 
         public string CompanyNameKey { get; set; }
-        public string JobDescriptionKey { get; set; }
-
+        public string JobDescKey { get; set; }
+        
         public List<GetTeacherSocialMediaDto> TeacherSocialMedias { get; set; }
         public List<GetTeacherCourseDto> TeacherCourses { get; set; }
     }

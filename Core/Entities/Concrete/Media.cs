@@ -15,7 +15,6 @@ namespace Core.Entities.Concrete
             ModelType = ProjectModelType.Media;
         }
         public string Source { get; set; }
-        public string AltrKey { get; set; }
         public string UniqueParentToken { get; set; }
         public MediaType MediaType { get; set; }
 

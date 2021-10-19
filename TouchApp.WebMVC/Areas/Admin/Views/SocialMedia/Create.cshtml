@@ -14,30 +14,46 @@
 <hr />
 <div class="row">
     <div class="col-md-12 col-12 col-sm-12">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @using (Html.BeginForm("Create", "SocialMedia", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="row  mb-1 mt-2">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="row mb-1 mt-2">
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="NameSocial" class="control-label"><strong>@("GeneralModelName.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="NameSocial" type="text" class="form-control" />
-                                <span asp-validation-for="NameSocial" class="text-danger"></span>
+                                @Html.LabelFor(x => x.NameSocial, "NameSocial.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.NameSocial, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.NameSocial, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="Uri" class="control-label"><strong>@("GeneralWebUrl.VisualLocalization".Translate())</strong></label>
-                                <input asp-for="Uri" type="text" class="form-control" />
-                                <span asp-validation-for="Uri" class="text-danger"></span>
+                                @Html.LabelFor(x => x.Uri, "UriSocial.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.Uri, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Uri, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label asp-for="IconSourceFile" class="control-label"><strong>@("GeneralLocalize.IconSourceImage".Translate())</strong></label>
-                                <input type="file" class="form-control mt-1 mb-1" asp-for="IconSourceFile" />
-                                <span asp-validation-for="IconSourceFile" class="text-danger"></span>
+                                @Html.LabelFor(x => x.IconHtml, "IconHtmlSocial.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.IconHtml, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.IconHtml, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.IconSourceFile, "GeneralLocalize.IconSourceFile".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.IconSourceFile, new { @class = "form-control mt-1 mb-1", @type = "file" })
+                                @Html.ValidationMessageFor(x => x.IconSourceFile, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.SocialMediaType, "SocialMediaType.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.DropDownListFor(x => x.SocialMediaType, Model.SocialMediaTypeList, "SelectListGender.SelectDefaultLocalize".Translate(), new { @class = "custom-select" })
+                                @Html.ValidationMessageFor(x => x.SocialMediaType, null, new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -48,14 +64,46 @@
                     @*TODO : Localize All Create Button*@
                     <div class="form-group mt-2 mb-2">
                         <input type="submit" value="@("CreateNew.LocalizationGeneral".Translate())" class="btn btn-primary" />
+                        <a class="ml-2 btn btn-secondary text-light" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
                     </div>
                 </div>
             </div>
 
-        </form>
+        }
     </div>
 </div>
 
-<div>
-    <a class="btn btn-secondary" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
+<div id="responseMessageContainer">
+    @if (Model.ResponseMessages != null && Model.ResponseMessages.Count > 0)
+    {
+        foreach (var message in Model.ResponseMessages)
+        {
+            <div class="responseMessage">
+                <div class="alert alert-@message.AlertColor alert-dismissible fade show" role="alert">
+                    <strong>@message.AlertMessage</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+    }
 </div>
+
+
+@section ScriptComponent{
+    <style>
+        .responseMessage {
+            position: relative;
+            right: 20px !important;
+            bottom: 20px !important;
+            opacity: 0.9 !important;
+        }
+    </style>
+    <script src="~/js/CustomComponent.js"></script>
+    <script>
+        setTimeout(function (e) {
+            $("#responseMessageContainer").fadeOut(500);
+        }, 3000)
+    </script>
+}

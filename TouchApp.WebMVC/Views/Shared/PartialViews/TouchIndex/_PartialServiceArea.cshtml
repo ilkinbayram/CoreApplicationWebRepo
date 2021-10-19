@@ -27,54 +27,60 @@
             <div class="col-lg-4 col-md-4">
                 @if (Model != null)
                 {
-                    for (int i = 0; i < Model.Count && Model.Count % 3 == 0; i++)
+                    for (int i = 0; i < Model.Count; i++)
                     {
-
-                        <div class="single-small-service">
-                            <div class="small-service-icon">
-                                <i class="@(Model[i].IconSource)"></i>
+                        if (i % 3 == 0)
+                        {
+                            <div class="single-small-service">
+                                <div class="small-service-icon">
+                                    @(Html.Raw(Model[i].IconHtml))
+                                </div>
+                                <div class="small-services-text">
+                                    <h4>@(Model[i].TitleKey.Translate())</h4>
+                                    <p>@(Model[i].DescriptionKey.Translate())</p>
+                                </div>
                             </div>
-                            <div class="small-services-text">
-                                <h4>@(Model[i].TitleKey.Translate())</h4>
-                                <p>@(Model[i].DescriptionKey.Translate())</p>
-                            </div>
-                        </div>
+                        }
                     }
                 }
             </div>
             <div class="col-lg-4 col-md-4">
                 @if (Model != null)
                 {
-                    for (int i = 0; i < Model.Count - 1 && Model.Count % 3 == 1; i++)
+                    for (int i = 0; i < Model.Count; i++)
                     {
-
-                        <div class="single-small-service">
-                            <div class="small-service-icon">
-                                <i class="@(Model[i].IconSource)"></i>
+                        if (i % 3 == 1)
+                        {
+                            <div class="single-small-service">
+                                <div class="small-service-icon">
+                                    @(Html.Raw(Model[i].IconHtml))
+                                </div>
+                                <div class="small-services-text">
+                                    <h4>@(Model[i].TitleKey.Translate())</h4>
+                                    <p>@(Model[i].DescriptionKey.Translate())</p>
+                                </div>
                             </div>
-                            <div class="small-services-text">
-                                <h4>@(Model[i].TitleKey.Translate())</h4>
-                                <p>@(Model[i].DescriptionKey.Translate())</p>
-                            </div>
-                        </div>
+                        }
                     }
                 }
             </div>
             <div class="col-lg-4 col-md-4">
                 @if (Model != null)
                 {
-                    for (int i = 0; i < Model.Count - 1 && Model.Count % 3 == 2; i++)
+                    for (int i = 0; i < Model.Count; i++)
                     {
-
-                        <div class="single-small-service">
-                            <div class="small-service-icon">
-                                <i class="@(Model[i].IconSource)"></i>
+                        if (i % 3 == 2)
+                        {
+                            <div class="single-small-service">
+                                <div class="small-service-icon">
+                                    @(Html.Raw(Model[i].IconHtml))
+                                </div>
+                                <div class="small-services-text">
+                                    <h4>@(Model[i].TitleKey.Translate())</h4>
+                                    <p>@(Model[i].DescriptionKey.Translate())</p>
+                                </div>
                             </div>
-                            <div class="small-services-text">
-                                <h4>@(Model[i].TitleKey.Translate())</h4>
-                                <p>@(Model[i].DescriptionKey.Translate())</p>
-                            </div>
-                        </div>
+                        }
                     }
                 }
             </div>

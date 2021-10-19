@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Dtos.SharingType;
+using Core.Utilities.UsableModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class SharingTypeController : Controller
     {
+        private readonly ISharingTypeService _sharingTypeService;
+
+        public SharingTypeController(ISharingTypeService sharingTypeService)
+        {
+            _sharingTypeService = sharingTypeService;
+        }
+
         // GET: SharingTypeController
         public async Task<ActionResult> Index()
         {
@@ -22,22 +32,35 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // GET: SharingTypeController/Create
         public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new CreateManagementSharingTypeDto();
+            return View(model);
         }
 
         // POST: SharingTypeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateManagementSharingTypeDto createModel)
         {
-            try
+            var resulPhraseService = _sharingTypeService.Add(createModel);
+
+            if (resulPhraseService != null)
             {
-                return RedirectToAction(nameof(Index));
+                if (resulPhraseService.Success)
+                {
+                    var createLocalizationDtoModel = new CreateManagementSharingTypeDto();
+                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resulPhraseService.Message });
+
+                    return View(createLocalizationDtoModel);
+                }
+                else
+                {
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resulPhraseService.Message });
+
+                    return View(createModel);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("ServerErrorPage");
         }
 
         // GET: SharingTypeController/Edit/5

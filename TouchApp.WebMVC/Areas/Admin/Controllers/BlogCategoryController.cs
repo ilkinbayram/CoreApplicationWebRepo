@@ -7,10 +7,12 @@ using TouchApp.Business.Abstract;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Core.Utilities.UsableModel;
 using Core.Extensions;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class BlogCategoryController : Controller
     {
         private IBlogCategoryService _blogCategoryService;

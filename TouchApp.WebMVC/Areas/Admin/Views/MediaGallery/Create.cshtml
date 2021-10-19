@@ -1,0 +1,97 @@
+﻿@using Core.Entities.Dtos.Media
+@using Core.Extensions
+
+@model CreateManagementMediaDto
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminPanelBootstrap.cshtml";
+}
+
+
+<h1>@("ToCreate.TranslateLocalization".Translate())</h1>
+<hr />
+
+<h4>@("MediaCreateView.HeaderLocalization".Translate())</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-12 col-12 col-sm-12">
+        @using (Html.BeginForm("Create", "MediaGallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row  mb-1 mt-2">
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.SourceFile, "GeneralLocalize.SourceFile".Translate(), new { @class = "control-label h6" })
+                        @Html.TextBoxFor(x => x.SourceFile, new { @class = "form-control mt-1 mb-1", @type = "file" })
+                        @Html.ValidationMessageFor(x => x.SourceFile, null, new { @class = "text-danger" })
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.MediaType, "ScreenType.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                        @Html.DropDownListFor(x => x.MediaType, Model.MediaTypes, "SelectListDefault.Localize".Translate(), new { @class = "custom-select" })
+                        @Html.ValidationMessageFor(x => x.MediaType, null, new { @class = "text-danger" })
+                    </div>
+                    <hr />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.SelectedSharingTypes, "GeneralLocalize.SourceFile".Translate(), new { @class = "control-label h6" })
+                        @Html.ListBoxFor(x => x.SelectedSharingTypes, Model.GivenDataesForSharingTypeIds, new { @class = "custom-select mt-1 mb-1"})
+                        @Html.ValidationMessageFor(x => x.SelectedSharingTypes, null, new { @class = "text-danger" })
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    @*TODO : Localize All Create Button*@
+                    <div class="form-group mt-2 mb-2">
+                        <input type="submit" value="@("CreateNew.LocalizationGeneral".Translate())" class="btn btn-primary" />
+                        <a class="ml-2 btn btn-secondary text-light" asp-action="Index">@("BackwardToList.LocalizationGeneral".Translate())</a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+<div id="responseMessageContainer">
+    @if (Model.ResponseMessages != null && Model.ResponseMessages.Count > 0)
+    {
+        foreach (var message in Model.ResponseMessages)
+        {
+            <div class="responseMessage">
+                <div class="alert alert-@message.AlertColor alert-dismissible fade show" role="alert">
+                    <strong>@message.AlertMessage</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+
+@section ScriptComponent{
+    <style>
+        .responseMessage {
+            position: relative;
+            right: 20px !important;
+            bottom: 20px !important;
+            opacity: 0.9 !important;
+        }
+    </style>
+    <script src="~/js/CustomComponent.js"></script>
+    <script>
+        setTimeout(function (e) {
+            $("#responseMessageContainer").fadeOut(500);
+        }, 3000)
+    </script>
+}

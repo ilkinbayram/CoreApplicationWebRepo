@@ -2,6 +2,7 @@
 using Core.Entities.Dtos.SocialMedia;
 using Core.Entities.Dtos.TeacherSocialMedia;
 using Core.Resources.Enums;
+using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -16,6 +17,7 @@ namespace Core.Entities.Dtos.Teacher
         public CreateManagementTeacherDto()
         {
             ModelType = ProjectModelType.Teacher;
+            ResponseMessages = new List<AlertResult>();
         }
 
         public string FirstName { get; set; }
@@ -37,11 +39,11 @@ namespace Core.Entities.Dtos.Teacher
         public string BiographyTranslateTUR { get; set; }
         public string BiographyTranslateRUS { get; set; }
         public string BiographyTranslateENG { get; set; }
-        public string ShortBiographyKey { get; set; }
-        public string ShortBiographyTranslateAZE { get; set; }
-        public string ShortBiographyTranslateTUR { get; set; }
-        public string ShortBiographyTranslateRUS { get; set; }
-        public string ShortBiographyTranslateENG { get; set; }
+        public string BioShortKey { get; set; }
+        public string BioShortTranslateAZE { get; set; }
+        public string BioShortTranslateTUR { get; set; }
+        public string BioShortTranslateRUS { get; set; }
+        public string BioShortTranslateENG { get; set; }
         public IFormFile ProfilePhotoFile { get; set; }
         public string ProfilePhotoPath { get; set; }
         public IFormFile WallpaperFile { get; set; }
@@ -65,11 +67,11 @@ namespace Core.Entities.Dtos.Teacher
         public string CompanyNameTranslateRUS { get; set; }
         public string CompanyNameTranslateENG { get; set; }
         public string CompanyNameTranslateTUR { get; set; }
-        public string JobDescriptionKey { get; set; }
-        public string JobDescriptionTranslateAZE { get; set; }
-        public string JobDescriptionTranslateTUR { get; set; }
-        public string JobDescriptionTranslateENG { get; set; }
-        public string JobDescriptionTranslateRUS { get; set; }
+        public string JobDescKey { get; set; }
+        public string JobDescTranslateAZE { get; set; }
+        public string JobDescTranslateTUR { get; set; }
+        public string JobDescTranslateENG { get; set; }
+        public string JobDescTranslateRUS { get; set; }
 
         public List<SelectListItem> GenderSelectList { get; set; }
         public List<SelectListItem> ProfessionDegreeSelectList { get; set; }
@@ -77,6 +79,8 @@ namespace Core.Entities.Dtos.Teacher
         public virtual List<CreateManagementTeacherSocialMediaDto> TeacherSocialMedias { get; set; }
 
         public List<GetSocialMediaDto> SocialMedias { get; set; }
+
+        public List<AlertResult> ResponseMessages { get; set; }
     }
 
 }

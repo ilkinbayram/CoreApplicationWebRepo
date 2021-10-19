@@ -14,7 +14,7 @@ namespace TouchApp.Business.Abstract
         IDataResult<Slider> Get(Expression<Func<Slider, bool>> filter);
         IDataResult<List<GetSliderDto>> GetDtoList(Expression<Func<Slider, bool>> filter = null, int takeCount = 2000);
         IDataResult<GetSliderDto> GetDto(Expression<Func<Slider, bool>> filter = null);
-        IDataResult<int> Add(Slider homeMetaTagGallery);
+        IDataResult<int> Add(CreateManagementSliderDto homeMetaTagGallery);
         IDataResult<int> Update(Slider homeMetaTagGallery);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);

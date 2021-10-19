@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Dtos.OurService;
+using Core.Utilities.UsableModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class OurServiceController : Controller
     {
+        private readonly ICourseServiceService _courseServiceService;
+
+        public OurServiceController(ICourseServiceService courseServiceService)
+        {
+            _courseServiceService = courseServiceService;
+        }
         // GET: OurServiceController
         public async Task<ActionResult> Index()
         {
@@ -22,22 +31,35 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // GET: OurServiceController/Create
         public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new CreateManagementCourseServiceDto();
+            return View(model);
         }
 
         // POST: OurServiceController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateManagementCourseServiceDto createModel)
         {
-            try
+            var resultCourseServiceService = _courseServiceService.Add(createModel);
+
+            if (resultCourseServiceService != null)
             {
-                return RedirectToAction(nameof(Index));
+                if (resultCourseServiceService.Success)
+                {
+                    var createLocalizationDtoModel = new CreateManagementCourseServiceDto();
+                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultCourseServiceService.Message });
+
+                    return View(createLocalizationDtoModel);
+                }
+                else
+                {
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultCourseServiceService.Message });
+
+                    return View(createModel);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("ServerErrorPage");
         }
 
         // GET: OurServiceController/Edit/5

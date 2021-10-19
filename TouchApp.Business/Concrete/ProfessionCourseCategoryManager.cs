@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.FieUploud;
 using Core.Entities.Dtos.ProfessionCourseCategory;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -18,28 +22,72 @@ namespace Business.Concrete
         private readonly IProfessionCourseCategoryDal _professionCourseCategoryDal;
         private readonly IMapper _mapper;
 
-        public ProfessionCourseCategoryManager(IProfessionCourseCategoryDal professionCourseCategoryDal, IMapper mapper)
+        private readonly IFileManager _fileManager;
+        private readonly ICloudinaryService _cloudinaryService;
+        private readonly ILocalizationDal _localizationDal;
+
+        public ProfessionCourseCategoryManager(IProfessionCourseCategoryDal professionCourseCategoryDal, 
+                                               IMapper mapper,
+                                               IFileManager fileManager,
+                                               ICloudinaryService cloudinaryService,
+                                               ILocalizationDal localizationDal)
         {
             _professionCourseCategoryDal = professionCourseCategoryDal;
             _mapper = mapper;
+            _fileManager = fileManager;
+            _cloudinaryService = cloudinaryService;
+            _localizationDal = localizationDal;
         }
 
-        public IDataResult<int> Add(ProfessionCourseCategory professionCourseCategory)
+        public IDataResult<int> Add(CreateManagementProfessionCourseCategoryDto professionCourseCategory)
         {
             try
             {
-                int affectedRows = _professionCourseCategoryDal.Add(professionCourseCategory);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
+                if (professionCourseCategory.IconFile != null)
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+
+                    var listFileListAdded = new List<string>();
+
+                    var fileUploadResult = _fileManager.UploadThumbnail(professionCourseCategory.IconFile);
+
+                    if (!fileUploadResult.Success)
+                        return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+                    var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
+
+                    var result = new FileName()
+                    {
+                        FilePath = fileUploadResult.Data["thumbnailPath"],
+                        CdnPath = _cloudinaryService.BuildUrl(publicId),
+                        PublicId = publicId
+                    };
+
+                    _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+                    _fileManager.Delete(fileUploadResult.Data["thumbnailPath"]);
+
+                    listFileListAdded.Add(publicId);
+
+                    professionCourseCategory.IconSource = result.CdnPath;
+
                 }
 
-                return dataResult;
+                var mappedModel = _mapper.Map<ProfessionCourseCategory>(professionCourseCategory);
+
+                int affectedRows = _professionCourseCategoryDal.Add(mappedModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(professionCourseCategory);
+
+                foreach (var localizationOne in localizationList)
+                {
+                    var responseAddLocalization = _localizationDal.Add(localizationOne);
+                    if (responseAddLocalization <= 0)
+                        throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+                }
+
+                if (affectedRows <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
             catch (Exception exception)
             {
@@ -140,6 +188,24 @@ namespace Business.Concrete
             catch (Exception exception)
             {
                 return new ErrorDataResult<GetProfessionCourseCategoryDto>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetProfessionCourseCategoryDto>> GetListDto(Expression<Func<ProfessionCourseCategory, bool>> filter = null)
+        {
+            try
+            {
+                var dtoListResult = new List<GetProfessionCourseCategoryDto>();
+                _professionCourseCategoryDal.GetList(filter).ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetProfessionCourseCategoryDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetProfessionCourseCategoryDto>>(dtoListResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetProfessionCourseCategoryDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -536,6 +602,7 @@ namespace Business.Concrete
             }
         }
 
+        
         #endregion
     }
 }

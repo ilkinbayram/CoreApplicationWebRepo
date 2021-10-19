@@ -16,9 +16,8 @@ namespace Core.Entities.Dtos.Media
             ModelType = ProjectModelType.Media;
         }
         public string Source { get; set; }
-        public string AltrKey { get; set; }
         public string UniqueParentToken { get; set; }
-        public string SharingTypeFilterConcat { get; set; }
+        public string NavigationClassesConcatSharingType { get; set; }
         public MediaType MediaType { get; set; }
 
         public List<GetSharingTypeMediaDto> SharingTypeMedias { get; set; }

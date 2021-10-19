@@ -2,8 +2,9 @@
 
 using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
-
-
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using Core.Utilities.UsableModel;
 
 namespace Core.Entities.Dtos.SocialMedia
 {
@@ -12,6 +13,7 @@ namespace Core.Entities.Dtos.SocialMedia
         public CreateManagementSocialMediaDto()
         {
             ModelType = ProjectModelType.SocialMedia;
+            ResponseMessages = new List<AlertResult>();
         }
 
         public SocialMediaType SocialMediaType { get; set; }
@@ -19,5 +21,10 @@ namespace Core.Entities.Dtos.SocialMedia
         public string Uri { get; set; }
         public IFormFile IconSourceFile { get; set; }
         public string IconSource { get; set; }
+        public string IconHtml { get; set; }
+
+        public List<SelectListItem> SocialMediaTypeList { get; set; }
+
+        public List<AlertResult> ResponseMessages { get; set; }
     }
 }

@@ -1,12 +1,26 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Dtos.SocialMedia;
+using Core.Extensions;
+using Core.Resources.Enums;
+using Core.Utilities.UsableModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class SocialMediaController : AdminBaseController
     {
+        private readonly ISocialMediaService _socialMediaService;
+        public SocialMediaController(ISocialMediaService socialMediaService)
+        {
+            _socialMediaService = socialMediaService;
+        }
+
         // GET: SocialMediaController
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -25,22 +39,50 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Create()
         {
-            return View();
+            var dtoModel = new CreateManagementSocialMediaDto();
+            dtoModel.SocialMediaTypeList = Enum.GetValues<SocialMediaType>().Cast<byte>().ToList().
+                               Select(x => new SelectListItem
+                               {
+                                   Value = x.ToString(),
+                                   Text = string.Format("{0}SocialMediaType.Localize", ((SocialMediaType)x).ToString()).Translate()
+                               }).ToList();
+
+            return View(dtoModel);
         }
 
         // POST: SocialMediaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateManagementSocialMediaDto createModel)
         {
-            try
+            var resultSocial = _socialMediaService.Add(createModel);
+
+            if (resultSocial != null)
             {
-                return RedirectToAction(nameof(Index));
+                if (resultSocial.Success)
+                {
+                    var createLangDtoModel = new CreateManagementSocialMediaDto();
+
+                    createLangDtoModel.SocialMediaTypeList = Enum.GetValues<SocialMediaType>().Cast<byte>().ToList().
+                   Select(x => new SelectListItem
+                   {
+                       Value = x.ToString(),
+                       Text = string.Format("{0}SocialMediaType.Localize", ((SocialMediaType)x).ToString()).Translate()
+                   }).ToList();
+
+                    createLangDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultSocial.Message });
+
+                    return View(createLangDtoModel);
+                }
+                else
+                {
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultSocial.Message });
+
+                    return View(createModel);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("ServerErrorPage");
         }
 
         // GET: SocialMediaController/Edit/5

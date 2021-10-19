@@ -1,4 +1,7 @@
-﻿
+﻿@using TouchApp.WebMVC.Areas.Global.Models.ViewModel
+@model AllCoursesViewModel
+
+
 @{
     ViewData["Title"] = "StudyPackage";
     Layout = "~/Views/Shared/_LayoutShared.cshtml";
@@ -6,4 +9,4 @@
 
 
 @Html.Partial("PartialViews/StudyPackage/_PartialBannerAllCoursesAreaPart")
-@Html.Partial("PartialViews/StudyPackage/_PartialAllCoursesList")
+@Html.Partial("PartialViews/StudyPackage/_PartialAllCoursesList", Model)

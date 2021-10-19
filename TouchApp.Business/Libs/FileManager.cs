@@ -13,7 +13,9 @@ namespace Business.Libs
         DataResult<string> Upload(IFormFile file, string savePath = "uploads", string newName = null);
 
         DataResult<Dictionary<string, string>> UploadSaveDictionary(IFormFile file, string savePath = "uploads", string newName = null);
+        DataResult<Dictionary<string, string>> UploadListFileSaveDictionary(List<IFormFile> files, string savePath = "uploads", string newName = null);
         DataResult<Dictionary<string, string>> UploadThumbnail(IFormFile file, int width = 100, int heigth = 100, string savePath = "uploads", string newName = null, string thumbnailNewName = null);
+        DataResult<Dictionary<string, string>> UploadVideoSaveDictionary(IFormFile file, string savePath = "uploads", string newName = null);
         void Delete(string filename, string deletedPath = "uploads");
     }
 
@@ -60,6 +62,91 @@ namespace Business.Libs
                 var dictionary = new Dictionary<string, string>();
                 dictionary.Add("imagePath", path);
                 result.SetData(dictionary);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result = new ErrorDataResult<Dictionary<string, string>>(message: ex.Message);
+                return result;
+            }
+        }
+
+        public DataResult<Dictionary<string, string>> UploadVideoSaveDictionary(IFormFile file, string savePath = "uploads", string newName = null)
+        {
+            DataResult<Dictionary<string, string>> result = new SuccessDataResult<Dictionary<string, string>>();
+
+            try
+            {
+                var list = file.FileName.Split('.');
+
+                string filename;
+
+                if (newName == null)
+                    filename = Guid.NewGuid() + "." + list[^1];
+                else
+                    filename = newName + "." + list[^1];
+
+                var writePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", savePath);
+                if (!Directory.Exists(writePath))
+                    Directory.CreateDirectory(writePath);
+
+                var path = Path.Combine(writePath, filename);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                result = new SuccessDataResult<Dictionary<string, string>>();
+                var dictionary = new Dictionary<string, string>();
+                dictionary.Add("videoPath", path);
+                result.SetData(dictionary);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result = new ErrorDataResult<Dictionary<string, string>>(message: ex.Message);
+                return result;
+            }
+        }
+
+        public DataResult<Dictionary<string, string>> UploadListFileSaveDictionary(List<IFormFile> files, string savePath = "uploads", string newName = null)
+        {
+            DataResult<Dictionary<string, string>> result = new SuccessDataResult<Dictionary<string, string>>();
+
+            try
+            {
+                var dictionary = new Dictionary<string, string>();
+
+                for (int i = 0; i < files.Count; i++)
+                {
+                    var list = files[i].FileName.Split('.');
+
+                    string filename;
+
+                    if (newName == null)
+                        filename = Guid.NewGuid() + "." + list[^1];
+                    else
+                        filename = newName + "." + list[^1];
+
+                    var writePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", savePath);
+                    if (!Directory.Exists(writePath))
+                        Directory.CreateDirectory(writePath);
+
+                    var path = Path.Combine(writePath, filename);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        files[i].CopyTo(stream);
+                    }
+
+                    result = new SuccessDataResult<Dictionary<string, string>>();
+                    
+                    dictionary.Add("imagePath"+i.ToString(), path);
+                    result.SetData(dictionary);
+                }
 
                 return result;
             }

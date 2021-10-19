@@ -6,7 +6,7 @@
 @model AllTeachersViewModel
 
 @{
-    string EnrollChildBackImageUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_URL_Enroll_YourChildBackground_Caption.ToString());
+    string EnrollChildBackImageUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_Url_Enroll_SideImage.ToString());
 }
 
 @*
@@ -26,22 +26,22 @@
                         <div class="class-list-item">
                             <div class="row">
                                 <div class="col-xl-5 col-lg-6 col-md-6">
-                                    <a href="#"><img src="@(teacherOne.ProfilePhotoPath)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
+                                    <a href="/Global/Teacher/GetCurrent/@(teacherOne.Id)"><img src="@(teacherOne.ProfilePhotoPath)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
                                 </div>
                                 <div class="col-xl-7 col-lg-6 col-md-6">
                                     <div class="class-list-text">
-                                        <h3><a href="#">@($"{teacherOne.FirstName} {teacherOne.LastName}")</a></h3>
+                                        <h3><a href="/Global/Teacher/GetCurrent/@(teacherOne.Id)">@($"{teacherOne.FirstName} {teacherOne.LastName}")</a></h3>
                                         <div class="class-information">
                                             <span><i class="far fa-envelope"></i>&nbsp;@(teacherOne.Email)</span>
                                             <span><i class="fas fa-mobile-alt"></i>&nbsp;@($"{teacherOne.PhoneNumberPrefix} {teacherOne.PhoneNumber}")</span>
                                             <span><i class="fas fa-user-tie"></i>&nbsp;@(teacherOne.ProfessionNameKey.Translate())</span>
                                             @if (string.IsNullOrEmpty(teacherOne.CompanyNameKey))
                                             {
-                                                <span data-toggle="tooltip" data-placement="top" title="@(teacherOne.JobDescriptionKey.Translate())"><i class="fas fa-briefcase"></i>&nbsp;@(teacherOne.CompanyNameKey.Translate())</span>
+                                                <span data-toggle="tooltip" data-placement="top" title="@(teacherOne.JobDescKey.Translate())"><i class="fas fa-briefcase"></i>&nbsp;@(teacherOne.CompanyNameKey.Translate())</span>
                                             }
                                         </div>
-                                        <p>@(teacherOne.ShortBiographyKey.Translate())</p>
-                                        <a href="#" class="button-default">@("GeneralReadMore.ButtonText".Translate())&nbsp;<i class="fa fa-angle-right"></i></a>
+                                        <p>@(teacherOne.BioShortKey.Translate())</p>
+                                        <a href="/Global/Teacher/GetCurrent/@(teacherOne.Id)" class="button-default">@("GeneralReadMore.ButtonText".Translate())&nbsp;<i class="fa fa-angle-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -61,11 +61,11 @@
                             {
                                 <div class="recent-post-item">
                                     <div class="recent-post-image">
-                                        <a href="#"><img src="@(courseOne.CaptionImageSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
+                                        <a href="/Global/StudyPackage/GetCurrent/@(courseOne.Id)"><img src="@(courseOne.CaptionImageSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
                                     </div>
                                     <div class="recent-post-text">
-                                        <h4><a href="#">@(courseOne.TitleKey.Translate())</a></h4>
-                                        <span><i class="fa fa-calendar"></i>@(courseOne.PublishDate.ToString("dd.MM.yyyy"))</span>
+                                        <h4><a href="/Global/StudyPackage/GetCurrent/@(courseOne.Id)">@(courseOne.TitleKey.Translate())</a></h4>
+                                        <span>@(courseOne.PublishDate.ToString("dd.MM.yyyy"))&nbsp;<i class="fa fa-calendar"></i></span>
                                     </div>
                                 </div>
                             }

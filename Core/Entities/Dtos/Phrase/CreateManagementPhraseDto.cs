@@ -2,9 +2,8 @@
 
 using Core.Entities.Dtos.Base;
 using Core.Resources.Enums;
-
-
-
+using System.Collections.Generic;
+using Core.Utilities.UsableModel;
 
 namespace Core.Entities.Dtos.Phrase
 {
@@ -12,6 +11,7 @@ namespace Core.Entities.Dtos.Phrase
     {
         public CreateManagementPhraseDto()
         {
+            ResponseMessages = new List<AlertResult>();
             ModelType = ProjectModelType.Phrase;
         }
         public string OwnerName { get; set; }
@@ -33,5 +33,7 @@ namespace Core.Entities.Dtos.Phrase
         public string TitleTranslateRUS { get; set; }
         public string TitleTranslateENG { get; set; }
         public string TitleTranslateTUR { get; set; }
+
+        public List<AlertResult> ResponseMessages { get; set; }
     }
 }

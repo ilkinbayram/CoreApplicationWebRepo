@@ -1,4 +1,10 @@
 ﻿@using Core.Extensions
+@using Core.Utilities.Helpers
+@using Core.Resources.Enums
+
+@{
+    var welcomeImageUri = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_Url_Welcome_OpenPage.ToString());
+}
 
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,42 +23,9 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <!-- #region Skill Bar -->
-                @*<div class="skill-bars">
-            <div class="orange">
-                <div class="skill-bar-item">
-                    <span>Playing Science</span>
-                    <div class="progress">
-                        <div class="progress-bar wow fadeInLeft" data-progress="80%" style="width: 80%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
-                            <span class="text-top">80%</span>
-                        </div>
-                    </div>
+                <div class="text-center">
+                    <img src="@(welcomeImageUri)" style="width: 50%;" alt="@("Inform.ImageWasNotFoundTranslate".Translate())" />
                 </div>
-            </div>
-            <div class="lemon">
-                <div class="skill-bar-item">
-                    <span>Arts And Craft</span>
-                    <div class="progress">
-                        <div class="progress-bar wow fadeInLeft" data-progress="75%" style="width: 75%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
-                            <span class="text-top">75%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sea-green">
-                <div class="skill-bar-item no-margin">
-                    <span>Creative Writing</span>
-                    <div class="progress no-margin">
-                        <div class="progress-bar wow fadeInLeft" data-progress="90%" style="width: 90%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
-                            <span class="text-top">90%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-                <!-- #endregion -->
-
             </div>
         </div>
     </div>

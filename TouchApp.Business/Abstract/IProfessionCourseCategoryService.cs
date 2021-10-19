@@ -13,7 +13,8 @@ namespace TouchApp.Business.Abstract
         IDataResult<List<ProfessionCourseCategory>> GetList(Expression<Func<ProfessionCourseCategory, bool>> filter = null);
         IDataResult<ProfessionCourseCategory> Get(Expression<Func<ProfessionCourseCategory, bool>> filter);
         IDataResult<GetProfessionCourseCategoryDto> GetDto(Expression<Func<ProfessionCourseCategory, bool>> filter = null);
-        IDataResult<int> Add(ProfessionCourseCategory professionProfessionCourseCategoryCategory);
+        IDataResult<List<GetProfessionCourseCategoryDto>> GetListDto(Expression<Func<ProfessionCourseCategory, bool>> filter = null);
+        IDataResult<int> Add(CreateManagementProfessionCourseCategoryDto professionProfessionCourseCategoryCategory);
         IDataResult<int> Update(ProfessionCourseCategory professionProfessionCourseCategoryCategory);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);

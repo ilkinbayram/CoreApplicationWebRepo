@@ -11,6 +11,7 @@ namespace TouchApp.Business.Abstract
     public interface ISharingTypeMediaService
     {
         IDataResult<List<SharingTypeMedia>> GetList(Expression<Func<SharingTypeMedia, bool>> filter = null);
+        IDataResult<List<GetSharingTypeMediaDto>> GetDtoList(Expression<Func<SharingTypeMedia, bool>> filter = null);
         IDataResult<SharingTypeMedia> Get(Expression<Func<SharingTypeMedia, bool>> filter);
         IDataResult<GetSharingTypeMediaDto> GetDto(Expression<Func<SharingTypeMedia, bool>> filter = null);
         IDataResult<int> Add(SharingTypeMedia sharingTypeMedia);

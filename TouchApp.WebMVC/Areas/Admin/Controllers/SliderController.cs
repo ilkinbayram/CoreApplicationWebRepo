@@ -1,11 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Dtos.Slider;
+using Core.Utilities.UsableModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class SliderController : Controller
     {
+        private readonly ISliderService _sliderService;
+
+        public SliderController(ISliderService sliderService)
+        {
+            _sliderService = sliderService;
+        }
+
         // GET: SliderController
         public async Task<ActionResult> Index()
         {
@@ -21,22 +32,36 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // GET: SliderController/Create
         public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new CreateManagementSliderDto();
+
+            return View(model);
         }
 
         // POST: SliderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateManagementSliderDto createModel)
         {
-            try
+            var resultSliderService = _sliderService.Add(createModel);
+
+            if (resultSliderService != null)
             {
-                return RedirectToAction(nameof(Index));
+                if (resultSliderService.Success)
+                {
+                    var createLocalizationDtoModel = new CreateManagementSliderDto();
+                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultSliderService.Message });
+
+                    return View(createLocalizationDtoModel);
+                }
+                else
+                {
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultSliderService.Message });
+
+                    return View(createModel);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("ServerErrorPage");
         }
 
         // GET: SliderController/Edit/5

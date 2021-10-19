@@ -1,10 +1,14 @@
-﻿
+﻿@using TouchApp.WebMVC.Areas.Global.Models.ViewModel
+
+@model AllTeachersViewModel
+
+
 @{
     ViewData["Title"] = "TeachersInfo";
-    Layout = "~/Views/Shared/_LayoutShared.cshtml";
+ Layout = "~/Views/Shared/_LayoutShared.cshtml";
 }
 
 @Html.Partial("PartialViews/Teacher/_PartialBannerAllTeachersAreaPart")
-@Html.Partial("PartialViews/Teacher/_PartialAllTeachersList")
+@Html.Partial("PartialViews/Teacher/_PartialAllTeachersList", Model)
 
 

@@ -17,6 +17,7 @@ namespace Core.Entities.Concrete
         }
 
         public string NameKey { get; set; }
+        public string AbriveatureClass { get; set; }
         public virtual List<SharingTypeMedia> SharingTypeMedias { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace TouchApp.Business.Abstract
         IDataResult<Media> Get(Expression<Func<Media, bool>> filter);
         IDataResult<List<GetMediaDto>> GetDtoList(Expression<Func<Media, bool>> filter = null, int takeCount = 2000);
         IDataResult<GetMediaDto> GetDto(Expression<Func<Media, bool>> filter = null);
-        IDataResult<int> Add(Media media);
+        IDataResult<int> Add(CreateManagementMediaDto media);
         IDataResult<int> Update(Media media);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);

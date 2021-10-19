@@ -1,6 +1,6 @@
 ﻿namespace Core.Resources.Enums
 {
-    public enum SocialMediaType
+    public enum SocialMediaType : byte
     {
         Instagram = 1,
         Facebook = 2,

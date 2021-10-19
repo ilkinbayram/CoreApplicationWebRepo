@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.FieUploud;
 using Core.Entities.Dtos.Phrase;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -18,32 +22,67 @@ namespace Business.Concrete
         private readonly IPhraseDal _phraseDal;
         private readonly IMapper _mapper;
 
-        public PhraseManager(IPhraseDal phraseDal, IMapper mapper)
+        private readonly IFileManager _fileManager;
+        private readonly ICloudinaryService _cloudinaryService;
+        private readonly ILocalizationDal _localizationDal;
+
+        public PhraseManager(IPhraseDal phraseDal,
+                             IMapper mapper,
+                             IFileManager fileManager,
+                             ICloudinaryService cloudinaryService,
+                             ILocalizationDal localizationDal)
         {
             _phraseDal = phraseDal;
             _mapper = mapper;
+            _fileManager = fileManager;
+            _cloudinaryService = cloudinaryService;
+            _localizationDal = localizationDal;
         }
 
-        public IDataResult<int> Add(Phrase phrase)
+
+        public IDataResult<int> Add(CreateManagementPhraseDto phrase)
         {
             try
             {
-                int affectedRows = _phraseDal.Add(phrase);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
+                var fileUploadResult = _fileManager.UploadSaveDictionary(phrase.CaptionSourceFile);
+
+                if (!fileUploadResult.Success)
+                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+                var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["imagePath"]);
+
+                var result = new FileName()
                 {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
+                    FilePath = fileUploadResult.Data["imagePath"],
+                    CdnPath = _cloudinaryService.BuildUrl(publicId),
+                    PublicId = publicId
+                };
+
+                _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+
+                phrase.CaptionSource = result.CdnPath;
+
+                var mappedModel = _mapper.Map<Phrase>(phrase);
+
+                int affectedRows = _phraseDal.Add(mappedModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(phrase);
+
+                foreach (var localizationOne in localizationList)
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    var responseAddLocalization = _localizationDal.Add(localizationOne);
+                    if (responseAddLocalization <= 0)
+                        throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
                 }
 
-                return dataResult;
+                if (affectedRows <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-500, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 

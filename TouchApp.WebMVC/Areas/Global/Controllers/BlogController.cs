@@ -43,7 +43,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             var viewModel = new AllBlogsViewModel();
             viewModel.AllBlogs = _blogService.GetListDto().Data;
             viewModel.BlogCategories = _blogCategoryService.GetListDto().Data;
-            viewModel.RecentCourses = _courseService.GetDtoList().Data.OrderByDescending(x => x.Created_at).Take(4).ToList();
+            viewModel.RecentCourses = _courseService.GetDtoList().Data.OrderByDescending(x => x.Created_at).Take(10).ToList();
             viewModel.Tags = _tagService.GetListDto().Data;
 
             return View(viewModel);
@@ -55,7 +55,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             var viewModel = new AllBlogsViewModel();
             viewModel.AllBlogs = _blogService.GetFilteredBlogsByTagId(id).Data;
             viewModel.BlogCategories = _blogCategoryService.GetListDto().Data;
-            viewModel.RecentCourses = _courseService.GetDtoList().Data.OrderByDescending(x => x.Created_at).Take(4).ToList();
+            viewModel.RecentCourses = _courseService.GetDtoList().Data.OrderByDescending(x => x.Created_at).Take(10).ToList();
             viewModel.Tags = _tagService.GetListDto().Data;
 
             return View("Touch", viewModel);
@@ -67,7 +67,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             var viewModel = new AllBlogsViewModel();
             viewModel.AllBlogs = _blogService.GetFilteredBlogsByBlogCategoryId(id).Data;
             viewModel.BlogCategories = _blogCategoryService.GetListDto().Data;
-            viewModel.RecentCourses = _courseService.GetDtoList().Data.OrderByDescending(x => x.Created_at).Take(4).ToList();
+            viewModel.RecentCourses = _courseService.GetDtoList().Data.OrderByDescending(x => x.Created_at).Take(10).ToList();
             viewModel.Tags = _tagService.GetListDto().Data;
 
             return View("Touch", viewModel);
@@ -79,7 +79,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             var viewModel = new BlogViewModel();
             viewModel.CurrentBlog = _blogService.GetDto(x => x.Id == id).Data;
             viewModel.BlogCategories = _blogCategoryService.GetListDto().Data;
-            viewModel.RecentCourses = _courseService.GetDtoList().Data.OrderByDescending(x=>x.Created_at).Take(4).ToList();
+            viewModel.RecentCourses = _courseService.GetDtoList().Data.OrderByDescending(x=>x.Created_at).Take(10).ToList();
             viewModel.Tags = _tagService.GetListDto().Data;
 
             if (viewModel.CurrentBlog!=null)

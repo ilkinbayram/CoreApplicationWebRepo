@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
 using Business.Constants;
+using Business.Libs;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos.FieUploud;
 using Core.Entities.Dtos.SocialMedia;
 using Core.Utilities.Results;
+using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.Business.BusinessHelper;
 using TouchApp.DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -18,32 +22,74 @@ namespace Business.Concrete
         private readonly ISocialMediaDal _socialMediaDal;
         private readonly IMapper _mapper;
 
-        public SocialMediaManager(ISocialMediaDal socialMediaDal, IMapper mapper)
+        private readonly IFileManager _fileManager;
+        private readonly ICloudinaryService _cloudinaryService;
+        private readonly ILocalizationDal _localizationDal;
+
+        public SocialMediaManager(ISocialMediaDal socialMediaDal,
+                                  IMapper mapper,
+                                  IFileManager fileManager,
+                                  ICloudinaryService cloudinaryService,
+                                  ILocalizationDal localizationDal)
         {
             _socialMediaDal = socialMediaDal;
             _mapper = mapper;
+            _fileManager = fileManager;
+            _cloudinaryService = cloudinaryService;
+            _localizationDal = localizationDal;
         }
 
-        public IDataResult<int> Add(SocialMedia socialMedia)
+        public IDataResult<int> Add(CreateManagementSocialMediaDto socialMedia)
         {
             try
             {
-                int affectedRows = _socialMediaDal.Add(socialMedia);
-                IDataResult<int> dataResult;
-                if (affectedRows > 0)
-                {
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
-                }
+                var listFileListAdded = new List<string>();
 
-                return dataResult;
+                var fileUploadResult = _fileManager.UploadThumbnail(socialMedia.IconSourceFile);
+
+                if (!fileUploadResult.Success)
+                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+
+                var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
+
+                var result = new FileName()
+                {
+                    FilePath = fileUploadResult.Data["thumbnailPath"],
+                    CdnPath = _cloudinaryService.BuildUrl(publicId),
+                    PublicId = publicId
+                };
+
+                _fileManager.Delete(fileUploadResult.Data["imagePath"]);
+                _fileManager.Delete(fileUploadResult.Data["thumbnailPath"]);
+
+                listFileListAdded.Add(publicId);
+
+                socialMedia.IconSource = result.CdnPath;
+
+                var mappedModel = _mapper.Map<SocialMedia>(socialMedia);
+
+                int affectedRows = _socialMediaDal.Add(mappedModel);
+
+                var localizationList = GeneralFunctionality.ConvertModelToLocalizationList(socialMedia);
+
+                if (localizationList != null && localizationList.Count>0)
+                {
+                    foreach (var localizationOne in localizationList)
+                    {
+                        var responseAddLocalization = _localizationDal.Add(localizationOne);
+                        if (responseAddLocalization <= 0)
+                            throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+                    }
+                }
+                
+                if (affectedRows <= 0)
+                    throw new Exception(Messages.ErrorMessages.NOT_ADDED_AND_ROLLED_BACK);
+
+                return new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-500, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -154,6 +200,25 @@ namespace Business.Concrete
             catch (Exception exception)
             {
                 return new ErrorDataResult<List<SocialMedia>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
+
+        public IDataResult<List<GetSocialMediaDto>> GetDtoList(Expression<Func<SocialMedia, bool>> filter = null, int takeCount = 2000)
+        {
+            try
+            {
+                var dtoListResult = new List<GetSocialMediaDto>();
+                var resultany = _socialMediaDal.GetList(filter).Take(takeCount).ToList();
+                _socialMediaDal.GetList(filter).Take(takeCount).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetSocialMediaDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetSocialMediaDto>>(dtoListResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetSocialMediaDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -536,7 +601,6 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<GetSocialMediaDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
-
         #endregion
     }
 }

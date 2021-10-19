@@ -1,10 +1,16 @@
-﻿
+﻿@using Core.Utilities.Helpers
 @using Core.Entities.Dtos.Teacher;
 @using Core.Extensions;
+@using Core.Resources.Enums;
 
 
 
-@model List<GetTeacherDto>;
+@model List<GetTeacherDto>
+
+@{
+    var urlTeachersCaptionAll = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_Url_TeachersContainerHome_FromManual.ToString());
+}
+
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -28,7 +34,7 @@
             <div class="col-lg-6">
                 <div class="teacher-image">
                     @* TODO : Localization *@
-                    <img src="~/img/teacher/17.jpg" alt="">
+                    <img src="@(urlTeachersCaptionAll)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())">
                 </div>
             </div>
             <div class="col-lg-6">
@@ -42,33 +48,82 @@
                                     <h2>@(teacherOne.FirstName)&nbsp;@(teacherOne.LastName)</h2>
                                     <span class="language">@(teacherOne.ProfessionNameKey.Translate())</span>
                                     <div class="teacher-info-container">
-                                        <p><i class="fa fa-graduation-cap"></i>Degree: @(string.Format("{0}.ProfessionDegree",teacherOne.ProfessionDegree.ToString()).Translate())</p>
-                                        @* TODO : Localization *@
-                                        <p><i class="fa fa-star"></i>Experience: 2 Years in Preschool Education (From)</p>
-                                        <p>
-                                            <i class="fa fa-edit"></i>My Courses:
-                                            @for (int i = 0; i < teacherOne.TeacherCourses.Count; i++)
-                                            {
-                                                <b>@(teacherOne.TeacherCourses[i].Course.TitleKey.Translate())</b>
-                                                if (i + 1 < teacherOne.TeacherCourses.Count)
+                                        @if (teacherOne.TeacherCourses.Count > 0)
+                                        {
+                                            <p>
+                                                <i class="fa fa-edit"></i>&nbsp;@("MyCoursesVisualLocalization.Translate".Translate()):&nbsp;
+                                                @for (int i = 0; i < teacherOne.TeacherCourses.Count; i++)
                                                 {
-                                                    <span>&sbquo;</span>
+                                                    @(teacherOne.TeacherCourses[i].Course.TitleKey.Translate())
+                                                    if (i + 1 < teacherOne.TeacherCourses.Count)
+                                                    {
+                                                        <i>&sbquo;</i>
+                                                    }
                                                 }
-                                            }
-                                        </p>
+                                            </p>
+                                        }
                                     </div>
                                     <p>@(teacherOne.BiographyKey.Translate())</p>
                                     <div class="teacher-links">
                                         @foreach (var socialMediaOne in teacherOne.TeacherSocialMedias)
                                         {
-                                            <a href="@(socialMediaOne.RedirectUrl)"><i class="@(socialMediaOne.SocialMedia.IconSource)"></i></a>
-
+                                            <a href="@(socialMediaOne.RedirectUrl)">@(Html.Raw(socialMediaOne.SocialMedia.IconHtml))</a>
                                         }
                                     </div>
-                                    @* TODO : Localization *@
-                                    <a href="#" class="button-default button-yellow">View Profile</a>
+                                    <a href="/Global/Teacher/GetCurrent/@(teacherOne.Id)" class="button-default button-yellow">@("ViewProfile".Translate())</a>
                                 </div>
                             }
+                            <div class="sin-testiText">
+                                <h2>Julia Thomson</h2>
+                                <span class="language">Chinese Teacher</span>
+                                <div class="teacher-info-container">
+                                    <p><i class="fa fa-graduation-cap"></i>Degree: Chinese Literature Master</p>
+                                    <p><i class="fa fa-star"></i>Experience: 1 Years in Preschool Education</p>
+                                    <p><i class="fa fa-edit"></i>My Courses: Activities Kiddie</p>
+                                </div>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea porro sed pariatur est vel culpa. Quaerat veniam eius fuga tenetur, beatae quam doloremque consequuntur, quidem totam eos magnam quos nostrum atque eveniet ea, perspiciatis deleniti quasi delectus. Vitae assumenda, facilis quia mollitia qui.</p>
+                                <div class="teacher-links">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                                <a href="#" class="button-default button-yellow">View Profile</a>
+                            </div>
+                            <div class="sin-testiText">
+                                <h2>Julia Thomson</h2>
+                                <span class="language">Chinese Teacher</span>
+                                <div class="teacher-info-container">
+                                    <p><i class="fa fa-graduation-cap"></i>Degree: Chinese Literature Master</p>
+                                    <p><i class="fa fa-star"></i>Experience: 1 Years in Preschool Education</p>
+                                    <p><i class="fa fa-edit"></i>My Courses: Activities Kiddie</p>
+                                </div>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea porro sed pariatur est vel culpa. Quaerat veniam eius fuga tenetur, beatae quam doloremque consequuntur, quidem totam eos magnam quos nostrum atque eveniet ea, perspiciatis deleniti quasi delectus. Vitae assumenda, facilis quia mollitia qui.</p>
+                                <div class="teacher-links">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                                <a href="#" class="button-default button-yellow">View Profile</a>
+                            </div>
+                            <div class="sin-testiText">
+                                <h2>Julia Thomson</h2>
+                                <span class="language">Chinese Teacher</span>
+                                <div class="teacher-info-container">
+                                    <p><i class="fa fa-graduation-cap"></i>Degree: Chinese Literature Master</p>
+                                    <p><i class="fa fa-star"></i>Experience: 1 Years in Preschool Education</p>
+                                    <p><i class="fa fa-edit"></i>My Courses: Activities Kiddie</p>
+                                </div>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea porro sed pariatur est vel culpa. Quaerat veniam eius fuga tenetur, beatae quam doloremque consequuntur, quidem totam eos magnam quos nostrum atque eveniet ea, perspiciatis deleniti quasi delectus. Vitae assumenda, facilis quia mollitia qui.</p>
+                                <div class="teacher-links">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                                <a href="#" class="button-default button-yellow">View Profile</a>
+                            </div>
                         }
                     </div>
                     <div class="testimonial-image-slider text-center">
@@ -79,11 +134,26 @@
                                 <div class="sin-testiImage">
                                     <div class="teacher-image-carousel">
                                         @* TODO : Localization *@
-                                        <img src="@(teacherOne.CaptionSource)" alt="The Image Was Not Found" />
+                                        <img src="@(teacherOne.CaptionSource)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())" />
                                     </div>
                                 </div>
                             }
                         }
+                        <div class="sin-testiImage">
+                            <div class="teacher-image-carousel">
+                                <img src="img/teacher/3.jpg" alt="teacher 2" />
+                            </div>
+                        </div>
+                        <div class="sin-testiImage">
+                            <div class="teacher-image-carousel">
+                                <img src="img/teacher/4.jpg" alt="teacher 3" />
+                            </div>
+                        </div>
+                        <div class="sin-testiImage">
+                            <div class="teacher-image-carousel">
+                                <img src="img/teacher/5.jpg" alt="teacher 4" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ namespace TouchApp.Business.Abstract
         IDataResult<Phrase> Get(Expression<Func<Phrase, bool>> filter);
         IDataResult<List<GetPhraseDto>> GetDtoList(Expression<Func<Phrase, bool>> filter = null, int takeCount = 2000);
         IDataResult<GetPhraseDto> GetDto(Expression<Func<Phrase, bool>> filter = null);
-        IDataResult<int> Add(Phrase phrase);
+        IDataResult<int> Add(CreateManagementPhraseDto phrase);
         IDataResult<int> Update(Phrase phrase);
         IDataResult<int> DeletePermanently(long Id);
         IDataResult<int> DeleteByStatus(long Id);

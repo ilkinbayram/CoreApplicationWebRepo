@@ -156,6 +156,24 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<SharingTypeMedia>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
+        
+        public IDataResult<List<GetSharingTypeMediaDto>> GetDtoList(Expression<Func<SharingTypeMedia, bool>> filter = null)
+        {
+            try
+            {
+                var dtoListResult = new List<GetSharingTypeMediaDto>();
+                _sharingTypeMediaDal.GetList(filter).ToList().ForEach(x =>
+                {
+                    dtoListResult.Add(_mapper.Map<GetSharingTypeMediaDto>(x));
+                });
+
+                return new SuccessDataResult<List<GetSharingTypeMediaDto>>(dtoListResult);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<GetSharingTypeMediaDto>>(null, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+            }
+        }
 
         public IDataResult<int> Update(SharingTypeMedia SharingTypeMedia)
         {

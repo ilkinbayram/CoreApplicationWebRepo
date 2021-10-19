@@ -4,6 +4,7 @@
 
 @{
     List<string> tagList = null;
+    Dictionary<string, string> dict = new Dictionary<string, string>();
 
     if (Model != null)
     {
@@ -15,7 +16,11 @@
             {
                 var currentOne = item.SharingType.NameKey;
                 if (!tagList.Contains(currentOne))
+                {
                     tagList.Add(currentOne);
+                    dict.Add(currentOne, item.SharingType.AbriveatureClass);
+                }
+
             }
         });
     };
@@ -52,7 +57,7 @@
                         {
                             foreach (var item in tagList)
                             {
-                                <li class="filter" data-filter=".@(item.Replace(".","-").Replace(" ","-"))">@(item.Translate())</li>
+                                <li class="filter" data-filter=".@(dict[item])">@(item.Translate())</li>
                             }
                         }
                     </ul>
@@ -70,7 +75,7 @@
 
                         for (int i = 0; i < mediaOne.SharingTypeMedias.Count; i++)
                         {
-                            shareTypeClass += mediaOne.SharingTypeMedias[i].SharingType.NameKey.Replace(".", "-").Replace(" ", "-");
+                            shareTypeClass += mediaOne.SharingTypeMedias[i].SharingType.AbriveatureClass;
                             shareTypeClass += " ";
 
                             shareTypeTranslation += mediaOne.SharingTypeMedias[i].SharingType.NameKey.Translate();
@@ -82,7 +87,7 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-18 mix single-items @shareTypeClass overlay-hover">
                             <div class="overlay-effect">
-                                <a href="#"><img src="@(mediaOne.Source)" alt="@(mediaOne.AltrKey.Translate())"></a>
+                                <a class="stop-media-redirect-link" href="@(mediaOne.Source)"><img src="@(mediaOne.Source)" alt="@("Inform.ImageWasNotFoundTranslate".Translate())"></a>
                                 <div class="gallery-hover-effect">
                                     <a class="gallery-icon venobox" href="@(mediaOne.Source)"><i class="fa fa-image"></i></a>
                                     <span class="gallery-text">@shareTypeTranslation</span>

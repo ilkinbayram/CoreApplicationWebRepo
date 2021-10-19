@@ -7,7 +7,7 @@ namespace Business.ValidationRules.FluentValidation.Slider
     {
         public CreateSliderDtoValidator()
         {
-            RuleFor(x => x.TitleKey).NotEmpty().WithMessage("Order bos ola bilmez");
+            RuleFor(x => x.MainTitleKey).NotEmpty().WithMessage("Order bos ola bilmez");
             RuleFor(x => x.SliderMediaSource).NotEmpty().WithMessage("SliderMediaSource bos ola bilmez");
         }
     }

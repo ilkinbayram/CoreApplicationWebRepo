@@ -1,12 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Dtos.ProfessionCourseCategory;
+using Core.Extensions;
+using Core.Utilities.UsableModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 using System.Threading.Tasks;
+using TouchApp.Business.Abstract;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class ProfessionCourseCategoryController : Controller
     {
+        private readonly IProfessionCourseCategoryService _professionCourseCategoryService;
+        public ProfessionCourseCategoryController(IProfessionCourseCategoryService professionCourseCategoryService)
+        {
+            _professionCourseCategoryService = professionCourseCategoryService;
+        }
+
         // GET: ProfessionCourseCategoryController
         public async Task<ActionResult> Index()
         {
@@ -22,22 +34,55 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         // GET: ProfessionCourseCategoryController/Create
         public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new CreateManagementProfessionCourseCategoryDto();
+
+            var resultBlogCatList = _professionCourseCategoryService.GetList(x => x.IsActive).Data;
+
+            model.ParentProfessionCourseCategories = resultBlogCatList != null ? resultBlogCatList.Select(x =>
+                        new SelectListItem
+                        {
+                            Value = x.Id.ToString(),
+                            Text = x.NameKey.Translate()
+                        }).ToList() : new System.Collections.Generic.List<SelectListItem>();
+
+            return View(model);
         }
 
         // POST: ProfessionCourseCategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection, CreateManagementProfessionCourseCategoryDto createModel)
         {
-            try
+            var resultProfessionCourseService = _professionCourseCategoryService.Add(createModel);
+
+            if (resultProfessionCourseService != null)
             {
-                return RedirectToAction(nameof(Index));
+                if (resultProfessionCourseService.Success)
+                {
+                    var createProfessionCourseDtoModel = new CreateManagementProfessionCourseCategoryDto();
+
+                    var resultProfessionCourseCatList = _professionCourseCategoryService.GetList(x => x.IsActive).Data;
+
+                    createProfessionCourseDtoModel.ParentProfessionCourseCategories = resultProfessionCourseCatList != null ? resultProfessionCourseCatList.Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.Id.ToString(),
+                                    Text = x.NameKey.Translate()
+                                }).ToList() : new System.Collections.Generic.List<SelectListItem>();
+
+                    createProfessionCourseDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultProfessionCourseService.Message });
+
+                    return View(createProfessionCourseDtoModel);
+                }
+                else
+                {
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultProfessionCourseService.Message });
+
+                    return View(createModel);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("ServerErrorPage");
         }
 
         // GET: ProfessionCourseCategoryController/Edit/5

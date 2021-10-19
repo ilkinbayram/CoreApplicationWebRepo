@@ -17,7 +17,7 @@
 
 <div class="row">
     <div class="col-md-12 col-12 col-sm-12">
-        @using (Html.BeginForm("Create", "Teacher", FormMethod.Post))
+        @using (Html.BeginForm("Create", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -33,26 +33,26 @@
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(x => x.BiographyTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.BiographyTranslateAZE, new { @class = "form-control" })
+                                @Html.TextAreaFor(x => x.BiographyTranslateAZE, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.BiographyTranslateAZE, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
                                 @Html.LabelFor(x => x.BiographyTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.BiographyTranslateRUS, new { @class = "form-control" })
+                                @Html.TextAreaFor(x => x.BiographyTranslateRUS, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.BiographyTranslateRUS, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(x => x.BiographyTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.BiographyTranslateENG, new { @class = "form-control" })
+                                @Html.TextAreaFor(x => x.BiographyTranslateENG, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.BiographyTranslateENG, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group mb-1">
                                 @Html.LabelFor(x => x.BiographyTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.BiographyTranslateTUR, new { @class = "form-control" })
+                                @Html.TextAreaFor(x => x.BiographyTranslateTUR, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.BiographyTranslateTUR, null, new { @class = "text-danger" })
                             </div>
                         </div>
@@ -64,33 +64,33 @@
                     <div class="row mb-1 mt-2">
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                @Html.LabelFor(x => x.ShortBiographyKey, "ShortBiographyKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ShortBiographyKey, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.ShortBiographyKey, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.BioShortKey, "BioShortKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.BioShortKey, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BioShortKey, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(x => x.ShortBiographyTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ShortBiographyTranslateAZE, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.ShortBiographyTranslateAZE, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.BioShortTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextAreaFor(x => x.BioShortTranslateAZE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BioShortTranslateAZE, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                @Html.LabelFor(x => x.ShortBiographyTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ShortBiographyTranslateRUS, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.ShortBiographyTranslateRUS, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.BioShortTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextAreaFor(x => x.BioShortTranslateRUS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BioShortTranslateRUS, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(x => x.ShortBiographyTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ShortBiographyTranslateENG, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.ShortBiographyTranslateENG, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.BioShortTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextAreaFor(x => x.BioShortTranslateENG, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BioShortTranslateENG, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group mb-1">
-                                @Html.LabelFor(x => x.ShortBiographyTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ShortBiographyTranslateTUR, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.ShortBiographyTranslateTUR, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.BioShortTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextAreaFor(x => x.BioShortTranslateTUR, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.BioShortTranslateTUR, null, new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -144,26 +144,26 @@
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(x => x.ProfessionDescriptionTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ProfessionDescriptionTranslateAZE, new { @class = "form-control" })
+                                @Html.TextAreaFor(x => x.ProfessionDescriptionTranslateAZE, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.ProfessionDescriptionTranslateAZE, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
                                 @Html.LabelFor(x => x.ProfessionDescriptionTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ProfessionDescriptionTranslateRUS, new { @class = "form-control" })
+                                @Html.TextAreaFor(x => x.ProfessionDescriptionTranslateRUS, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.ProfessionDescriptionTranslateRUS, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(x => x.ProfessionDescriptionTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ProfessionDescriptionTranslateENG, new { @class = "form-control" })
+                                @Html.TextAreaFor(x => x.ProfessionDescriptionTranslateENG, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.ProfessionDescriptionTranslateENG, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group mb-1">
                                 @Html.LabelFor(x => x.ProfessionDescriptionTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.ProfessionDescriptionTranslateTUR, new { @class = "form-control" })
+                                @Html.TextAreaFor(x => x.ProfessionDescriptionTranslateTUR, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.ProfessionDescriptionTranslateTUR, null, new { @class = "text-danger" })
                             </div>
                         </div>
@@ -212,33 +212,33 @@
                     <div class="row mb-1 mt-2">
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                @Html.LabelFor(x => x.JobDescriptionKey, "JobDescriptionKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.JobDescriptionKey, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.JobDescriptionKey, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.JobDescKey, "JobDescKey.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextBoxFor(x => x.JobDescKey, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.JobDescKey, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(x => x.JobDescriptionTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.JobDescriptionTranslateAZE, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.JobDescriptionTranslateAZE, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.JobDescTranslateAZE, "TranslateToAzerbaijani.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextAreaFor(x => x.JobDescTranslateAZE, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.JobDescTranslateAZE, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group">
-                                @Html.LabelFor(x => x.JobDescriptionTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.JobDescriptionTranslateRUS, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.JobDescriptionTranslateRUS, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.JobDescTranslateRUS, "TranslateToRussian.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextAreaFor(x => x.JobDescTranslateRUS, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.JobDescTranslateRUS, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(x => x.JobDescriptionTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.JobDescriptionTranslateENG, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.JobDescriptionTranslateENG, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.JobDescTranslateENG, "TranslateToEnglish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextAreaFor(x => x.JobDescTranslateENG, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.JobDescTranslateENG, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                             <div class="form-group mb-1">
-                                @Html.LabelFor(x => x.JobDescriptionTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
-                                @Html.TextBoxFor(x => x.JobDescriptionTranslateTUR, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.JobDescriptionTranslateTUR, null, new { @class = "text-danger" })
+                                @Html.LabelFor(x => x.JobDescTranslateTUR, "TranslateToTurkish.VisualLocalization".Translate(), new { @class = "control-label h6" })
+                                @Html.TextAreaFor(x => x.JobDescTranslateTUR, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.JobDescTranslateTUR, null, new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -389,6 +389,23 @@
         }
     </div>
 </div>
+<div id="responseMessageContainer">
+    @if (Model.ResponseMessages != null && Model.ResponseMessages.Count > 0)
+    {
+        foreach (var message in Model.ResponseMessages)
+        {
+            <div class="responseMessage">
+                <div class="alert alert-@message.AlertColor alert-dismissible fade show" role="alert">
+                    <strong>@message.AlertMessage</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+    }
+</div>
+
 
 @section ScriptComponent{
     <style>

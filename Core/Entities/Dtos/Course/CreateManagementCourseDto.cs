@@ -16,6 +16,7 @@ namespace Core.Entities.Dtos.Course
     {
         public CreateManagementCourseDto()
         {
+            TeacherCourses = new List<CreateManagementTeacherCourseDto>();
             ResponseMessages = new List<AlertResult>();
             ModelType = ProjectModelType.Course;
         }
@@ -33,11 +34,16 @@ namespace Core.Entities.Dtos.Course
         public string DescriptionTranslateRUS { get; set; }
         public string DescriptionTranslateENG { get; set; }
         public string DescriptionTranslateTUR { get; set; }
-        public string PreviewDescriptionKey { get; set; }
-        public string PreviewDescriptionTranslateAZE { get; set; }
-        public string PreviewDescriptionTranslateRUS { get; set; }
-        public string PreviewDescriptionTranslateENG { get; set; }
-        public string PreviewDescriptionTranslateTUR { get; set; }
+        public string PreviewDescKey { get; set; }
+        public string PreviewDescTranslateAZE { get; set; }
+        public string PreviewDescTranslateRUS { get; set; }
+        public string PreviewDescTranslateENG { get; set; }
+        public string PreviewDescTranslateTUR { get; set; }
+        public string CourseInfoHtmlMaintenanceKey { get; set; }
+        public string CourseInfoHtmlMaintenanceTranslateAZE { get; set; }
+        public string CourseInfoHtmlMaintenanceTranslateRUS { get; set; }
+        public string CourseInfoHtmlMaintenanceTranslateENG { get; set; }
+        public string CourseInfoHtmlMaintenanceTranslateTUR { get; set; }
         public byte TotalMonths { get; set; }
         public short TotalHours { get; set; }
         public decimal PricePerMonth { get; set; }

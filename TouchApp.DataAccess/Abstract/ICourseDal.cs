@@ -8,7 +8,7 @@ namespace TouchApp.DataAccess.Abstract
 {
     public interface ICourseDal : IEntityRepository<Course>, IEntityQueryableRepository<Course>
     {
-        List<Course> GetAllWithRelations(Expression<Func<Course, bool>> filter);
+        List<Course> GetAllWithRelations(Expression<Func<Course, bool>> filter = null);
         Course GetWithRelations(Expression<Func<Course, bool>> filter);
     }
 }
