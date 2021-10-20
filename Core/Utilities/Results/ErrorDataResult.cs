@@ -1,21 +1,33 @@
-﻿namespace Core.Utilities.Results
+﻿using System.Collections.Generic;
+
+namespace Core.Utilities.Results
 {
     public class ErrorDataResult<T>:DataResult<T>
     {
-        public ErrorDataResult(T data, string message) : base(data, false, message)
+        public ErrorDataResult(T data, bool isProcessBroken, string message) : base(data, false, isProcessBroken, message)
         {
         }
 
-        public ErrorDataResult(T data) : base(data, false)
+        public ErrorDataResult(T data, bool isProcessBroken) : base(data, false, isProcessBroken)
         {
         }
 
-        public ErrorDataResult(string message) : base(default, false, message)
+        public ErrorDataResult(bool isProcessBroken, string message) : base(default, false, isProcessBroken, message)
         {
 
         }
 
-        public ErrorDataResult() : base(default, false)
+        public ErrorDataResult(bool isProcessBroken, List<string> messages) : base(default, false, isProcessBroken, messages)
+        {
+
+        }
+
+        public ErrorDataResult(string message) : base(default, false, false, message)
+        {
+
+        }
+
+        public ErrorDataResult() : base(default, false, false)
         {
 
         }

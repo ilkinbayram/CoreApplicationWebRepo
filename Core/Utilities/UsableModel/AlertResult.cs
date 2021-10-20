@@ -1,11 +1,13 @@
 ﻿using Core.Resources.Enums;
+using System.Collections.Generic;
 
 namespace Core.Utilities.UsableModel
 {
     public class AlertResult
     {
         public AlertStatus Status { get; set; }
+        public bool IsComplexMessage { get; set; }
         public string AlertColor { get; set; }
-        public string AlertMessage { get; set; }
+        public List<string> AlertMessages { get; set; }
     }
 }

@@ -3,12 +3,12 @@
     public class DataResult<T> : Result, IDataResult<T>
     {
         private T _data;
-        public DataResult(T data,bool success, string message) : base(success, message)
+        public DataResult(T data,bool success, bool isProcessBroken, string message) : base(success, isProcessBroken, message)
         {
             _data = data;
         }
 
-        public DataResult(T data, bool success):base(success)
+        public DataResult(T data, bool success, bool isProcessBroken):base(success, isProcessBroken)
         {
             _data = data;
         }

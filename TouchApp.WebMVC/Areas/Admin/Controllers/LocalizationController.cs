@@ -2,6 +2,7 @@
 using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
 
@@ -57,13 +58,14 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                 if (resultLocalizationService.Success)
                 {
                     var createLocalizationDtoModel = new CreateLocalizationDto();
-                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultLocalizationService.Message });
-
+                    
+                        createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultLocalizationService.Responses.Select(x=>x.Message).ToList() });
+                   
                     return View(createLocalizationDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultLocalizationService.Message });
+                        createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultLocalizationService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

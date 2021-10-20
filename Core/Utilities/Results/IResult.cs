@@ -1,8 +1,11 @@
-﻿namespace Core.Utilities.Results
+﻿using System.Collections.Generic;
+
+namespace Core.Utilities.Results
 {
     public interface IResult
     {
         bool Success { get; }
-        string Message { get; }
+        bool IsProcessBroken { get; }
+        List<Response> Responses { get; }
     }
 }

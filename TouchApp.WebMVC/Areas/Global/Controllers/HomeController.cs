@@ -1,4 +1,5 @@
-﻿using Business.ExternalServices.Mail.Services.Abstract;
+﻿using AutoMapper;
+using Business.ExternalServices.Mail.Services.Abstract;
 using Core.CrossCuttingConcerns.Caching;
 using Core.Extensions;
 using Core.Resources.Enums;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
 using TouchApp.Business.BusinessHelper;
 using TouchApp.Business.ExternalServices.Mail;
+using TouchApp.Business.ExternalServices.Mail.ModelAcceptor;
 using TouchApp.WebMVC.Areas.Global.Models.ViewModel;
 
 namespace TouchApp.WebMVC.Areas.Global.Controllers
@@ -17,19 +19,20 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
     [Area("Global")]
     public class HomeController : Controller
     {
-        private ICacheManager _cacheManager;
-        private ISessionStorageHelper _sessionStorageHelper;
-        private ILocalizationService _localizationService;
-        private IBlogService _blogService;
-        private ICourseService _courseService;
-        private ICourseServiceService _courseServiceService;
-        private IMediaService _mediaService;
-        private IPhraseService _phraseService;
-        private ISliderService _sliderService;
-        private ITeacherService _teacherService;
-        private ILanguageService _languageService;
-        private IConfigHelper _configHelper;
-        private ISendgridMailService _mailService;
+        private readonly ICacheManager _cacheManager;
+        private readonly ISessionStorageHelper _sessionStorageHelper;
+        private readonly ILocalizationService _localizationService;
+        private readonly IBlogService _blogService;
+        private readonly ICourseService _courseService;
+        private readonly ICourseServiceService _courseServiceService;
+        private readonly IMediaService _mediaService;
+        private readonly IPhraseService _phraseService;
+        private readonly ISliderService _sliderService;
+        private readonly ITeacherService _teacherService;
+        private readonly ILanguageService _languageService;
+        private readonly IConfigHelper _configHelper;
+        private readonly ISendgridMailService _mailService;
+        private readonly IMapper _mapper;
 
         private HomeViewModel _viewModel;
         public HomeController(ICacheManager cacheManager, 
@@ -44,7 +47,8 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
                               IPhraseService phraseService,
                               ISliderService sliderService,
                               ITeacherService teacherService,
-                              ISendgridMailService mailService)
+                              ISendgridMailService mailService,
+                              IMapper mapper)
         {
             _cacheManager = cacheManager;
             _localizationService = localizationService;
@@ -59,6 +63,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
             _sliderService = sliderService;
             _teacherService = teacherService;
             _mailService = mailService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -93,27 +98,24 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
 
             mailRequest.Lang_oid = Convert.ToByte(languageOid);
 
-            bool responseIsTrueClient = false;
-            bool responseIsTrueServer = false;
+            bool responseIsTrue = false;
 
             var notificationModel = new AlertResult();
 
             switch (mailRequest.MailType)
             {
                 case (byte)MailType.Information_Email:
-                    responseIsTrueClient = responseIsTrueServer = await _mailService.SendMailFromClientAsync(mailRequest);
+                    responseIsTrue = _mailService.SendInformationMailFromClient(_mapper.Map<InformationMailRequestModel>(mailRequest)).Data;
                     notificationModel.Status = AlertStatus.Success;
                     notificationModel.AlertMessage = "GeneralMailSuccessNotificationForMail.Localization".Translate();
                     break;
                 case (byte)MailType.Register_email:
-                    responseIsTrueClient = _mailService.SendRegisterFromClientMail(mailRequest);
-                    responseIsTrueServer = _mailService.SendRegisterFromServerMail(mailRequest);
+                    responseIsTrue = _mailService.SendRegisterMailFromClient(_mapper.Map<RegisterMailRequestModel>(mailRequest)).Data;
                     notificationModel.Status = AlertStatus.Success;
                     notificationModel.AlertMessage = "EmailSuccessNotificationGeneralRegister.Localization".Translate();
                     break;
                 case (byte)MailType.Quick_Register:
-                    responseIsTrueClient = _mailService.SendQuickRequestFromClientMail(mailRequest);
-                    responseIsTrueServer = _mailService.SendQuickRequestFromServerMail(mailRequest);
+                    responseIsTrue = _mailService.SendQuickRegisterMailFromClient(_mapper.Map<QuickRegisterMailRequestModel>(mailRequest)).Data;
                     notificationModel.Status = AlertStatus.Success;
                     notificationModel.AlertMessage = "EmailSuccessNotificationQuickRegister.Localization".Translate();
                     break;
@@ -121,7 +123,7 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
                     break;
             }
 
-            if (responseIsTrueClient && responseIsTrueServer)
+            if (responseIsTrue)
                 return PartialView("_PartialNotificationAlert",notificationModel);
 
             notificationModel.Status = AlertStatus.Danger;

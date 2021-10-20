@@ -187,7 +187,8 @@ namespace Business.Libs
             }
             catch (Exception ex)
             {
-                ErrorDataResult<string> errorDataResult = new ErrorDataResult<string>("", ex.Message);
+                ErrorDataResult<string> errorDataResult = new ErrorDataResult<string>("");
+                errorDataResult.SetMessages(ex.Message);
                 return errorDataResult;
             }
         }

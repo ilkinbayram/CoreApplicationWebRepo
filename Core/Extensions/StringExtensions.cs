@@ -14,37 +14,6 @@ namespace Core.Extensions
 {
     public static class StringExtensions
     {
-        public static long[] ToFeatureIdArray(this string featureIdsJoined)
-        {
-            List<long> resultList = new List<long>();
-            long[] emptyResult = new long[0];
-
-            if (featureIdsJoined == default)
-                return default;
-
-            var initialArray = featureIdsJoined.Split(',');
-
-
-            if (initialArray.Length == 1)
-            {
-                if (!long.TryParse(initialArray[0], out long result))
-                    return emptyResult;
-
-                resultList.Add(result);
-                return resultList.ToArray();
-            }
-
-            foreach (var idStr in initialArray)
-            {
-                if (!long.TryParse(idStr, out long result))
-                    return emptyResult;
-
-                resultList.Add(result);
-            }
-
-            return resultList.ToArray();
-        }
-
         public static string Translate(this string key)
         {
             try
@@ -88,6 +57,67 @@ namespace Core.Extensions
                 {
                     return allResponse.ContainsKey(lang_oid) && allResponse[lang_oid].ContainsKey(key)
                         ? allResponse[lang_oid][key]
+                        : key;
+                }
+
+                return key;
+            }
+            catch (Exception ex)
+            {
+                return key;
+            }
+        }
+
+        public static string Translate(this string key, params string[] insteadParameters)
+        {
+            try
+            {
+                var _cacheManager = CoreInstanceFactory.GetInstance<ICacheManager>();
+
+                insteadParameters.ToList().ForEach(x =>
+                {
+                    x = x.Translate();
+                });
+
+                var serverLocalizationKey = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.ServerCache_ContainerKeyword.ToString(), ChildKeySettings.Server_Language_CachedForAll.ToString());
+
+                var currentLangOid = Convert.ToInt16(ClientSideStorageHelper.GetLangOidStatic());
+
+                var allResponse = _cacheManager.Get<Dictionary<short, Dictionary<string, string>>>(serverLocalizationKey);
+
+                if (allResponse != null)
+                {
+                    return allResponse.ContainsKey(currentLangOid) && allResponse[currentLangOid].ContainsKey(key)
+                        ? string.Format(allResponse[currentLangOid][key], insteadParameters)
+                        : key;
+                }
+
+                return key;
+            }
+            catch (Exception ex)
+            {
+                return key;
+            }
+        }
+
+        public static string Translate(this string key, string insteadParameter)
+        {
+            try
+            {
+                var _cacheManager = CoreInstanceFactory.GetInstance<ICacheManager>();
+
+                // TODO : Hard Code Should Be Refactored
+
+                var serverLocalizationKey = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.ServerCache_ContainerKeyword.ToString(), ChildKeySettings.Server_Language_CachedForAll.ToString());
+
+                var currentLangOid = Convert.ToInt16(ClientSideStorageHelper.GetLangOidStatic());
+
+                var allResponse = _cacheManager.Get<Dictionary<short, Dictionary<string, string>>>(serverLocalizationKey);
+
+                if (allResponse != null)
+                {
+                    return allResponse.ContainsKey(currentLangOid) && allResponse[currentLangOid].ContainsKey(key)
+                        ? string.Format(allResponse[currentLangOid][key], insteadParameter.Translate())
                         : key;
                 }
 

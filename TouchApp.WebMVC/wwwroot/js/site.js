@@ -8,11 +8,6 @@
 /*--------------------------
     Custom JS START
 ---------------------------- */
-
-$(".vbox-close").click(function (e) {
-    console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
-});
-
 $('body').click(function (e) {
     if (e.target.className=='stop-media-redirect-link') {
         e.preventDefault();

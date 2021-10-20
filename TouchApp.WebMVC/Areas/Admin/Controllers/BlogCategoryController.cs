@@ -37,7 +37,7 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         {
             var model = new CreateBlogCategoryManagementDto();
 
-            var resultBlogCatList = _blogCategoryService.GetList(x=>x.IsActive).Data;
+            var resultBlogCatList = _blogCategoryService.GetList(x => x.IsActive).Data;
 
             model.ParentBlogCategories = resultBlogCatList != null ? resultBlogCatList.Select(x =>
                         new SelectListItem
@@ -54,11 +54,11 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(IFormCollection collection, CreateBlogCategoryManagementDto createModel)
         {
-            var resultBlogService = _blogCategoryService.Add(createModel);
+            var resultBlogCategoryServiceResponse = _blogCategoryService.Add(createModel);
 
-            if (resultBlogService != null)
+            if (!resultBlogCategoryServiceResponse.IsProcessBroken)
             {
-                if (resultBlogService.Success)
+                if (resultBlogCategoryServiceResponse.Success)
                 {
                     var createBlogDtoModel = new CreateBlogCategoryManagementDto();
 
@@ -71,13 +71,14 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                                     Text = x.NameKey.Translate()
                                 }).ToList() : new System.Collections.Generic.List<SelectListItem>();
 
-                    createBlogDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultBlogService.Message });
+
+                    createBlogDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultBlogCategoryServiceResponse.Responses.Select(x => x.Message).ToList() });
 
                     return View(createBlogDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultBlogService.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultBlogCategoryServiceResponse.Responses.Select(x => x.Message).ToList() });
 
                     return View(createModel);
                 }

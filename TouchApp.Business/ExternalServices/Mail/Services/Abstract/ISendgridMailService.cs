@@ -1,17 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Core.Resources.Enums;
+using Core.Utilities.Results;
 using TouchApp.Business.ExternalServices.Mail;
+using TouchApp.Business.ExternalServices.Mail.ModelAcceptor;
 
 namespace Business.ExternalServices.Mail.Services.Abstract
 {
     public interface ISendgridMailService
     {
-        Task<bool> SendMailFromClientAsync(MailRequest mailRequest);
-        Task<bool> SendMailFromServerAsync(MailRequest mailRequest);
-
-        bool SendQuickRequestFromClientMail(MailRequest mailRequest);
-        bool SendQuickRequestFromServerMail(MailRequest mailRequest);
-        bool SendRegisterFromClientMail(MailRequest mailRequest);
-        bool SendRegisterFromServerMail(MailRequest mailRequest);
+        IDataResult<bool> SendInformationMailFromClient(InformationMailRequestModel mailRequest);
+        IDataResult<bool> SendQuickRegisterMailFromClient(QuickRegisterMailRequestModel mailRequest);
+        IDataResult<bool> SendRegisterMailFromClient(RegisterMailRequestModel mailRequest);
     }
 }

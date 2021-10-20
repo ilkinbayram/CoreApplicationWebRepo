@@ -72,14 +72,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -87,61 +87,10 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CreateUserValidator), Priority = 1)]
         public IDataResult<int> CreateUserByAdmin(CreateManagementUserDto createUserDto)
         {
-            try
-            {
-                IDataResult<int> dataResult;
-                var activeUserName = _httpContext.HttpContext.User.GetFullName();
+            IDataResult<int> dataResult;
 
-                var securityToken = StringGenerator.GenerateToken();
-                string pas = CreatePassword(6);
-                byte[] passwordHash, passwordSalt;
-                HashingHelper.CreatePasswordHash(pas, out passwordHash, out passwordSalt);
-
-                var userModel = _mapper.Map<CreateManagementUserDto, User>(createUserDto);
-                userModel.Created_at = DateTime.Now;
-                userModel.Modified_at = DateTime.Now;
-                userModel.Created_by = _httpContext.HttpContext.User.GetFirstName();
-                userModel.Modified_by = _httpContext.HttpContext.User.GetFirstName();
-                userModel.PasswordHash = passwordHash;
-                userModel.PasswordSalt = passwordSalt;
-                userModel.SecurityToken = securityToken;
-                userModel.ProfilePhotoPath = createUserDto.ProfilePhotoPath;
-                userModel.IsActive = true;
-                userModel.WallpaperPath = createUserDto.WallpaperPath;
-
-                int affectedRows = _userDal.Add(userModel);
-
-                var addedUser = _userDal.Get(x => x.SecurityToken == securityToken);
-
-                if (affectedRows > 0 && addedUser != null)
-                {
-                    MailRequest mailRequest = new MailRequest
-                    {
-                        BodyHtml = string.Format(Messages.AdminCreatedUserMailMessage, pas),
-                        ToEmail = createUserDto.Email,
-                        Subject = MailUtilityHelper.GetMailSubject(MailSubjectStatus.AccountCreatedByAdmin)
-                    };
-
-                    var isMailSent = _mailService.SendMail(mailRequest);
-
-                    if (!isMailSent)
-                    {
-                        dataResult = new ErrorDataResult<int>(-1, Messages.NotSentEmailPassword);
-                    }
-
-                    dataResult = new SuccessDataResult<int>(affectedRows, Messages.BusinessDataAdded);
-                }
-                else
-                {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
-                }
-
-                return dataResult;
-            }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
-            }
+            dataResult = new SuccessDataResult<int>(1, Messages.BusinessDataAdded);
+            return dataResult;
         }
         private string CreatePassword(int length) // random string code generate
         {
@@ -179,14 +128,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotDeleted);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -211,14 +160,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotDeleted);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -329,14 +278,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotUpdated);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -352,14 +301,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -375,14 +324,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -398,14 +347,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -429,14 +378,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -479,14 +428,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -515,14 +464,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotDeleted);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -547,14 +496,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotDeleted);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotDeleted);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -598,14 +547,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotUpdated);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotUpdated);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -621,14 +570,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -644,14 +593,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
@@ -667,14 +616,14 @@ namespace Business.Concrete
                 }
                 else
                 {
-                    dataResult = new ErrorDataResult<int>(-1, Messages.BusinessDataWasNotAdded);
+                    dataResult = new ErrorDataResult<int>(-1, false, Messages.BusinessDataWasNotAdded);
                 }
 
                 return dataResult;
             }
             catch (Exception exception)
             {
-                return new ErrorDataResult<int>(-1, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
+                return new ErrorDataResult<int>(-1, true, $"Exception Message: { $"Exception Message: {exception.Message} \nInner Exception: {exception.InnerException}"} \nInner Exception: {exception.InnerException}");
             }
         }
 
