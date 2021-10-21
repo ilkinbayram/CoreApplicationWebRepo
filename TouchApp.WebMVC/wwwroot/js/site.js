@@ -87,6 +87,9 @@ function ajaxMailSend(propComponentIdContainer, mailAction, successCallBack = nu
                     }, 2000);
                 }, 5500);
             });
+            setTimeout(function (e) {
+                $("#notification-container").html('');
+            }, 9500);
         }
 
         // phoneId, fromEmailId, toEmailId, subjectId, mailTypeId, nameSurnameId, messageId
@@ -130,6 +133,9 @@ function ajaxMailSend(propComponentIdContainer, mailAction, successCallBack = nu
                     }, 2000);
                 }, 5500);
             });
+            setTimeout(function (e) {
+                $("#notification-container").html('');
+            }, 9500);
         }
 
         loaderSpinner.gSpinner('hide');
