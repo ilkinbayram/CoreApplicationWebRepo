@@ -32,7 +32,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 792, DateTimeKind.Local).AddTicks(3510));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 469, DateTimeKind.Local).AddTicks(136));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -59,7 +59,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 792, DateTimeKind.Local).AddTicks(4172));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 469, DateTimeKind.Local).AddTicks(1217));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -103,7 +103,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 776, DateTimeKind.Local).AddTicks(7271));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 446, DateTimeKind.Local).AddTicks(2876));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -124,7 +124,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 776, DateTimeKind.Local).AddTicks(7950));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 446, DateTimeKind.Local).AddTicks(3626));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -149,7 +149,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("d95b0710-df67-4d18-b117-934144a0cc6b");
+                        .HasDefaultValue("ab7e11df-eb32-48ec-9980-feb54c416ae3");
 
                     b.HasKey("Id");
 
@@ -171,7 +171,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 778, DateTimeKind.Local).AddTicks(1242));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 447, DateTimeKind.Local).AddTicks(9272));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -198,7 +198,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 778, DateTimeKind.Local).AddTicks(1962));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 448, DateTimeKind.Local).AddTicks(21));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -242,7 +242,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 757, DateTimeKind.Local).AddTicks(8066));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 419, DateTimeKind.Local).AddTicks(3387));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -269,7 +269,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 757, DateTimeKind.Local).AddTicks(8787));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 419, DateTimeKind.Local).AddTicks(4226));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -306,7 +306,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("2e86be3a-4a4c-4832-9692-5138cf4a67c1");
+                        .HasDefaultValue("8d1bd36f-9742-4aa4-8351-e37fdaa4cafa");
 
                     b.HasKey("Id");
 
@@ -336,7 +336,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 759, DateTimeKind.Local).AddTicks(1957));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 421, DateTimeKind.Local).AddTicks(24));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -360,7 +360,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 759, DateTimeKind.Local).AddTicks(2653));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 421, DateTimeKind.Local).AddTicks(843));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -392,7 +392,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 760, DateTimeKind.Local).AddTicks(6150));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 422, DateTimeKind.Local).AddTicks(8797));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -422,7 +422,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 760, DateTimeKind.Local).AddTicks(6962));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 422, DateTimeKind.Local).AddTicks(9509));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -458,7 +458,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 793, DateTimeKind.Local).AddTicks(6361));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 471, DateTimeKind.Local).AddTicks(682));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -488,7 +488,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 793, DateTimeKind.Local).AddTicks(7022));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 471, DateTimeKind.Local).AddTicks(1740));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -520,7 +520,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 795, DateTimeKind.Local).AddTicks(618));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 473, DateTimeKind.Local).AddTicks(4031));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -544,7 +544,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 795, DateTimeKind.Local).AddTicks(1303));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 473, DateTimeKind.Local).AddTicks(4992));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -622,7 +622,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 763, DateTimeKind.Local).AddTicks(4775));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 425, DateTimeKind.Local).AddTicks(9313));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -649,7 +649,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 763, DateTimeKind.Local).AddTicks(5675));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 426, DateTimeKind.Local).AddTicks(83));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -686,7 +686,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 771, DateTimeKind.Local).AddTicks(2086));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 439, DateTimeKind.Local).AddTicks(1823));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -710,7 +710,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 771, DateTimeKind.Local).AddTicks(2776));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 439, DateTimeKind.Local).AddTicks(3545));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -778,7 +778,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 744, DateTimeKind.Local).AddTicks(1318));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 402, DateTimeKind.Local).AddTicks(5467));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -799,7 +799,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 744, DateTimeKind.Local).AddTicks(7164));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 403, DateTimeKind.Local).AddTicks(2216));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -837,7 +837,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 772, DateTimeKind.Local).AddTicks(5784));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 441, DateTimeKind.Local).AddTicks(9567));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -858,7 +858,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 772, DateTimeKind.Local).AddTicks(6410));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 442, DateTimeKind.Local).AddTicks(333));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -897,7 +897,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 761, DateTimeKind.Local).AddTicks(9626));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 424, DateTimeKind.Local).AddTicks(2742));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -924,7 +924,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 762, DateTimeKind.Local).AddTicks(271));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 424, DateTimeKind.Local).AddTicks(3530));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -959,7 +959,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 796, DateTimeKind.Local).AddTicks(5421));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 475, DateTimeKind.Local).AddTicks(6952));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -986,7 +986,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 796, DateTimeKind.Local).AddTicks(6044));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 475, DateTimeKind.Local).AddTicks(8203));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1022,7 +1022,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 798, DateTimeKind.Local).AddTicks(1032));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 477, DateTimeKind.Local).AddTicks(8823));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1043,7 +1043,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 798, DateTimeKind.Local).AddTicks(1699));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 477, DateTimeKind.Local).AddTicks(9624));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1080,7 +1080,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 799, DateTimeKind.Local).AddTicks(4605));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 479, DateTimeKind.Local).AddTicks(4462));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1107,7 +1107,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 799, DateTimeKind.Local).AddTicks(5279));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 479, DateTimeKind.Local).AddTicks(5267));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1145,7 +1145,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 801, DateTimeKind.Local).AddTicks(748));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 481, DateTimeKind.Local).AddTicks(1350));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1172,7 +1172,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 801, DateTimeKind.Local).AddTicks(1383));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 481, DateTimeKind.Local).AddTicks(2253));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1224,7 +1224,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 779, DateTimeKind.Local).AddTicks(6116));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 449, DateTimeKind.Local).AddTicks(5903));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1245,7 +1245,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 779, DateTimeKind.Local).AddTicks(6754));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 449, DateTimeKind.Local).AddTicks(6649));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1275,7 +1275,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 780, DateTimeKind.Local).AddTicks(9948));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 451, DateTimeKind.Local).AddTicks(4228));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1299,7 +1299,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 781, DateTimeKind.Local).AddTicks(677));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 451, DateTimeKind.Local).AddTicks(6195));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1385,7 +1385,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 785, DateTimeKind.Local).AddTicks(3047));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 457, DateTimeKind.Local).AddTicks(2547));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1412,7 +1412,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 785, DateTimeKind.Local).AddTicks(3633));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 457, DateTimeKind.Local).AddTicks(3300));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1457,7 +1457,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 774, DateTimeKind.Local).AddTicks(7557));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 444, DateTimeKind.Local).AddTicks(686));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1490,7 +1490,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 774, DateTimeKind.Local).AddTicks(8224));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 444, DateTimeKind.Local).AddTicks(1460));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1577,7 +1577,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 802, DateTimeKind.Local).AddTicks(5240));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 482, DateTimeKind.Local).AddTicks(8006));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1598,7 +1598,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 802, DateTimeKind.Local).AddTicks(5921));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 482, DateTimeKind.Local).AddTicks(8819));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1641,7 +1641,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 804, DateTimeKind.Local).AddTicks(1462));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 484, DateTimeKind.Local).AddTicks(9808));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1662,7 +1662,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 804, DateTimeKind.Local).AddTicks(2300));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 485, DateTimeKind.Local).AddTicks(990));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1691,7 +1691,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 782, DateTimeKind.Local).AddTicks(3644));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 453, DateTimeKind.Local).AddTicks(7704));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1712,7 +1712,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 782, DateTimeKind.Local).AddTicks(4271));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 453, DateTimeKind.Local).AddTicks(8414));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1748,7 +1748,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 783, DateTimeKind.Local).AddTicks(8483));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 455, DateTimeKind.Local).AddTicks(4890));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1769,7 +1769,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 783, DateTimeKind.Local).AddTicks(9169));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 455, DateTimeKind.Local).AddTicks(5721));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1818,7 +1818,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 787, DateTimeKind.Local).AddTicks(2997));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 460, DateTimeKind.Local).AddTicks(7446));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1854,7 +1854,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 787, DateTimeKind.Local).AddTicks(3611));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 460, DateTimeKind.Local).AddTicks(8414));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1920,7 +1920,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 788, DateTimeKind.Local).AddTicks(8406));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 463, DateTimeKind.Local).AddTicks(2364));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1941,7 +1941,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 788, DateTimeKind.Local).AddTicks(9078));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 463, DateTimeKind.Local).AddTicks(3378));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -2017,7 +2017,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 791, DateTimeKind.Local).AddTicks(2036));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 467, DateTimeKind.Local).AddTicks(846));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -2038,7 +2038,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 791, DateTimeKind.Local).AddTicks(2698));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 467, DateTimeKind.Local).AddTicks(2034));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -2084,7 +2084,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 755, DateTimeKind.Local).AddTicks(8744));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 417, DateTimeKind.Local).AddTicks(785));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -2123,7 +2123,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 755, DateTimeKind.Local).AddTicks(9404));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 417, DateTimeKind.Local).AddTicks(1552));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -2221,7 +2221,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 789, DateTimeKind.Local).AddTicks(9835));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 465, DateTimeKind.Local).AddTicks(880));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -2242,7 +2242,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 19, 5, 9, 36, 790, DateTimeKind.Local).AddTicks(521));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 465, DateTimeKind.Local).AddTicks(2090));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()

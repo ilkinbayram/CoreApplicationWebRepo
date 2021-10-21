@@ -55,7 +55,7 @@ namespace Business.Concrete
                 var fileUploadResult = _fileManager.UploadListFileSaveDictionary(fileList);
 
                 if (!fileUploadResult.Success)
-                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+                    return new ErrorDataResult<int>(-1, false, fileUploadResult.Responses);
 
                 for (int i = 0; i < fileList.Count; i++)
                 {
@@ -80,7 +80,7 @@ namespace Business.Concrete
                 var movieUploadResult = _fileManager.UploadVideoSaveDictionary(teacher.PreviewMovieFile);
 
                 if (!movieUploadResult.Success)
-                    return new ErrorDataResult<int>(-1, movieUploadResult.Message);
+                    return new ErrorDataResult<int>(-1, false, movieUploadResult.Responses);
 
                 var publicVideoId = _cloudinaryService.StoreVideo(movieUploadResult.Data["videoPath"]);
 

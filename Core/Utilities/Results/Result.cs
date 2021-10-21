@@ -3,18 +3,17 @@ using System.Linq;
 
 namespace Core.Utilities.Results
 {
-    public class Result:IResult
+    public class Result : IResult
     {
         private readonly List<Response> _responses;
-        public Result(bool success, bool isProcessBroken, string message):this(success, isProcessBroken)
+        private bool _hasResponseMessages => _responses != null && _responses.Count > 0;
+        public Result(bool success, bool isProcessBroken, string message) : this(success, isProcessBroken)
         {
-            if (Responses != null) _responses = new List<Response>();
             _responses.Add(new Response(message));
         }
 
         public Result(bool success, bool isProcessBroken, string message, string fullDetail) : this(success, isProcessBroken)
         {
-            if (Responses != null) _responses = new List<Response>();
             _responses.Add(new Response(message, fullDetail));
         }
 
@@ -24,18 +23,16 @@ namespace Core.Utilities.Results
             {
                 foreach (var msgOne in messages)
                 {
-                    if (Responses != null) _responses = new List<Response>();
                     _responses.Add(new Response(msgOne));
                 }
             }
         }
         public Result(bool success, bool isProcessBroken, List<Response> responses) : this(success, isProcessBroken)
         {
-            if (responses != null && responses.Count > 0)
+            if (responses != null)
             {
                 foreach (var resOne in responses)
                 {
-                    if (Responses != null) _responses = new List<Response>();
                     _responses.Add(resOne);
                 }
             }
@@ -45,12 +42,14 @@ namespace Core.Utilities.Results
         {
             Success = success;
             IsProcessBroken = isProcessBroken;
-            if (Responses != null) _responses = new List<Response>();
+            if (Responses == null) _responses = new List<Response>();
         }
+
+        public bool HasResponseMessages => _hasResponseMessages;
 
         public void SetMessages(string message, string fullDetail)
         {
-            if (!_responses.Any(x=>x.Message == message))
+            if (!_responses.Any(x => x.Message == message))
                 _responses.Add(new Response(message, fullDetail));
         }
         public void SetMessages(string message)
@@ -61,7 +60,7 @@ namespace Core.Utilities.Results
 
         public void SetMessages(List<string> messageList)
         {
-            if (messageList != null && messageList.Count>0)
+            if (messageList != null && messageList.Count > 0)
             {
                 foreach (var messageOne in messageList)
                 {

@@ -50,7 +50,7 @@ namespace Business.Concrete
                     var fileUploadResult = _fileManager.UploadThumbnail(blogCategory.IconFile);
 
                     if (!fileUploadResult.Success)
-                        return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+                        return new ErrorDataResult<int>(-1, false, fileUploadResult.Responses);
 
                     var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
 

@@ -80,12 +80,12 @@ function ajaxMailSend(propComponentIdContainer, mailAction, successCallBack = nu
             $("#notification-container").html(data);
             $("#notification-container").animate({
                 opacity: 1
-            }, 1500, function () {
+            }, 2000, function () {
                 setTimeout(function (e) {
                     $("#notification-container").animate({
                         opacity: 0
-                    }, 1500);
-                }, 4500);
+                    }, 2000);
+                }, 5500);
             });
         }
 
@@ -123,12 +123,12 @@ function ajaxMailSend(propComponentIdContainer, mailAction, successCallBack = nu
             $("#notification-container").html(data);
             $("#notification-container").animate({
                 opacity: 1
-            }, 1500, function () {
+            }, 2000, function () {
                 setTimeout(function (e) {
                     $("#notification-container").animate({
                         opacity: 0
-                    }, 1500);
-                }, 4500);
+                    }, 2000);
+                }, 5500);
             });
         }
 

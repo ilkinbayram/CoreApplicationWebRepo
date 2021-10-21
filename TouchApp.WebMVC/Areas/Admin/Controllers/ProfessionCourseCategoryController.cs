@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class ProfessionCourseCategoryController : Controller
     {
         private readonly IProfessionCourseCategoryService _professionCourseCategoryService;
@@ -70,13 +72,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                                     Text = x.NameKey.Translate()
                                 }).ToList() : new System.Collections.Generic.List<SelectListItem>();
 
-                    createProfessionCourseDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultProfessionCourseService.Message });
+                    createProfessionCourseDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultProfessionCourseService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createProfessionCourseDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultProfessionCourseService.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultProfessionCourseService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

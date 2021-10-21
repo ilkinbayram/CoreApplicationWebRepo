@@ -80,13 +80,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                                    Text = x.NameKey.Translate()
                                }).ToList();
 
-                    createBlogDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultBlogService.Message });
+                    createBlogDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultBlogService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createBlogDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultBlogService.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultBlogService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

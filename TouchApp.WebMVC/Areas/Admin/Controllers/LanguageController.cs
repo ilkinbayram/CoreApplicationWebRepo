@@ -2,12 +2,15 @@
 using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class LanguageController : Controller
     {
 
@@ -57,13 +60,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                 if (resultLang.Success)
                 {
                     var createLangDtoModel = new CreateManagementLanguageDto();
-                    createLangDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultLang.Message });
+                    createLangDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultLang.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createLangDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultLang.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultLang.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

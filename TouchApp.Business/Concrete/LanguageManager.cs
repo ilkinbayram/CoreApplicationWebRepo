@@ -10,8 +10,6 @@ using Core.Utilities.Results;
 using Core.Utilities.Services.Rest;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -58,7 +56,7 @@ namespace Business.Concrete
                 var fileUploadResult = _fileManager.UploadThumbnail(language.FlagIconFile);
 
                 if (!fileUploadResult.Success)
-                    return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+                    return new ErrorDataResult<int>(-1, false, fileUploadResult.Responses);
 
                 var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);
 
@@ -359,7 +357,7 @@ namespace Business.Concrete
 
             if (!fileUploadResult.Success)
             {
-                return new ErrorDataResult<int>(-1, fileUploadResult.Message);
+                return new ErrorDataResult<int>(-1, false, fileUploadResult.Responses);
             }
 
             var publicId = _cloudinaryService.StoreImage(fileUploadResult.Data["thumbnailPath"]);

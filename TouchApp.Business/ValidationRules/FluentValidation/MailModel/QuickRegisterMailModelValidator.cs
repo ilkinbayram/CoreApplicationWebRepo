@@ -8,11 +8,10 @@ namespace TouchApp.Business.ValidationRules.FluentValidation.MailModel
     {
         public QuickRegisterMailModelValidator()
         {
-            var givenGenericType = this.GetType().BaseType.GetGenericParameterConstraints()[0];
+            var givenGenericType = this.GetType().BaseType.GetGenericArguments()[0];
             var dictionary = ModelInfoExtensions.GetNameDictionary(givenGenericType);
 
-
-            RuleFor(x => x.FromEmail).NotEmpty().WithMessage("MustNotBeEmptyRule.FluentValidationContraint".Translate(dictionary["FromEmail"]));
+            RuleFor(x => x.FromEmail).NotEmpty().WithMessage("MustNotBeEmptyRule.FluentValidationContraint".Translate(dictionary["FromEmail"])).EmailAddress().WithMessage("EmailConstraintValidation.NotSupportedEmailLocalization".Translate());
         }
     }
 }

@@ -25,28 +25,13 @@ namespace Business.ExternalServices.Mail.Services
             _mapper = mapper;
         }
 
-        [ValidationAspect(typeof(InformationMailRequestModelValidator))]
+        [ValidationAspect(typeof(InformationMailRequestModelValidator),typeof(bool))]
         public IDataResult<bool> SendInformationMailFromClient(InformationMailRequestModel mailRequest)
         {
             IDataResult<bool> result;
             try
             {
                 var modelSendGrid = _mapper.Map<ClientStaticMailTemplate>(mailRequest);
-                var serverModelSendGrid = new WelcomeMailTemplate()
-                {
-                    SubjectMail = "MailTemplate.SubjectLocalization".Translate(mailRequest.Lang_oid),
-                    Hello_Name = "MailTemplate.HelloNameLocalization".Translate(mailRequest.Lang_oid) + ", " + mailRequest.Name + " !",
-                    Message_By = "MailTemplate.MessageByLocalization".Translate(mailRequest.Lang_oid),
-                    Best_Regards = "MailTemplate.BestRegardsLocalization".Translate(mailRequest.Lang_oid),
-                    Link_Of_Navigation = "MailTemplate.NavigationTextLocalization".Translate(mailRequest.Lang_oid),
-                    Information_After_Hello_List_Header = "MailTemplate.InformationAfterHelloListHeaderLocalization".Translate(mailRequest.Lang_oid),
-                    Last_Information = "MailTemplate.LastInformationLocalization".Translate(mailRequest.Lang_oid),
-                    Go_To_Our_Website = "MailTemplate.GoToOurWebsiteLocalization".Translate(mailRequest.Lang_oid),
-                    List1_Text = "MailTemplate.List1TextLocalization".Translate(mailRequest.Lang_oid),
-                    List2_Text = "MailTemplate.List2TextLocalization".Translate(mailRequest.Lang_oid),
-                    List3_Text = "MailTemplate.List3TextLocalization".Translate(mailRequest.Lang_oid),
-                    Welcome_Message = "MailTemplate.WelcomeMessageLocalization".Translate(mailRequest.Lang_oid)
-                };
 
                 var serverInfoMail = ConfigHelper.GetSettingsDataStatic<string>(
                     ParentKeySettings.GlobalAccessibility_ContainerKeyword.ToString(),
@@ -63,22 +48,15 @@ namespace Business.ExternalServices.Mail.Services
                 var client = new SendGridClient(apiKey);
 
                 var sendGridMessage = new SendGridMessage();
-                var sendGridMessageServer = new SendGridMessage();
 
                 sendGridMessage.SetFrom(clientStaticEmail, $"Client : {mailRequest.Name}");
                 sendGridMessage.AddTo(serverInfoMail, "Server Register Admin");
                 sendGridMessage.SetTemplateId("d-a747e832df4241deb750de7c0e617299");
                 sendGridMessage.SetTemplateData(modelSendGrid);
 
-                sendGridMessageServer.SetFrom(serverInfoMail, $"Touch Academy : Server Admin");
-                sendGridMessageServer.AddTo(mailRequest.FromEmail, $"Approver : {mailRequest.Name}");
-                sendGridMessageServer.SetTemplateId("d-4673ce006f634ceb97a43a9bc0ed540f");
-                sendGridMessageServer.SetTemplateData(modelSendGrid);
-
                 var responseFromClient = client.SendEmailAsync(sendGridMessage).Result;
-                var responseFromServer = client.SendEmailAsync(sendGridMessageServer).Result;
 
-                if (!responseFromClient.IsSuccessStatusCode || !responseFromServer.IsSuccessStatusCode)
+                if (!responseFromClient.IsSuccessStatusCode)
                     return new ErrorDataResult<bool>(false, false);
 
                 result = new SuccessDataResult<bool>(true);
@@ -91,7 +69,7 @@ namespace Business.ExternalServices.Mail.Services
             return result;
         }
 
-        [ValidationAspect(typeof(QuickRegisterMailModelValidator))]
+        [ValidationAspect(typeof(QuickRegisterMailModelValidator), typeof(bool))]
         public IDataResult<bool> SendQuickRegisterMailFromClient(QuickRegisterMailRequestModel mailRequest)
         {
             IDataResult<bool> result;
@@ -122,6 +100,7 @@ namespace Business.ExternalServices.Mail.Services
                     ChildKeySettings.Email_SendGrid_ApiKey.ToString());
 
                 var client = new SendGridClient(apiKey);
+                var clientServer = new SendGridClient(apiKey);
 
                 var sendGridMessageFromUser = new SendGridMessage();
                 var sendGridMessageFromServer = new SendGridMessage();
@@ -137,7 +116,7 @@ namespace Business.ExternalServices.Mail.Services
                 sendGridMessageFromServer.SetTemplateData(modelSendGridFromServer);
 
                 var responseFromUser = client.SendEmailAsync(sendGridMessageFromUser).Result;
-                var responseFromServer = client.SendEmailAsync(sendGridMessageFromServer).Result;
+                var responseFromServer = clientServer.SendEmailAsync(sendGridMessageFromServer).Result;
 
                 if (!responseFromUser.IsSuccessStatusCode || !responseFromServer.IsSuccessStatusCode)
                     return new ErrorDataResult<bool>(false, false);
@@ -152,7 +131,7 @@ namespace Business.ExternalServices.Mail.Services
             return result;
         }
 
-        [ValidationAspect(typeof(RegisterMailRequestModelValidator))]
+        [ValidationAspect(typeof(RegisterMailRequestModelValidator), typeof(bool))]
         public IDataResult<bool> SendRegisterMailFromClient(RegisterMailRequestModel mailRequest)
         {
             IDataResult<bool> result;

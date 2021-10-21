@@ -10,10 +10,12 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class TeacherController : AdminBaseController
     {
 
@@ -109,13 +111,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                     if (socialMedias != null && socialMedias.Count > 0)
                         createTeacherDtoModel.SocialMedias = socialMedias;
 
-                    createTeacherDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultTeacherService.Message });
+                    createTeacherDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultTeacherService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createTeacherDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultTeacherService.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultTeacherService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

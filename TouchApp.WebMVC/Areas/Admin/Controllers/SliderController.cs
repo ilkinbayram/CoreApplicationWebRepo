@@ -2,12 +2,15 @@
 using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class SliderController : Controller
     {
         private readonly ISliderService _sliderService;
@@ -49,13 +52,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                 if (resultSliderService.Success)
                 {
                     var createLocalizationDtoModel = new CreateManagementSliderDto();
-                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultSliderService.Message });
+                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultSliderService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createLocalizationDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultSliderService.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultSliderService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

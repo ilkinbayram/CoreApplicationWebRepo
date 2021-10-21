@@ -475,6 +475,21 @@ namespace TouchApp.Business.Mapping
             CreateMap<MailRequest, InformationMailRequestModel>();
             CreateMap<MailRequest, QuickRegisterMailRequestModel>();
             CreateMap<MailRequest, RegisterMailRequestModel>();
+
+            CreateMap<InformationMailRequestModel, ClientStaticMailTemplate>()
+                .ForMember(x => x.Client_Description, from => from.MapFrom(p => p.Message))
+                .ForMember(x => x.Client_Subject, from => from.MapFrom(p => p.Subject))
+                .ForMember(x => x.Client_Full_Name, from => from.MapFrom(p => p.Name))
+                .ForMember(x => x.Client_Email, from => from.MapFrom(p => p.FromEmail));
+
+            CreateMap<QuickRegisterMailRequestModel, ClientStaticMailTemplate>()
+                .ForMember(x => x.Client_Email, from => from.MapFrom(p => p.FromEmail));
+
+            CreateMap<RegisterMailRequestModel, ClientStaticMailTemplate>()
+                .ForMember(x => x.Client_Description, from => from.MapFrom(p => p.Message))
+                .ForMember(x => x.Client_Phone, from => from.MapFrom(p => p.Phone))
+                .ForMember(x => x.Client_Full_Name, from => from.MapFrom(p => p.Name))
+                .ForMember(x => x.Client_Email, from => from.MapFrom(p => p.FromEmail));
             #endregion
         }
     }

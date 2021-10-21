@@ -26,7 +26,7 @@ namespace Business.Concrete
             _tokenHelper = tokenHelper;
             _mapper = mapper;
         }
-        [ValidationAspect(typeof(UserRegisterValidator), Priority = 1)]
+        [ValidationAspect(typeof(UserRegisterValidator), typeof(User),Priority = 1)]
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password, string securityToken)
         {
             if (userForRegisterDto.IsAgree)
@@ -58,7 +58,7 @@ namespace Business.Concrete
 
         }
 
-        [ValidationAspect(typeof(UserRegisterValidator), Priority = 1)]
+        [ValidationAspect(typeof(UserRegisterValidator), typeof(User), Priority = 1)]
         public IDataResult<User> RegisterByExistMail(UserForRegisterDto userForRegisterDto, string password, string securityToken)
         {
             if (userForRegisterDto.IsAgree)

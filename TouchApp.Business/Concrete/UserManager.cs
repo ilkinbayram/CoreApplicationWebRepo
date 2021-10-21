@@ -84,7 +84,7 @@ namespace Business.Concrete
         }
 
         [TransactionScopeAspectAsync()]
-        [ValidationAspect(typeof(CreateUserValidator), Priority = 1)]
+        [ValidationAspect(typeof(CreateUserValidator), typeof(int), Priority = 1)]
         public IDataResult<int> CreateUserByAdmin(CreateManagementUserDto createUserDto)
         {
             IDataResult<int> dataResult;
@@ -402,7 +402,7 @@ namespace Business.Concrete
 
         }
 
-        [ValidationAspect(typeof(UpdateUserDtoValidator), Priority = 1)]
+        [ValidationAspect(typeof(UpdateUserDtoValidator), typeof(int),Priority = 1)]
         public IDataResult<int> UpdateUserByAdmin(UpdateUserDto updateUserDto)
         {
             return null;

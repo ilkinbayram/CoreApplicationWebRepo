@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TouchApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211016231330_SimilarNamesUpdated")]
-    partial class SimilarNamesUpdated
+    [Migration("20211019154657_backupFirst")]
+    partial class backupFirst
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,12 +32,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 469, DateTimeKind.Local).AddTicks(136));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("DefinitionKey")
                         .HasColumnType("nvarchar(max)");
@@ -55,12 +59,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 469, DateTimeKind.Local).AddTicks(1217));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("OptionKey")
                         .HasColumnType("nvarchar(max)");
@@ -95,12 +103,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 446, DateTimeKind.Local).AddTicks(2876));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -112,12 +124,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 446, DateTimeKind.Local).AddTicks(3626));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("PreviewDescriptionKey")
                         .HasColumnType("nvarchar(max)");
@@ -135,7 +151,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("588ea110-5e0e-4fab-b7d2-1327fba75241");
+                        .HasDefaultValue("ab7e11df-eb32-48ec-9980-feb54c416ae3");
 
                     b.HasKey("Id");
 
@@ -155,12 +171,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 447, DateTimeKind.Local).AddTicks(9272));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("DescKey")
                         .HasColumnType("nvarchar(max)");
@@ -178,12 +198,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 448, DateTimeKind.Local).AddTicks(21));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("NameKey")
                         .HasColumnType("nvarchar(max)");
@@ -213,14 +237,21 @@ namespace TouchApp.DataAccess.Migrations
                     b.Property<string>("ContentHtmlRawKey")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CourseInfoHtmlMaintenanceKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 419, DateTimeKind.Local).AddTicks(3387));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("DescriptionKey")
                         .HasColumnType("nvarchar(max)");
@@ -238,12 +269,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 419, DateTimeKind.Local).AddTicks(4226));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("PreviewDescKey")
                         .HasColumnType("nvarchar(max)");
@@ -273,7 +308,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("00b361df-5776-4e04-a30c-07768fedb5e5");
+                        .HasDefaultValue("8d1bd36f-9742-4aa4-8351-e37fdaa4cafa");
 
                     b.HasKey("Id");
 
@@ -301,12 +336,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 421, DateTimeKind.Local).AddTicks(24));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsAccepted")
                         .HasColumnType("bit");
@@ -321,12 +360,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 421, DateTimeKind.Local).AddTicks(843));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("OwnerEmail")
                         .HasColumnType("nvarchar(max)");
@@ -349,14 +392,21 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 422, DateTimeKind.Local).AddTicks(8797));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("DescriptionKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IconHtml")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IconSource")
@@ -372,12 +422,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 422, DateTimeKind.Local).AddTicks(9509));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("TitleKey")
                         .HasColumnType("nvarchar(max)");
@@ -404,12 +458,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 471, DateTimeKind.Local).AddTicks(682));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<DateTime>("ExamDateTime")
                         .HasColumnType("datetime2");
@@ -430,12 +488,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 471, DateTimeKind.Local).AddTicks(1740));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<long>("StudyingGroupId")
                         .HasColumnType("bigint");
@@ -458,12 +520,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 473, DateTimeKind.Local).AddTicks(4031));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<long>("ExamId")
                         .HasColumnType("bigint");
@@ -478,12 +544,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 473, DateTimeKind.Local).AddTicks(4992));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<long>("QuestionId")
                         .HasColumnType("bigint");
@@ -552,12 +622,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 425, DateTimeKind.Local).AddTicks(9313));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -575,12 +649,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 426, DateTimeKind.Local).AddTicks(83));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<short>("Project_oid")
                         .HasColumnType("smallint");
@@ -606,17 +684,18 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AltrKey")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 439, DateTimeKind.Local).AddTicks(1823));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -631,12 +710,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 439, DateTimeKind.Local).AddTicks(3545));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("Source")
                         .HasColumnType("nvarchar(max)");
@@ -695,12 +778,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 402, DateTimeKind.Local).AddTicks(5467));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -712,12 +799,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 403, DateTimeKind.Local).AddTicks(2216));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -746,12 +837,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 441, DateTimeKind.Local).AddTicks(9567));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -763,12 +858,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 442, DateTimeKind.Local).AddTicks(333));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("OwnerName")
                         .HasColumnType("nvarchar(max)");
@@ -798,12 +897,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 424, DateTimeKind.Local).AddTicks(2742));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("DescriptionKey")
                         .HasColumnType("nvarchar(max)");
@@ -821,12 +924,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 424, DateTimeKind.Local).AddTicks(3530));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("NameKey")
                         .HasColumnType("nvarchar(max)");
@@ -852,12 +959,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 475, DateTimeKind.Local).AddTicks(6952));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<byte>("DifficultyDegree")
                         .HasColumnType("tinyint");
@@ -875,12 +986,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 475, DateTimeKind.Local).AddTicks(8203));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("QuestionTextKey")
                         .HasColumnType("nvarchar(max)");
@@ -907,12 +1022,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 477, DateTimeKind.Local).AddTicks(8823));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -924,12 +1043,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 477, DateTimeKind.Local).AddTicks(9624));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<long>("QuestionId")
                         .HasColumnType("bigint");
@@ -957,12 +1080,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 479, DateTimeKind.Local).AddTicks(4462));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("DefinitionKey")
                         .HasColumnType("nvarchar(max)");
@@ -980,12 +1107,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 479, DateTimeKind.Local).AddTicks(5267));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("OptionKey")
                         .HasColumnType("nvarchar(max)");
@@ -1014,12 +1145,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 481, DateTimeKind.Local).AddTicks(1350));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<long>("ExamId")
                         .HasColumnType("bigint");
@@ -1037,12 +1172,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 481, DateTimeKind.Local).AddTicks(2253));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<byte>("NoAnswerCount")
                         .HasColumnType("tinyint");
@@ -1080,14 +1219,21 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AbriveatureClass")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 449, DateTimeKind.Local).AddTicks(5903));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -1099,12 +1245,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 449, DateTimeKind.Local).AddTicks(6649));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("NameKey")
                         .HasColumnType("nvarchar(max)");
@@ -1125,12 +1275,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 451, DateTimeKind.Local).AddTicks(4228));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -1145,12 +1299,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 451, DateTimeKind.Local).AddTicks(6195));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<long>("SharingTypeId")
                         .HasColumnType("bigint");
@@ -1173,6 +1331,12 @@ namespace TouchApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ButtonRoute")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ButtonTextKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Created_at")
                         .HasColumnType("datetime2");
 
@@ -1183,6 +1347,11 @@ namespace TouchApp.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
+
+                    b.Property<string>("MainTitleKey")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<short>("ModelType")
                         .HasColumnType("smallint");
@@ -1197,11 +1366,6 @@ namespace TouchApp.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubTitleKey")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("TitleKey")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -1221,12 +1385,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 457, DateTimeKind.Local).AddTicks(2547));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("IconHtml")
                         .HasColumnType("nvarchar(max)");
@@ -1244,12 +1412,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 457, DateTimeKind.Local).AddTicks(3300));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("NameSocial")
                         .HasColumnType("nvarchar(max)");
@@ -1285,12 +1457,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 444, DateTimeKind.Local).AddTicks(686));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -1314,12 +1490,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 444, DateTimeKind.Local).AddTicks(1460));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("varbinary(max)");
@@ -1397,12 +1577,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 482, DateTimeKind.Local).AddTicks(8006));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -1414,12 +1598,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 482, DateTimeKind.Local).AddTicks(8819));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<DateTime>("RegisteredDate")
                         .HasColumnType("datetime2");
@@ -1453,12 +1641,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 484, DateTimeKind.Local).AddTicks(9808));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -1470,12 +1662,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 485, DateTimeKind.Local).AddTicks(990));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.HasKey("Id");
 
@@ -1497,7 +1693,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 17, 3, 13, 28, 52, DateTimeKind.Local).AddTicks(2112));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 453, DateTimeKind.Local).AddTicks(7704));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1516,12 +1712,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 453, DateTimeKind.Local).AddTicks(8414));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -1550,7 +1750,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 17, 3, 13, 28, 55, DateTimeKind.Local).AddTicks(4978));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 455, DateTimeKind.Local).AddTicks(4890));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -1571,7 +1771,7 @@ namespace TouchApp.DataAccess.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2021, 10, 17, 3, 13, 28, 55, DateTimeKind.Local).AddTicks(5869));
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 455, DateTimeKind.Local).AddTicks(5721));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
@@ -1618,12 +1818,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 460, DateTimeKind.Local).AddTicks(7446));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -1650,12 +1854,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 460, DateTimeKind.Local).AddTicks(8414));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("varbinary(max)");
@@ -1712,12 +1920,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 463, DateTimeKind.Local).AddTicks(2364));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -1729,12 +1941,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 463, DateTimeKind.Local).AddTicks(3378));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<long>("TeacherId")
                         .HasColumnType("bigint");
@@ -1801,12 +2017,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 467, DateTimeKind.Local).AddTicks(846));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -1818,12 +2038,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 467, DateTimeKind.Local).AddTicks(2034));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("RedirectUrl")
                         .HasColumnType("nvarchar(max)");
@@ -1860,12 +2084,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 417, DateTimeKind.Local).AddTicks(785));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -1895,12 +2123,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 417, DateTimeKind.Local).AddTicks(1552));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
@@ -1989,12 +2221,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Created_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 465, DateTimeKind.Local).AddTicks(880));
 
                     b.Property<string>("Created_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -2006,12 +2242,16 @@ namespace TouchApp.DataAccess.Migrations
 
                     b.Property<DateTime?>("Modified_at")
                         .IsRequired()
-                        .HasColumnType("smalldatetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2021, 10, 19, 19, 46, 55, 465, DateTimeKind.Local).AddTicks(2090));
 
                     b.Property<string>("Modified_by")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("System Manager");
 
                     b.Property<string>("RedirectUrl")
                         .HasColumnType("nvarchar(max)");

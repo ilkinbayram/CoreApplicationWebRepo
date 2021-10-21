@@ -37,7 +37,7 @@ namespace TouchApp.WebMVC
             var serverDb = Configuration.GetConnectionString("ServerDB");
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(localDb);
+                options.UseSqlServer(serverDb);
             });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -74,6 +74,9 @@ namespace TouchApp.WebMVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //app.ConfigureCustomExceptionMiddleware();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

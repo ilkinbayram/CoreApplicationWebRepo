@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class LocalizationController : AdminBaseController
     {
         private ILocalizationService _localizationService;
@@ -58,14 +60,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                 if (resultLocalizationService.Success)
                 {
                     var createLocalizationDtoModel = new CreateLocalizationDto();
-                    
-                        createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultLocalizationService.Responses.Select(x=>x.Message).ToList() });
-                   
+                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultLocalizationService.Responses.Select(x=>x.Message).ToList() });
+
                     return View(createLocalizationDtoModel);
                 }
                 else
                 {
-                        createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultLocalizationService.Responses.Select(x=>x.Message).ToList() });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultLocalizationService.Responses.Select(x => x.Message).ToList() });
 
                     return View(createModel);
                 }

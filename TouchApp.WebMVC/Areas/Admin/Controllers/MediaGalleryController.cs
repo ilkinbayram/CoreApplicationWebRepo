@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Linq;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class MediaGalleryController : Controller
     {
         private readonly IMediaService _mediaService;
@@ -81,13 +83,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                         Text = string.Format("{0}MediaType.Localize", ((MediaType)x).ToString()).Translate()
                     }).ToList();
 
-                    createBlogDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultBlogService.Message });
+                    createBlogDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultBlogService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createBlogDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultBlogService.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultBlogService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

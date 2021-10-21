@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace TouchApp.Business.ExternalServices.Mail.ModelAcceptor
 {
@@ -17,5 +19,6 @@ namespace TouchApp.Business.ExternalServices.Mail.ModelAcceptor
         public string Name { get; set; }
 
         public short Lang_oid { get; set; }
+        public List<IFormFile> Attachments { get; set; }
     }
 }

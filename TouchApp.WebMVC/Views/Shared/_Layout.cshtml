@@ -13,6 +13,7 @@
     string TouchLightenLogoUrl = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_URL_TouchAcademy_Lighten_Logo.ToString());
 
     string locationCourseKey = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.GlobalAccessibility_ContainerKeyword.ToString(), ChildKeySettings.Location_LotfiZadeh_Caspian.ToString());
+    string titleIcon = ConfigHelper.GetSettingsDataStatic<string>(ParentKeySettings.MediaServiceURL_ContainerKeyword.ToString(), ChildKeySettings.Media_URL_TouchAcademy_TitleIconLogoBlack.ToString());
 }
 
 
@@ -27,7 +28,7 @@
 
     <!-- favicon
     ============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/touchacademyrepo/image/upload/v1633480239/touchapp/manualUploads/TitleLogoTouch_zqndno.jpg">
+    <link rel="shortcut icon" type="image/x-icon" href="@(titleIcon)">
 
     <!-- Google Fonts
     ============================================ -->

@@ -14,6 +14,8 @@
         Media_Url_Enroll_SideImage = 304,
         Media_Url_TeachersContainerHome_FromManual = 305,
         Media_Url_Welcome_OpenPage = 306,
+        Media_URL_TouchAcademy_TitleIcon = 307,
+        Media_URL_TouchAcademy_TitleIconLogoBlack = 308,
 
         InfoMail_GlobalAccess = 400,
         RegisterMail_GlobalAccess = 401,

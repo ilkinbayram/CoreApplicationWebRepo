@@ -3407,7 +3407,8 @@ span.schedule-time {
     height: 54px;
     line-height: 47px;
     position: fixed;
-    right: 12px;
+    right: 26px;
+    bottom: 30px;
     text-align: center;
     width: 54px;
     z-index: 999;

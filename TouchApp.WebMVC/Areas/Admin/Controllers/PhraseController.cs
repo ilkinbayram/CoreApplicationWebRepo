@@ -2,12 +2,15 @@
 using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class PhraseController : Controller
     {
         private readonly IPhraseService _phraseService;
@@ -47,13 +50,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                 if (resulPhraseService.Success)
                 {
                     var createLocalizationDtoModel = new CreateManagementPhraseDto();
-                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resulPhraseService.Message });
+                    createLocalizationDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resulPhraseService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createLocalizationDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resulPhraseService.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resulPhraseService.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

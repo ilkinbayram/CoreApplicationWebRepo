@@ -9,10 +9,12 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
+using TouchApp.WebMVC.Filters;
 
 namespace TouchApp.WebMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [SimpleDefaultAdminAuthorizationFilter]
     public class SocialMediaController : AdminBaseController
     {
         private readonly ISocialMediaService _socialMediaService;
@@ -70,13 +72,13 @@ namespace TouchApp.WebMVC.Areas.Admin.Controllers
                        Text = string.Format("{0}SocialMediaType.Localize", ((SocialMediaType)x).ToString()).Translate()
                    }).ToList();
 
-                    createLangDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessage = resultSocial.Message });
+                    createLangDtoModel.ResponseMessages.Add(new AlertResult { AlertColor = "success", AlertMessages = resultSocial.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createLangDtoModel);
                 }
                 else
                 {
-                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessage = resultSocial.Message });
+                    createModel.ResponseMessages.Add(new AlertResult { AlertColor = "danger", AlertMessages = resultSocial.Responses.Select(x=>x.Message).ToList() });
 
                     return View(createModel);
                 }

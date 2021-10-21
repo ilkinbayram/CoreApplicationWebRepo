@@ -1,23 +1,35 @@
-﻿namespace Core.Utilities.Results
+﻿using System.Collections.Generic;
+
+namespace Core.Utilities.Results
 {
     public class DataResult<T> : Result, IDataResult<T>
     {
-        private T _data;
-        public DataResult(T data,bool success, bool isProcessBroken, string message) : base(success, isProcessBroken, message)
+        private readonly T _data;
+        public DataResult(T data, bool isSuccess, bool isProcessBroken) : base(isSuccess, isProcessBroken)
         {
             _data = data;
         }
 
-        public DataResult(T data, bool success, bool isProcessBroken):base(success, isProcessBroken)
+        public DataResult(T data, bool isSuccess, bool isProcessBroken, string message) : base(isSuccess, isProcessBroken, message)
+        {
+            _data = data;
+        }
+
+        public DataResult(T data, bool isSuccess, bool isProcessBroken, string message, string fullDetail) : base(isSuccess, isProcessBroken, message, fullDetail)
+        {
+            _data = data;
+        }
+
+        public DataResult(T data, bool isSuccess, bool isProcessBroken, List<string> messages) : base(isSuccess, isProcessBroken, messages)
+        {
+            _data = data;
+        }
+
+        public DataResult(T data, bool isSuccess, bool isProcessBroken, List<Response> responses):base(isSuccess, isProcessBroken, responses)
         {
             _data = data;
         }
 
         public T Data => _data;
-
-        public void SetData(T data)
-        {
-            _data = data;
-        }
     }
 }

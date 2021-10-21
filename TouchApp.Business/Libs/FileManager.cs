@@ -58,10 +58,9 @@ namespace Business.Libs
                     file.CopyTo(stream);
                 }
 
-                result = new SuccessDataResult<Dictionary<string, string>>();
                 var dictionary = new Dictionary<string, string>();
                 dictionary.Add("imagePath", path);
-                result.SetData(dictionary);
+                result = new SuccessDataResult<Dictionary<string, string>>(dictionary);
 
                 return result;
             }
@@ -98,10 +97,9 @@ namespace Business.Libs
                     file.CopyTo(stream);
                 }
 
-                result = new SuccessDataResult<Dictionary<string, string>>();
                 var dictionary = new Dictionary<string, string>();
                 dictionary.Add("videoPath", path);
-                result.SetData(dictionary);
+                result = new SuccessDataResult<Dictionary<string, string>>(dictionary);
 
                 return result;
             }
@@ -142,10 +140,8 @@ namespace Business.Libs
                         files[i].CopyTo(stream);
                     }
 
-                    result = new SuccessDataResult<Dictionary<string, string>>();
-                    
-                    dictionary.Add("imagePath"+i.ToString(), path);
-                    result.SetData(dictionary);
+                    dictionary.Add("imagePath" + i.ToString(), path);
+                    result = new SuccessDataResult<Dictionary<string, string>>(dictionary);
                 }
 
                 return result;
@@ -236,11 +232,10 @@ namespace Business.Libs
                         thumnailIcon.Save(thumbnailPath);
                     }
 
-                    result = new SuccessDataResult<Dictionary<string, string>>();
                     var dictionary = new Dictionary<string, string>();
                     dictionary.Add("imagePath", path);
                     dictionary.Add("thumbnailPath", path);
-                    result.SetData(dictionary);
+                    result = new SuccessDataResult<Dictionary<string, string>>(dictionary);
                 }
                 else
                 {

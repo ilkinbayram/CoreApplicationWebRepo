@@ -4,9 +4,12 @@ using Core.CrossCuttingConcerns.Caching;
 using Core.Extensions;
 using Core.Resources.Enums;
 using Core.Utilities.Helpers.Abstracts;
+using Core.Utilities.Results;
 using Core.Utilities.UsableModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TouchApp.Business.Abstract;
 using TouchApp.Business.BusinessHelper;
@@ -35,8 +38,8 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         private readonly IMapper _mapper;
 
         private HomeViewModel _viewModel;
-        public HomeController(ICacheManager cacheManager, 
-                              ILocalizationService localizationService, 
+        public HomeController(ICacheManager cacheManager,
+                              ILocalizationService localizationService,
                               IConfigHelper configHelper,
                               ISessionStorageHelper sessionStorageHelper,
                               ILanguageService languageService,
@@ -71,14 +74,14 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
         {
             GeneralFunctionality.ConfigureLanguageLocalizationSetting(_sessionStorageHelper, _cacheManager, _configHelper, _languageService, _localizationService, ParentKeySettings.ServerCache_ContainerKeyword, ChildKeySettings.Server_Language_CachedForAll, 1440);
 
-            _viewModel = new HomeViewModel 
-            { 
-                Blogs = _blogService.GetDtoList(takeCount:100).Data, 
-                Courses = _courseService.GetDtoList().Data, 
-                CourseServices = _courseServiceService.GetDtoList().Data, 
-                Medias = _mediaService.GetDtoList().Data, 
-                Phrases = _phraseService.GetDtoList().Data, 
-                Sliders = _sliderService.GetDtoList().Data, 
+            _viewModel = new HomeViewModel
+            {
+                Blogs = _blogService.GetDtoList(takeCount: 100).Data,
+                Courses = _courseService.GetDtoList().Data,
+                CourseServices = _courseServiceService.GetDtoList().Data,
+                Medias = _mediaService.GetDtoList().Data,
+                Phrases = _phraseService.GetDtoList().Data,
+                Sliders = _sliderService.GetDtoList().Data,
                 Teachers = _teacherService.GetDtoList().Data
             };
 
@@ -98,36 +101,36 @@ namespace TouchApp.WebMVC.Areas.Global.Controllers
 
             mailRequest.Lang_oid = Convert.ToByte(languageOid);
 
-            bool responseIsTrue = false;
+            IDataResult<bool> response = new ErrorDataResult<bool>();
 
             var notificationModel = new AlertResult();
 
             switch (mailRequest.MailType)
             {
                 case (byte)MailType.Information_Email:
-                    responseIsTrue = _mailService.SendInformationMailFromClient(_mapper.Map<InformationMailRequestModel>(mailRequest)).Data;
-                    notificationModel.Status = AlertStatus.Success;
-                    notificationModel.AlertMessage = "GeneralMailSuccessNotificationForMail.Localization".Translate();
+                    response = _mailService.SendInformationMailFromClient(_mapper.Map<InformationMailRequestModel>(mailRequest));
+                    notificationModel.AlertMessages.Add("GeneralMailSuccessNotificationForMail.Localization".Translate());
                     break;
                 case (byte)MailType.Register_email:
-                    responseIsTrue = _mailService.SendRegisterMailFromClient(_mapper.Map<RegisterMailRequestModel>(mailRequest)).Data;
-                    notificationModel.Status = AlertStatus.Success;
-                    notificationModel.AlertMessage = "EmailSuccessNotificationGeneralRegister.Localization".Translate();
+                    response = _mailService.SendRegisterMailFromClient(_mapper.Map<RegisterMailRequestModel>(mailRequest));
+                    notificationModel.AlertMessages.Add("EmailSuccessNotificationGeneralRegister.Localization".Translate());
                     break;
                 case (byte)MailType.Quick_Register:
-                    responseIsTrue = _mailService.SendQuickRegisterMailFromClient(_mapper.Map<QuickRegisterMailRequestModel>(mailRequest)).Data;
-                    notificationModel.Status = AlertStatus.Success;
-                    notificationModel.AlertMessage = "EmailSuccessNotificationQuickRegister.Localization".Translate();
-                    break;
-                default:
+                    response = _mailService.SendQuickRegisterMailFromClient(_mapper.Map<QuickRegisterMailRequestModel>(mailRequest));
+                    notificationModel.AlertMessages.Add("EmailSuccessNotificationQuickRegister.Localization".Translate());
                     break;
             }
 
-            if (responseIsTrue)
-                return PartialView("_PartialNotificationAlert",notificationModel);
-
-            notificationModel.Status = AlertStatus.Danger;
-            notificationModel.AlertMessage = "EmailFailedNotification.GeneralLocalization".Translate();
+            if (!response.Success || response.IsProcessBroken)
+            {
+                notificationModel.Status = AlertStatus.Danger;
+                notificationModel.AlertMessages = response.Responses.Select(x => x.Message).ToList();
+            }
+            else
+            {
+                notificationModel.Status = AlertStatus.Success;
+            }
+            
             return PartialView("_PartialNotificationAlert", notificationModel);
         }
     }

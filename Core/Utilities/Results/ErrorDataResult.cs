@@ -12,7 +12,7 @@ namespace Core.Utilities.Results
         {
         }
 
-        public ErrorDataResult(bool isProcessBroken, string message) : base(default, false, isProcessBroken, message)
+        public ErrorDataResult(bool isProcessBroken, List<Response> responses) : base(default, false, isProcessBroken, responses)
         {
 
         }
@@ -22,7 +22,22 @@ namespace Core.Utilities.Results
 
         }
 
+        public ErrorDataResult(T data, bool isProcessBroken, List<Response> responses) : base(data, false, isProcessBroken, responses)
+        {
+
+        }
+
+        public ErrorDataResult(T data, bool isProcessBroken, List<string> messages) : base(data, false, isProcessBroken, messages)
+        {
+
+        }
+
         public ErrorDataResult(string message) : base(default, false, false, message)
+        {
+
+        }
+
+        public ErrorDataResult(T data, string message) : base(data, false, false, message)
         {
 
         }
