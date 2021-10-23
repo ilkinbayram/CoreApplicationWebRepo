@@ -1,4 +1,5 @@
 ﻿@using Core.Utilities.UsableModel
+@using Core.Extensions
 @model AlertResult
 
 @{
@@ -23,7 +24,7 @@
                             {
                                 @foreach (var message in Model.AlertMessages)
                                 {
-                                    <i class="fas fa-quote-left"></i> @($"  {message}  ") <i class="fas fa-quote-right"></i><br />
+                                    <i class="fas fa-quote-left"></i> @($"  {message.Translate()}  ") <i class="fas fa-quote-right"></i><br />
                                 }
                             }
                         </p>
